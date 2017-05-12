@@ -1,0 +1,12 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
+The style file: nps_thesis.bst
+Database file #1: thesis.bib
+-- nps_thesis.bst version 1.9 (2016/05/05) by Mark Gondree.
+-- based on IEEEtran.bst (2008/09/30) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in mell2011nist
+Warning--empty journal in nasab2012security
+
+Done.
+(There were 2 warnings)

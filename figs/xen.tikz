@@ -1,0 +1,56 @@
+\begin{tikzpicture}[
+rednode/.style={rectangle, draw=black!60, fill=red!20, very thick, minimum size=15mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=15mm, text width=2cm, text centered},
+greennode/.style={rectangle, draw=black!60, fill=green!20, very thick, minimum size=15mm, text width=2cm, text centered},
+greynode/.style={rectangle, draw=black!60, fill=black!20, very thick, minimum size=15mm, text width=2cm, text centered},]
+
+\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=green!20, rectangle, draw=black!70, minimum width=150mm, minimum height=10mm, anchor= south west,
+	label={[anchor=south, yshift=0.15cm, xshift=-6.5cm]south:I/O}, 
+	label={[anchor=south, yshift=0.15cm, xshift=-1.5cm]south:Memory}, 
+	label={[anchor=south, yshift=0.15cm, xshift=1.5cm]south:\ac{CPU}}, 
+	label={[anchor=south, yshift=0.15cm, xshift=6.5cm]south:\textbf{HW}}] 
+at (0, 0) {};
+
+\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!15, rectangle, draw=black!70, minimum width=150mm, minimum height=10mm, anchor= south west,
+	label={[anchor=south, yshift=0.15cm, xshift=-4.5cm]south:Config}, 
+	label={[anchor=south, yshift=0.15cm, xshift=-2cm]south:Scheduler}, 
+	label={[anchor=south, yshift=0.15cm, xshift=0cm]south:MMU}, 
+	label={[anchor=south, yshift=0.15cm, xshift=2cm]south:Timers},
+	label={[anchor=south, yshift=0.15cm, xshift=4.5cm]south:Interrupts},
+	label={[anchor=south, yshift=0.15cm, xshift=6.5cm]south:\textbf{XEN}}] 
+at (0, 1.5) {};
+
+\draw[copy shadow={draw=black!10, fill=black!40, opacity=0.5}, black, fill=white] (0, 6.5)rectangle(2, 8.5);
+\draw[black, fill = black!80] (0.2, 6.7)rectangle(1.8, 8);
+\node[anchor= south west] at (0, 7.9) {\textit{Console}};
+
+\draw[copy shadow={draw=black!10, fill=black!40, opacity=0.5}, black, fill=white] (0, 3)rectangle(3, 6);
+\node[anchor= south west, greynode, label={}] at (0.3, 3.25) {Dom0 Kernel};
+\node[anchor= south west] at (0, 5.25) {\textit{VM0 or Dom0}};
+
+
+
+\draw[copy shadow={draw=black!10, fill=black!40, opacity=0.5}, black, fill=white] (12, 3)rectangle(15, 6);
+\node[anchor= south west, greennode, label={}] at (12.3, 3.25) {Guest OS};
+\node[anchor= south west] at (12, 5.25) {\textit{VMn}};
+
+\draw[anchor= south west, draw=green!70, line width=1mm,<->] (2.6,3.7) -- (12.3,3.7);
+
+\draw[copy shadow={draw=black!10, fill=black!40, opacity=0.5}, black, fill=white] (8.5, 3)rectangle(11.5, 6);
+\node[anchor= south west, bluenode, label={}] at (8.8, 3.25) {Guest OS};
+\node[anchor= south west] at (8.5, 5.25) {\textit{VM2}};
+
+\draw[anchor= south west, draw=blue!70, line width=1mm,<->] (2.6,4) -- (8.8,4);
+
+
+\draw[copy shadow={draw=black!10, fill=black!40, opacity=0.5}, black, fill=white] (5, 3)rectangle(8, 6);
+\node[anchor= south west, rednode, label={}] at (5.3, 3.25) {Guest OS};
+\node[anchor= south west] at (5, 5.25) {\textit{VM1}};
+
+
+\draw[anchor= south west, draw=red!70, line width=1mm,<->] (2.6,4.3) -- (5.3,4.3);
+
+\draw[anchor= south west, draw=orange, line width=1mm,<->] (1.05,0.8) -- (1.05,3.25);
+\draw[anchor= south west, draw=orange, line width=1mm,<->] (1.05,4.8) -- (1.05,6.5);
+
+\end{tikzpicture}

@@ -1,0 +1,179 @@
+
+\chapter{Background}\label{ch:background}
+
+In this chapter, the information of the relevant software and hardware is presented. In the first section a short introduction on virtualization and its benefits is given. Then the types of hypervisors and Xen, the platform we will work on, are described. The next section refers to \ac{VMI} and Xen's capabilities in that field, the LibVMI \ac{API} and DRAKVUF, the library and main application we will leverage, as well as the system call functionality and convention. Finally, some of the existing solutions that leverage introspection are reviewed.
+
+\section{Virtualization}\label{sec:virtualization}
+Running many and different services on a single \ac{OS} is not recommended anymore. Cheap hardware lead the past years in systems that ran a plethora of different software, which became over time a challenge to manage efficiently and securely. Therefore, many service providers, since hardware was inexpensive, turned into running only one service per physical machine~\cite{rosenblum2005virtual}. That, on its turn, resulted to underutilization of hardware and capabilities, as well as increased cost in maintenance. Virtualization was a solution to the problem ~\cite{rosenblum2005virtual}. By hosting different \ac{VM}s on a single and powerful system solves many of the problems. Resources are used efficiently, with each service using only a part of the underlying hardware. Security is implemented easier, as it is much simpler to secure one machine running one service, than having to combine all of them on one. Redundancy between services is also achieved, since each \ac{VM} is independent from the rest, and any failure does not affect the rest of the \ac{VM}s.
+\par But the advantages of virtualization do not stop there. Easy backup, restore, cloning and migration of a system are just a few of them. Creating snapshots of entire machines and restoring to a previous state, in case of corruption or misconfiguration, has become a trivial task. Also, modern hypervisors implement a very solid and sophisticated \ac{VM} isolation, that pivoting from a \ac{VM} to another, as well as hypervisor attacks, have become extremely difficult.
+
+\begin{figure}
+	\centering
+	\input{figs/tovirt.tikz}
+	\caption{Migrating to virtualization}
+	\label{fig:tovirt}
+\end{figure}
+
+Hypervisor is the software that drives this mechanism. It runs directly on the hardware and uses a separate \ac{OS} installation and resides outside all the guest \ac{VM}s. At the same time, since the hypervisor manages the allocation and usage of the physical resources, has a unique visibility of the internal state of each \ac{VM}. 
+\subsection{Hypervisor types}\label{sub:hyptypes}
+Different vendors provide their solution in virtualization. Generally, hypervisors are separated in two categories. Type-I or bare-metal hypervisors and type-II or hosted hypervisors.
+\par Type-II hypervisors are applications, which require a host \ac{OS} to run on. Typical type-II solution are VMWare Workstation and Oracle VirtualBox. These hypervisors work as any other application and the \ac{VM}s run on top of them. Although they are simpler to manage for the average user, as well as for simple applications or use as testing environment, type-II hypervisors perform worse than type-I. 
+
+\begin{figure}
+	\centering
+	\input{figs/hyptypes.tikz}
+	\caption{Architectural difference of type-I vs type-II hypervisors}
+	\label{fig:hyptypes}
+\end{figure}
+
+\par Type-I hypervisors run directly on the hardware, managing the resources directly without the intervention of any host \ac{OS}. On the contrary, a more privileged \ac{OS} is used, to provide an \ac{API} for the efficient management of the hypervisor and its hosted \ac{VM}s. Type-I hypervisors are most commonly used in server deployment and enterprise solutions, where performance and efficiency are important. Figure~\ref{fig:hyptypes} shows the basic architectural difference between the two types.
+
+\subsection{The Xen project}\label{sub:xen}
+The Xen Project is an open-source type-I hypervisor~\cite{xen}. Its small footprint and limited interface to the Guest, makes it more robust and secure. The hypervisor runs directly on top of the hardware, as depicted in Figure~\ref{img:xen}. It requires a host \ac{OS} which acts as an interface between the hypervisor and the user, as well as paravirtualized guests. This host \ac{OS} is called control or privileged domain, also known as Dom0, and runs at a more privileged level than the rest of the \ac{VM}s. The rest of the \ac{VM}s run on a lower privilege level and are called guest domains or DomUs. 
+
+\begin{figure}
+	\centering
+%	\includegraphics{xen}
+	\input{figs/xen.tikz}
+	\caption{Xen Hypervisor Architecture}
+	\label{img:xen}
+\end{figure}
+
+\par To understand how this happens, we need to introduce another \ac{CPU} architectural feature, which provides different privilege levels for the execution of the \ac{CPU} instructions, depending on what is the nature of the program invoking them. This mechanism is called protection rings and is present on all modern \ac{CPU}s and is used from all modern \ac{OS}s. Protection rings are numbered 0 to 3, with 0 being the most privileged. Usually, applications run in ring 3, also called user mode, and the kernel and device drivers run in ring 3, also called privileged or supervisor mode. But, the hypervisor must run at a more privileged level than the guest \ac{OS}, in order to allocate and manage the shared resources, otherwise there is a conflict when the guest \ac{OS} or the hypervisor tries to manage the systems resources. Initially, paravirtualization was used. A technique where \ac{OS} vendors had to modify their kernels to run on a different privilege level, besides 0, like 1 or 2, to avoid that conflict between the guest \ac{OS} kernel and the hypervisor.
+
+\par For type-I hypervisors to work efficiently and without any guest \ac{OS} modification due to conflicts on the protection ring 0, \ac{CPU} manufacturers have introduced a new ring -1 to support virtualization. The new ring, called hypervisor mode, is even more privileged than ring 0 and is employed only during hypervisor execution. This new architecture is supported on newer \ac{CPU}s that employ \ac{VT}, VT-x for Intel and AMD-V for AMD processors. From the moment \ac{CPU}s started supporting \ac{VT}, the employment of \ac{VM}s started rising significantly.
+
+As virtualization keeps advancing, there is always the question of whether we can leverage it, to provide more than efficient sharing and usage of resources. The unique ability of the hypervisor to access the state of a \ac{VM}, at a \ac{CPU} register level or byte of memory, has been the center of research for many years. 
+
+\begin{figure}
+	\centering
+	\input{figs/rings.tikz}
+	\caption{x86 protection rings}
+	\label{fig:rings}
+\end{figure}
+
+\section{Virtual Machine Introspection}\label{sec:vmi}
+As firstly introduced as a concept in~\cite{garfinkel2003virtual}, \ac{VMI} is the leverage of the more privileged status of the hypervisor, to inspect the internal state of a \ac{VM}. The Xen hypervisor, trying to make that more efficient, included introspection methods to inspect its guest \ac{VM}s. To make these methods more accessible and provide better introspection capabilities, XenAccess~\cite{payne2007secure} was implemented, as well as the mem-events \ac{API}s to address that concept~\cite{lars_2016}. Because of strong research and security interest, introspection in Xen progressed and eventually LibVMI~\cite{payne2011libvmi} was introduced. It is a library that makes the introspection capabilities of the Xen hypervisor even more accessible. It also provides access to part of the hypervisors introspection methods to third-party applications, using a C or Python interface, the later called PyVMI.
+
+\par Initially, the memory management of the hypervisor included an extra step in the memory access mechanism. Because each \ac{VM} assumes that has complete control over the entire address space, and assumes that it writes directly on the hardware, the hypervisor must introduce this extra step. Normally the \ac{OS} had to translate the virtual address used by an application to a physical address on the hardware. For the hypervisor, each \ac{VM} is essentially an application. Since every \ac{OS} will try to write eventually on the same physical address, the hypervisor must make a distinction between the \ac{VM}s. It assigns each \ac{VM} a specific physical address space, which then tracks by having additional \ac{PT} to translate between \ac{GMFN} and \ac{MFN}. This mapping is a one-to-one.
+
+\begin{figure}
+	\centering
+	\input{figs/mm.tikz}
+	\caption{Hypervisor memory management concept}
+	\label{fig:hypmm}
+\end{figure}
+
+\par With the introduction of \ac{IOMMU}, this extra step got eliminated. Additionally, when Intel, with its Haswell generation \ac{CPU}, included the support of 512 \ac{EPT}s, Xen’s introspection capabilities increased, while the overhead reduced significantly. Furthermore, this allowed better isolation and therefore enhanced security between the \ac{VM}s. Following that development, XenAccess and mem-events were redesigned and were evolved to altp2m, the new Xen \ac{VMI} subsystem. One of the most critical changes that came with altp2m, was the concurrent assignment of multiple \ac{EPT}s per \ac{VM}, a capability although available, never leveraged. This was a significant improvement, as the hypervisor can keep track of different \ac{EPT}s with different permissions, which can change during the execution of the \ac{VM}.
+
+\begin{figure}[ht]
+	\centering
+	\scalebox{0.95}{\input{figs/ept.tikz}}
+	\caption{Normal vs altp2m multiple \ac{EPT} assignment}
+	\label{fig:ept}
+\end{figure}
+
+\par LibVMI, as mentioned earlier, is an \ac{API} which provides exposure to a subset of Xen’s \ac{VMI} functionalities, as well as other platforms. It makes possible to monitor the state of any \ac{VM}, including memory and \ac{CPU} state. Memory can be accessed directly, using physical addresses, or indirectly with the use of virtual addresses, \ac{OS} and user application symbols. It can monitor memory and register events and provide notifications for them, allowing this way the execution of callback functions. 
+
+
+\begin{figure}[ht]
+	\centering
+	\input{figs/libvmi.tikz}
+	\caption{LibVMI out of guest access of \ac{VM} state}
+	\label{fig:libvmi}
+\end{figure}
+
+\par LibVMI focuses in a subset of introspection methods, that provide memory reading and writing capabilities from running \ac{VM}s. It provides also methods for accessing and modifying \ac{CPU} registers, as well as helper methods to pause and unpause a \ac{VM}. Accessing a \ac{VM}' memory space is not a trivial task. After detecting where the page directory is, a scan of the page tables follows, to detect the memory mapping of the running process. This gets translated to a virtual address, which later, on the hypervisor gets translated to a physical address. The following figure~\ref{fig:accesskernel} shows a slightly different request, that of reading a kernel symbol.
+
+\par Xen’s introspection methods have a very significant impact on system security. The monitoring application resides on the Host and accesses the \ac{VM}s state from the hypervisor. That implies a zero-footprint monitoring tool, from the \ac{VM}s perspective. The monitor does not leave a trace of its action that can be detected from inside the guest.
+
+\begin{figure}[ht]
+	\centering
+	\input{figs/kernelsym.tikz}
+%	\includegraphics{libvmi}
+	\caption{Using LibVMI to access the value of a kernel symbol}
+	\label{fig:accesskernel}
+\end{figure}
+
+\par Although this development was game-changing, it had its drawback. Just monitoring that values of specific parts of memory, or the \ac{CPU} registers, over a time interval to make any inferences about the running state of the \ac{VM}, leaves the \ac{VM} vulnerable during the waiting period. A solution is to trap the memory regions that we want to monitor for access or modification. But this can be detected from a knowledgeable adversary. 
+\par To solve this problem the Xen’s newest \ac{VMI} \ac{API}, altp2m, along with the substantial number of \ac{EPT}s on the latest \ac{CPU}s, were employed. This project, DRAKVUF~\cite{lengyel2014drakvuf}, is a dynamic malware analysis platform. One of the most key features, is that it traps the memory addresses the user wants to monitor. When the event gets triggered, the \ac{EPT} with the trapped address gets swapped with the original, continuing that way an unmodified execution of the guest \ac{VM}. This allows the monitor of an arbitrary number of memory addresses, providing notification on every such event, while at the same time it is untraceable from inside the guest.
+
+\par A compromised system is just a matter of time. Whether it results from user error, or targeted malicious activity, it is bound to happen. This eventuality led researchers to invest their resources to \ac{VM} security. Some solutions focus on the analysis part, where by leveraging the hypervisors introspection methods gain better insight and understanding of the behavior and impact of a malware, so that it can be successfully intercepted. Other solutions have a more active role, by trying to protect crucial parts of a running \ac{VM}. They prevent the kernel from being corrupt, or provide secure access to parts of memory where critical information or applications are stored. 
+These solutions can provide valuable information on which events and actions led to a compromised system, or protect the vital \ac{OS} space from being corrupt by malicious activity, each of them on its own unique way. 
+
+
+\section{System Calls}\label{sec:syscalls}
+Modern  \ac{OS}s are responsible for allocating their resources efficiently and securely to themselves, as well as the user level applications. The part of the \ac{OS} assigned to manage these resources, like memory, hard disk drive access, or \ac{CPU} time, is the kernel of the \ac{OS}. The kernel is the heart of the \ac{OS} that makes everything work in harmony without conflicts or resolves them if there are any, and runs in the kernel-space. When an application is running it runs in the so-called user-space. This distinction exists to prevent application from having direct access to the underlying hardware and is enforced with the protection rings, explained before in the chapter. The running application has no knowledge of any other application being executed on the same machine and whenever it requires some resource it asks the \ac{OS} through the kernel. The kernel on its behalf accesses the hard disk drive, allocates memory or executes other commands that are considered privileged and the application cannot execute. It handles all the low-level details of what the application asked and returns the results of the action. 
+
+\par It is a very complicated software and the most crucial part of the \ac{OS}. Therefore, not every process can access the kernel directly or invoke all its functions, to avoid corruption or misuse of the low-level access it has, to gain access where one should not. This limited interface to the kernel, a sort of protection mechanism, is called system call. The details of making a system call depend on the \ac{OS}.
+
+\par Programming on a high-level language usually does not involve making system calls directly. Most languages have implemented wrappers for making a system call and simplifying the system call interface. Regardless that fact, the application will eventually have to make a system call to access some of the systems resources.
+
+
+\section{Related Work}\label{sec:related}
+The Introspection concept gave birth to numerous interesting solutions, which target a more critical issue of the information world, that of computer security. Following are only some of the solutions produced so far. Although the approach on each research is different, the result and method of employment can potentially classify them according th the following categorization, also suggested in~\cite{bauman2015survey}.
+
+\subsection{In-\ac{VM}-Based Monitoring}\label{sub:invm}
+These solutions implement part of the application inside the \ac{VM}. They employ an inside agent to gather information on the \ac{VM} execution state and use the elevated privileges of the hypervisor to protect the agent from corruption or subversion. Depending on the application we can refine the classification more to detection, prevention and recovery solutions. Working in a \ac{VM} to gather information for the hypervisor can become a very intensive task increasing the performance overhead. The hypervisor, as well as every \ac{VM}, is a complete \ac{OS}, running its processes and applications, its own scheduler and intercepting its own interrupts. Besides that, there is an extra overhead, when the execution switches between a \ac{VM} and the hypervisor and vice versa, a pair of events called VM-exit and VM-entry (figure~\ref{fig:vmevents}). Having a monitoring and logging application on the hypervisor, triggers a considerable number of VM-exit events. This is a problem some of the following solutions tried to address by using different approaches.
+
+\begin{figure}[ht]
+	\centering
+	\input{figs/vmevents.tikz}
+	\caption{VM-exit and VM-entry events}
+	\label{fig:vmevents}
+\end{figure}
+
+\subsubsection{Detection}
+
+To prevent this overhead, a monitoring solution, SIM~\cite{sharif2009secure}, used the hypervisor the following way. The hypervisor, since it provides all the resource allocation, can mark the memory pages allocated to a \ac{VM}, different than the guest \ac{OS} would. It can mark a page read-only when the \ac{OS} marks it as read/write. This will trigger a \ac{VM}-exit event and the hypervisor can act according to a different policy than that of the \ac{VM}’s \ac{OS}. So, SIM, is placed inside the \ac{VM}, monitoring the guest \ac{OS}, but at the same time is protected by being placed on a protected by the hypervisor region of the \ac{VM}’s address space. 
+
+\par Virtuoso~\cite{dolan2011virtuoso}, is a tool that tries to bridge that sematic gap by automating the process of extracting \ac{OS} kernel information, relevant to introspection. It runs a helper program inside the \ac{VM}, which yields the wanted result. It analyzes the execution trace of that helper program and generates the introspection code that will give the same result when ran from the hypervisor. This method helps gain some knowledge about the internal machine state without having the required intricate knowledge of \ac{OS} internals, but from the hypervisor’s point of view. 
+
+
+\subsubsection{Prevention}
+
+In~\cite{payne2008lares}, in the same manner, Lares tries to modify the guest \ac{OS} minimally, so that the code used for monitoring can be protected easily, while all the introspection and decision making code is placed in a security \ac{VM}. The two communicate through the hypervisor, which protects the hooked code in the untrusted \ac{VM}, while at the same time provides information to the security \ac{VM}. It also provides communication between the \ac{VM}s, so that the decision making on the security \ac{VM} can be enforced to the untrusted one. In this case, the monitoring happens on process creation, allowing or denying the execution of programs, as defined in a whitelist.
+
+\par SHype~\cite{sailer2005building} is a modified hypervisor that implements \ac{MAC} on shared resources between \ac{VM}s. SHype is used also in~\cite{hay2008forensics}, to provide a more fine-grained \ac{MAC} on data flow between \ac{VM}s and services. Hyperlink~\cite{xiao2016hyperlink} implements a hybrid of protected in-\ac{VM} monitoring alongside \ac{MAC}-based hypervisor protection, for guest \ac{VM} and hypervisor protection.
+
+\par InkTag~\cite{hofmann2013inktag} introduces many different new concepts to run \ac{HAP} in an untrusted \ac{OS}. The threat model for this approach is more advanced and sophisticated. Inktag to protect the \ac{HAP} employs many different mechanisms, on various levels, to ensure that there is no data leak and malicious intervention during the \ac{HAP}s runtime. 
+\par Paraverification, is the concept introduced, where the kernel is required to perform some extra tasks, to provide the hypervisor high-level information about the process state. This way, the hypervisor can easily determine the high-level effects of low-level actions. Furthermore, the \ac{HAP} does not interact directly with the kernel. This is done by an untrusted trampoline code, which is responsible for making the system calls instead of the \ac{HAP}, and receiving the system call results from the \ac{OS}, and after validating them, return them to the \ac{HAP}.
+\par To protect the contents of the \ac{HAP}s memory address space, InkTag employs two \ac{EPT}s. One for use during untrusted execution, which is visible by the untrusted \ac{OS}, and one for use during trusted execution which is visible and used only by the hypervisor. In addition, if a page from the \ac{HAP}s address space needs to be evicted, InkTag hashes the contents and encrypts them before they get written on the disk. This way it provides protection against malicious modification and access.
+Also, to further protect the \ac{HAP} and its files, a different access control mechanism is used. Each process and file is followed by attributes, which are used to enforce an access policy, such that it will protect the files, the processes and their spawned processes. InkTag also uses a different convention to address memory and files, with the use of \ac{OI}, an internal representation visible and known only to the \ac{HAP} and the hypervisor. These are used to define the permissions each \ac{HAP} has.
+Finally, InkTag modifies the actual media layout, to inject file metadata, which are used to provide crash consistency. These metadata are not visible by the untrusted \ac{OS}, since these sectors are not included in the media view of the \ac{OS}. 
+
+\par On a similar approach, Overshadow~\cite{chen2008overshadow} provides a one-to-many memory mapping from the \ac{VM} to physical memory, as well as other mechanisms to further protect the applications and their data. As a high-level overview, the actual data in memory depend on the process trying to access them. The contents get encrypted and hashed for untrusted processes and decrypted when the trusted application tries to access them. 
+
+\par To manage secure application execution inside a compromised \ac{OS} Haven~\cite{baumann2015shielding} takes a different approach. To protect the application Haven employs Intel's \ac{SGX}. \ac{SGX} allows a process to define a secure region of address space, called enclave. What Haven does, is to put the whole application in an enclave and uses an in-enclave library \ac{OS} for the interactions with the \ac{OS}.
+
+\par On the downside, InkTag and Haven were attacked in~\cite{xu2015controlled} with the use of controlled-channel attacks, resulting to the extraction of substantial amounts of sensitive information from protected applications. Complete text documents were extracted, as well as outlines of JPEG images, showing that data protection during process, in not a trivial task. 
+
+
+\subsection{Out-of-\ac{VM}-Based Monitoring}\label{sub:outvm}
+Having a monitoring tool on the hypervisor has its benefits. At the same time though, there is a significant drawback. Although everything is visible from the hypervisors perspective, the data collected miss context. It is extremely difficult, by analyzing memory and \ac{CPU} register values to understand the context, under which every execution cycle happens. Following, we comment some of the out-of-\ac{VM} solutions. Some of them work on raw collected data, while others try to bridge that semantic gap to better understand the high-level commands being executed in the \ac{VM}.
+
+\subsubsection{Detection}
+
+\par ReVirt~\cite{dunlap2002revirt}, is a logging application. By using the hypervisor’s \ac{VM} access, it creates extensive logs of a \ac{VM}’s execution. Since the hypervisor has unlimited access to the state of the \ac{VM}, ReVirt can collect and record enough information to be able to recreate and simulate the execution of the target machine. This can be very valuable for collecting malware activity data, even after the system has been compromised, hijacked or even replaced. The replay data can prove very useful in the malware analysis field, as every non-deterministic action of a malware is recorded and deterministic results can be recreated, providing this way a full system view and impact of the malware, on every step of the malicious activity.
+
+\par ~\cite{macko2011collecting} uses the ability of the hypervisor to transparently access the running \ac{VM}’s internal state to collect system-level provenance, starting even from the moment the \ac{VM} starts booting. 
+
+\par On a different approach, ~\cite{crawford2013insider} implements a mechanism to detect insider threats. It uses \ac{VMI} to stealthy monitor the user’s actions and detect suspicious activity that correlates to an insider threat. Although this alert mechanism is very useful, especially due to its transparency, the insider finally gets access to the information he wants.
+
+\par When the introspection idea was conceived~\cite{garfinkel2003virtual}, it was utilized to create a hybrid \ac{IDS}. By placing an \ac{IDS} solution on the hypervisor, it gained the best of both worlds, \ac{HIDS} and \ac{NIDS}. Since it is placed outside the \ac{VM}, it has the advantage of not being prone to detection, attack and corruption or evasion. It can monitor directly the network traffic, given that the \ac{NIC} is a common shared resource. On the other hand, by having the hypervisor’s introspection capability, it can act also as a \ac{HIDS}, by monitoring the actual system behavior and execution. 
+
+\par Other solutions have been proposed to fill the semantic gap between the hypervisor and the guest \ac{VM} like Strider Ghostbuster~\cite{wang2005detecting}, PoKeR~\cite{riley2009multi} and VMWatcher~\cite{jiang2007stealthy}. Although all of them employ different techniques to achieve that, but unfortunately, as later researches mention~\cite{mahapatra2011online}, they fail at a point, implying that way that this semantic gap is difficult to bridge. 
+
+\subsubsection{Prevention}
+
+\par This semantic gap was also addressed in~\cite{srinivasan2011process} with a technique called process out-grafting. This method, instead of monitoring the \ac{VM} as a whole, it focuses on each separate process, for a more fine-grained execution monitoring. This is done by implementing two new techniques. The first is called on-demand grafting, which can relocate a running process from the guest target \ac{VM} to a security \ac{VM}. This effectively bridges completely the semantic gap, as for all intents and purposes the process is running on the same system as the monitor. This way the monitor can intercept all instructions executed by the suspicious process, without the need of hypervisor intervention. The second technique called split execution, makes a logical separation on the execution of instructions. If the process runs in user-space, it continues to run on the security \ac{VM}. When there is a kernel request, like a system-call, it executes that instruction on the target \ac{VM}. That technique creates an isolation between the monitor and the suspicious process, since they don’t run on the same kernel, while at the same time the suspect’s process perspective, it is still running inside the target \ac{VM}. 
+
+
+\par Furthermore, SecVisor~\cite{seshadri2007secvisor} and HUKO~\cite{xiong2011practical} [14], propose a kernel integrity method, that protects the kernel against code injection, such that happens from rootkits. In this case, SecVisor and HUKO are part of the hypervisor. They are used to allow user allowed code execution, while at the same time prevents malicious code execution.
+
+
+\par Sentry~\cite{srivastava2012efficient}, does a more granular kernel protection by preventing low-trust kernel components from altering security-critical data used by the kernel to manage the system and itself. It protects dynamically allocated memory, is isolated from the untrusted kernel by running on the Hypervisor and reduces the overhead by monitoring only the kernel related memory pages for suspicious activity.
+
+
+\par A direct approach to filesystem integrity is presented in~\cite{nasab2012security}. The author tries to protect the \ac{OS} from running maliciously modified system executables. The target \ac{VM} is deployed offline and all the files are signed digitally using a private key. The digests are stored on the hypervisor. When the process has been completed for all the files to be protected, the \ac{VM} gets online. During its execution, whenever a file is accessed, before it gets loaded into memory, the system retrieves its digest and compares it to the copy on the hypervisor. If the file hasn’t changed access or execution continues, otherwise denied.
+

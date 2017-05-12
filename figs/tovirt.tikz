@@ -1,0 +1,66 @@
+%\documentclass[tikz, border=10pt]{standalone}
+%%%<
+%%%>
+\begin{comment}
+:Title: Basic Philosophy concepts
+:Tags: Diagrams;Graphs;Philosophy
+:Author: Vilson Vieira
+:Slug: philosophy
+
+This graph diagram presents the basic Philosophy concepts of dialectics,
+opposition and innovation.
+\end{comment}
+
+\def\xout{3.5}
+\def\yout{2.2}
+\def\xin{1.8}
+\def\yin{1.05}
+\def\xapp{3}
+\def\yapp{1.9}
+\def\xhard{-0.7}
+\def\xr{0}
+\def\yr{0.2}
+\def\xb{4}
+\def\yb{0.2}
+\def\xg{2}
+\def\yg{-2.5}
+\def\xrr{10}
+\def\yrr{1}
+\def\xbb{10}
+\def\ybb{-1.8}
+\def\ygg{-4.6}
+\begin{tikzpicture}[
+rednode/.style={rectangle, draw=black!60, fill=red!20, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},
+greennode/.style={rectangle, draw=black!60, fill=green!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+  % Dialectics
+  \draw[black] (\xr, \yr)rectangle(\xr + \xout, \yr + \yout);
+  \node[rednode, label={[xshift = \xhard cm, yshift=-\yout cm]Hardware}] at (\xr + \xin, \yr + \yin) {Operating System};
+  \node at (\xr + \xapp, \yr + \yapp) {\textit{App}};
+
+  \draw[black] (\xb, \yb)rectangle(\xb + \xout, \yb + \yout);
+  \node[bluenode, label={[xshift=\xhard cm, yshift=-\yout cm]Hardware}] at (\xb + \xin, \yb + \yin) {Operating System};
+  \node at (\xb + \xapp, \yb + \yapp) {\textit{App}};
+
+  \draw[black] (\xg, \yg)rectangle(\xg + \xout, \yg + \yout);
+  \node[greennode, label={[xshift=\xhard cm, yshift=-\yout cm]Hardware}] at (\xg + \xin, \yg + \yin) {Operating System};
+  \node at (\xg + \xapp, \yg + \yapp) {\textit{App}};
+  
+  \draw[black] (9.5, -5.2)rectangle(14,3.5);
+  \node at (10.5, -5.5) {\text{Hardware}};
+  
+  \draw[line width=1mm,->] (8,-1) -- (9,-1);
+  
+  \draw[dashed] (\xrr, \yrr)rectangle(\xrr + \xout, \yrr + \yout);
+  \node[rednode, label={[xshift = \xhard cm, yshift=-\yout cm]DomU}] at (\xrr + \xin, \yrr + \yin) {Operating System};
+  \node at (\xrr + \xapp, \yrr + \yapp) {\textit{App}};
+  
+  \draw[dashed] (\xrr, \ybb)rectangle(\xrr + \xout, \ybb + \yout);
+  \node[bluenode, label={[xshift = \xhard cm, yshift=-\yout cm]DomU}] at (\xrr + \xin, \ybb + \yin) {Operating System};
+  \node at (\xrr + \xapp, \ybb + \yapp) {\textit{App}};
+  
+  \draw[dashed] (\xrr, \ygg)rectangle(\xrr + \xout, \ygg + \yout);
+  \node[greennode, label={[xshift = \xhard cm, yshift=-\yout cm]DomU}] at (\xrr + \xin, \ygg + \yin) {Operating System};
+  \node at (\xrr + \xapp, \ygg + \yapp) {\textit{App}};
+
+\end{tikzpicture}

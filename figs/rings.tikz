@@ -1,0 +1,29 @@
+\begin{tikzpicture}[
+rednode/.style={circle, draw=red!60, fill=red!30, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+  
+  	\filldraw[fill=green!70, draw=black] (0, 0) circle (2.8cm);
+  	\filldraw[fill=yellow!70, draw=black] (0, 0) circle (2.3cm);
+	\filldraw[fill=orange!70, draw=black] (0, 0) circle (1.8cm);
+	\filldraw[fill=red!70, draw=black] (0, 0) circle (1.3cm);
+
+
+  	\filldraw[fill=green!70, draw=black] (9, 0) circle (2.8cm);
+	\filldraw[fill=yellow!70, draw=black] (9, 0) circle (2.3cm);
+	\filldraw[fill=orange!70, draw=black] (9, 0) circle (1.8cm);
+	\filldraw[fill=red!70, draw=black] (9, 0) circle (1.3cm);
+	\filldraw[fill=purple!70, draw=black] (9, 0) circle (0.8cm);
+	
+	\draw[black, -] (0, 2.8) -- (9, 2.8);
+	\draw[black, -] (0, 2.3) -- (9, 2.3);
+	\draw[black, -] (0, 1.8) -- (9, 1.8);
+	\draw[black, -] (0, 1.3) -- (9, 1.3);
+	\draw[black, -] (4.5, 0.8) -- (9, 0.8);
+
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:3: Applications}] at (2.95, 2.15) {};
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:2: Not Used}] at (2.95, 1.75) {};
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:1: Not Used}] at (2.95, 1.25) {};
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:0: Kernel, Drivers}] at (2.95, 0.75) {};	
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:-1: Hypervisor}] at (2.95, 0.25) {};	
+		
+\end{tikzpicture}

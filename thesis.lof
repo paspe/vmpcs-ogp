@@ -1,0 +1,20 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Migrating to virtualization\relax }}{6}{figure.caption.19}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Architectural difference of type-I vs type-II hypervisors\relax }}{7}{figure.caption.20}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen Hypervisor Architecture\relax }}{8}{figure.caption.21}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.23}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.27}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.30}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out of guest access of \ac {VM} state\relax }}{12}{figure.caption.31}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.32}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.33}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Short figure title, with \emph {emph} and \textit {italics} in a caption.\relax }}{27}{figure.caption.47}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Some styled math in a caption, $\mathsf {Func}(x, \sigma ) = x^2 + \overline {\sigma } + \pi $.\relax }}{28}{figure.caption.48}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Caption using subfigure package.\relax }}{29}{figure.caption.49}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {First sub-figure}}}{29}{subfigure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Second sub-figure}}}{29}{subfigure.3.2}
+\contentsfinish 

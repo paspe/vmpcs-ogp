@@ -1,0 +1,46 @@
+\begin{tikzpicture}[
+rednode/.style={circle, draw=red!60, fill=red!30, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+
+  
+   	\node[anchor= south west, copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=white, rectangle, rounded corners, draw=black, minimum width=50mm, minimum height=70mm, label={[yshift=-1cm]north:Dom0}] at (0, 0) {};
+   	
+	\node[anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=45mm, minimum height=10mm, label={[yshift=-0.8cm]VMI Application}] at (0.25, 5) {}; 
+	\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=45mm, minimum height=10mm, label={[yshift=-0.8cm]LibVMI}] at (0.25, 3.5) {}; 
+	
+	\node[dashed, anchor= south west, fill=white, rectangle, draw=black!80, minimum width=20mm, minimum height=15mm, label={[yshift=-1.5cm]\begin{tabular}{c}
+		System \\ Map
+		\end{tabular}}] at (2.5, 1.5) {}; 
+	
+   	\node[anchor= south west, copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=white, rectangle, rounded corners, draw=black, minimum width=75mm, minimum height=42mm, label={[yshift=-0.7cm]north:User VM (DomU)}] at (7, 0) {};
+
+	\node[dashed, anchor= south west, fill=white, rectangle, draw=black!80, minimum width=20mm, minimum height=20mm, label={[yshift=-1.7cm]\begin{tabular}{c}
+		Page \\ Directory
+		\end{tabular}}] at (7.2, 1.5) {}; 
+
+	\node[dashed, anchor= south west, fill=white, rectangle, draw=black!80, minimum width=20mm, minimum height=20mm, label={[yshift=-1.7cm]\begin{tabular}{c}
+	Page \\ Table
+	\end{tabular}}] at (9.6, 1.5) {}; 
+
+	\node[dashed, anchor= south west, fill=white, rectangle, draw=black!80, minimum width=20mm, minimum height=20mm, label={[yshift=-1.7cm]\begin{tabular}{c}
+	Kernel \\ Data
+	\end{tabular}}] at (12.2, 0.5) {}; 
+
+	\draw[anchor= south west, draw=red!70, line width=1mm,->] (4, 5) -- (4, 4.5);
+	\draw[anchor= south west, draw=red!70, line width=1mm,->] (4, 3.5) -- (4, 3);
+	
+	\draw[anchor= south west, draw=red!70, line width=1mm,->] (4.5, 2) -- (7.2, 2);
+	\draw[anchor= south west, draw=red!70, line width=1mm,->] (9.2, 2) -- (9.6, 2);
+	\draw[anchor= south west, draw=red!70, line width=1mm,->] (11.6, 2) -- (12.2, 2);
+	
+	\draw[anchor= south west, draw=blue!60, line width=1mm,->] (12.2, 1) -- (1, 1) -- (1, 3.5);
+	\draw[anchor= south west, draw=blue!60, line width=1mm,->] (1, 4.5) -- (1, 5);
+
+	\node[anchor= south west, rectangle, text width=90mm, label={}, font=\small] at (5.5, 4.5) {\textit{
+		The VMI application requests a kernel symbol. 
+		LibVMI looks up the symbol in the System Map.
+		Then it looksup in the Page Directory to find the correct Page Table.
+		It finds the symbol in the Page Table, reads the data and returns the value to the application.}};
+
+
+\end{tikzpicture}

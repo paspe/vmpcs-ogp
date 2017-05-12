@@ -1,0 +1,48 @@
+\begin{tikzpicture}[
+rednode/.style={circle, draw=red!60, fill=red!30, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+ 
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (0, 5) {};
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (0.5, 5) {};
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=red!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (1, 5) {};
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=blue!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (1.5, 5) {};
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=green!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (2, 5) {};
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (2.5, 5) {};
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (3, 5) {};
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (3.5, 5) {};
+   	
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=green!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (0, 2.5) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (0.5, 2.5) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (1, 2.5) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (1.5, 2.5) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (2, 2.5) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=blue!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (2.5, 2.5) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (3, 2.5) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=red!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (3.5, 2.5) {};
+	
+   	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (0, 0) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=blue!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (0.5, 0) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (1, 0) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=green!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (1.5, 0) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (2, 0) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=red!60, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (2.5, 0) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (3, 0) {};
+	\node (rect) [copy shadow={draw=black!20, fill=black!40, opacity=0.5}, fill=white, rectangle, draw=black!50, minimum width=5mm, minimum height=5mm, anchor= south west,label={}] at (3.5, 0) {};
+	
+   	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:Application}] at (-3, 5) {};
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:Virtual}] at (4.5, 5) {};
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:Kernel}] at (-3, 2.5) {};
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:Pseudo-physical}] at (4.5, 2.5) {};
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:Hypervisor}] at (-3, 0) {};
+	\node (rect) [rectangle, minimum width=30mm, minimum height=4mm, anchor= south west,label={[anchor=south]south:Machine}] at (4.5, 0) {};
+	
+	\draw[line width=0.3mm, red!80, ->] (1.25, 5) -- (3.75, 3);
+	\draw[line width=0.3mm, blue!80, ->] (1.75, 5) -- (2.75, 3);
+	\draw[line width=0.3mm, green!80, ->] (2.25, 5) -- (0.25, 3);
+
+	\draw[line width=0.3mm, green!80, ->] (0.25, 2.5) -- (1.75, 0.5);
+	\draw[line width=0.3mm, blue!80, ->] (2.75, 2.5) -- (0.75, 0.5);
+	\draw[line width=0.3mm, red!80, ->] (3.75, 2.5) -- (2.75, 0.5);
+
+		
+\end{tikzpicture}

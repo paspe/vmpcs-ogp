@@ -1,0 +1,24 @@
+\begin{tikzpicture}[
+rednode/.style={circle, draw=red!60, fill=red!30, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+  
+   	\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!10, rectangle, rounded corners, draw=black, minimum width=50mm, minimum height=50mm, label={[yshift=-1.5cm]north:\begin{tabular}{c}
+   		LibVMI System \\ (Host OS/Privileged \ac{VM})
+   		\end{tabular}}] at (0, -1) {};
+	\node (rect) [fill=green!10, rectangle, draw=black!80, minimum width=45mm, minimum height=10mm, label={[yshift=-0.8cm]LibVMI}] at (0, -2.5) {}; 
+	\node (rect) [fill=green!10, rectangle, draw=black!80, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]App(C)}] at (-1.25, -1.3) {}; 
+	\node (rect) [fill=green!10, rectangle, draw=black!80, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]PyVMI}] at (1.2, -1.3) {}; 
+
+   	\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!10, rectangle, rounded corners, draw=black, minimum width=50mm, minimum height=50mm, label={}] at (6.6, -1) {};
+   	\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!10, rectangle, rounded corners, draw=black, minimum width=50mm, minimum height=50mm, label={}] at (6.3, -1.3) {};
+   	\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!10, rectangle, rounded corners, draw=black, minimum width=50mm, minimum height=50mm, label={[yshift=-1cm]north:Monitored \ac{VM}s}] at (6, -1.6) {};
+   	
+   	\node (rect) [fill=blue!10, rectangle, minimum width=20mm, minimum height=10mm, label={[yshift=-2.5cm]\begin{tabular}{c}
+   		Windows \\ Linux \\ Other \ac{OS}
+   		\end{tabular}}] at (6, -1) {}; 
+
+   	\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!10, rectangle, rounded corners, draw=black, minimum width=100mm, minimum height=10mm, label={[yshift=-0.9cm]north:Hypervisor/Virtualization}] at (3, -7) {};
+
+	\draw[->, line width=2pt, draw=black] (3, -6.5) arc[x radius=6cm, y radius=-3.5cm, start angle=120, end angle=180];
+	\draw[->, line width=2pt, draw=black] (3, -6.5) arc[x radius=-6cm, y radius=-2.8cm, start angle=120, end angle=180];
+\end{tikzpicture}

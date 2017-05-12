@@ -1,0 +1,52 @@
+\def\xout{15}
+\def\yout{6}
+\def\x{0}
+\def\y{0}
+\def\xr{7.75}
+%\def\yl{1}
+\def\xl{0.25}
+\def\yl{0.25}
+\def\yoffset{0.8}
+\def\xsize{70}
+\def\ysize{7}
+\def\xapp{2.5}
+\def\yapp{4.3}
+\def\xos{3.2}
+\def\yos{2.2}
+
+\begin{tikzpicture}[
+anode/.style={rectangle, draw=black!60, very thick, minimum size=5mm, minimum width=7cm, minimum height=1cm, text centered},
+rednode/.style={rectangle, draw=black!60, fill=red!20, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+  
+  \draw[black] (\x, \y)rectangle(\xout,\yout);
+  \draw[red,thick,-] (7.5, 0) -- (7.5, 6);
+  \node (rect) [rectangle, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Type-I hypervisor}] at (\xl,\yl+5) {};
+  \node (rect) [rectangle, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Type-II hypervisor}] at (\xr,\yl+5) {};
+
+  
+  \node (rect) [rectangle, draw, fill=black!5, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Host hardware}] at (\xl,\yl+\yoffset) {};
+  \node (rect) [rectangle, draw, fill=black!20, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Hypervisor}] at (\xl,\yl+\yoffset+\yoffset) {};
+
+  \draw[black] (\xl, \yl + \yoffset + \yoffset + \yoffset)rectangle(\xl + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
+  \node[rednode] at (\xl + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
+  \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{App}}] at (\xl+2.5,\yl+3.7) {};
+
+  \draw[black] (4, \yl + \yoffset + \yoffset + \yoffset)rectangle(4.05 + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
+  \node[bluenode] at (4 + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
+  \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{App}}] at (4+2.5,\yl+3.7) {};
+
+
+  \node (rect) [rectangle, draw, fill=black!5, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Host hardware}] at (\xr,\yl) {};
+  \node (rect) [rectangle, draw, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Operating System}] at (\xr,\yl+\yoffset) {};
+  \node (rect) [rectangle, draw, fill=black!20, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Hypervisor}] at (\xr,\yl+\yoffset+\yoffset) {};
+
+  \draw[black] (\xr, \yl + \yoffset + \yoffset + \yoffset)rectangle(\xr + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
+  \node[rednode] at (\xr + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
+  \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{App}}] at (\xr+2.5,\yl+3.7) {};
+
+  \draw[black] (\xr + 3.75, \yl + \yoffset + \yoffset + \yoffset)rectangle(\xr + 3.8 + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
+  \node[bluenode] at (\xr + 3.75 + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
+  \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{App}}] at (\xr + 3.75 + 2.5,\yl+3.7) {};
+  
+\end{tikzpicture}

@@ -1,0 +1,22 @@
+\begin{tikzpicture}[
+rednode/.style={circle, draw=red!60, fill=red!30, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+  
+   	\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!10, rectangle, rounded corners, draw=black, minimum width=50mm, minimum height=10mm, label={[yshift=-0.75cm]north:Guest VM1}] at (0, -1) {};
+   	\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!10, rectangle, rounded corners, draw=black, minimum width=50mm, minimum height=10mm, label={[yshift=-0.75cm]north:Guest VM2}] at (7, -1) {};
+   	
+   	\node (rect) [copy shadow={draw=black!10, fill=black!40, opacity=0.5}, fill=blue!10, rectangle, rounded corners, draw=black, minimum width=80mm, minimum height=10mm, label={[yshift=-0.9cm]north:Hypervisor}] at (3.5, -5) {};
+
+	\draw[->, line width=2pt, draw=black] (2, -4.5) -- (-1, -1.5);
+	\draw[<-, line width=2pt, draw=black] (3, -4.5) -- (0, -1.5);
+	
+	\draw[->, line width=2pt, draw=black] (4, -4.5) -- (7, -1.5);
+	\draw[<-, line width=2pt, draw=black] (5, -4.5) -- (8, -1.5);
+
+	\node[rotate=-45] at (-0.2, -3) {VM-entry};
+	\node[rotate=-45] at (2.1, -3) {VM-exit};
+
+	\node[rotate=45] at (5, -3) {VM-entry};
+	\node[rotate=45] at (7, -3) {VM-exit};
+	
+\end{tikzpicture}
