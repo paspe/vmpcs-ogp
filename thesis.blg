@@ -1,5 +1,14 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thesis.aux
 The style file: nps_thesis.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: thesis.bib
 -- nps_thesis.bst version 1.9 (2016/05/05) by Mark Gondree.
 -- based on IEEEtran.bst (2008/09/30) by Michael Shell.
@@ -9,4 +18,45 @@ Warning--empty journal in mell2011nist
 Warning--empty journal in nasab2012security
 
 Done.
+You've used 33 entries,
+            4329 wiz_defined-function locations,
+            1032 strings with 14112 characters,
+and the built_in function-call counts, 25848 in all, are:
+= -- 1994
+> -- 630
+< -- 209
++ -- 339
+- -- 110
+* -- 1233
+:= -- 3731
+add.period$ -- 82
+call.type$ -- 33
+change.case$ -- 35
+chr.to.int$ -- 489
+cite$ -- 35
+duplicate$ -- 1887
+empty$ -- 2236
+format.name$ -- 138
+if$ -- 6069
+int.to.chr$ -- 0
+int.to.str$ -- 33
+missing$ -- 320
+newline$ -- 122
+num.names$ -- 31
+pop$ -- 866
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1995
+stack$ -- 0
+substring$ -- 1183
+swap$ -- 1473
+text.length$ -- 46
+text.prefix$ -- 0
+top$ -- 6
+type$ -- 33
+warning$ -- 2
+while$ -- 121
+width$ -- 35
+write$ -- 329
 (There were 2 warnings)

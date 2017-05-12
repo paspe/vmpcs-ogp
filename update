@@ -7,5 +7,5 @@ git add .
 git commit -m "updates"
 git push -u origin master
 cd ..
-"C:\Program Files\7-Zip\7z.exe" a -r thesis.zip -w Thesis
+zip -r -u -b Thesis thesis.zip
 cd Thesis
