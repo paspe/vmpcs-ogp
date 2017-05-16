@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  11 MAY 2017 19:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  15 MAY 2017 17:33
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1704,17 +1704,17 @@ Package acronym Info: Label `acro:OI' newly defined as it shall be overridden
 although it is yet undefined on input line 142.
  [16.36]
 Package acronym Info: Label `acro:SGX' newly defined as it shall be overridden
-although it is yet undefined on input line 147.
+although it is yet undefined on input line 148.
  [17.37]
-Package acronym Info: Label `acro:IDS' overridden on input line 163.
+Package acronym Info: Label `acro:IDS' overridden on input line 164.
 Package acronym Info: Label `acro:HIDS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 163.
+although it is yet undefined on input line 164.
 Package acronym Info: Label `acro:NIDS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 163.
+although it is yet undefined on input line 164.
 Package acronym Info: Label `acro:NIC' newly defined as it shall be overridden
-although it is yet undefined on input line 163.
+although it is yet undefined on input line 164.
  [18.38]) (chapter3.tex
 [19.39] [20.40
 
@@ -1765,7 +1765,7 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 Here is how much of TeX's memory you used:
  25640 strings out of 493328
  441893 string characters out of 3139125
- 665910 words of memory out of 3000000
+ 665923 words of memory out of 3000000
  28323 multiletter control sequences out of 15000+200000
  87017 words of font info for 103 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1792,9 +1792,9 @@ pe1/public/txfonts/rtxmi.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tx
 fonts/rtxr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsyb.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb><C:/Program F
 iles/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (55 pages, 442429 bytes).
+Output written on thesis.pdf (55 pages, 442841 bytes).
 PDF statistics:
- 1203 PDF objects out of 1440 (max. 8388607)
+ 1204 PDF objects out of 1440 (max. 8388607)
  187 named destinations out of 1000 (max. 500000)
  258 words of extra memory for PDF output out of 10000 (max. 10000000)
 
