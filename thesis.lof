@@ -12,9 +12,4 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Short figure title, with \emph {emph} and \textit {italics} in a caption.\relax }}{27}{figure.caption.47}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Some styled math in a caption, $\mathsf {Func}(x, \sigma ) = x^2 + \overline {\sigma } + \pi $.\relax }}{28}{figure.caption.48}
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Caption using subfigure package.\relax }}{29}{figure.caption.49}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {First sub-figure}}}{29}{subfigure.3.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Second sub-figure}}}{29}{subfigure.3.2}
 \contentsfinish 

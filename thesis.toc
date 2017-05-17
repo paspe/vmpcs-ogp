@@ -16,13 +16,9 @@
 \contentsline {subsubsection}{Detection}{17}{subsubsection*.40}
 \contentsline {subsubsection}{Prevention}{18}{subsubsection*.45}
 \contentsline {chapter}{\numberline {3}Design and Implementation}{21}{chapter.3}
-\contentsline {section}{\numberline {3.1}Goals}{21}{section.3.1}
+\contentsline {section}{\numberline {3.1}Specifications}{21}{section.3.1}
 \contentsline {chapter}{\numberline {4}Results and Conclusion}{23}{chapter.4}
 \contentsline {chapter}{\numberline {5}Future Work}{25}{chapter.5}
-\contentsline {chapter}{Appendix:\nobreakspace {}[My Appendix Title]}{27}{appendix*.46}
-\contentsline {section}{\numberline {A.1}Section Example}{27}{section.Alph0.1}
-\contentsline {subsection}{\numberline {A.1.1}Subsection Example}{28}{subsection.Alph0.1.1}
-\contentsline {section}{\numberline {A.2}Another Section}{28}{section.Alph0.2}
-\contentsline {chapter}{List of References}{31}{figure.caption.49}
-\contentsline {chapter}{Initial Distribution List}{35}{appendix*.51}
+\contentsline {chapter}{List of References}{27}{chapter.5}
+\contentsline {chapter}{Initial Distribution List}{31}{chapter*.48}
 \contentsfinish 

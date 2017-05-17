@@ -1,9 +1,12 @@
 
 \chapter{Design and Implementation}\label{ch:chapter3}
 
-In this chapter we will firstly discuss the goals of this research. We will expand on the design philosophy and go in depth on the implementation.
+In this chapter we will firstly discuss the specifications, threat model and goals of this research. We will expand on the design philosophy and go in depth on the implementation.
 
-\section{Goals}\label{sec:goals}
+\section{Specifications}\label{sec:specs}
+
+
+
 
 As far as we know, all works on \ac{VM} monitoring and security focus in kernel and \ac{OS} protection, malicious activity monitoring or extensive logging for replay and online or offline forensic purposes, or secure resource sharing among \ac{VM}s. All these solutions do not provide any protection for the actual files of the system, which can be maliciously accessed when the \ac{VM} has been compromised. \ac{VM} security is a very active research filed, that produces many solutions, each with different focus, but generally surrounding the malware protection realm. Many of these are referenced in~\cite{bauman2015survey}, an extensive survey on hypervisor-based solutions.
 
