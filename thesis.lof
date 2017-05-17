@@ -1,14 +1,14 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Migrating to virtualization\relax }}{6}{figure.caption.19}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Architectural difference of type-I vs type-II hypervisors\relax }}{7}{figure.caption.20}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen Hypervisor Architecture\relax }}{8}{figure.caption.21}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.23}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.27}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.30}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out of guest access of \ac {VM} state\relax }}{12}{figure.caption.31}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.32}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.33}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Migrating to virtualization\relax }}{6}{figure.caption.21}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Architectural difference of type-I vs type-II hypervisors\relax }}{7}{figure.caption.22}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen Hypervisor Architecture\relax }}{8}{figure.caption.23}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.25}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.29}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.32}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out of guest access of \ac {VM} state\relax }}{12}{figure.caption.33}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.34}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.35}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

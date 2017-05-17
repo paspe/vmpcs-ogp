@@ -175,13 +175,13 @@ A.~Srivastava and J.~Giffin, ``Efficient protection of kernel data structures
   via object partitioning,'' in \emph{Proceedings of the 28th annual computer
   security applications conference}. ACM, 2012, pp. 429--438.
 
-\bibitem{baliga2008automated}
-A.~Baliga, L.~Iftode, and X.~Chen, ``Automated containment of rootkits
-  attacks,'' \emph{Computers \& Security}, vol.~27, no.~7, pp. 323--334, 2008.
-
 \bibitem{nasab2012security}
 M.~R. Nasab, ``Security functions for virtual machines via introspection,''
   2012.
+
+\bibitem{baliga2008automated}
+A.~Baliga, L.~Iftode, and X.~Chen, ``Automated containment of rootkits
+  attacks,'' \emph{Computers \& Security}, vol.~27, no.~7, pp. 323--334, 2008.
 
 \bibitem{rekall}
 ``Wrekall memory forensic framework.'' Available:

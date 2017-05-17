@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  16 MAY 2017 18:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  17 MAY 2017 11:20
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1646,29 +1646,34 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <17.28> not available
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 17.28pt on input line 10.
 Package acronym Info: Label `acro:VMI' newly defined as it shall be overridden
-although it is yet undefined on input line 12.
+although it is yet undefined on input line 14.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\ucs\uni-32.def"
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 )
 Package acronym Info: Label `acro:ACL' newly defined as it shall be overridden
-although it is yet undefined on input line 12.
+although it is yet undefined on input line 14.
 Package acronym Info: Label `acro:SACL' newly defined as it shall be overridden
 
-although it is yet undefined on input line 12.
+although it is yet undefined on input line 14.
 Package acronym Info: Label `acro:VMPCS-OGP' newly defined as it shall be overr
 idden
-although it is yet undefined on input line 12.
+although it is yet undefined on input line 14.
 Package acronym Info: Label `acro:API' newly defined as it shall be overridden
-although it is yet undefined on input line 13.
+although it is yet undefined on input line 16.
  [2.22]
-LaTeX Font Info:    Try loading font information for TS1+ntxtlf on input line 1
-9.
+Package acronym Info: Label `acro:IoT' newly defined as it shall be overridden
+although it is yet undefined on input line 20.
+Package acronym Info: Label `acro:SCADA' newly defined as it shall be overridde
+n
+although it is yet undefined on input line 20.
+LaTeX Font Info:    Try loading font information for TS1+ntxtlf on input line 2
+5.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\ts1ntxtlf.fd"
 File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
 )
 LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
-(Font)              scaled to size 12.0pt on input line 19.
+(Font)              scaled to size 12.0pt on input line 25.
  [3.23])
 (chapter2.tex [4.24]
 Chapter 2.
@@ -1734,17 +1739,17 @@ Overfull \hbox (16.616pt too wide) in paragraph at lines 176--204
 Chapter 3.
 [21.41
 
-]) (chapter4.tex [22.42]
-Chapter 4.
-) (chapter5.tex [23.43
+] [22.42]) (chapter4.tex [23.43] [24.44
 
-] [24.44
+]
+Chapter 4.
+) (chapter5.tex [25.45] [26.46
 
 ]
 Chapter 5.
-) [25.45] [26.46
+) [27.47] [28.48
 
-] (thesis.bbl [27.47
+] (thesis.bbl [29.49
 
 ]
 Underfull \hbox (badness 1077) in paragraph at lines 104--109
@@ -1752,22 +1757,22 @@ Underfull \hbox (badness 1077) in paragraph at lines 104--109
 . Wald-spurger, 
  []
 
-[28.48]) [29.49] [30.50
+[30.50]) [31.51] [32.52
 
-] [31.51]
+] [33.53]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 224.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 224.
  (thesis.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 224.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 224.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 39315873E2BC515809BC1C282AED6ACD;887.
+(rerunfilecheck)             Checksum: C2BBD2E4A6DE2D39DADD61E4B1983F38;887.
  ) 
 Here is how much of TeX's memory you used:
- 25581 strings out of 493328
- 441067 string characters out of 3139125
- 666480 words of memory out of 3000000
- 28306 multiletter control sequences out of 15000+200000
+ 25603 strings out of 493328
+ 441297 string characters out of 3139125
+ 665772 words of memory out of 3000000
+ 28320 multiletter control sequences out of 15000+200000
  66569 words of font info for 75 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,94p,1383b,929s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1782,9 +1787,9 @@ n\ec\dpi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
 ur\jknappen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/q
 tmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on thesis.pdf (51 pages, 377477 bytes).
+Output written on thesis.pdf (53 pages, 384668 bytes).
 PDF statistics:
- 1076 PDF objects out of 1200 (max. 8388607)
- 174 named destinations out of 1000 (max. 500000)
+ 1105 PDF objects out of 1200 (max. 8388607)
+ 182 named destinations out of 1000 (max. 500000)
  234 words of extra memory for PDF output out of 10000 (max. 10000000)
 
