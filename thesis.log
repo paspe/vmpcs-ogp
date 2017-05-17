@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  16 MAY 2017 18:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  16 MAY 2017 18:20
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1726,11 +1726,11 @@ although it is yet undefined on input line 164.
 Package acronym Info: Label `acro:NIC' newly defined as it shall be overridden
 although it is yet undefined on input line 164.
  [18.38]
-Overfull \hbox (16.616pt too wide) in paragraph at lines 188--235
+Overfull \hbox (16.616pt too wide) in paragraph at lines 176--204
  [][] 
  []
 
-) (chapter3.tex [19.39] [20.40]
+[19.39]) (chapter3.tex [20.40]
 Chapter 3.
 [21.41
 
@@ -1782,9 +1782,9 @@ n\ec\dpi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
 ur\jknappen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/q
 tmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on thesis.pdf (51 pages, 377162 bytes).
+Output written on thesis.pdf (51 pages, 377477 bytes).
 PDF statistics:
- 1075 PDF objects out of 1200 (max. 8388607)
+ 1076 PDF objects out of 1200 (max. 8388607)
  174 named destinations out of 1000 (max. 500000)
  234 words of extra memory for PDF output out of 10000 (max. 10000000)
 

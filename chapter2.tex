@@ -169,6 +169,39 @@ Having a monitoring tool on the hypervisor has its benefits. At the same time th
 
 \par This semantic gap was also addressed in~\cite{srinivasan2011process} with a technique called process out-grafting. This method, instead of monitoring the \ac{VM} as a whole, it focuses on each separate process, for a more fine-grained execution monitoring. This is done by implementing two new techniques. The first is called on-demand grafting, which can relocate a running process from the guest target \ac{VM} to a security \ac{VM}. This effectively bridges completely the semantic gap, as for all intents and purposes the process is running on the same system as the monitor. This way the monitor can intercept all instructions executed by the suspicious process, without the need of hypervisor intervention. The second technique called split execution, makes a logical separation on the execution of instructions. If the process runs in user-space, it continues to run on the security \ac{VM}. When there is a kernel request, like a system-call, it executes that instruction on the target \ac{VM}. That technique creates an isolation between the monitor and the suspicious process, since they don’t run on the same kernel, while at the same time the suspect’s process perspective, it is still running inside the target \ac{VM}. 
 
+\begin{table}[h]
+	\centering
+	\caption{Overview of solutions}
+	\label{tbl:overview}
+	\begin{tabular}{lcccccc}
+		\toprule
+		Solution & In-VM & Out-of-VM & Detection & Prevention  & \multicolumn{2}{c}{File Protection}  \\
+		\hline
+		&		 &			 &  &  & \scriptsize {Detection} & \scriptsize {Prevention} \\
+		\hline
+		SIM~\cite{sharif2009secure} 					& X &   & X &   &   & \\
+		Virtuoso~\cite{dolan2011virtuoso} 				& X &   & X &   &   & \\
+		Lares~\cite{payne2008lares} 					& X &   &   & X &   & \\
+		SHype~\cite{sailer2005building}					& X &   &   & X &   & \\
+		InkTag~\cite{hofmann2013inktag}					& X &   &   & X &   & \\
+		Overshadow~\cite{chen2008overshadow}			& X &   &   & X &   & \\
+		Haven~\cite{baumann2015shielding}				& X &   &   & X &   & \\
+		ReVirt~\cite{dunlap2002revirt}					&   & X & X &   &   & \\
+		~\cite{macko2011collecting}						&   & X & X &   &   & \\
+		~\cite{crawford2013insider}						&   & X & X &   & X & \\
+		VMI~\cite{garfinkel2003virtual}					&   & X & X &   & X & \\
+		Strider Ghostbuster~\cite{wang2005detecting}	&   & X & X &   & X & \\
+		PoKeR~\cite{riley2009multi}						&   & X & X &   & X & \\
+		VMWatcher~\cite{jiang2007stealthy}				&   & X & X &   & X & \\
+		~\cite{srinivasan2011process}					&   & X &   & X &   &  \\
+		SecVisor~\cite{seshadri2007secvisor} 			&   & X &   & X &   &  \\
+		HUKO~\cite{xiong2011practical}					&   & X &   & X &   &  \\
+		Sentry~\cite{srivastava2012efficient}			&   & X &   & X &   &  \\
+		~\cite{nasab2012security}						&   & X &   & X &   &  X\\
+		Paladin~\cite{baliga2008automated}				&   & X &   & X &   &  X\\
+		\bottomrule
+	\end{tabular}	
+\end{table}
 
 \par Furthermore, SecVisor~\cite{seshadri2007secvisor} and HUKO~\cite{xiong2011practical}, propose a kernel integrity method, that protects the kernel against code injection, such that happens from rootkits. In this case, SecVisor and HUKO are part of the hypervisor. They are used to allow user allowed code execution, while at the same time prevents malicious code execution.
 
@@ -178,63 +211,5 @@ Having a monitoring tool on the hypervisor has its benefits. At the same time th
 
 \par Paladin~\cite{baliga2008automated} introduces first the concept of Out-of-Guest \ac{ACL}, although at a granular level, by enforcing generic access permissions. A more direct approach to filesystem integrity is presented in~\cite{nasab2012security}. The author tries to protect the \ac{OS} from accessing maliciously modified files. The target \ac{VM} is deployed offline and all the files are signed digitally using a private key. The digests are stored on the hypervisor. When the process has been completed for all the files to be protected, the \ac{VM} gets online. During its execution, whenever a file is accessed, before it gets loaded into memory, the system retrieves its digest and compares it to the copy on the hypervisor. If the file hasn’t changed access or execution continues, otherwise denied.
 
-\par Below is a table representing the key features of the solutions presented.
+\par \ref{tbl:overview} shows a representation of the key features of the solutions presented above.
 
-\begin{table}
-	\centering
-	\caption{Overview of solutions}
-	\label{tbl:overview}
-	
-	\begin{tabular}{lcccccc}
-		\toprule
-		Solution & In-VM & Out-of-VM & Detection & Prevention  & \multicolumn{2}{c}{File Protection}  \\
-		\hline
-				 &		 &			 &  &  & \scriptsize {Detection} & \scriptsize {Prevention} \\
-		\hline
-		SIM~\cite{sharif2009secure} 					& X &   & X &   &   & \\
-		
-		Virtuoso~\cite{dolan2011virtuoso} 				& X &   & X &   &   & \\
-
-		Lares~\cite{payne2008lares} 					& X &   &   & X &   & \\
-		
-		SHype~\cite{sailer2005building}					& X &   &   & X &   & \\
-		
-		InkTag~\cite{hofmann2013inktag}					& X &   &   & X &   & \\
-		
-		Overshadow~\cite{chen2008overshadow}			& X &   &   & X &   & \\
-		
-		Haven~\cite{baumann2015shielding}				& X &   &   & X &   & \\
-		
-		ReVirt~\cite{dunlap2002revirt}					&   & X & X &   &   & \\
-		
-		~\cite{macko2011collecting}						&   & X & X &   &   & \\
-		
-		~\cite{crawford2013insider}						&   & X & X &   & X & \\
-		
-		VMI~\cite{garfinkel2003virtual}					&   & X & X &   & X & \\
-		
-		Strider Ghostbuster~\cite{wang2005detecting}	&   & X & X &   & X & \\
-		
-		PoKeR~\cite{riley2009multi}						&   & X & X &   & X & \\
-		
-		VMWatcher~\cite{jiang2007stealthy}				&   & X & X &   & X & \\
-		
-		~\cite{srinivasan2011process}					&   & X &   & X &   &  \\
-		
-		SecVisor~\cite{seshadri2007secvisor} 			&   & X &   & X &   &  \\
-		
-		HUKO~\cite{xiong2011practical}					&   & X &   & X &   &  \\
-		
-		Sentry~\cite{srivastava2012efficient}			&   & X &   & X &   &  \\
-		
-		~\cite{nasab2012security}						&   & X &   & X &   &  X\\
-		
-		Paladin~\cite{baliga2008automated}				&   & X &   & X &   &  X\\
-		\bottomrule
-	\end{tabular}
-	
-	
-	
-	
-	
-\end{table}
