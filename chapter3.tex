@@ -1,16 +1,63 @@
 
 \chapter{Design and Implementation}\label{ch:chapter3}
 
-In this chapter we will firstly discuss the specifications, threat model and goals of this research. We will expand on the design philosophy and go in depth on the implementation.
+In this chapter we will firstly give an overview of the project. We will discuss the specifications, threat model and goals of this research. We will expand on the design philosophy and go in depth on the implementation.
 
-\section{Specifications}\label{sec:specs}
-
+\section{Overview}
 
 As far as we know, all works on \ac{VM} monitoring and security focus in kernel and \ac{OS} protection, malicious activity monitoring or extensive logging for replay and online or offline forensic purposes, or secure resource sharing among \ac{VM}s. All these solutions do not provide any protection for the actual files of the system, which can be maliciously accessed when the \ac{VM} has been compromised. \ac{VM} security is a very active research filed, that produces many solutions, each with different focus, but generally surrounding the malware protection realm, as depicted in table~\ref{tbl:overview} and even more extensive in~\cite{bauman2015survey}, an extensive survey on hypervisor-based solutions.
 
 \par In this research, we will try to leverage the Xen’s \ac{VMI} capabilities and create a mechanism to protect some critical files on a \ac{VM}. We want to create an alternate \ac{ACL} on the hypervisor, that will include modified permissions for file access. The hypervisor will monitor what files are being accessed and cross-check the action with the \ac{ACL}s entries, enforcing the out-of-guest \ac{ACL}. Although a similar approach was employed with Paladin~\cite{baliga2008automated} and ~\cite{nasab2012security}, there are some fundamental differences. 
 
 \par We will focus on the use of type-I hypervisor instead of type-II. Moreover, we want the guest \ac{OS} to be unmodified and without any code, app or monitor injection that must be protected. We will employ the stealthy property of DRAKVUF~\cite{lengyel2014drakvuf}, to make the process of file protection completely transparent to the guest \ac{OS}, retaining this way a zero-footprint monitor on the guest. DRAKVUF also helps in bridging the semantic gap between the hypervisor and the \ac{VM} with the use of a Rekall profile~\cite{rekall}, having this way access to selected kernel structures. Furthermore, we want to employ a per user \ac{ACL}, enforced on specific files or whole folders, sometimes not essential to the \ac{OS}. Essentially, we want to protect any type of data, regardless of the content. Confidentiality is enforced by denying even read access, while integrity by denying write. This mechanism must also extend to the root user, since our threat model assumes that the system is compromised. Finally, we will try to enforce a specific file access mode, where log files are forced to open always in append mode rather than write, regardless of the program, process or user accessing them. To achieve all that we will intercept all relevant system calls and verify the validity of the request. 
+
+\par The concept is fairly simple. We will use DRAKVUF to create a trap on all the relevant system calls, which are shown in table~\ref{tbl:syscalls}.
+
+\begin{table}[h]
+	\centering
+	\caption{Trapped system calls}
+	\label{tbl:syscalls}
+	\begin{tabular}{cc}
+		\toprule
+		System call & Number \\
+		\hline
+		open & 2 \\ openat & ??? \\ rename & 82 \\ renameat & ??? \\ unlink & 87 \\ unlinkat & 263 \\
+		\bottomrule
+\end{tabular}	
+\end{table}
+
+This gives us the opportunity to stop the \ac{VM} execution when these system calls are called. At this point, we access the registers related with each system call to retrieve the information we need to perform the validation of the requested call. Figure~\ref{fig:overview} gives an overview of the flow of information during a trapped system call. 
+
+\par When one of the trapped system calls gets executed, LibVMI pauses the \ac{VM} execution. It then passes the \ac{VM}s state information to DRAKVUF, where our running plugin retrieves it. Going through some \ac{VM} memory accesses, the plugin gets the file being accessed and from whom. With this information, it goes through the \ac{SACL} to find any matching files or folders that are being protected. If none is found, it returns control to LibVMI, which then resumes the \ac{VM}s execution. If an entry in the \ac{SACL} is found, then the plugin checks if the requested file access is prohibited. If it is allowed, execution continues normally. If it is prohibited on the other hand, then the plugin changes the value of some registers related to the system call so that it will fail.
+
+\par The \ac{SACL}'s format was kept as simple as possible, so that editing and reviewing it is easy. Figure~\ref{fig:sacl} shows an example, which we will analyze later.
+
+\begin{figure}[ht]
+	\centering
+	\begin{lstlisting}
+/home/user/Documents/readme.txt		100644	1000	1000
+/home/user/Desktop/credit_card.pdf	100400	1000	1000
+/home/user/Documents			140220	0	0
+	\end{lstlisting}
+	\caption{\ac{SACL} sample}
+	\label{fig:sacl}
+\end{figure}
+
+\par The system keeps to \ac{SACL}s. One for all non-root users and one for root, since this account is of greater significance. Furthermore, two different checks are being performed. First it checks for a protected folder, as it is a more generic case. If no entry is found, it then checks for specific files in the list to match.
+
+\par It is paramount to explain that at this point the system does not alter basic properties of the files that are being protected. It does not change the owner or the group, since this requires intervention in the \ac{VM}. Although in the \ac{SACL} we can define a different owner, the generic effects is denial of access. That means that we cannot change who can access a file, rather we can change who cannot. This system acts as a supplementary and more fine-grained access control mechanism, to make more strict file access policies. Therefore, if we change the owner of a file in the \ac{SACL}, we essentially prohibit access to that file from the owner, we do not specify a new one, as the final call for file access comes from the unmodified guest \ac{OS}.
+
+\begin{figure}[ht]
+	\centering
+	\input{figs/overview.tikz}
+	\caption{Information flow during a trapped system call execution}
+	\label{fig:overview}
+\end{figure}
+
+
+\section{Specifications}\label{sec:specs}
+
+
 
 \subsection{Requirements}\label{sub:requirements}
 The goal of this research is to provide a virtualization extension that will extend the granular-level file access control of the Linux \ac{OS}. The requirements we defined for our system are:
@@ -20,12 +67,59 @@ The goal of this research is to provide a virtualization extension that will ext
 	\item \textbf{(R3)} The monitoring application must be stealthy to avoid detection.
 \end{itemize}
 
-By leveraging Xen's introspection methods, we will create the Out-of-VM monitoring agent, which will run on Dom0, completely outside the \ac{VM}, conforming this way with \textbf{(R1)}. The use of DRAKVUF~\cite{lengyel2014drakvuf}, will provide us with stealthy monitoring, as it leverages alternate \ac{EPT}s with different permissions, preventing any detection from applications inside a \ac{VM}, achieving this way \textbf{(R3)}. We will have to restrict some of the usability of the system, although not during normal execution, to achieve the file confidentiality and integrity we want, as explained later in this chapter. Therefore we assume that \textbf{(R2)} is achieved, although with some restrictions, mostly concerning the root user.
+By leveraging Xen's introspection methods, we will create the Out-of-VM monitoring agent, which will run on Dom0, completely outside the \ac{VM}, conforming this way with \textbf{(R1)}. Also, by ensuring that there is no code running on the guest \ac{OS}, we increase the deployment speed, as there is no need to modify the guest \ac{VM} in any way. The required pre-deployment configuration of the guest \ac{VM} is limited to the creation of a Rekall profile, required by LibVMI and DRAKVUF. The use of DRAKVUF~\cite{lengyel2014drakvuf}, will provide us with stealthy monitoring, as it leverages alternate \ac{EPT}s with different permissions, preventing any detection from applications inside a \ac{VM}, achieving this way \textbf{(R3)}. We will have to restrict some of the usability of the system, although not during normal execution, to achieve the file confidentiality and integrity we want, as explained later in this chapter. Therefore we assume that \textbf{(R2)} is achieved, although with some restrictions, mostly concerning the root user.
 
 \subsection{Threat Model}\label{sub:threat}
 
-Computer security has been evolving because the attackers methods evolve too. Modern \ac{OS}s and applications are so complex that they introduce many bugs in their code. Some of these bugs are benign, but some are serious enough to allow security breaches like remote access to a system, administrator/root access, arbitrary code execution, etc. For this research we have adopted a moderate threat model, where we assume that the guest \ac{VM} is insecure. That means that an adversary can gain access to it remotely. We assume this way, that physical access to the hosting machine is restricted. This reflects many applications and systems working over a network connection.
+Computer security has been evolving because the attackers methods evolve too. Modern \ac{OS}s and applications are so complex that they introduce many bugs in their code. Some of these bugs are benign, but some are serious enough to allow security breaches like remote access to a system, administrator/root access, arbitrary code execution, etc. 
 
-\par Moreover, we assume that the underlying \ac{OS} is not trusted. This essentially means that the adversary can gain root privileges, allowing him this way to modify system executables, as well as modify the kernel on runtime.
+\par For this research we have adopted a moderate threat model, where we assume that the guest \ac{VM} is insecure. That means that an adversary can gain access to it remotely. We assume this way, that physical access to the hosting machine is restricted. This reflects many applications and systems working over a network connection.
 
-\par We consider the hypervisor along with its Dom0 to be secure and trusted. 
+\par Moreover, we assume that the underlying \ac{OS} is not trusted. This essentially means that the adversary can gain root privileges, allowing him this way to modify system executables, as well as the kernel on runtime.
+
+\par We consider the hypervisor along with its Dom0 to be secure and trusted. We will not address hypervisor vectored attacks.
+
+\subsection{Guest \ac{VM} Configuration}\label{sub:conf}
+
+As mentioned before, there is no significant setup for the guest \ac{VM} in order for our system to run. The only requirement coming from LibVMI and DRAKVUF, is the creation and export of a Rekall profile in the guest \ac{VM}. Because this profile depends on the kernel version running, it is imperative to recreate the profile in the case of a kernel version update. 
+\par To protect the \ac{VM} from running unprotected in such a case, we have set the options in the Xen guest configuration file to shutdown the \ac{VM} in case it needs to reboot, as shown in figure~\ref{fig:conf}. This does not affect significantly the usability of the guest system, as the Linux \ac{OS} seldom requires a reboot, even after software updates.
+
+\begin{figure}[ht]
+	\centering
+	\begin{lstlisting}
+		on_poweroff = "destroy"
+		on_reboot = "destroy"
+		on_crash = "destroy"
+	\end{lstlisting}
+	\caption{Guest \ac{VM} shutdown configuration line}
+	\label{fig:conf}
+\end{figure}
+
+\par To support file confidentiality and integrity even from root access, we need to prohibit the root user from executing the \textit{su} command. This command, short for switch user, allows root to switch to any account in the \ac{OS}. To do that we need to edit a configuration file so that the execution of this command is not allowed. Our test \ac{VM} uses \ac{PAM} authentication. So, to achieve the required result we edited the \textit{/etc/pam.d/su} file by adding the line shown in figure~\ref{fig:pam}.
+
+\begin{figure}[ht]
+	\centering
+	\begin{lstlisting}
+	auth       required   pam_wheel.so deny group=root	
+	\end{lstlisting}
+	\caption{Guest \ac{VM} shutdown configuration line}
+	\label{fig:pam}
+\end{figure}
+
+\par Furthermore, since root can change other user passwords, we need to deny that capability. To do that, we don't need any special in-\ac{VM} configuration. We just need to protect the \textit{/etc/shadow} file from being modified by anyone. Therefore, a sample \ac{SACL} to enforce these minimum security requirements we have set, is shown in figure\ref{fig:root_sacl}
+
+\begin{figure}[ht]
+	\centering
+	\begin{lstlisting}
+		/etc/shadow     100440
+		/etc/pam.d/su   100000
+	\end{lstlisting}
+	\caption{Guest \ac{VM} shutdown configuration line}
+	\label{fig:root_sacl}
+\end{figure}
+
+\par As we see in figure~\ref{fig:root_sacl}, the \ac{SACL} for protecting files from the root user, is more simple. Since it is targeted for this specific user, we do not need the entries for owner and group. Furthermore, the permission bits for group and others are ignored when parsed.
+
+
+
+
