@@ -21,8 +21,10 @@
 \contentsline {subsection}{\numberline {3.2.1}Requirements}{23}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Threat Model}{24}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Guest \ac {VM} Configuration}{25}{subsection.3.2.3}
-\contentsline {chapter}{\numberline {4}Results and Conclusion}{27}{chapter.4}
-\contentsline {chapter}{\numberline {5}Future Work}{29}{chapter.5}
-\contentsline {chapter}{List of References}{31}{chapter.5}
-\contentsline {chapter}{Initial Distribution List}{35}{chapter*.58}
+\contentsline {section}{\numberline {3.3}Design}{26}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}System Calls}{26}{subsection.3.3.1}
+\contentsline {chapter}{\numberline {4}Results and Conclusion}{29}{chapter.4}
+\contentsline {chapter}{\numberline {5}Future Work}{31}{chapter.5}
+\contentsline {chapter}{List of References}{33}{chapter.5}
+\contentsline {chapter}{Initial Distribution List}{37}{chapter*.59}
 \contentsfinish 

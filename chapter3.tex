@@ -21,7 +21,7 @@ As far as we know, all works on \ac{VM} monitoring and security focus in kernel 
 		\toprule
 		System call & Number \\
 		\hline
-		open & 2 \\ openat & ??? \\ rename & 82 \\ renameat & ??? \\ unlink & 87 \\ unlinkat & 263 \\
+		sys\_open & 2 \\ sys\_openat & 257 \\ sys\_rename & 82 \\ sys\_renameat & 264 \\ sys\_unlink & 87 \\ sys\_unlinkat & 263 \\
 		\bottomrule
 \end{tabular}	
 \end{table}
@@ -118,8 +118,47 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 	\label{fig:root_sacl}
 \end{figure}
 
-\par As we see in figure~\ref{fig:root_sacl}, the \ac{SACL} for protecting files from the root user, is more simple. Since it is targeted for this specific user, we do not need the entries for owner and group. Furthermore, the permission bits for group and others are ignored when parsed.
+\par As we see in figure~\ref{fig:root_sacl}, the \ac{SACL} for protecting files from the root user, is more simple. Since it is targeted for this specific user, we do not need the entries for owner and group. Furthermore, the permission bits for group and others are ignored when parsed. This simplifies the file structure, while at the same time reduces memory utilization.
 
 
 
+\section{Design}\label{sec:design}
+In this section we will present the design philosophy of our solution.
+
+\subsection{System Calls}\label{sub:syscalls}
+All applications running in user-space to access a file need to ask the kernel. Applications do not have knowledge of the low-level \ac{OS} and device details to access the files they need. So, they request from the kernel to do that work for them. The kernel accesses the requested file using the device drivers and when the operation is completed, returns to the application a handle to that file, called file descriptor. This happens for many operations restricted to the kernel for security reasons. Also it provides an abstraction to the applications, which are written without the need of the knowledge of device specifics and work on variations of the underlying hardware running the same \ac{OS}. 
+
+\par For applications to be compatible to \ac{OS} version upgrades and portable between different systems, there is a need for a specific standard calling convention of these kernel functions. This calling convention is a system call. System calls are specific entry points to the kernel, which when provided specific arguments perform an operation sin behalf of the application. Many system calls exist, each performing a different operation. We will focus on those who are relevant to accessing files, whether for read or modification. These are depicted in table~\ref{tbl:syscalls}.
+\par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform, are passed to the kernel through the registers. Table~\ref{tbl:prototypes} shows what arguments need to be passed to each system call on each register for it to perform the requested operation.
+
+
+\begin{table}[h]
+	\centering
+	\caption{Trapped system calls}
+	\label{tbl:prototypes}
+	\begin{tabular}{cccccc}
+		\toprule
+		Syscall & Syscall &  &  &  &   \\
+		Name & Number  					  & RDI & RSI & RDX & R10 \\
+		\toprule
+		sys\_open 		& 2 	&	const char	&	int flags	&	int mode	&				 \\
+					 	&   	&	*filename	&				&				&				 \\
+		\hline
+		sys\_openat 	& 257  	&	int dfd		&	const char 	&	int flags	&	int mode	 \\
+					 	&   	&				&	*filename	&				&				 \\
+		\hline
+		sys\_rename 	& 82  	&	const char	&	const char	&				&				 \\
+					 	&   	&	*oldname	&	*newname	&				&				 \\
+		\hline
+		sys\_renameat 	& 264  	&	int oldfd	&	const char 	&	int newfd	&	const char 	 \\
+					 	&   	&				&	*oldname	&				&	*newname	 \\ 
+		\hline
+		sys\_unlink 	& 87  	&	const char	&				&				&				 \\
+					 	&   	&	*pathname	&				&				&				 \\ 
+		\hline
+		sys\_unlinkat 	& 263  	&	int dfd		&	const char	&	int flag	&				 \\
+					 	&   	&				&	*pathname	&				&				 \\
+		\bottomrule
+	\end{tabular}	
+\end{table}
 
