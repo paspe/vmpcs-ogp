@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  23 MAY 2017 10:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  23 MAY 2017 10:41
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1769,7 +1769,7 @@ Chapter 3.
 
 ] [22.42] (figs/overview.tikz) [23.43] [24.44]
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
-although it is yet undefined on input line 98.
+although it is yet undefined on input line 100.
  [25.45] [26.46] [27.47])
 (chapter4.tex [28.48]
 Chapter 4.
@@ -1819,7 +1819,7 @@ n\ec\dpi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
 ur\jknappen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/q
 tmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on thesis.pdf (57 pages, 415774 bytes).
+Output written on thesis.pdf (57 pages, 415865 bytes).
 PDF statistics:
  1239 PDF objects out of 1440 (max. 8388607)
  215 named destinations out of 1000 (max. 500000)

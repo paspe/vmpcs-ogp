@@ -21,7 +21,9 @@ As far as we know, all works on \ac{VM} monitoring and security focus in kernel 
 		\toprule
 		System call & Number \\
 		\hline
-		sys\_open & 2 \\ sys\_openat & 257 \\ sys\_rename & 82 \\ sys\_renameat & 264 \\ sys\_unlink & 87 \\ sys\_unlinkat & 263 \\
+		sys\_open & 2 \\ sys\_openat & 257 \\ sys\_open\_by\_handle\_at & 304 \\
+		sys\_rename & 82 \\ sys\_renameat & 264 \\ 
+		sys\_unlink & 87 \\ sys\_unlinkat & 263 \\
 		\bottomrule
 \end{tabular}	
 \end{table}
@@ -146,6 +148,9 @@ All applications running in user-space to access a file need to ask the kernel. 
 		\hline
 		sys\_openat 	& 257  	&	int dfd		&	const char 	&	int flags	&	int mode	 \\
 					 	&   	&				&	*filename	&				&				 \\
+		\hline
+		sys\_open\_by\_handle\_at 	& 304  	&				&	 			&				&				 \\
+						&   	&				&				&				&				 \\
 		\hline
 		sys\_rename 	& 82  	&	const char	&	const char	&				&				 \\
 					 	&   	&	*oldname	&	*newname	&				&				 \\
