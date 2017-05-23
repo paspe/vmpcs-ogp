@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  21 MAY 2017 10:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  22 MAY 2017 19:07
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1770,12 +1770,12 @@ Chapter 3.
 ] [22.42] (figs/overview.tikz) [23.43] [24.44]
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
 although it is yet undefined on input line 98.
- [25.45] [26.46])
-(chapter4.tex [27.47] [28.48
-
-]
+ [25.45] [26.46] [27.47])
+(chapter4.tex [28.48]
 Chapter 4.
-) (chapter5.tex [29.49] [30.50
+) (chapter5.tex [29.49
+
+] [30.50
 
 ]
 Chapter 5.
@@ -1801,10 +1801,10 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: E05BD58F344FF94106AFB26DC038B831;997.
  ) 
 Here is how much of TeX's memory you used:
- 27264 strings out of 493328
- 463270 string characters out of 3139125
- 687167 words of memory out of 3000000
- 29938 multiletter control sequences out of 15000+200000
+ 27270 strings out of 493328
+ 463356 string characters out of 3139125
+ 687277 words of memory out of 3000000
+ 29942 multiletter control sequences out of 15000+200000
  66569 words of font info for 75 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,94p,1383b,1195s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1819,9 +1819,9 @@ n\ec\dpi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
 ur\jknappen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/q
 tmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on thesis.pdf (57 pages, 412008 bytes).
+Output written on thesis.pdf (57 pages, 415523 bytes).
 PDF statistics:
- 1230 PDF objects out of 1440 (max. 8388607)
- 213 named destinations out of 1000 (max. 500000)
+ 1239 PDF objects out of 1440 (max. 8388607)
+ 215 named destinations out of 1000 (max. 500000)
  250 words of extra memory for PDF output out of 10000 (max. 10000000)
 

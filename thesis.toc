@@ -23,6 +23,8 @@
 \contentsline {subsection}{\numberline {3.2.3}Guest \ac {VM} Configuration}{25}{subsection.3.2.3}
 \contentsline {section}{\numberline {3.3}Design}{26}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}System Calls}{26}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}System Call Hooking}{28}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Trap Handling}{28}{subsection.3.3.3}
 \contentsline {chapter}{\numberline {4}Results and Conclusion}{29}{chapter.4}
 \contentsline {chapter}{\numberline {5}Future Work}{31}{chapter.5}
 \contentsline {chapter}{List of References}{33}{chapter.5}

@@ -139,7 +139,7 @@ All applications running in user-space to access a file need to ask the kernel. 
 	\begin{tabular}{cccccc}
 		\toprule
 		Syscall & Syscall &  &  &  &   \\
-		Name & Number  					  & RDI & RSI & RDX & R10 \\
+		Name & Number  					  & rdi & rsi & rdx & r10 \\
 		\toprule
 		sys\_open 		& 2 	&	const char	&	int flags	&	int mode	&				 \\
 					 	&   	&	*filename	&				&				&				 \\
@@ -162,3 +162,12 @@ All applications running in user-space to access a file need to ask the kernel. 
 	\end{tabular}	
 \end{table}
 
+\par Table~\ref{tbl:prototypes} shows that there are two generic cases we need to examine. One case is for the sys\_open, sys\_rename and sys\_unlink system calls, where we have to find the strings pointer by the pointers in the rdi register, and in the rsi register in the case of rename. After we retrieve the strings, we then try to match them to any entry in the \ac{SACL}s in the hypervisor. If there is a match, we then retrieve the userid and groupid of the owner of the currently running process, which requested the specific file access. We check then if the user or group of the running process has enough permissions to access the files, according to the \ac{SACL}s. if there is any difference between the permissions and the requested access mode, we overwrite the contents of the relevant registers with NULL, resulting to a failed system call.
+
+\par The second case is for the sys\_openat, sys\_renameat and sys\_unlinkat system calls, where we have to retrieve the string of the file being accessed from different registers, according to tabel~\ref{tbl:prototypes}. After that the algorithm is the same as above.
+
+\subsection{System Call Hooking}\label{sub:hooking}
+
+To achieve the above mentioned system call intercept we need to place traps to the system calls of interest. This gets implemented by DRAKVUF. LibVMI reads the Rekall profile of the guest \ac{VM} to get the base address of the kernel symbol table. DRAKVUF then starts from that base address and searches for the system call table. This table includes the function pointers for all supported system calls. Going through that table makes possible the detection and trapping of the system calls. This is achieved by placing the \textit{INT3 (0xCC)} byte at the beginning of the system call function. This byte is executed by the \ac{CPU} as an debugging interrupt, a breakpoint. This in its turn triggers a VM-exit, which is caught by DRAKVUF and handled by our function. DRAKVUF implements multiple \ac{EPT}s with different permissions for the same page. This allows placing the trap in the system calls, while at the same time when accessed for read, the original functions are accessed, not revealing this way the injected breakpoint.
+
+\subsection{Trap Handling}\label{sub:handling}
