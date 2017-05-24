@@ -12,11 +12,12 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces \ac {SACL} sample\relax }}{23}{figure.caption.51}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Information flow during a trapped system call execution\relax }}{24}{figure.caption.52}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{25}{figure.caption.53}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.53}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.55}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.56}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Getting the file being accessed\relax }}{29}{figure.caption.58}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{30}{figure.caption.60}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces \textit {struct protected\_files} memory layout\relax }}{27}{figure.caption.57}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{30}{figure.caption.59}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces sys\_unlink and sys\_unlinkat skeleton code flow\relax }}{31}{figure.caption.61}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

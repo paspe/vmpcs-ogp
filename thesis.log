@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  23 MAY 2017 18:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  24 MAY 2017 11:09
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1336,14 +1336,17 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\hypcap.sty"
 Package: hypcap 2016/05/16 v1.12 Adjusting the anchors of captions (HO)
-) (thesis.aux)
+) (thesis.aux
+
+LaTeX Warning: Label `fig:sacl' multiply defined.
+
+)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 123.
 LaTeX Font Info:    Try loading font information for OML+ntxmi on input line 12
 3.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\omlntxmi.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\omlntxmi.fd"
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
 LaTeX Font Info:    ... okay on input line 123.
@@ -1623,6 +1626,8 @@ although it is yet undefined on input line 9.
 Package acronym Info: Label `acro:SACL' newly defined as it shall be overridden
 
 although it is yet undefined on input line 13.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 12.0pt on input line 18.
 )
 \tf@lof=\write8
 \openout8 = `thesis.lof'.
@@ -1705,10 +1710,7 @@ LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
  [3.23])
 (chapter2.tex [4.24]
 Chapter 2.
-(figs/tovirt.tikz
-LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
-(Font)              scaled to size 12.0pt on input line 39.
-) [5.25
+(figs/tovirt.tikz) [5.25
 
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
@@ -1769,22 +1771,22 @@ Chapter 3.
 
 ] [22.42] (figs/overview.tikz) [23.43] [24.44]
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
-although it is yet undefined on input line 100.
+although it is yet undefined on input line 104.
  [25.45] [26.46] [27.47]
-[28.48]
+[28.48] [29.49]
 Package acronym Info: Label `acro:PWD' newly defined as it shall be overridden
-although it is yet undefined on input line 216.
- [29.49]) (chapter4.tex [30.50]
+although it is yet undefined on input line 246.
+ [30.50]) (chapter4.tex [31.51] [32.52]
 Chapter 4.
-) (chapter5.tex [31.51
+) (chapter5.tex [33.53
 
-] [32.52
+] [34.54
 
 ]
 Chapter 5.
-) [33.53] [34.54
+) [35.55] [36.56
 
-] (thesis.bbl [35.55
+] (thesis.bbl [37.57
 
 ]
 Underfull \hbox (badness 1077) in paragraph at lines 104--109
@@ -1792,40 +1794,45 @@ Underfull \hbox (badness 1077) in paragraph at lines 104--109
 . Wald-spurger, 
  []
 
-[36.56]) [37.57] [38.58
+[38.58]) [39.59] [40.60
 
-] [39.59]
+] [41.61]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 225.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 225.
  (thesis.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 225.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 225.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 893A2B95A9A07ADD6F852453C7A2620B;997.
+(rerunfilecheck)             Checksum: DA1CA8275D431062D9364C783B2BBBDE;997.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 27330 strings out of 493328
- 464145 string characters out of 3139125
- 688544 words of memory out of 3000000
- 29953 multiletter control sequences out of 15000+200000
- 67152 words of font info for 77 fonts, out of 3000000 for 9000
+ 27338 strings out of 493328
+ 464235 string characters out of 3139125
+ 687684 words of memory out of 3000000
+ 29956 multiletter control sequences out of 15000+200000
+ 67977 words of font info for 78 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,13n,94p,1383b,1195s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 60i,13n,94p,1436b,1195s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecss1200.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}{
-C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ts1.enc} <C:\Users\halek
-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss2074.pk> <C:\U
-sers\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx0800
+ecsi1200.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
+ec\dpi600\ecss1200.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-t
+s1.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ec-tlf.enc} <C:\U
+sers\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss2074
 .pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
-0\ecsi0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
-n\ec\dpi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
-ur\jknappen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/q
-tmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (59 pages, 440298 bytes).
+0\ecsx0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
+n\ec\dpi600\ecsi0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
+ur\jknappen\ec\dpi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fon
+ts\pk\ljfour\jknappen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/
+type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr
+i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
+Output written on thesis.pdf (61 pages, 451624 bytes).
 PDF statistics:
- 1322 PDF objects out of 1440 (max. 8388607)
- 262 named destinations out of 1000 (max. 500000)
+ 1362 PDF objects out of 1440 (max. 8388607)
+ 266 named destinations out of 1000 (max. 500000)
  250 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,6 +1,17 @@
 #!/bin/sh
+
 git add .
-git commit -m "updates"
+
+if [ $# -eq 0 ]
+    then
+        note=
+        echo -n 'Commit note? '
+        read note
+        git commit -m \""$note"\"
+    else
+        git commit -m \""$1"\"
+fi
+
 git push -u origin master
 cd ..
 zip -r -u -b Thesis thesis.zip
