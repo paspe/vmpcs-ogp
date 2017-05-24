@@ -218,7 +218,7 @@ After a hooked system call gets executed, our callback function is called. We fi
 
 \begin{figure}[ht]
 \centering
-\begin{lstlisting}
+\begin{lstlisting}[ basicstyle=\footnotesize]
 currpid = vmi_dtb_to_pid(vmi, info->regs->cr3);
 switch (info->regs->rax){
 case 2:
@@ -251,7 +251,7 @@ case 264:
 
 \begin{figure}[ht]
 \centering
-\begin{lstlisting}
+\begin{lstlisting}[ basicstyle=\footnotesize]
 case 87: // unlink syscall
 case 263: // unlinkat syscall
 switch(info->userid){
@@ -281,4 +281,33 @@ default: // other users
 
 \par In the case of \textit{sys\_rename} and \textit{sys\_renameat}, which are used for file moving, we perform the same check as per \textit{sys\_unlink} and \textit{sys\_unlinkat}, with the difference that if we do not find a match for the \textit{oldname} of the system call, we additionally check for a match on the \textit{newname}. The first part ensures that if the user or group does not have read permissions, as enforced by our \ac{SACL}, he cannot rename or move the file to an unprotected folder or filename, ensuring the confidentiality of the information stored in the file. In the second case we prevent the protected file from being overwritten by another file, if the permissions are not correct. This way we improve integrity of the underlying \ac{OS}, by preventing modification of the protected file. 
 
-\par Finally in the case of \textit{sys\_open} and \textit{sys\_openat}, we only have to check for one filename in our \ac{SACL}s. If there is an entry, then the permission check algorithm is more complicated. This happens because we have to match the requested by the process access \textit{mode} with the permissions we want to enforce. So, we check for read permission when a \textit{O\_RDONLY} access is requested and for write permissions on a \textit{O\_WRONLY}. In the case of a \textit{O\_RDWR} request we initially chack for both permissions. If that fails, we then check if the process user or group has read permissions. If that is true, we alter the file access mode to read-only and allow execution. If all of them fail we change the \textit{rax} register contents to \textit{NULL} and resume \ac{VM} execution, which results to a failed system call. This more complex permission check improves confidentiality, by not allowing read access to those who do not have the right, and integrity and availability by denying write access to those who cannot write to the file, as per the \ac{SACL} enforced policy.
+\par Finally in the case of \textit{sys\_open} and \textit{sys\_openat}, we only have to check for one filename in our \ac{SACL}s. If there is an entry, then the permission check algorithm is more complicated. This happens because we have to match the requested by the process access \textit{mode} with the permissions we want to enforce. So, we check for read permission when a \textit{O\_RDONLY} access is requested and for write permissions on a \textit{O\_WRONLY}. In the case of a \textit{O\_RDWR} request we initially chack for both permissions. If that fails, we then check if the process user or group has read permissions. If that is true, we alter the file access mode to read-only and allow execution. If all of them fail we change the \textit{rax} register contents to \textit{NULL} and resume \ac{VM} execution, which results to a failed system call. This more complex permission check improves confidentiality, by not allowing read access to those who do not have the right, and integrity and availability by denying write access to those who cannot write to the file, as per the \ac{SACL} enforced policy. Figure~\ref{fig:open} shows the code for the permission checks done in case of the \textit{sys\_open} and \textit{sys\_openat} system calls.
+
+\begin{figure}[ht]
+	\centering
+	\begin{lstlisting}[basicstyle=\footnotesize]
+switch(info->regs->rax){
+case 2:
+case 82:
+  if ( ((info->regs->rsi & 07) | O_RDONLY) == O_RDONLY){
+    if ( !(check->mode & r) ) {
+      vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+      return 1; }
+  } else if ( ((info->regs->rsi & 07) | O_WRONLY) == O_WRONLY) {
+    if ( !(check->mode & w) ) {
+      vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+      return 1; }
+  } else if ( ((info->regs->rsi & 07) | O_RDWR) == O_RDWR) {
+    if ( !(check->mode & w) && !(check->mode & r) ) {
+      vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+      return 1;
+    } else if ( !(check->mode & w) ){
+      vmi_set_vcpureg(vmi, 0, RSI, info->vcpu);
+      return 1; }
+  }
+  break;
+	\end{lstlisting}
+	\caption{sys\_open and sys\_openat permission checks}
+	\label{fig:open}
+\end{figure}
+

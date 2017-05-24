@@ -18,6 +18,7 @@
 \contentsline {figure}{\numberline {3.6}{\ignorespaces \textit {struct protected\_files} memory layout\relax }}{27}{figure.caption.57}
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{30}{figure.caption.59}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces sys\_unlink and sys\_unlinkat skeleton code flow\relax }}{31}{figure.caption.61}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces sys\_open and sys\_openat permission checks\relax }}{32}{figure.caption.62}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 
