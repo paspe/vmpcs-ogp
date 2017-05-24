@@ -24,9 +24,10 @@
 \contentsline {section}{\numberline {3.3}Design}{26}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}System Calls}{26}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}System Call Hooking}{28}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Trap Handling}{28}{subsection.3.3.3}
-\contentsline {chapter}{\numberline {4}Results and Conclusion}{29}{chapter.4}
-\contentsline {chapter}{\numberline {5}Future Work}{31}{chapter.5}
-\contentsline {chapter}{List of References}{33}{chapter.5}
-\contentsline {chapter}{Initial Distribution List}{37}{chapter*.59}
+\contentsline {subsection}{\numberline {3.3.3}The task\_struct}{28}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Trap Handling}{29}{subsection.3.3.4}
+\contentsline {chapter}{\numberline {4}Results and Conclusion}{31}{chapter.4}
+\contentsline {chapter}{\numberline {5}Future Work}{33}{chapter.5}
+\contentsline {chapter}{List of References}{35}{chapter.5}
+\contentsline {chapter}{Initial Distribution List}{39}{chapter*.62}
 \contentsfinish 
