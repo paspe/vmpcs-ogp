@@ -22,7 +22,7 @@ As far as we know, all works on \ac{VM} monitoring and security focus in kernel 
 		System call & Number \\
 		\hline
 		sys\_open & 2 \\ sys\_openat & 257 \\ sys\_open\_by\_handle\_at & 304 \\
-		sys\_rename & 82 \\ sys\_renameat & 264 \\ 
+		sys\_rename & 82 \\ sys\_renameat & 264 \\  sys\_renameat2 & 316 \\ 
 		sys\_unlink & 87 \\ sys\_unlinkat & 263 \\
 		\bottomrule
 \end{tabular}	
@@ -120,7 +120,7 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 		/etc/shadow     100440
 		/etc/pam.d/su   100000
 	\end{lstlisting}
-	\caption{Guest \ac{VM} shutdown configuration line}
+	\caption{root user \ac{SACL} sample}
 	\label{fig:root_sacl}
 \end{figure}
 
@@ -132,7 +132,7 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 In this section we will present the design philosophy of our solution.
 
 \subsection{Shadow Access Control List}\label{sub:sacl}
-During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have created for hthe \ac{VM} to be protected. At this point of the research we were limited to small lists, so the initial implementation for storing and searching through the \ac{SACL}s is four distinct linked lists. Figure~\ref{fig:sacl} depicts the structure created for storing each entry.
+During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have created for hthe \ac{VM} to be protected. At this point of the research we were limited to small lists, so the initial implementation for storing and searching through the \ac{SACL}s is two linked lists and two arrays of linked lists, as explained below. Figure~\ref{fig:sacl} depicts the structure created for storing each entry.
 
 \begin{figure}[ht]
 	\centering
@@ -146,7 +146,7 @@ During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have 
 		\hline
 		u & uid\_t \\
 		\hline
-		g & uid\_t \\
+		g & gid\_t \\
 		\hline
 		next & struct protected\_files * \\
 		\hline
@@ -155,44 +155,46 @@ During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have 
 	\label{fig:sacl}
 \end{figure}
 
-\par The above memory structure is used for both protected folders and protected files. Moreover, we create two of each, as mentioned before, one for the root user and one for the rest. To improve overall search speed for our algorithm, instead of keeping one linked list for the folders and one for the files, we created arrays of size 4096, which is the maximum pathname length, as set in \textit{linux/limits.h}. Then, according to the pathname length of each entry, it is appended to a linked list located at the array in index equal to the pathname length.
+\par The above memory structure is used for both protected folders and protected files. Moreover, we create two of each, as mentioned before, one for the root user and one for the rest. To improve overall search speed for our algorithm, instead of keeping one linked list for all the files, we created two arrays, one for the root user and one for the rest, of size 4096 for the files, which is the maximum pathname length, as set in \textit{linux/limits.h}. Then, according to the pathname length of each entry, it is appended to a linked list located at the array in index equal to the pathname length.
 
 \subsection{System Calls}\label{sub:syscalls}
 All applications running in user-space to access a file need to ask the kernel. Applications do not have knowledge of the low-level \ac{OS} and device details to access the files they need. So, they request from the kernel to do that work for them. The kernel accesses the requested file using the device drivers and when the operation is completed, returns to the application a handle to that file, called file descriptor. This happens for many operations restricted to the kernel for security reasons. Also it provides an abstraction to the applications, which are written without the need of the knowledge of device specifics and work on variations of the underlying hardware running the same \ac{OS}. 
 
 \par For applications to be compatible to \ac{OS} version upgrades and portable between different systems, there is a need for a specific standard calling convention of these kernel functions. This calling convention is a system call. System calls are specific entry points to the kernel, which when provided specific arguments perform an operation sin behalf of the application. Many system calls exist, each performing a different operation. We will focus on those who are relevant to accessing files, whether for read or modification. These are depicted in table~\ref{tbl:syscalls}.
-\par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform, are passed to the kernel through the registers. Table~\ref{tbl:prototypes} shows what arguments need to be passed to each system call on each register for it to perform the requested operation.
-
+\par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform, are passed to the kernel through the registers in the order of rdi, rsi, rdx, r10, r8, r9, while the system call number is passed in rax. Table~\ref{tbl:prototypes} shows what arguments need to be passed to each system call on each register for it to perform the requested operation.
 
 \begin{table}[h]
 	\centering
-	\caption{Trapped system calls}
+	\caption{Trapped system calls}[ basicstyle=\footnotesize]
 	\label{tbl:prototypes}
-	\begin{tabular}{cccccc}
+	\begin{tabular}{ccccccc}
 		\toprule
-		Syscall & Syscall &  &  &  &   \\
-		Name & Number  					  & rdi & rsi & rdx & r10 \\
+		Syscall 					& Syscall \#	&  				& 				&  						&  					&   		\\
+		Name 						& rax		  	& rdi 			& rsi 			& rdx 					& r10 				& r8 		\\
 		\toprule
-		sys\_open 		& 2 	&	const char	&	int flags	&	int mode	&				 \\
-					 	&   	&	*filename	&				&				&				 \\
+		sys\_open 					& 2 			&	const char	&	int flags	&	int mode			&					&		 	\\
+					 				&   			&	*filename	&				&						&					&		 	\\
 		\hline
-		sys\_openat 	& 257  	&	int dfd		&	const char 	&	int flags	&	int mode	 \\
-					 	&   	&				&	*filename	&				&				 \\
+		sys\_openat 				& 257  			&	int dfd		&	const char 	&	int flags			&	int mode		&	 		\\
+					 				&   			&				&	*filename	&						&					&		 	\\
 		\hline
-		sys\_open\_by\_handle\_at 	& 304  	&				&	 			&				&				 \\
-						&   	&				&				&				&				 \\
+		sys\_open\_by\_handle\_at 	& 304  			&	int dirfd	&	const char	&						&					&		 	\\
+									&   			&				&	*pathname	&						&					&		 	\\
 		\hline
-		sys\_rename 	& 82  	&	const char	&	const char	&				&				 \\
-					 	&   	&	*oldname	&	*newname	&				&				 \\
+		sys\_rename 				& 82  			&	const char	&	const char	&	struct file\_handle	&	int 			&	int 	\\
+					 				&   			&	*oldname	&	*newname	&	*handle				&	*mount\_id		&	flags	\\
 		\hline
-		sys\_renameat 	& 264  	&	int oldfd	&	const char 	&	int newfd	&	const char 	 \\
-					 	&   	&				&	*oldname	&				&	*newname	 \\ 
+		sys\_renameat 				& 264  			&	int oldfd	&	const char 	&	int newfd			&	const char 		&	 		\\
+					 				&   			&				&	*oldname	&						&	*newname		& 			\\ 
 		\hline
-		sys\_unlink 	& 87  	&	const char	&				&				&				 \\
-					 	&   	&	*pathname	&				&				&				 \\ 
+		sys\_renameat2 				& 316  			&	int oldfd	&	const char 	&	int newfd			&	const char 		&	unsigned 		\\
+									&   			&				&	*oldname	&						&	*newname		& 	int flags		\\ 
 		\hline
-		sys\_unlinkat 	& 263  	&	int dfd		&	const char	&	int flag	&				 \\
-					 	&   	&				&	*pathname	&				&				 \\
+		sys\_unlink 				& 87  			&	const char	&				&						&					&		 	\\
+					 				&   			&	*pathname	&				&						&					&		 	\\ 
+		\hline
+		sys\_unlinkat 				& 263  			&	int dfd		&	const char	&	int flag			&					&		 	\\
+					 				&   			&				&	*pathname	&						&					&		 	\\
 		\bottomrule
 	\end{tabular}	
 \end{table}
@@ -221,17 +223,18 @@ After a hooked system call gets executed, our callback function is called. We fi
 \begin{lstlisting}[ basicstyle=\footnotesize]
 currpid = vmi_dtb_to_pid(vmi, info->regs->cr3);
 switch (info->regs->rax){
-case 2:
-case 82:
-case 87:
+case S_OPEN:
+case S_RENAME:
+case S_UNLINK:
   addr=vmi_translate_uv2p(vmi,info->regs->rdi,currpid);
   filename=vmi_read_str_pa(vmi,addr);
   .
   .
   break;
-case 257:
-case 263:
-case 264:
+case S_OPENAT:
+case S_UNLINKAT:
+case S_RENAMEAT:
+case S_RENAMEAT2:
   addr=vmi_translate_uv2p(vmi,info->regs->rsi,currpid);
   filename=vmi_read_str_pa(vmi,addr);
   .
@@ -245,17 +248,18 @@ case 264:
 
 \par When a system call is executed the file being accessed is passed either with absolute, or relative path. The first case is straightforward, as by reading the string pointer by the corresponding register, we retrieve the full pathname of the file. If the file is passed with a relative path, the retrieval procedure is more complicated. That is because we need to recreate the \ac{PWD}. The Linux kernel does not store this information somewhere. On the contrary, in the \textit{task\_struct}, the kernel only stores in another structure the parent directory. Therefore, we need to loop through the parent folders, so that by prepending each time the parent, we recreate the \ac{PWD} and the full pathname. This allows us to try to match the file being accessed with the entries in the \ac{SACL}.
 
-\par After we have retrieved the pathname, we then check for the system call that triggered the VM-exit event. The calls are handled in pairs, \textit{sys\_open} with \textit{sys\_openat}, \textit{sys\_rename} with \textit{sys\_renameat} and \textit{sys\_unlink} with \textit{sys\_unlinkat}.
+\par After we have retrieved the pathname, we then check for the system call that triggered the VM-exit event. The calls are handled as follows: 
+
+\textit{sys\_open} with \textit{sys\_openat}, \textit{sys\_rename} with \textit{sys\_renameat} and \textit{sys\_renameat2}, and \textit{sys\_unlink} with \textit{sys\_unlinkat}.
 
 \par In the case of \textit{sys\_unlink} and \textit{sys\_unlinkat}, which are used for file deletion the procedure is straightforward. Once we look in the \ac{SACL}, if there is an entry, we verify that the user or group deleting the file, has write permissions. If that is true, the callback function returns control to the \ac{VM} to resume execution. If permissions do not match, the pointer to the filename string is modified to \textit{NULL}, so that the system call, after the \ac{VM} resumes execution, fails (figure~\ref{fig:unlink}). By hooking and preventing execution of these system calls we prevent deletion of the protected files, improving this way the availability assurances of the underlying \ac{OS}.
 
 \begin{figure}[ht]
 \centering
 \begin{lstlisting}[ basicstyle=\footnotesize]
-case 87: // unlink syscall
-case 263: // unlinkat syscall
-switch(info->userid){
-case 0: // root user
+case S_UNLINK:          // unlink syscall (to prevent deletion of a file)
+case S_UNLINKAT:  switch(info->userid){
+case ROOT: // root user
   if(strcmp(check->pathname,filename)==0){
 	check_permissions(check,info,vmi,ROOT);			
   .
@@ -279,7 +283,7 @@ default: // other users
 
 \par The search for a match in the \ac{SACL}s is performed in two steps for all cases. Once to go through protected folders and once to go through individually protected files. Also, the root user is handled separately from the rest of the users because of the special elevated privileges that account is granted. 
 
-\par In the case of \textit{sys\_rename} and \textit{sys\_renameat}, which are used for file moving, we perform the same check as per \textit{sys\_unlink} and \textit{sys\_unlinkat}, with the difference that if we do not find a match for the \textit{oldname} of the system call, we additionally check for a match on the \textit{newname}. The first part ensures that if the user or group does not have read permissions, as enforced by our \ac{SACL}, he cannot rename or move the file to an unprotected folder or filename, ensuring the confidentiality of the information stored in the file. In the second case we prevent the protected file from being overwritten by another file, if the permissions are not correct. This way we improve integrity of the underlying \ac{OS}, by preventing modification of the protected file. 
+\par In the case of \textit{sys\_rename}, \textit{sys\_renameat} and \textit{sys\_renameat2}, which are used for file moving, we perform the same check as per \textit{sys\_unlink} and \textit{sys\_unlinkat}, with the difference that if we do not find a match for the \textit{oldname} of the system call, we additionally check for a match on the \textit{newname}. The first part ensures that if the user or group does not have read permissions, as enforced by our \ac{SACL}, he cannot rename or move the file to an unprotected folder or filename, ensuring the confidentiality of the information stored in the file. In the second case we prevent the protected file from being overwritten by another file, if the permissions are not correct. This way we improve integrity of the underlying \ac{OS}, by preventing modification of the protected file. 
 
 \par Finally in the case of \textit{sys\_open} and \textit{sys\_openat}, we only have to check for one filename in our \ac{SACL}s. If there is an entry, then the permission check algorithm is more complicated. This happens because we have to match the requested by the process access \textit{mode} with the permissions we want to enforce. So, we check for read permission when a \textit{O\_RDONLY} access is requested and for write permissions on a \textit{O\_WRONLY}. In the case of a \textit{O\_RDWR} request we initially chack for both permissions. If that fails, we then check if the process user or group has read permissions. If that is true, we alter the file access mode to read-only and allow execution. If all of them fail we change the \textit{rax} register contents to \textit{NULL} and resume \ac{VM} execution, which results to a failed system call. This more complex permission check improves confidentiality, by not allowing read access to those who do not have the right, and integrity and availability by denying write access to those who cannot write to the file, as per the \ac{SACL} enforced policy. Figure~\ref{fig:open} shows the code for the permission checks done in case of the \textit{sys\_open} and \textit{sys\_openat} system calls.
 
@@ -287,8 +291,8 @@ default: // other users
 	\centering
 	\begin{lstlisting}[basicstyle=\footnotesize]
 switch(info->regs->rax){
-case 2:
-case 82:
+case S_OPEN:
+case S_OPENAT:
   if ( ((info->regs->rsi & 07) | O_RDONLY) == O_RDONLY){
     if ( !(check->mode & r) ) {
       vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
@@ -310,4 +314,5 @@ case 82:
 	\caption{sys\_open and sys\_openat permission checks}
 	\label{fig:open}
 \end{figure}
+
 

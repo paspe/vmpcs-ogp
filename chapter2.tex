@@ -179,26 +179,30 @@ Having a monitoring tool on the hypervisor has its benefits. At the same time th
 		\hline
 		&		 &			 &  &  & \scriptsize {Detection} & \scriptsize {Prevention} \\
 		\hline
-		SIM~\cite{sharif2009secure} 					& X &   & X &   &   & \\
-		Virtuoso~\cite{dolan2011virtuoso} 				& X &   & X &   &   & \\
-		Lares~\cite{payne2008lares} 					& X &   &   & X &   & \\
-		SHype~\cite{sailer2005building}					& X &   &   & X &   & \\
-		InkTag~\cite{hofmann2013inktag}					& X &   &   & X &   & \\
-		Overshadow~\cite{chen2008overshadow}			& X &   &   & X &   & \\
-		Haven~\cite{baumann2015shielding}				& X &   &   & X &   & \\
-		ReVirt~\cite{dunlap2002revirt}					&   & X & X &   &   & \\
-		Macko et al~\cite{macko2011collecting}			&   & X & X &   &   & \\
-		Crawford et al~\cite{crawford2013insider}		&   & X & X &   &   & \\
-		VMI~\cite{garfinkel2003virtual}					&   & X & X &   &   & \\
-		Strider Ghostbuster~\cite{wang2005detecting}	&   & X & X &   &   & \\
-		PoKeR~\cite{riley2009multi}						&   & X & X &   &   & \\
-		VMWatcher~\cite{jiang2007stealthy}				&   & X & X &   &   & \\
-		Srinivasan et al~\cite{srinivasan2011process}	&   & X &   & X &   & \\
-		SecVisor~\cite{seshadri2007secvisor} 			&   & X &   & X &   & \\
-		HUKO~\cite{xiong2011practical}					&   & X &   & X &   & \\
-		Sentry~\cite{srivastava2012efficient}			&   & X &   & X &   & \\
-		Nasab~\cite{nasab2012security}					&   & X &   & X & X & \\
-		Paladin~\cite{baliga2008automated}				&   & X &   & X & X & \\
+		SIM~\cite{sharif2009secure} 					& \checkmark & - & \checkmark & - & - & -\\
+		Virtuoso~\cite{dolan2011virtuoso} 				& \checkmark & - & \checkmark & - & - & -\\
+		\hline
+		Lares~\cite{payne2008lares} 					& \checkmark & - & - & \checkmark & - & -\\
+		SHype~\cite{sailer2005building}					& \checkmark & - & - & \checkmark & - & -\\
+		InkTag~\cite{hofmann2013inktag}					& \checkmark & - & - & \checkmark & - & -\\
+		Overshadow~\cite{chen2008overshadow}			& \checkmark & - & - & \checkmark & - & -\\
+		Haven~\cite{baumann2015shielding}				& \checkmark & - & - & \checkmark & - & -\\
+		\hline
+		ReVirt~\cite{dunlap2002revirt}					& - & \checkmark & \checkmark & - & - & -\\
+		Macko et al~\cite{macko2011collecting}			& - & \checkmark & \checkmark & - & - & -\\
+		Crawford et al~\cite{crawford2013insider}		& - & \checkmark & \checkmark & - & - & -\\
+		VMI~\cite{garfinkel2003virtual}					& - & \checkmark & \checkmark & - & - & -\\
+		Strider Ghostbuster~\cite{wang2005detecting}	& - & \checkmark & \checkmark & - & - & -\\
+		PoKeR~\cite{riley2009multi}						& - & \checkmark & \checkmark & - & - & -\\
+		VMWatcher~\cite{jiang2007stealthy}				& - & \checkmark & \checkmark & - & - & -\\
+		\hline
+		Srinivasan et al~\cite{srinivasan2011process}	& - & \checkmark & - & \checkmark & - & -\\
+		SecVisor~\cite{seshadri2007secvisor} 			& - & \checkmark & - & \checkmark & - & -\\
+		HUKO~\cite{xiong2011practical}					& - & \checkmark & - & \checkmark & - & -\\
+		Sentry~\cite{srivastava2012efficient}			& - & \checkmark & - & \checkmark & - & -\\
+		\hline
+		Nasab~\cite{nasab2012security}					& - & \checkmark & - & \checkmark & \checkmark & -\\
+		Paladin~\cite{baliga2008automated}				& - & \checkmark & - & \checkmark & \checkmark & -\\
 		\bottomrule
 	\end{tabular}	
 \end{table}
