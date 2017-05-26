@@ -248,9 +248,12 @@ case S_RENAMEAT2:
 
 \par When a system call is executed the file being accessed is passed either with absolute, or relative path. The first case is straightforward, as by reading the string pointer by the corresponding register, we retrieve the full pathname of the file. If the file is passed with a relative path, the retrieval procedure is more complicated. That is because we need to recreate the \ac{PWD}. The Linux kernel does not store this information somewhere. On the contrary, in the \textit{task\_struct}, the kernel only stores in another structure the parent directory. Therefore, we need to loop through the parent folders, so that by prepending each time the parent, we recreate the \ac{PWD} and the full pathname. This allows us to try to match the file being accessed with the entries in the \ac{SACL}.
 
-\par After we have retrieved the pathname, we then check for the system call that triggered the VM-exit event. The calls are handled as follows: 
-
-\textit{sys\_open} with \textit{sys\_openat}, \textit{sys\_rename} with \textit{sys\_renameat} and \textit{sys\_renameat2}, and \textit{sys\_unlink} with \textit{sys\_unlinkat}.
+\par After we have retrieved the pathname, we then check for the system call that triggered the VM-exit event. For this research we will not handle the \textit{sys\_open\_by\_handle\_at} system call. At this point of the research we are unaware of any compiled program that uses this specific system call. Moreover, although this is a valid and known attack vector to bypass this solution, support for it can be added in the future, while at the same time does not hinder our proof of concept. The rest of the system calls are handled as follows: 
+\begin{itemize}
+\item \textit{sys\_open} with \textit{sys\_openat}
+\item \textit{sys\_rename} with \textit{sys\_renameat} and \textit{sys\_renameat2}
+\item \textit{sys\_unlink} with \textit{sys\_unlinkat}
+\end{itemize}
 
 \par In the case of \textit{sys\_unlink} and \textit{sys\_unlinkat}, which are used for file deletion the procedure is straightforward. Once we look in the \ac{SACL}, if there is an entry, we verify that the user or group deleting the file, has write permissions. If that is true, the callback function returns control to the \ac{VM} to resume execution. If permissions do not match, the pointer to the filename string is modified to \textit{NULL}, so that the system call, after the \ac{VM} resumes execution, fails (figure~\ref{fig:unlink}). By hooking and preventing execution of these system calls we prevent deletion of the protected files, improving this way the availability assurances of the underlying \ac{OS}.
 
