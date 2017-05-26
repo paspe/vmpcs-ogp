@@ -132,7 +132,7 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 In this section we will present the design philosophy of our solution.
 
 \subsection{Shadow Access Control List}\label{sub:sacl}
-During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have created for hthe \ac{VM} to be protected. At this point of the research we were limited to small lists, so the initial implementation for storing and searching through the \ac{SACL}s is two linked lists and two arrays of linked lists, as explained below. Figure~\ref{fig:sacl} depicts the structure created for storing each entry.
+During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have created for hthe \ac{VM} to be protected. At this point of the research we were limited to small lists, so the initial implementation for storing and searching through the \ac{SACL}s is two linked lists and two arrays of linked lists, as explained below. Figure~\ref{fig:sacl_layout} depicts the structure created for storing each entry.
 
 \begin{figure}[ht]
 	\centering
@@ -152,7 +152,7 @@ During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have 
 		\hline
 	\end{tabular}
 	\caption{\textit{struct protected\_files} memory layout}
-	\label{fig:sacl}
+	\label{fig:sacl_layout}
 \end{figure}
 
 \par The above memory structure is used for both protected folders and protected files. Moreover, we create two of each, as mentioned before, one for the root user and one for the rest. To improve overall search speed for our algorithm, instead of keeping one linked list for all the files, we created two arrays, one for the root user and one for the rest, of size 4096 for the files, which is the maximum pathname length, as set in \textit{linux/limits.h}. Then, according to the pathname length of each entry, it is appended to a linked list located at the array in index equal to the pathname length.

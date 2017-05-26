@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  26 MAY 2017 13:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  26 MAY 2017 13:43
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1336,17 +1336,14 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\hypcap.sty"
 Package: hypcap 2016/05/16 v1.12 Adjusting the anchors of captions (HO)
-) (thesis.aux
-
-LaTeX Warning: Label `fig:sacl' multiply defined.
-
-)
+) (thesis.aux)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 123.
 LaTeX Font Info:    Try loading font information for OML+ntxmi on input line 12
 3.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\omlntxmi.fd"
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\omlntxmi.fd"
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
 LaTeX Font Info:    ... okay on input line 123.
@@ -1830,15 +1827,12 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 27405 strings out of 493328
- 465159 string characters out of 3139125
- 688745 words of memory out of 3000000
- 29992 multiletter control sequences out of 15000+200000
+ 27407 strings out of 493328
+ 465193 string characters out of 3139125
+ 688755 words of memory out of 3000000
+ 29994 multiletter control sequences out of 15000+200000
  80706 words of font info for 112 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,94p,1436b,1277s stack positions out of 5000i,500n,10000p,200000b,50000s
