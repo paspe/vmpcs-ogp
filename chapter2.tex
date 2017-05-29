@@ -174,7 +174,16 @@ Having a monitoring tool on the hypervisor has its benefits. At the same time th
 
 \par This semantic gap was also addressed in~\cite{srinivasan2011process} with a technique called process out-grafting. This method, instead of monitoring the \ac{VM} as a whole, it focuses on each separate process, for a more fine-grained execution monitoring. This is done by implementing two new techniques. The first is called on-demand grafting, which can relocate a running process from the guest target \ac{VM} to a security \ac{VM}. This effectively bridges completely the semantic gap, as for all intents and purposes the process is running on the same system as the monitor. This way the monitor can intercept all instructions executed by the suspicious process, without the need of hypervisor intervention. The second technique called split execution, makes a logical separation on the execution of instructions. If the process runs in user-space, it continues to run on the security \ac{VM}. When there is a kernel request, like a system-call, it executes that instruction on the target \ac{VM}. That technique creates an isolation between the monitor and the suspicious process, since they don’t run on the same kernel, while at the same time the suspect’s process perspective, it is still running inside the target \ac{VM}. 
 
-\begin{table}[h][\footnotesize]
+\par Furthermore, SecVisor~\cite{seshadri2007secvisor} and HUKO~\cite{xiong2011practical}, propose a kernel integrity method, that protects the kernel against code injection, such that happens from rootkits. In this case, SecVisor and HUKO are part of the hypervisor. They are used to allow user allowed code execution, while at the same time prevents malicious code execution.
+
+
+\par Sentry~\cite{srivastava2012efficient}, does a more granular kernel protection by preventing low-trust kernel components from altering security-critical data used by the kernel to manage the system and itself. It protects dynamically allocated memory, is isolated from the untrusted kernel by running on the Hypervisor and reduces the overhead by monitoring only the kernel related memory pages for suspicious activity.
+
+
+\par Paladin~\cite{baliga2008automated} introduces first the concept of Out-of-Guest \ac{ACL}, although at a granular level, by enforcing generic access permissions. A more direct approach to file integrity is presented in~\cite{nasab2012security}. The author tries to protect the \ac{OS} from accessing maliciously modified files. The target \ac{VM} is deployed offline and all the files are signed digitally using a private key. The digests are stored on the hypervisor. When the process has been completed for all the files to be protected, the \ac{VM} gets online. During its execution, whenever a file is accessed, before it gets loaded into memory, the system retrieves its digest and compares it to the copy on the hypervisor. If the file hasn’t changed access or execution continues, otherwise denied.
+
+\begin{table}[h]
+    \footnotesize
 	\centering
 	\caption{Overview of solutions}
 	\label{tbl:overview}
@@ -212,13 +221,7 @@ Having a monitoring tool on the hypervisor has its benefits. At the same time th
 	\end{tabular}	
 \end{table}
 
-\par Furthermore, SecVisor~\cite{seshadri2007secvisor} and HUKO~\cite{xiong2011practical}, propose a kernel integrity method, that protects the kernel against code injection, such that happens from rootkits. In this case, SecVisor and HUKO are part of the hypervisor. They are used to allow user allowed code execution, while at the same time prevents malicious code execution.
 
-
-\par Sentry~\cite{srivastava2012efficient}, does a more granular kernel protection by preventing low-trust kernel components from altering security-critical data used by the kernel to manage the system and itself. It protects dynamically allocated memory, is isolated from the untrusted kernel by running on the Hypervisor and reduces the overhead by monitoring only the kernel related memory pages for suspicious activity.
-
-
-\par Paladin~\cite{baliga2008automated} introduces first the concept of Out-of-Guest \ac{ACL}, although at a granular level, by enforcing generic access permissions. A more direct approach to file integrity is presented in~\cite{nasab2012security}. The author tries to protect the \ac{OS} from accessing maliciously modified files. The target \ac{VM} is deployed offline and all the files are signed digitally using a private key. The digests are stored on the hypervisor. When the process has been completed for all the files to be protected, the \ac{VM} gets online. During its execution, whenever a file is accessed, before it gets loaded into memory, the system retrieves its digest and compares it to the copy on the hypervisor. If the file hasn’t changed access or execution continues, otherwise denied.
 
 \par Table \ref{tbl:overview} shows a representation of the key features of the solutions presented above.
 
