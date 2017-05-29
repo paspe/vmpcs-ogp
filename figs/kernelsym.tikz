@@ -39,8 +39,8 @@ bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum siz
 	\node[anchor= south west, rectangle, text width=90mm, label={}, font=\small] at (5.5, 4.5) {\textit{
 		The VMI application requests a kernel symbol. 
 		LibVMI looks up the symbol in the System Map.
-		Then it looksup in the Page Directory to find the correct Page Table.
-		It finds the symbol in the Page Table, reads the data and returns the value to the application.}};
+		Then it looks up in the Page Directory to find the correct Page Table.
+		It finds the symbol in the Page Table, reads the data, and returns the value to the application.}};
 
 
 \end{tikzpicture}
