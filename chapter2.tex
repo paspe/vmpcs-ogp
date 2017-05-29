@@ -174,7 +174,7 @@ Having a monitoring tool on the hypervisor has its benefits. At the same time th
 
 \par This semantic gap was also addressed in~\cite{srinivasan2011process} with a technique called process out-grafting. This method, instead of monitoring the \ac{VM} as a whole, it focuses on each separate process, for a more fine-grained execution monitoring. This is done by implementing two new techniques. The first is called on-demand grafting, which can relocate a running process from the guest target \ac{VM} to a security \ac{VM}. This effectively bridges completely the semantic gap, as for all intents and purposes the process is running on the same system as the monitor. This way the monitor can intercept all instructions executed by the suspicious process, without the need of hypervisor intervention. The second technique called split execution, makes a logical separation on the execution of instructions. If the process runs in user-space, it continues to run on the security \ac{VM}. When there is a kernel request, like a system-call, it executes that instruction on the target \ac{VM}. That technique creates an isolation between the monitor and the suspicious process, since they don’t run on the same kernel, while at the same time the suspect’s process perspective, it is still running inside the target \ac{VM}. 
 
-\begin{table}[h]
+\begin{table}[h][\footnotesize]
 	\centering
 	\caption{Overview of solutions}
 	\label{tbl:overview}

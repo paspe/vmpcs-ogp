@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  29 MAY 2017 09:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  29 MAY 2017 10:01
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1757,12 +1757,16 @@ although it is yet undefined on input line 169.
 Package acronym Info: Label `acro:NIC' newly defined as it shall be overridden
 although it is yet undefined on input line 169.
  [18.38]
-Overfull \hbox (16.616pt too wide) in paragraph at lines 181--213
- [][] 
- []
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 181.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 7.3pt on input line 181.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 5.5pt on input line 181.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 181.
 
 [19.39]) (chapter3.tex [20.40]
 Chapter 3.
@@ -1772,18 +1776,6 @@ Chapter 3.
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
 although it is yet undefined on input line 104.
  [25.45] [26.46] [27.47]
-LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 170.
-LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 170.
-LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 170.
-
-
-LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 170.
-
-
 Overfull \hbox (18.48999pt too wide) in paragraph at lines 168--200
  [][] 
  []
@@ -1852,7 +1844,7 @@ type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr
 i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (63 pages, 463136 bytes).
+Output written on thesis.pdf (63 pages, 463209 bytes).
 PDF statistics:
  1408 PDF objects out of 1440 (max. 8388607)
  290 named destinations out of 1000 (max. 500000)
