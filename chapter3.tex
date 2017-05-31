@@ -1,15 +1,15 @@
 
 \chapter{Design and Implementation}\label{ch:chapter3}
 
-In this chapter we will firstly give an overview of the project. We will discuss the specifications, threat model and goals of this research. We will expand on the design philosophy and go in depth on the implementation.
+In this chapter we will discuss the specifications, threat model, and goals of this research. We will expand on the design philosophy and go in depth on the implementation.
 
 \section{Overview}
 
-As far as we know, all works on \ac{VM} monitoring and security focus in kernel and \ac{OS} protection, malicious activity monitoring or extensive logging for replay and online or offline forensic purposes, or secure resource sharing among \ac{VM}s. All these solutions do not provide any protection for the actual files of the system, which can be maliciously accessed when the \ac{VM} has been compromised. \ac{VM} security is a very active research filed, that produces many solutions, each with different focus, but generally surrounding the malware protection realm, as depicted in table~\ref{tbl:overview} and even more extensive in~\cite{bauman2015survey}, an extensive survey on hypervisor-based solutions.
+As far as we know, all work on \ac{VM} monitoring and security focuses on kernel and \ac{OS} protection, malicious activity monitoring, extensive logging for replay and online or offline forensic purposes, or secure resource sharing among \ac{VM}s. None of these solutions provide any protection for the actual files of the system, which can be maliciously accessed when the \ac{VM} has been compromised. \ac{VM} security is a very active research field, producing many solutions, each with different focus, but generally surrounding the malware protection realm, as depicted in table~\ref{tbl:overview} and even more extensively in Bauman et al~\cite{bauman2015survey}, an extensive survey on hypervisor-based solutions.
 
-\par In this research, we will try to leverage the Xen’s \ac{VMI} capabilities and create a mechanism to protect some critical files on a \ac{VM}. We want to create an alternate \ac{ACL} on the hypervisor, that will include modified permissions for file access. The hypervisor will monitor what files are being accessed and cross-check the action with the \ac{ACL}s entries, enforcing the out-of-guest \ac{ACL}. Although a similar approach was employed with Paladin~\cite{baliga2008automated} and ~\cite{nasab2012security}, there are some fundamental differences. 
+\par In this research, we will try to leverage the Xen’s \ac{VMI} capabilities to create a mechanism that protects some critical files on a \ac{VM}. We want to create an alternate \ac{ACL} on the hypervisor that will include modified permissions for file access. The hypervisor will monitor which files are being accessed and cross-check the action with the \ac{ACL}s entries, enforcing the out-of-guest \ac{ACL}. Although a similar approach was employed with Paladin~\cite{baliga2008automated} and Nasab~\cite{nasab2012security}, there are some fundamental differences. 
 
-\par We will focus on the use of type-I hypervisor instead of type-II. Moreover, we want the guest \ac{OS} to be unmodified and without any code, app or monitor injection that must be protected. We will employ the stealthy property of DRAKVUF~\cite{lengyel2014drakvuf}, to make the process of file protection completely transparent to the guest \ac{OS}, retaining this way a zero-footprint monitor on the guest. DRAKVUF also helps in bridging the semantic gap between the hypervisor and the \ac{VM} with the use of a Rekall profile~\cite{rekall}, having this way access to selected kernel structures. Furthermore, we want to employ a per user \ac{ACL}, enforced on specific files or whole folders, sometimes not essential to the \ac{OS}. Essentially, we want to protect any type of data, regardless of the content. Confidentiality is enforced by denying even read access, while integrity by denying write and availability by protecting deletion of the files. This mechanism must also extend to the root user, since our threat model assumes that the system is compromised. Finally, we will try to enforce a specific file access mode, where log files are forced to open always in append mode rather than write, regardless of the program, process or user accessing them. To achieve all that we will intercept all relevant system calls and verify the validity of the request. 
+\par We will focus on the use of type-I hypervisor instead of type-II. Moreover, we want the guest \ac{OS} to be unmodified and without any code, application, or monitor injection that must be protected. We will employ the stealthy property of DRAKVUF~\cite{lengyel2014drakvuf} to make the process of file protection completely transparent to the guest \ac{OS}, retaining a zero-footprint monitor on the guest. DRAKVUF also helps bridge the semantic gap between the hypervisor and the \ac{VM} with the use of a Rekall profile~\cite{rekall}, having access to selected kernel structures. Furthermore, we want to employ a per user \ac{ACL}, enforced on specific files or whole folders, sometimes not essential to the \ac{OS}. Essentially, we want to protect any type of data, regardless of the content. We improve confidentiality by denying even read access, integrity by denying write, and availability by protecting deletion of the files. This mechanism must also extend to the root user, since our threat model assumes that the system is compromised. Finally, we will try to enforce a specific file access mode, where log files are forced to open always in append mode rather than write, regardless of the program, process, or user accessing them. To achieve all that, we will intercept all relevant system calls and verify the validity of the request. 
 
 \par The concept is fairly simple. We will use DRAKVUF to create a trap on all the relevant system calls, which are shown in table~\ref{tbl:syscalls}.
 
@@ -30,9 +30,9 @@ As far as we know, all works on \ac{VM} monitoring and security focus in kernel 
 
 This gives us the opportunity to stop the \ac{VM} execution when these system calls are called. At this point, we access the registers related with each system call to retrieve the information we need to perform the validation of the requested call. Figure~\ref{fig:overview} gives an overview of the flow of information during a trapped system call. 
 
-\par When one of the trapped system calls gets executed, LibVMI pauses the \ac{VM} execution. It then passes the \ac{VM}s state information to DRAKVUF, where our running plugin retrieves it. Going through some \ac{VM} memory accesses, the plugin gets the file being accessed and from whom. With this information, it goes through the \ac{SACL} to find any matching files or folders that are being protected. If none is found, it returns control to LibVMI, which then resumes the \ac{VM}s execution. If an entry in the \ac{SACL} is found, then the plugin checks if the requested file access is prohibited. If it is allowed, execution continues normally. If it is prohibited on the other hand, then the plugin changes the value of some registers related to the system call so that it will fail.
+\par When one of the trapped system calls gets executed, LibVMI pauses the \ac{VM} execution. It then passes the \ac{VM}s state information to DRAKVUF, where our running plugin retrieves it. Going through some \ac{VM} memory accesses, the plugin gets the file being accessed, the userid, and the groupid. With this information, it goes through the \ac{SACL} to find any matching files or folders that are being protected. If none are found, it returns control to LibVMI, which then resumes the \ac{VM}'s execution. If an entry in the \ac{SACL} is found, then the plugin checks if the requested file access is prohibited. If it is allowed, execution continues normally. If it is prohibited, on the other hand, then the plugin changes the value of some registers related to the system call so that it will fail.
 
-\par The \ac{SACL}'s format was kept as simple as possible, so that editing and reviewing it is easy. Figure~\ref{fig:sacl} shows an example, which we will analyze later.
+\par The \ac{SACL}'s format was kept as simple as possible so that editing and reviewing it is easy. Figure~\ref{fig:sacl} shows an example, which we will analyze later.
 
 \begin{figure}[ht]
 	\centering
@@ -45,9 +45,9 @@ This gives us the opportunity to stop the \ac{VM} execution when these system ca
 	\label{fig:sacl}
 \end{figure}
 
-\par The system keeps to \ac{SACL}s. One for all non-root users and one for root, since this account is of greater significance. Furthermore, two different checks are being performed. First it checks for a protected folder, as it is a more generic case. If no entry is found, it then checks for specific files in the list to match.
+\par The system keeps two \ac{SACL}s: one for all non-root users and one for root, since this account is of greater significance. Furthermore, two different checks are being performed. First it checks for a protected folder, as it is a more generic case. If no entry is found, it then checks for specific files in the list to match.
 
-\par It is paramount to explain that at this point the system does not alter basic properties of the files that are being protected. It does not change the owner or the group, since this requires intervention in the \ac{VM}. Although in the \ac{SACL} we can define a different owner, the generic effects is denial of access. That means that we cannot change who can access a file, rather we can change who cannot. This system acts as a supplementary and more fine-grained access control mechanism, to make more strict file access policies. Therefore, if we change the owner of a file in the \ac{SACL}, we essentially prohibit access to that file from the owner, we do not specify a new one, as the final call for file access comes from the unmodified guest \ac{OS}.
+\par It is paramount to explain that at this point the system does not alter basic properties of the files that are being protected. It does not change the owner or the group, since this requires intervention in the \ac{VM}. Although in the \ac{SACL} we can define a different owner, the generic effects is denial of access. That means that we cannot change who can access a file, rather we can change who cannot. This system acts as a supplementary and more fine-grained access control mechanism to make more strict file access policies. Therefore, if we change the owner of a file in the \ac{SACL}, we essentially prohibit access to that file from the owner; we do not specify a new one, as the final call for file access comes from the unmodified guest \ac{OS}.
 
 \begin{figure}[ht]
 	\centering
@@ -71,23 +71,23 @@ The goal of this research is to provide a virtualization extension that will ext
 \end{itemize}
 
 By leveraging Xen's introspection methods, we will create the Out-of-VM monitoring agent, which will run on Dom0, completely outside the \ac{VM}, conforming this way with \textbf{(R1)}. Also, by ensuring that there is no code running on the guest \ac{OS}, we increase the deployment speed, as there is no need to modify the guest \ac{VM} in any way. The required pre-deployment configuration of the guest \ac{VM} is limited to the creation of a Rekall profile, required by LibVMI and DRAKVUF. 
-\par The use of DRAKVUF~\cite{lengyel2014drakvuf}, will provide us with stealthy monitoring, as it leverages alternate \ac{EPT}s with different permissions, preventing any detection from applications inside a \ac{VM}, achieving this way \textbf{(R3)}. We will have to restrict some of the usability of the system, although not during normal execution, to achieve the file confidentiality, integrity and availability we want, as explained later in this chapter. Therefore we assume that \textbf{(R2)} is achieved, although with some restrictions, mostly concerning the root user.
+\par The use of DRAKVUF~\cite{lengyel2014drakvuf} will provide us with stealthy monitoring, as it leverages alternate \ac{EPT}s with different permissions, preventing any detection from applications inside a \ac{VM}, achieving this way \textbf{(R3)}. We will have to restrict some of the usability of the system, although not during normal execution, to achieve the file confidentiality, integrity and availability we want, as explained later in this chapter. Therefore we assume that \textbf{(R2)} is achieved, although with some restrictions, mostly concerning the root user.
 \par Going through the available system call list, as well as testing during different types of file access, we assess that the system calls mentioned in table~\ref{tbl:syscalls} provide full coverage of the possible ways a file can be accessed. Monitoring the execution of these system calls and validating the request made to the guest \ac{OS} kernel is sufficient for ensuring the guest \ac{VM} file confidentiality, integrity and availability, as we want to enforce it, thus conforming to \textbf{(R4)}.
 
 
 \subsection{Threat Model}\label{sub:threat}
 
-Computer security has been evolving because the attackers methods evolve too. Modern \ac{OS}s and applications are so complex that they introduce many bugs in their code. Some of these bugs are benign, but some are serious enough to allow security breaches like remote access to a system, administrator/root access, arbitrary code execution, etc. 
+Computer security has been evolving because the attackers methods evolve, too. Modern \ac{OS}s and applications are so complex that they introduce many bugs in their code. Some of these bugs are benign, but some are serious enough to allow security breaches like remote access to a system, administrator/root access, arbitrary code execution, etc..
 
-\par For this research we have adopted a moderate threat model, where we assume that the guest \ac{VM} is insecure. That means that an adversary can gain access to it remotely. We assume this way, that physical access to the hosting machine is restricted. This reflects many applications and systems working over a network connection.
+\par For this research, we have adopted a moderate threat model where we assume that the guest \ac{VM} is insecure. That means that an adversary can gain access to it remotely. We assume this way that physical access to the hosting machine is restricted. This reflects many applications and systems working over a network connection.
 
-\par Moreover, we assume that the underlying \ac{OS} is not trusted. This essentially means that the adversary can gain root privileges, allowing him this way to modify system executables, as well as the kernel on runtime.
+\par Moreover, we assume that the underlying \ac{OS} is not trusted. This essentially means that the adversaries can gain root privileges, allowing them this way to modify system executables, as well as the kernel on runtime.
 
 \par We consider the hypervisor along with its Dom0 to be secure and trusted. We will not address hypervisor vectored attacks.
 
 \subsection{Guest \ac{VM} Configuration}\label{sub:conf}
 
-As mentioned before, there is no significant setup for the guest \ac{VM} in order for our system to run. The only requirement coming from LibVMI and DRAKVUF, is the creation and export of a Rekall profile in the guest \ac{VM}. Because this profile depends on the kernel version running, it is imperative to recreate the profile in the case of a kernel version update. 
+As mentioned before, there is no significant setup for the guest \ac{VM} in order for our system to run. The only requirement coming from LibVMI and DRAKVUF is the creation and export of a Rekall profile in the guest \ac{VM}. Because this profile depends on the kernel version running, it is imperative to recreate the profile in the case of a kernel version update. 
 \par To protect the \ac{VM} from running unprotected in such a case, we have set the options in the Xen guest configuration file to shutdown the \ac{VM} in case it needs to reboot, as shown in figure~\ref{fig:conf}. This does not affect significantly the usability of the guest system, as the Linux \ac{OS} seldom requires a reboot, even after software updates.
 
 \begin{figure}[ht]
@@ -101,7 +101,7 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 	\label{fig:conf}
 \end{figure}
 
-\par To support file confidentiality, integrity and availability even from root access, we need to prohibit the root user from executing the \textit{su} command. This command, short for switch user, allows root to switch to any account in the \ac{OS}. To do that we need to edit a configuration file so that the execution of this command is not allowed. Our test \ac{VM} uses \ac{PAM} authentication. So, to achieve the required result we edited the \textit{/etc/pam.d/su} file by adding the line shown in figure~\ref{fig:pam}.
+\par To support file confidentiality, integrity and availability even from root access, we need to prohibit the root user from executing the \textit{su} command. This command, short for switch user, allows root to switch to any account in the \ac{OS}. To do that we need to edit a configuration file so that the execution of this command is not allowed. Our test \ac{VM} uses \ac{PAM} authentication. To achieve the required result, we edited the \textit{/etc/pam.d/su} file by adding the line shown in figure~\ref{fig:pam}.
 
 \begin{figure}[ht]
 	\centering
@@ -112,7 +112,7 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 	\label{fig:pam}
 \end{figure}
 
-\par Furthermore, since root can change other user passwords, we need to deny that capability. To do that, we don't need any special in-\ac{VM} configuration. We just need to protect the \textit{/etc/shadow} file from being modified by anyone. Therefore, a sample \ac{SACL} to enforce these minimum security requirements we have set, is shown in figure\ref{fig:root_sacl}
+\par Furthermore, since root can change other user passwords, we also need to deny that capability. To do that, we do not need any special in-\ac{VM} configuration. We just need to protect the \textit{/etc/shadow} file from being modified by anyone. Therefore, a sample \ac{SACL} to enforce these minimum security requirements we have set, is shown in figure\ref{fig:root_sacl}
 
 \begin{figure}[ht]
 	\centering
@@ -124,12 +124,12 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 	\label{fig:root_sacl}
 \end{figure}
 
-\par As we see in figure~\ref{fig:root_sacl}, the \ac{SACL} for protecting files from the root user, is more simple. Since it is targeted for this specific user, we do not need the entries for owner and group. Furthermore, the permission bits for group and others are ignored when parsed. This simplifies the file structure, while at the same time reduces memory utilization.
+\par As we see in figure~\ref{fig:root_sacl}, the \ac{SACL} for protecting files from the root user is more simple. Since it is targeted for this specific user, we do not need the entries for owner and group. Furthermore, the permission bits for group and others are ignored when parsed. This simplifies the file structure, while at the same time reduces memory utilization.
 
 
 
 \section{Design}\label{sec:design}
-In this section we will present the design philosophy of our solution.
+In this section, we will present the design philosophy of our solution.
 
 \subsection{Shadow Access Control List}\label{sub:sacl}
 During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have created for hthe \ac{VM} to be protected. At this point of the research we were limited to small lists, so the initial implementation for storing and searching through the \ac{SACL}s is two linked lists and two arrays of linked lists, as explained below. Figure~\ref{fig:sacl_layout} depicts the structure created for storing each entry.
@@ -158,10 +158,11 @@ During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have 
 \par The above memory structure is used for both protected folders and protected files. Moreover, we create two of each, as mentioned before, one for the root user and one for the rest. To improve overall search speed for our algorithm, instead of keeping one linked list for all the files, we created two arrays, one for the root user and one for the rest, of size 4096 for the files, which is the maximum pathname length, as set in \textit{linux/limits.h}. Then, according to the pathname length of each entry, it is appended to a linked list located at the array in index equal to the pathname length.
 
 \subsection{System Calls}\label{sub:syscalls}
-All applications running in user-space to access a file need to ask the kernel. Applications do not have knowledge of the low-level \ac{OS} and device details to access the files they need. So, they request from the kernel to do that work for them. The kernel accesses the requested file using the device drivers and when the operation is completed, returns to the application a handle to that file, called file descriptor. This happens for many operations restricted to the kernel for security reasons. Also it provides an abstraction to the applications, which are written without the need of the knowledge of device specifics and work on variations of the underlying hardware running the same \ac{OS}. 
+All applications running in user-space need to ask the kernel to access a file. Applications do not have knowledge of the low-level \ac{OS} and device details to access the files they need, so they request from the kernel to do that work for them. The kernel accesses the requested file using the device drivers and, when the operation is completed, returns to the application a handle to that file, called file descriptor. This happens for many operations restricted to the kernel for security reasons. Also, it provides an abstraction to the applications, which are written without the need of the knowledge of device specifics and work on variations of the underlying hardware running the same \ac{OS}. 
 
-\par For applications to be compatible to \ac{OS} version upgrades and portable between different systems, there is a need for a specific standard calling convention of these kernel functions. This calling convention is a system call. System calls are specific entry points to the kernel, which when provided specific arguments perform an operation sin behalf of the application. Many system calls exist, each performing a different operation. We will focus on those who are relevant to accessing files, whether for read or modification. These are depicted in table~\ref{tbl:syscalls}.
-\par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform, are passed to the kernel through the registers in the order of rdi, rsi, rdx, r10, r8, r9, while the system call number is passed in rax. Table~\ref{tbl:prototypes} shows what arguments need to be passed to each system call on each register for it to perform the requested operation.
+\par For applications to be compatible to \ac{OS} version upgrades and portable between different systems, a specific standard calling convention of these kernel functions is needed. This calling convention is a system call. System calls are specific entry points to the kernel, which, when provided specific arguments perform an operation on behalf of the application. Many system calls exist, each performing a different operation. We will focus on those who are relevant to accessing files, whether to read or modify. These are depicted in table~\ref{tbl:syscalls}.
+
+\par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform are passed to the kernel through the registers in the order of rdi, rsi, rdx, r10, r8, r9, while the system call number is passed in rax. Table~\ref{tbl:prototypes} shows which arguments need to be passed to each system call on each register for it to perform the requested operation.
 
 \begin{table}[h]
 	\centering
@@ -288,35 +289,43 @@ default: // other users
 \par The search for a match in the \ac{SACL}s is performed in two steps for all cases. Once to go through protected folders and once to go through individually protected files. Also, the root user is handled separately from the rest of the users because of the special elevated privileges that account is granted. 
 
 \par In the case of \textit{sys\_rename}, \textit{sys\_renameat} and \textit{sys\_renameat2}, which are used for file moving, we perform the same check as per \textit{sys\_unlink} and \textit{sys\_unlinkat}, with the difference that if we do not find a match for the \textit{oldname} of the system call, we additionally check for a match on the \textit{newname}. The first part ensures that if the user or group does not have read permissions, as enforced by our \ac{SACL}, he cannot rename or move the file to an unprotected folder or filename, ensuring the confidentiality of the information stored in the file. In the second case we prevent the protected file from being overwritten by another file, if the permissions are not correct. This way we improve integrity of the underlying \ac{OS}, by preventing modification of the protected file. 
-
-\par Finally in the case of \textit{sys\_open} and \textit{sys\_openat}, we only have to check for one filename in our \ac{SACL}s. If there is an entry, then the permission check algorithm is more complicated. This happens because we have to match the requested by the process access \textit{mode} with the permissions we want to enforce. So, we check for read permission when a \textit{O\_RDONLY} access is requested and for write permissions on a \textit{O\_WRONLY}. In the case of a \textit{O\_RDWR} request we initially chack for both permissions. If that fails, we then check if the process user or group has read permissions. If that is true, we alter the file access mode to read-only and allow execution. If all of them fail we change the \textit{rax} register contents to \textit{NULL} and resume \ac{VM} execution, which results to a failed system call. This more complex permission check improves confidentiality, by not allowing read access to those who do not have the right, and integrity and availability by denying write access to those who cannot write to the file, as per the \ac{SACL} enforced policy. Figure~\ref{fig:open} shows the code for the permission checks done in case of the \textit{sys\_open} and \textit{sys\_openat} system calls.
-
 \begin{figure}[ht]
 	\centering
 	\begin{lstlisting}[basicstyle=\footnotesize]
-switch(info->regs->rax){
-case S_OPEN:
-case S_OPENAT:
-  if ( ((info->regs->rsi & 07) | O_RDONLY) == O_RDONLY){
-    if ( !(check->mode & r) ) {
-      vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
-      return 1; }
-  } else if ( ((info->regs->rsi & 07) | O_WRONLY) == O_WRONLY) {
-    if ( !(check->mode & w) ) {
-      vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
-      return 1; }
-  } else if ( ((info->regs->rsi & 07) | O_RDWR) == O_RDWR) {
-    if ( !(check->mode & w) && !(check->mode & r) ) {
-      vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
-      return 1;
-    } else if ( !(check->mode & w) ){
-      vmi_set_vcpureg(vmi, 0, RSI, info->vcpu);
-      return 1; }
-  }
-  break;
+	switch(info->regs->rax){
+	case S_OPEN:
+	case S_OPENAT:
+	if ( ((info->regs->rsi & 07) | O_RDONLY) == O_RDONLY){
+	if ( !(check->mode & r) ) {
+	vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+	return 1; }
+	} else if ( ((info->regs->rsi & 07) | O_WRONLY) == O_WRONLY) {
+	if ( !(check->mode & w) ) {
+	vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+	return 1; }
+	} else if ( ((info->regs->rsi & 07) | O_RDWR) == O_RDWR) {
+	if ( !(check->mode & w) && !(check->mode & r) ) {
+	vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+	return 1;
+	} else if ( !(check->mode & w) ){
+	vmi_set_vcpureg(vmi, 0, RSI, info->vcpu);
+	return 1; }
+	}
+	break;
 	\end{lstlisting}
 	\caption{sys\_open and sys\_openat permission checks}
 	\label{fig:open}
 \end{figure}
+
+\par Finally in the case of \textit{sys\_open} and \textit{sys\_openat}, we only have to check for one filename in our \ac{SACL}s. If there is an entry, then the permission check algorithm is more complicated. This happens because we have to match the requested by the process access \textit{mode} with the permissions we want to enforce. So, we check for read permission when a \textit{O\_RDONLY} access is requested, and for write permissions on a \textit{O\_WRONLY}. In the case of a \textit{O\_RDWR} request we initially check for both permissions. If that fails, we then check if the process user or group has read permissions. If that is true, we alter the file access mode to read-only and allow execution. If all of them fail we change the \textit{rax} register contents to \textit{NULL} and resume \ac{VM} execution, which results to a failed system call. This more complex permission check improves confidentiality, by not allowing read access to those who do not have the right, and integrity and availability by denying write access to those who cannot write to the file, as per the \ac{SACL} enforced policy. Figure~\ref{fig:open} shows the code for the permission checks done in case of the \textit{sys\_open} and \textit{sys\_openat} system calls.
+
+
+
+
+
+
+
+
+
 
 

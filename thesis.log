@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  29 MAY 2017 10:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  31 MAY 2017 14:35
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1756,19 +1756,19 @@ Package acronym Info: Label `acro:NIDS' newly defined as it shall be overridden
 although it is yet undefined on input line 169.
 Package acronym Info: Label `acro:NIC' newly defined as it shall be overridden
 although it is yet undefined on input line 169.
- [18.38]
+ [18.38] [19.39]
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 181.
+(Font)              scaled to size 10.0pt on input line 192.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 181.
+(Font)              scaled to size 7.3pt on input line 192.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 181.
+(Font)              scaled to size 5.5pt on input line 192.
 
 
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 181.
+(Font)              size <5> substituted on input line 192.
 
-[19.39]) (chapter3.tex [20.40]
+) (chapter3.tex [20.40]
 Chapter 3.
 [21.41
 
@@ -1776,19 +1776,10 @@ Chapter 3.
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
 although it is yet undefined on input line 104.
  [25.45] [26.46] [27.47]
-Overfull \hbox (18.48999pt too wide) in paragraph at lines 168--200
- [][] 
- []
-
 [28.48] [29.49]
 Package acronym Info: Label `acro:PWD' newly defined as it shall be overridden
-although it is yet undefined on input line 249.
- [30.50]
-Overfull \hbox (4.38445pt too wide) in paragraph at lines 263--264
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[31.51]) (chapter4.tex [32.52] [33.53] [34.54
+although it is yet undefined on input line 251.
+ [30.50] [31.51] [32.52]) (chapter4.tex [33.53] [34.54
 
 ]
 Chapter 4.
@@ -1823,13 +1814,13 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 27407 strings out of 493328
- 465193 string characters out of 3139125
- 688520 words of memory out of 3000000
- 29994 multiletter control sequences out of 15000+200000
+ 27409 strings out of 493328
+ 465202 string characters out of 3139125
+ 688563 words of memory out of 3000000
+ 29995 multiletter control sequences out of 15000+200000
  80706 words of font info for 112 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,13n,94p,1436b,1277s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 60i,13n,94p,1417b,1282s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
 ecsi1200.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
 ec\dpi600\ecss1200.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-t
@@ -1844,9 +1835,9 @@ type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr
 i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (63 pages, 463209 bytes).
+Output written on thesis.pdf (63 pages, 462996 bytes).
 PDF statistics:
- 1408 PDF objects out of 1440 (max. 8388607)
- 290 named destinations out of 1000 (max. 500000)
+ 1409 PDF objects out of 1440 (max. 8388607)
+ 291 named destinations out of 1000 (max. 500000)
  250 words of extra memory for PDF output out of 10000 (max. 10000000)
 
