@@ -22,8 +22,8 @@
 \BIBdecl
 
 \bibitem{mell2011nist}
-P.~Mell, T.~Grance \emph{et~al.}, ``The nist definition of cloud computing,''
-  2011.
+P.~Mell and T.~Grance, \emph{The NIST definition of cloud computing}.
+  Gaithersburg: NIST, 2011.
 
 \bibitem{garfinkel2003virtual}
 T.~Garfinkel, M.~Rosenblum \emph{et~al.}, ``A virtual machine introspection
@@ -181,7 +181,7 @@ A.~Baliga, L.~Iftode, and X.~Chen, ``Automated containment of rootkits
 
 \bibitem{nasab2012security}
 M.~R. Nasab, ``Security functions for virtual machines via introspection,''
-  2012.
+  Master's thesis, Chalmers University of Technology, 2012.
 
 \bibitem{rekall}
 ``Wrekall memory forensic framework.'' Available:
