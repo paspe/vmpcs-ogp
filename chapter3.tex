@@ -88,7 +88,7 @@ Computer security has been evolving because the attackers methods evolve, too. M
 \subsection{Guest \ac{VM} Configuration}\label{sub:conf}
 
 As mentioned before, there is no significant setup for the guest \ac{VM} in order for our system to run. The only requirement coming from LibVMI and DRAKVUF is the creation and export of a Rekall profile in the guest \ac{VM}. Because this profile depends on the kernel version running, it is imperative to recreate the profile in the case of a kernel version update. 
-\par To protect the \ac{VM} from running unprotected in such a case, we have set the options in the Xen guest configuration file to shutdown the \ac{VM} in case it needs to reboot, as shown in figure~\ref{fig:conf}. This does not affect significantly the usability of the guest system, as the Linux \ac{OS} seldom requires a reboot, even after software updates.
+\par To protect the \ac{VM} from running unprotected in such a case, we have set the options in the Xen guest configuration file to shutdown the \ac{VM} in case it needs to reboot, as shown in figure~\ref{fig:conf}. This does not affect significantly the usability of the guest system, as the Linux \ac{OS} seldom requires a reboot, even after software updates. As a side effect, the specific configuration will protect against custom built kernels, compiled by attackers, since the \ac{VM} will not run unsupervised. It is in the administrator's cunning to wonder why the \ac{VM} was rebooted, or powered off in the first place.
 
 \begin{figure}[ht]
 	\centering

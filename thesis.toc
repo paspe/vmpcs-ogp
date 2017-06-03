@@ -27,8 +27,8 @@
 \contentsline {subsection}{\numberline {3.3.3}System Call Hooking}{28}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}The task\_struct}{29}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}Trap Handling}{30}{subsection.3.3.5}
-\contentsline {chapter}{\numberline {4}Results and Conclusion}{35}{chapter.4}
-\contentsline {chapter}{\numberline {5}Future Work}{37}{chapter.5}
+\contentsline {chapter}{\numberline {4}Evaluation}{35}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{37}{chapter.5}
 \contentsline {chapter}{List of References}{39}{chapter.5}
 \contentsline {chapter}{Initial Distribution List}{43}{chapter*.64}
 \contentsfinish 
