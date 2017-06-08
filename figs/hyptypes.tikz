@@ -26,7 +26,7 @@ bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum siz
 
   
   \node (rect) [rectangle, draw, fill=black!5, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Host hardware}] at (\xl,\yl+\yoffset) {};
-  \node (rect) [rectangle, draw, fill=black!20, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Hypervisor}] at (\xl,\yl+\yoffset+\yoffset) {};
+  \node (rect) [rectangle, draw, fill=black!20, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Hypervisor / OS}] at (\xl,\yl+\yoffset+\yoffset) {};
 
   \draw[black] (\xl, \yl + \yoffset + \yoffset + \yoffset)rectangle(\xl + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
   \node[rednode] at (\xl + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
