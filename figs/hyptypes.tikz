@@ -31,10 +31,12 @@ bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum siz
   \draw[black] (\xl, \yl + \yoffset + \yoffset + \yoffset)rectangle(\xl + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
   \node[rednode] at (\xl + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
   \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{App}}] at (\xl+2.5,\yl+3.7) {};
+  \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{VM\textsubscript{1}}}] at (\xl+2.6,\yl+4.3) {};
 
   \draw[black] (4, \yl + \yoffset + \yoffset + \yoffset)rectangle(4.05 + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
   \node[bluenode] at (4 + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
   \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{App}}] at (4+2.5,\yl+3.7) {};
+  \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{VM\textsubscript{2}}}] at (4+2.6,\yl+4.3) {};
 
 
   \node (rect) [rectangle, draw, fill=black!5, minimum width=\xsize mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:Host hardware}] at (\xr,\yl) {};
@@ -44,9 +46,12 @@ bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum siz
   \draw[black] (\xr, \yl + \yoffset + \yoffset + \yoffset)rectangle(\xr + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
   \node[rednode] at (\xr + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
   \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{App}}] at (\xr+2.5,\yl+3.7) {};
+  \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{VM\textsubscript{1}}}] at (\xr+2.6,\yl+4.3) {};
+
 
   \draw[black] (\xr + 3.75, \yl + \yoffset + \yoffset + \yoffset)rectangle(\xr + 3.8 + \xos, \yl + \yos+ \yoffset + \yoffset + 0.6);
   \node[bluenode] at (\xr + 3.75 + \yoffset + \yoffset, \yl + \yoffset + \yoffset + \yoffset + \yoffset) {Operating System};
   \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{App}}] at (\xr + 3.75 + 2.5,\yl+3.7) {};
+  \node (rect) [rectangle, minimum width=\xos mm, minimum height=\ysize mm, anchor= south west,label={[anchor=south]south:\textit{VM\textsubscript{2}}}] at (\xr+3.75+2.6,\yl+4.3) {};
   
 \end{tikzpicture}
