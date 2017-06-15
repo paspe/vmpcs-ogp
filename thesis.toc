@@ -24,7 +24,7 @@
 \contentsline {section}{\numberline {3.3}Design}{26}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Shadow Access Control List}{27}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}System Calls}{27}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}System Call Hooking}{28}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.3}System Call Hooking}{29}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}The task\_struct}{29}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}Trap Handling}{30}{subsection.3.3.5}
 \contentsline {chapter}{\numberline {4}Evaluation}{35}{chapter.4}
