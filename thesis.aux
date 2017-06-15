@@ -40,6 +40,7 @@
 \newacro{API}[\AC@hyperlink{API}{API}]{Application program interface}
 \newacro{VT}[\AC@hyperlink{VT}{VT}]{Virtualization Technology}
 \newacro{PT}[\AC@hyperlink{PT}{PT}]{Page Table}
+\newacro{PTs}[\AC@hyperlink{PTs}{PTs}]{Page Tables}
 \newacro{EPT}[\AC@hyperlink{EPT}{EPT}]{Extended Page Tables}
 \newacro{GMFN}[\AC@hyperlink{GMFN}{GMFN}]{Guest Machine Frame Number}
 \newacro{MFN}[\AC@hyperlink{MFN}{MFN}]{Machine Frame Number}
@@ -192,6 +193,7 @@
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{CPU}
+\citation{chisnall2008definitive}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.26}}
 \newlabel{fig:rings}{{2.4}{9}{x86 protection rings\relax }{figure.caption.26}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Virtual Machine Introspection}{9}{section.2.2}}
@@ -206,20 +208,21 @@
 \acronymused{OS}
 \acronymused{VM}
 \acronymused{VM}
-\AC@undonewlabel{acro:PT}
-\newlabel{acro:PT}{{2.2}{9}{Virtual Machine Introspection}{section*.27}{}}
-\acronymused{PT}
+\AC@undonewlabel{acro:PTs}
+\newlabel{acro:PTs}{{2.2}{9}{Virtual Machine Introspection}{section*.27}{}}
+\acronymused{PTs}
+\acronymused{OS}
 \AC@undonewlabel{acro:GMFN}
 \newlabel{acro:GMFN}{{2.2}{9}{Virtual Machine Introspection}{section*.28}{}}
 \acronymused{GMFN}
 \AC@undonewlabel{acro:MFN}
 \newlabel{acro:MFN}{{2.2}{9}{Virtual Machine Introspection}{section*.29}{}}
 \acronymused{MFN}
-\AC@undonewlabel{acro:IOMMU}
-\newlabel{acro:IOMMU}{{2.2}{9}{Virtual Machine Introspection}{section*.31}{}}
-\acronymused{IOMMU}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.30}}
 \newlabel{fig:hypmm}{{2.5}{10}{Hypervisor memory management concept\relax }{figure.caption.30}{}}
+\AC@undonewlabel{acro:IOMMU}
+\newlabel{acro:IOMMU}{{2.2}{10}{Virtual Machine Introspection}{section*.31}{}}
+\acronymused{IOMMU}
 \acronymused{CPU}
 \AC@undonewlabel{acro:EPT}
 \newlabel{acro:EPT}{{2.2}{10}{Virtual Machine Introspection}{section*.32}{}}
@@ -238,11 +241,11 @@
 \acronymused{VM}
 \acronymused{CPU}
 \acronymused{VM}
-\acronymused{VM}
 \citation{lengyel2014drakvuf}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.33}}
 \acronymused{EPT}
 \newlabel{fig:ept}{{2.6}{11}{Normal vs altp2m multiple \ac {EPT} assignment\relax }{figure.caption.33}{}}
+\acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{CPU}
@@ -252,13 +255,13 @@
 \acronymused{API}
 \acronymused{EPT}
 \acronymused{CPU}
-\acronymused{EPT}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{OS}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out of guest access of \ac {VM} state\relax }}{12}{figure.caption.34}}
 \acronymused{VM}
 \newlabel{fig:libvmi}{{2.7}{12}{LibVMI out of guest access of \ac {VM} state\relax }{figure.caption.34}{}}
+\acronymused{EPT}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
@@ -607,32 +610,33 @@
 \bibcite{xen}{6}
 \bibcite{payne2007secure}{7}
 \bibcite{lars_2016}{8}
-\bibcite{bauman2015survey}{9}
-\bibcite{sharif2009secure}{10}
-\bibcite{dolan2011virtuoso}{11}
-\bibcite{payne2008lares}{12}
-\bibcite{sailer2005building}{13}
+\bibcite{chisnall2008definitive}{9}
+\bibcite{bauman2015survey}{10}
+\bibcite{sharif2009secure}{11}
+\bibcite{dolan2011virtuoso}{12}
+\bibcite{payne2008lares}{13}
 \@writefile{toc}{\contentsline {chapter}{List of References}{39}{chapter.5}}
-\bibcite{hay2008forensics}{14}
-\bibcite{xiao2016hyperlink}{15}
-\bibcite{hofmann2013inktag}{16}
-\bibcite{chen2008overshadow}{17}
-\bibcite{baumann2015shielding}{18}
-\bibcite{xu2015controlled}{19}
-\bibcite{dunlap2002revirt}{20}
-\bibcite{macko2011collecting}{21}
-\bibcite{crawford2013insider}{22}
-\bibcite{wang2005detecting}{23}
-\bibcite{riley2009multi}{24}
-\bibcite{jiang2007stealthy}{25}
-\bibcite{mahapatra2011online}{26}
-\bibcite{srinivasan2011process}{27}
-\bibcite{seshadri2007secvisor}{28}
-\bibcite{xiong2011practical}{29}
-\bibcite{srivastava2012efficient}{30}
-\bibcite{baliga2008automated}{31}
-\bibcite{nasab2012security}{32}
-\bibcite{rekall}{33}
+\bibcite{sailer2005building}{14}
+\bibcite{hay2008forensics}{15}
+\bibcite{xiao2016hyperlink}{16}
+\bibcite{hofmann2013inktag}{17}
+\bibcite{chen2008overshadow}{18}
+\bibcite{baumann2015shielding}{19}
+\bibcite{xu2015controlled}{20}
+\bibcite{dunlap2002revirt}{21}
+\bibcite{macko2011collecting}{22}
+\bibcite{crawford2013insider}{23}
+\bibcite{wang2005detecting}{24}
+\bibcite{riley2009multi}{25}
+\bibcite{jiang2007stealthy}{26}
+\bibcite{mahapatra2011online}{27}
+\bibcite{srinivasan2011process}{28}
+\bibcite{seshadri2007secvisor}{29}
+\bibcite{xiong2011practical}{30}
+\bibcite{srivastava2012efficient}{31}
+\bibcite{baliga2008automated}{32}
+\bibcite{nasab2012security}{33}
+\bibcite{rekall}{34}
 \@writefile{toc}{\contentsline {chapter}{Initial Distribution List}{43}{chapter*.64}}
 \ttl@finishall
 \newlabel{TotPages}{{63}{43}{}{page.43}{}}
