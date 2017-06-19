@@ -291,7 +291,7 @@ default: // other users
 \par The search for a match in the \ac{SACL}s is performed in two steps for all cases. Once to go through protected folders and once to go through individually protected files. Also, the root user is handled separately from the rest of the users because of the special elevated privileges that account is granted. 
 
 \par In the case of \textit{sys\_rename}, \textit{sys\_renameat} and \textit{sys\_renameat2}, which are used for file moving, we perform the same check as per \textit{sys\_unlink} and \textit{sys\_unlinkat}, with the difference that if we do not find a match for the \textit{oldname} of the system call, we additionally check for a match on the \textit{newname}. The first part ensures that if the user or group does not have read permissions, as enforced by our \ac{SACL}, he cannot rename or move the file to an unprotected folder or filename, ensuring the confidentiality of the information stored in the file. In the second case we prevent the protected file from being overwritten by another file, if the permissions are not correct. This way we improve integrity of the underlying \ac{OS}, by preventing modification of the protected file. 
-\begin{figure}[ht]
+\begin{figure}[ht!]
 	\centering
 	\begin{lstlisting}[basicstyle=\footnotesize]
 	switch(info->regs->rax){
@@ -316,6 +316,7 @@ default: // other users
 	break;
 	\end{lstlisting}
 	\caption{sys\_open and sys\_openat permission checks}
+	\vspace*{4in}
 	\label{fig:open}
 \end{figure}
 
