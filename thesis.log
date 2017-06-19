@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  19 JUN 2017 15:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  19 JUN 2017 15:15
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1667,12 +1667,12 @@ l.76 \acro{HAP}{hardware assisted paging}
 ] (chapter1.tex
 Chapter 1.
 Package acronym Info: Label `acro:OS' overridden on input line 3.
+Package acronym Info: Label `acro:VM' overridden on input line 3.
 Package acronym Info: Label `acro:NIST' newly defined as it shall be overridden
 
 although it is yet undefined on input line 5.
 Package acronym Info: Label `acro:CPU' newly defined as it shall be overridden
 although it is yet undefined on input line 7.
-Package acronym Info: Label `acro:VM' overridden on input line 7.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 17.28pt on input line 13.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <17.28> not available
@@ -1858,7 +1858,7 @@ type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr
 i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (63 pages, 468864 bytes).
+Output written on thesis.pdf (63 pages, 468841 bytes).
 PDF statistics:
  1438 PDF objects out of 1440 (max. 8388607)
  299 named destinations out of 1000 (max. 500000)
