@@ -1,24 +1,24 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Migrating to virtualization\relax }}{6}{figure.caption.22}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Architectural difference of type-I vs type-II hypervisors\relax }}{7}{figure.caption.23}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen Hypervisor Architecture\relax }}{8}{figure.caption.24}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.26}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.30}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.33}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out of guest access of \ac {VM} state\relax }}{12}{figure.caption.34}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.35}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.36}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Evolution of software deployment from single \ac {OS} to virtualization\relax }}{6}{figure.caption.26}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Architectural difference of type-I vs type-II hypervisors\relax }}{7}{figure.caption.27}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen Hypervisor Architecture\relax }}{8}{figure.caption.28}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.31}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.36}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.40}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out of guest access of \ac {VM} state\relax }}{12}{figure.caption.41}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.42}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.43}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces \ac {SACL} sample\relax }}{23}{figure.caption.51}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Information flow during a trapped system call execution\relax }}{24}{figure.caption.52}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.53}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.55}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{26}{figure.caption.56}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces \textit {struct protected\_files} memory layout\relax }}{27}{figure.caption.57}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{30}{figure.caption.59}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces sys\_unlink and sys\_unlinkat skeleton code flow\relax }}{32}{figure.caption.61}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces sys\_open and sys\_openat permission checks\relax }}{33}{figure.caption.62}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces \ac {SACL} sample\relax }}{23}{figure.caption.59}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Information flow during a trapped system call execution\relax }}{23}{figure.caption.60}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.61}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.63}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{26}{figure.caption.64}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces \textit {struct protected\_files} memory layout\relax }}{27}{figure.caption.65}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{30}{figure.caption.67}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces sys\_unlink and sys\_unlinkat skeleton code flow\relax }}{32}{figure.caption.69}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces sys\_open and sys\_openat permission checks\relax }}{33}{figure.caption.70}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

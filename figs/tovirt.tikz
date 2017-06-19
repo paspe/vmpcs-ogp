@@ -52,15 +52,15 @@ greennode/.style={rectangle, draw=black!60, fill=green!20, very thick, minimum s
   \draw[line width=1mm,->] (8,-1) -- (9,-1);
   
   \draw[dashed] (\xrr, \yrr)rectangle(\xrr + \xout, \yrr + \yout);
-  \node[rednode, label={[xshift = \xhard cm, yshift=-\yout cm]DomU}] at (\xrr + \xin, \yrr + \yin) {Operating System};
+  \node[rednode, label={[xshift = \xhard-1 cm, yshift=-\yout cm]VM}] at (\xrr + \xin, \yrr + \yin) {Operating System};
   \node at (\xrr + \xapp, \yrr + \yapp) {\textit{App}};
   
   \draw[dashed] (\xrr, \ybb)rectangle(\xrr + \xout, \ybb + \yout);
-  \node[bluenode, label={[xshift = \xhard cm, yshift=-\yout cm]DomU}] at (\xrr + \xin, \ybb + \yin) {Operating System};
+  \node[bluenode, label={[xshift = \xhard-1 cm, yshift=-\yout cm]VM}] at (\xrr + \xin, \ybb + \yin) {Operating System};
   \node at (\xrr + \xapp, \ybb + \yapp) {\textit{App}};
   
   \draw[dashed] (\xrr, \ygg)rectangle(\xrr + \xout, \ygg + \yout);
-  \node[greennode, label={[xshift = \xhard cm, yshift=-\yout cm]DomU}] at (\xrr + \xin, \ygg + \yin) {Operating System};
+  \node[greennode, label={[xshift = \xhard-1 cm, yshift=-\yout cm]VM}] at (\xrr + \xin, \ygg + \yin) {Operating System};
   \node at (\xrr + \xapp, \ygg + \yapp) {\textit{App}};
 
 \end{tikzpicture}

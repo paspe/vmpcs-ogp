@@ -17,22 +17,28 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\AC@undonewlabel{acro:OS}
+\newlabel{acro:OS}{{}{ix}{\ULABEL \listfigurename }{section*.3}{}}
+\acronymused{OS}
 \AC@undonewlabel{acro:EPT}
-\newlabel{acro:EPT}{{}{ix}{\ULABEL \listfigurename }{section*.3}{}}
+\newlabel{acro:EPT}{{}{ix}{\ULABEL \listfigurename }{section*.4}{}}
 \acronymused{EPT}
 \AC@undonewlabel{acro:VM}
-\newlabel{acro:VM}{{}{ix}{\ULABEL \listfigurename }{section*.4}{}}
+\newlabel{acro:VM}{{}{ix}{\ULABEL \listfigurename }{section*.5}{}}
 \acronymused{VM}
 \AC@undonewlabel{acro:SACL}
-\newlabel{acro:SACL}{{}{ix}{\ULABEL \listfigurename }{section*.5}{}}
+\newlabel{acro:SACL}{{}{ix}{\ULABEL \listfigurename }{section*.6}{}}
 \acronymused{SACL}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{SACL}
 \newacro{NIST}[\AC@hyperlink{NIST}{NIST}]{National Institute of Standards and Technology}
 \newacro{OS}[\AC@hyperlink{OS}{OS}]{Operating System}
-\newacro{VM}[\AC@hyperlink{VM}{VM}]{Virtual Machines}
+\newacroplural{OS}[OSes]{Operating Systems}
+\newacro{VM}[\AC@hyperlink{VM}{VM}]{Virtual Machine}
+\newacroplural{VM}[VMs]{Virtual Machines}
 \newacro{CPU}[\AC@hyperlink{CPU}{CPU}]{Central Processing Unit}
+\newacroplural{CPU}[CPUs]{Central Processing Units}
 \newacro{VMI}[\AC@hyperlink{VMI}{VMI}]{Virtual Machine Introspection}
 \newacro{ACL}[\AC@hyperlink{ACL}{ACL}]{Access Control List}
 \newacro{SACL}[\AC@hyperlink{SACL}{SACL}]{Shadow ACL}
@@ -40,8 +46,9 @@
 \newacro{API}[\AC@hyperlink{API}{API}]{Application program interface}
 \newacro{VT}[\AC@hyperlink{VT}{VT}]{Virtualization Technology}
 \newacro{PT}[\AC@hyperlink{PT}{PT}]{Page Table}
-\newacro{PTs}[\AC@hyperlink{PTs}{PTs}]{Page Tables}
-\newacro{EPT}[\AC@hyperlink{EPT}{EPT}]{Extended Page Tables}
+\newacroplural{PT}[PTs]{Page Tables}
+\newacro{EPT}[\AC@hyperlink{EPT}{EPT}]{Extended Page Table}
+\newacroplural{EPT}[EPTs]{Extended Page Tables}
 \newacro{GMFN}[\AC@hyperlink{GMFN}{GMFN}]{Guest Machine Frame Number}
 \newacro{MFN}[\AC@hyperlink{MFN}{MFN}]{Machine Frame Number}
 \newacro{IOMMU}[\AC@hyperlink{IOMMU}{IOMMU}]{Input/Output Memory Management Unit}
@@ -52,7 +59,7 @@
 \newacro{SGX}[\AC@hyperlink{SGX}{SGX}]{Software Guard Extensions}
 \newacro{IDS}[\AC@hyperlink{IDS}{IDS}]{Intrusion Detection System}
 \AC@undonewlabel{acro:IDS}
-\newlabel{acro:IDS}{{}{xiv}{\ULABEL \listacronymname }{section*.8}{}}
+\newlabel{acro:IDS}{{}{xiv}{\ULABEL \listacronymname }{section*.9}{}}
 \acronymused{IDS}
 \newacro{HIDS}[\AC@hyperlink{HIDS}{HIDS}]{Host \ac {IDS}}
 \acronymused{IDS}
@@ -63,29 +70,32 @@
 \newacro{PAM}[\AC@hyperlink{PAM}{PAM}]{pluggable authentication module}
 \newacro{PWD}[\AC@hyperlink{PWD}{PWD}]{present working directory}
 \newacro{APT}[\AC@hyperlink{APT}{APT}]{advanced persistent threat}
+\newacro{HAP}[\AC@hyperlink{HAP}{HAP}]{hardware assisted paging}
 \citation{mell2011nist}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{ch:intro}{{1}{1}{Introduction}{chapter.1}{}}
 \AC@undonewlabel{acro:OS}
-\newlabel{acro:OS}{{1}{1}{Introduction}{section*.11}{}}
+\newlabel{acro:OS}{{1}{1}{Introduction}{section*.12}{}}
+\acronymused{OS}
 \acronymused{OS}
 \AC@undonewlabel{acro:NIST}
-\newlabel{acro:NIST}{{1}{1}{Introduction}{section*.12}{}}
+\newlabel{acro:NIST}{{1}{1}{Introduction}{section*.13}{}}
 \acronymused{NIST}
-\AC@undonewlabel{acro:VM}
-\newlabel{acro:VM}{{1}{1}{Introduction}{section*.13}{}}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{VM}
 \AC@undonewlabel{acro:CPU}
 \newlabel{acro:CPU}{{1}{1}{Introduction}{section*.14}{}}
 \acronymused{CPU}
+\AC@undonewlabel{acro:VM}
+\newlabel{acro:VM}{{1}{1}{Introduction}{section*.15}{}}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{CPU}
+\acronymused{VM}
 \citation{garfinkel2003virtual}
 \citation{payne2011libvmi}
 \citation{lengyel2014drakvuf}
-\acronymused{VM}
 \@writefile{toc}{\contentsline {section}{\numberline {1.1}Problem Statement}{2}{section.1.1}}
 \newlabel{sec:problem}{{1.1}{2}{Problem Statement}{section.1.1}{}}
 \acronymused{OS}
@@ -94,31 +104,33 @@
 \acronymused{VM}
 \acronymused{OS}
 \AC@undonewlabel{acro:VMI}
-\newlabel{acro:VMI}{{1.1}{2}{Problem Statement}{section*.15}{}}
+\newlabel{acro:VMI}{{1.1}{2}{Problem Statement}{section*.16}{}}
 \acronymused{VMI}
+\acronymused{VM}
+\acronymused{VM}
 \AC@undonewlabel{acro:ACL}
-\newlabel{acro:ACL}{{1.1}{2}{Problem Statement}{section*.16}{}}
+\newlabel{acro:ACL}{{1.1}{2}{Problem Statement}{section*.17}{}}
 \acronymused{ACL}
 \AC@undonewlabel{acro:SACL}
-\newlabel{acro:SACL}{{1.1}{2}{Problem Statement}{section*.17}{}}
+\newlabel{acro:SACL}{{1.1}{2}{Problem Statement}{section*.18}{}}
 \acronymused{SACL}
 \AC@undonewlabel{acro:VMPCS-OGP}
-\newlabel{acro:VMPCS-OGP}{{1.1}{2}{Problem Statement}{section*.18}{}}
+\newlabel{acro:VMPCS-OGP}{{1.1}{2}{Problem Statement}{section*.19}{}}
 \acronymused{VMPCS-OGP}
 \acronymused{VM}
 \acronymused{VMI}
 \AC@undonewlabel{acro:API}
-\newlabel{acro:API}{{1.1}{2}{Problem Statement}{section*.19}{}}
+\newlabel{acro:API}{{1.1}{2}{Problem Statement}{section*.20}{}}
 \acronymused{API}
 \acronymused{ACL}
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{SACL}
 \AC@undonewlabel{acro:IoT}
-\newlabel{acro:IoT}{{1.1}{3}{Problem Statement}{section*.20}{}}
+\newlabel{acro:IoT}{{1.1}{3}{Problem Statement}{section*.21}{}}
 \acronymused{IoT}
 \AC@undonewlabel{acro:SCADA}
-\newlabel{acro:SCADA}{{1.1}{3}{Problem Statement}{section*.21}{}}
+\newlabel{acro:SCADA}{{1.1}{3}{Problem Statement}{section*.22}{}}
 \acronymused{SCADA}
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}Research Questions}{3}{section.1.2}}
 \newlabel{sec:question}{{1.2}{3}{Research Questions}{section.1.2}{}}
@@ -133,20 +145,30 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{ch:background}{{2}{5}{Background}{chapter.2}{}}
-\acronymused{VMI}
+\AC@undonewlabel{acro:API}
+\newlabel{acro:API}{{2}{5}{Background}{section*.23}{}}
 \acronymused{API}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Virtualization}{5}{section.2.1}}
 \newlabel{sec:virtualization}{{2.1}{5}{Virtualization}{section.2.1}{}}
+\AC@undonewlabel{acro:OS}
+\newlabel{acro:OS}{{2.1}{5}{Virtualization}{section*.24}{}}
 \acronymused{OS}
+\acronymused{OS}
+\acronymused{OS}
+\AC@undonewlabel{acro:VM}
+\newlabel{acro:VM}{{2.1}{5}{Virtualization}{section*.25}{}}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Migrating to virtualization\relax }}{6}{figure.caption.22}}
+\acronymused{VM}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Evolution of software deployment from single \ac {OS} to virtualization\relax }}{6}{figure.caption.26}}
+\acronymused{OS}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:tovirt}{{2.1}{6}{Migrating to virtualization\relax }{figure.caption.22}{}}
+\newlabel{fig:tovirt}{{2.1}{6}{Evolution of software deployment from single \ac {OS} to virtualization\relax }{figure.caption.26}{}}
+\acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
 \acronymused{VM}
@@ -155,11 +177,14 @@
 \acronymused{OS}
 \acronymused{VM}
 \citation{xen}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Architectural difference of type-I vs type-II hypervisors\relax }}{7}{figure.caption.23}}
-\newlabel{fig:hyptypes}{{2.2}{7}{Architectural difference of type-I vs type-II hypervisors\relax }{figure.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Architectural difference of type-I vs type-II hypervisors\relax }}{7}{figure.caption.27}}
+\newlabel{fig:hyptypes}{{2.2}{7}{Architectural difference of type-I vs type-II hypervisors\relax }{figure.caption.27}{}}
 \acronymused{OS}
 \acronymused{OS}
-\acronymused{API}
+\acronymused{OS}
+\acronymused{OS}
+\acronymused{OS}
+\acronymused{OS}
 \acronymused{VM}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}The Xen project}{7}{subsection.2.1.2}}
 \newlabel{sub:xen}{{2.1.2}{7}{The Xen project}{subsection.2.1.2}{}}
@@ -167,17 +192,15 @@
 \acronymused{OS}
 \acronymused{VM}
 \acronymused{VM}
+\AC@undonewlabel{acro:CPU}
+\newlabel{acro:CPU}{{\caption@xref {acro:CPU}{ on input line 12}}{8}{The Xen project}{section*.29}{}}
+\acronymused{CPU}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen Hypervisor Architecture\relax }}{8}{figure.caption.28}}
+\newlabel{img:xen}{{2.3}{8}{Xen Hypervisor Architecture\relax }{figure.caption.28}{}}
 \acronymused{CPU}
 \acronymused{CPU}
 \acronymused{CPU}
 \acronymused{OS}
-\citation{garfinkel2003virtual}
-\citation{payne2007secure}
-\citation{lars_2016}
-\citation{payne2011libvmi}
-\acronymused{CPU}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen Hypervisor Architecture\relax }}{8}{figure.caption.24}}
-\newlabel{img:xen}{{2.3}{8}{Xen Hypervisor Architecture\relax }{figure.caption.24}{}}
 \acronymused{OS}
 \acronymused{OS}
 \acronymused{OS}
@@ -186,67 +209,91 @@
 \acronymused{CPU}
 \acronymused{CPU}
 \AC@undonewlabel{acro:VT}
-\newlabel{acro:VT}{{2.1.2}{8}{The Xen project}{section*.25}{}}
+\newlabel{acro:VT}{{2.1.2}{8}{The Xen project}{section*.30}{}}
 \acronymused{VT}
-\acronymused{CPU}
-\acronymused{VT}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{CPU}
+\citation{garfinkel2003virtual}
+\citation{payne2007secure}
+\citation{payne2011libvmi}
 \citation{chisnall2008definitive}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.26}}
-\newlabel{fig:rings}{{2.4}{9}{x86 protection rings\relax }{figure.caption.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.31}}
+\newlabel{fig:rings}{{2.4}{9}{x86 protection rings\relax }{figure.caption.31}{}}
+\acronymused{VM}
+\acronymused{CPU}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Virtual Machine Introspection}{9}{section.2.2}}
 \newlabel{sec:vmi}{{2.2}{9}{Virtual Machine Introspection}{section.2.2}{}}
+\AC@undonewlabel{acro:VMI}
+\newlabel{acro:VMI}{{2.2}{9}{Virtual Machine Introspection}{section*.32}{}}
 \acronymused{VMI}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{API}
 \acronymused{VM}
 \acronymused{OS}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.36}}
+\newlabel{fig:hypmm}{{2.5}{10}{Hypervisor memory management concept\relax }{figure.caption.36}{}}
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
 \acronymused{VM}
-\AC@undonewlabel{acro:PTs}
-\newlabel{acro:PTs}{{2.2}{9}{Virtual Machine Introspection}{section*.27}{}}
-\acronymused{PTs}
-\acronymused{OS}
+\AC@undonewlabel{acro:PT}
+\newlabel{acro:PT}{{2.2}{10}{Virtual Machine Introspection}{section*.33}{}}
+\acronymused{PT}
+\acronymused{VM}
 \AC@undonewlabel{acro:GMFN}
-\newlabel{acro:GMFN}{{2.2}{9}{Virtual Machine Introspection}{section*.28}{}}
+\newlabel{acro:GMFN}{{2.2}{10}{Virtual Machine Introspection}{section*.34}{}}
 \acronymused{GMFN}
 \AC@undonewlabel{acro:MFN}
-\newlabel{acro:MFN}{{2.2}{9}{Virtual Machine Introspection}{section*.29}{}}
+\newlabel{acro:MFN}{{2.2}{10}{Virtual Machine Introspection}{section*.35}{}}
 \acronymused{MFN}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.30}}
-\newlabel{fig:hypmm}{{2.5}{10}{Hypervisor memory management concept\relax }{figure.caption.30}{}}
 \AC@undonewlabel{acro:IOMMU}
-\newlabel{acro:IOMMU}{{2.2}{10}{Virtual Machine Introspection}{section*.31}{}}
+\newlabel{acro:IOMMU}{{2.2}{10}{Virtual Machine Introspection}{section*.37}{}}
 \acronymused{IOMMU}
-\acronymused{CPU}
 \AC@undonewlabel{acro:EPT}
-\newlabel{acro:EPT}{{2.2}{10}{Virtual Machine Introspection}{section*.32}{}}
+\newlabel{acro:EPT}{{2.2}{10}{Virtual Machine Introspection}{section*.38}{}}
+\acronymused{EPT}
+\acronymused{CPU}
+\acronymused{EPT}
+\AC@undonewlabel{acro:HAP}
+\newlabel{acro:HAP}{{2.2}{10}{Virtual Machine Introspection}{section*.39}{}}
+\acronymused{HAP}
+\acronymused{HAP}
+\acronymused{VM}
+\acronymused{EPT}
+\acronymused{CPU}
 \acronymused{EPT}
 \acronymused{VM}
-\acronymused{VMI}
+\acronymused{CPU}
+\acronymused{CPU}
+\acronymused{EPT}
 \acronymused{EPT}
 \acronymused{VM}
 \acronymused{EPT}
 \acronymused{VM}
+\acronymused{CPU}
+\acronymused{VM}
+\acronymused{VM}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.40}}
+\acronymused{EPT}
+\newlabel{fig:ept}{{2.6}{11}{Normal vs altp2m multiple \ac {EPT} assignment\relax }{figure.caption.40}{}}
 \acronymused{API}
 \acronymused{VMI}
 \acronymused{VM}
 \acronymused{CPU}
 \acronymused{OS}
 \acronymused{VM}
+\acronymused{VM}
+\acronymused{VM}
 \acronymused{CPU}
+\acronymused{VM}
+\acronymused{VM}
 \acronymused{VM}
 \citation{lengyel2014drakvuf}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.33}}
-\acronymused{EPT}
-\newlabel{fig:ept}{{2.6}{11}{Normal vs altp2m multiple \ac {EPT} assignment\relax }{figure.caption.33}{}}
 \acronymused{VM}
 \acronymused{VM}
+\acronymused{OS}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out of guest access of \ac {VM} state\relax }}{12}{figure.caption.41}}
+\acronymused{VM}
+\newlabel{fig:libvmi}{{2.7}{12}{LibVMI out of guest access of \ac {VM} state\relax }{figure.caption.41}{}}
 \acronymused{VM}
 \acronymused{CPU}
 \acronymused{VM}
@@ -255,19 +302,10 @@
 \acronymused{API}
 \acronymused{EPT}
 \acronymused{CPU}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{OS}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out of guest access of \ac {VM} state\relax }}{12}{figure.caption.34}}
-\acronymused{VM}
-\newlabel{fig:libvmi}{{2.7}{12}{LibVMI out of guest access of \ac {VM} state\relax }{figure.caption.34}{}}
 \acronymused{EPT}
 \acronymused{VM}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{OS}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.35}}
-\newlabel{fig:accesskernel}{{2.8}{13}{Using LibVMI to access the value of a kernel symbol\relax }{figure.caption.35}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.42}}
+\newlabel{fig:accesskernel}{{2.8}{13}{Using LibVMI to access the value of a kernel symbol\relax }{figure.caption.42}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}System Calls}{13}{section.2.3}}
 \newlabel{sec:syscalls}{{2.3}{13}{System Calls}{section.2.3}{}}
 \acronymused{OS}
@@ -278,51 +316,58 @@
 \acronymused{OS}
 \acronymused{OS}
 \citation{bauman2015survey}
-\citation{sharif2009secure}
+\acronymused{OS}
+\acronymused{OS}
 \acronymused{OS}
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Related Work}{14}{section.2.4}}
 \newlabel{sec:related}{{2.4}{14}{Related Work}{section.2.4}{}}
 \acronymused{VM}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}In-\ac {VM}-Based Monitoring}{14}{subsection.2.4.1}}
-\newlabel{sub:invm}{{2.4.1}{14}{In-\ac {VM}-Based Monitoring}{subsection.2.4.1}{}}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{VM}
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
-\@writefile{toc}{\contentsline {subsubsection}{Detection}{14}{subsubsection*.37}}
 \acronymused{VM}
-\acronymused{OS}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}In-\ac {VM} Monitoring}{14}{subsection.2.4.1}}
+\newlabel{sub:invm}{{2.4.1}{14}{In-\ac {VM} Monitoring}{subsection.2.4.1}{}}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{VM}
+\citation{sharif2009secure}
 \citation{dolan2011virtuoso}
+\acronymused{VM}
+\acronymused{OS}
+\acronymused{VM}
+\acronymused{VM}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.43}}
+\newlabel{fig:vmevents}{{2.9}{15}{VM-exit and VM-entry events\relax }{figure.caption.43}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Detection}{15}{subsubsection*.44}}
+\acronymused{VM}
+\acronymused{OS}
+\acronymused{OS}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{OS}
+\acronymused{VM}
+\acronymused{OS}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{OS}
 \citation{payne2008lares}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.36}}
-\newlabel{fig:vmevents}{{2.9}{15}{VM-exit and VM-entry events\relax }{figure.caption.36}{}}
-\acronymused{OS}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{OS}
-\acronymused{VM}
-\acronymused{OS}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{OS}
-\acronymused{VM}
-\acronymused{OS}
-\@writefile{toc}{\contentsline {subsubsection}{Prevention}{15}{subsubsection*.38}}
-\acronymused{OS}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{VM}
 \citation{sailer2005building}
 \citation{hay2008forensics}
 \citation{xiao2016hyperlink}
 \citation{hofmann2013inktag}
 \citation{hofmann2013inktag}
+\acronymused{VM}
+\acronymused{OS}
+\@writefile{toc}{\contentsline {subsubsection}{Prevention}{16}{subsubsection*.45}}
+\acronymused{OS}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{VM}
 \AC@undonewlabel{acro:MAC}
-\newlabel{acro:MAC}{{2.4.1}{16}{Prevention}{section*.39}{}}
+\newlabel{acro:MAC}{{2.4.1}{16}{Prevention}{section*.46}{}}
 \acronymused{MAC}
 \acronymused{VM}
 \acronymused{MAC}
@@ -330,8 +375,6 @@
 \acronymused{VM}
 \acronymused{MAC}
 \acronymused{VM}
-\AC@undonewlabel{acro:HAP}
-\newlabel{acro:HAP}{{2.4.1}{16}{Prevention}{section*.40}{}}
 \acronymused{HAP}
 \acronymused{OS}
 \acronymused{HAP}
@@ -340,46 +383,41 @@
 \acronymused{HAP}
 \acronymused{OS}
 \acronymused{HAP}
+\citation{chen2008overshadow}
+\citation{baumann2015shielding}
+\citation{xu2015controlled}
 \acronymused{HAP}
 \acronymused{EPT}
 \acronymused{OS}
 \acronymused{HAP}
 \acronymused{HAP}
 \AC@undonewlabel{acro:OI}
-\newlabel{acro:OI}{{2.4.1}{16}{Prevention}{section*.41}{}}
+\newlabel{acro:OI}{{2.4.1}{17}{Prevention}{section*.47}{}}
 \acronymused{OI}
 \acronymused{HAP}
 \acronymused{HAP}
 \acronymused{OS}
-\citation{chen2008overshadow}
-\citation{baumann2015shielding}
-\citation{xu2015controlled}
-\citation{dunlap2002revirt}
 \acronymused{OS}
 \acronymused{HAP}
 \acronymused{VM}
 \acronymused{OS}
 \AC@undonewlabel{acro:SGX}
-\newlabel{acro:SGX}{{2.4.1}{17}{Prevention}{section*.42}{}}
+\newlabel{acro:SGX}{{2.4.1}{17}{Prevention}{section*.48}{}}
 \acronymused{SGX}
 \acronymused{SGX}
 \acronymused{OS}
 \acronymused{OS}
-\acronymused{VM}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Out-of-\ac {VM}-Based Monitoring}{17}{subsection.2.4.2}}
-\newlabel{sub:outvm}{{2.4.2}{17}{Out-of-\ac {VM}-Based Monitoring}{subsection.2.4.2}{}}
-\acronymused{CPU}
-\acronymused{VM}
-\acronymused{VM}
+\citation{dunlap2002revirt}
 \citation{macko2011collecting}
 \citation{crawford2013insider}
 \citation{garfinkel2003virtual}
-\citation{wang2005detecting}
-\citation{riley2009multi}
-\citation{jiang2007stealthy}
-\citation{mahapatra2011online}
-\citation{srinivasan2011process}
-\@writefile{toc}{\contentsline {subsubsection}{Detection}{18}{subsubsection*.43}}
+\acronymused{VM}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Out-\ac {VM} Monitoring}{18}{subsection.2.4.2}}
+\newlabel{sub:outvm}{{2.4.2}{18}{Out-\ac {VM} Monitoring}{subsection.2.4.2}{}}
+\acronymused{CPU}
+\acronymused{VM}
+\acronymused{VM}
+\@writefile{toc}{\contentsline {subsubsection}{Detection}{18}{subsubsection*.49}}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
@@ -387,37 +425,38 @@
 \acronymused{VM}
 \acronymused{VMI}
 \AC@undonewlabel{acro:IDS}
-\newlabel{acro:IDS}{{2.4.2}{18}{Detection}{section*.44}{}}
+\newlabel{acro:IDS}{{2.4.2}{18}{Detection}{section*.50}{}}
 \acronymused{IDS}
 \acronymused{IDS}
 \AC@undonewlabel{acro:HIDS}
-\newlabel{acro:HIDS}{{2.4.2}{18}{Detection}{section*.45}{}}
+\newlabel{acro:HIDS}{{2.4.2}{18}{Detection}{section*.51}{}}
 \acronymused{IDS}
 \acronymused{HIDS}
 \AC@undonewlabel{acro:NIDS}
-\newlabel{acro:NIDS}{{2.4.2}{18}{Detection}{section*.46}{}}
+\newlabel{acro:NIDS}{{2.4.2}{18}{Detection}{section*.52}{}}
 \acronymused{IDS}
 \acronymused{NIDS}
 \acronymused{VM}
 \AC@undonewlabel{acro:NIC}
-\newlabel{acro:NIC}{{2.4.2}{18}{Detection}{section*.47}{}}
+\newlabel{acro:NIC}{{2.4.2}{18}{Detection}{section*.53}{}}
 \acronymused{NIC}
-\acronymused{HIDS}
-\acronymused{VM}
+\citation{wang2005detecting}
+\citation{riley2009multi}
+\citation{jiang2007stealthy}
+\citation{mahapatra2011online}
+\citation{srinivasan2011process}
 \citation{seshadri2007secvisor}
 \citation{xiong2011practical}
 \citation{srivastava2012efficient}
 \citation{baliga2008automated}
 \citation{nasab2012security}
-\@writefile{toc}{\contentsline {subsubsection}{Prevention}{19}{subsubsection*.48}}
+\acronymused{HIDS}
+\acronymused{VM}
+\@writefile{toc}{\contentsline {subsubsection}{Prevention}{19}{subsubsection*.54}}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{ACL}
-\acronymused{OS}
 \acronymused{VM}
 \acronymused{VM}
 \citation{sharif2009secure}
@@ -440,8 +479,14 @@
 \citation{srivastava2012efficient}
 \citation{nasab2012security}
 \citation{baliga2008automated}
-\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of solutions\relax }}{20}{table.caption.49}}
-\newlabel{tbl:overview}{{2.1}{20}{Overview of solutions\relax }{table.caption.49}{}}
+\AC@undonewlabel{acro:ACL}
+\newlabel{acro:ACL}{{2.4.2}{20}{Prevention}{section*.55}{}}
+\acronymused{ACL}
+\acronymused{OS}
+\acronymused{VM}
+\acronymused{VM}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of solutions\relax }}{20}{table.caption.56}}
+\newlabel{tbl:overview}{{2.1}{20}{Overview of solutions\relax }{table.caption.56}{}}
 \citation{bauman2015survey}
 \citation{baliga2008automated}
 \citation{nasab2012security}
@@ -467,34 +512,36 @@
 \acronymused{VM}
 \acronymused{ACL}
 \acronymused{OS}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Trapped system calls\relax }}{22}{table.caption.50}}
-\newlabel{tbl:syscalls}{{3.1}{22}{Trapped system calls\relax }{table.caption.50}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Trapped system calls\relax }}{22}{table.caption.57}}
+\newlabel{tbl:syscalls}{{3.1}{22}{Trapped system calls\relax }{table.caption.57}{}}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
+\AC@undonewlabel{acro:SACL}
+\newlabel{acro:SACL}{{3.1}{22}{Overview}{section*.58}{}}
 \acronymused{SACL}
 \acronymused{VM}
 \acronymused{SACL}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces \ac {SACL} sample\relax }}{23}{figure.caption.51}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces \ac {SACL} sample\relax }}{23}{figure.caption.59}}
 \acronymused{SACL}
-\newlabel{fig:sacl}{{3.1}{23}{\ac {SACL} sample\relax }{figure.caption.51}{}}
+\newlabel{fig:sacl}{{3.1}{23}{\ac {SACL} sample\relax }{figure.caption.59}{}}
 \acronymused{SACL}
 \acronymused{VM}
 \acronymused{SACL}
 \acronymused{SACL}
 \acronymused{OS}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Specifications}{23}{section.3.2}}
-\newlabel{sec:specs}{{3.2}{23}{Specifications}{section.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Requirements}{23}{subsection.3.2.1}}
-\newlabel{sub:requirements}{{3.2.1}{23}{Requirements}{subsection.3.2.1}{}}
-\acronymused{OS}
-\acronymused{VM}
+\acronymused{SACL}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Information flow during a trapped system call execution\relax }}{23}{figure.caption.60}}
+\newlabel{fig:overview}{{3.2}{23}{Information flow during a trapped system call execution\relax }{figure.caption.60}{}}
 \citation{lengyel2014drakvuf}
-\acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Information flow during a trapped system call execution\relax }}{24}{figure.caption.52}}
-\newlabel{fig:overview}{{3.2}{24}{Information flow during a trapped system call execution\relax }{figure.caption.52}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Specifications}{24}{section.3.2}}
+\newlabel{sec:specs}{{3.2}{24}{Specifications}{section.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Requirements}{24}{subsection.3.2.1}}
+\newlabel{sub:requirements}{{3.2.1}{24}{Requirements}{subsection.3.2.1}{}}
+\acronymused{OS}
+\acronymused{VM}
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
@@ -518,32 +565,32 @@
 \acronymused{OS}
 \acronymused{VM}
 \acronymused{VM}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.53}}
-\acronymused{VM}
-\newlabel{fig:conf}{{3.3}{26}{Guest \ac {VM} shutdown configuration line\relax }{figure.caption.53}{}}
 \acronymused{OS}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.61}}
+\acronymused{VM}
+\newlabel{fig:conf}{{3.3}{26}{Guest \ac {VM} shutdown configuration line\relax }{figure.caption.61}{}}
 \acronymused{VM}
 \AC@undonewlabel{acro:PAM}
-\newlabel{acro:PAM}{{3.2.3}{26}{Guest \ac {VM} Configuration}{section*.54}{}}
+\newlabel{acro:PAM}{{3.2.3}{26}{Guest \ac {VM} Configuration}{section*.62}{}}
 \acronymused{PAM}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.55}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{26}{figure.caption.63}}
 \acronymused{VM}
-\newlabel{fig:pam}{{3.4}{26}{Guest \ac {VM} shutdown configuration line\relax }{figure.caption.55}{}}
+\newlabel{fig:pam}{{3.4}{26}{Guest \ac {VM} shutdown configuration line\relax }{figure.caption.63}{}}
 \acronymused{VM}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{26}{figure.caption.56}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{26}{figure.caption.64}}
 \acronymused{SACL}
-\newlabel{fig:root_sacl}{{3.5}{26}{root user \ac {SACL} sample\relax }{figure.caption.56}{}}
+\newlabel{fig:root_sacl}{{3.5}{26}{root user \ac {SACL} sample\relax }{figure.caption.64}{}}
 \acronymused{SACL}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Design}{26}{section.3.3}}
 \newlabel{sec:design}{{3.3}{26}{Design}{section.3.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Shadow Access Control List}{27}{subsection.3.3.1}}
-\newlabel{sub:sacl}{{3.3.1}{27}{Shadow Access Control List}{subsection.3.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Shadow Access Control List}{26}{subsection.3.3.1}}
+\newlabel{sub:sacl}{{3.3.1}{26}{Shadow Access Control List}{subsection.3.3.1}{}}
 \acronymused{SACL}
 \acronymused{VM}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces \textit  {struct protected\_files} memory layout\relax }}{27}{figure.caption.57}}
-\newlabel{fig:sacl_layout}{{3.6}{27}{\textit {struct protected\_files} memory layout\relax }{figure.caption.57}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces \textit  {struct protected\_files} memory layout\relax }}{27}{figure.caption.65}}
+\newlabel{fig:sacl_layout}{{3.6}{27}{\textit {struct protected\_files} memory layout\relax }{figure.caption.65}{}}
 \acronymused{SACL}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}System Calls}{27}{subsection.3.3.2}}
 \newlabel{sub:syscalls}{{3.3.2}{27}{System Calls}{subsection.3.3.2}{}}
@@ -551,10 +598,10 @@
 \acronymused{OS}
 \acronymused{OS}
 \acronymused{OS}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Trapped system calls\relax }}{28}{table.caption.58}}
-\newlabel{tbl:prototypes}{{3.2}{28}{Trapped system calls\relax }{table.caption.58}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}System Call Hooking}{29}{subsection.3.3.3}}
-\newlabel{sub:hooking}{{3.3.3}{29}{System Call Hooking}{subsection.3.3.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Trapped system calls\relax }}{28}{table.caption.66}}
+\newlabel{tbl:prototypes}{{3.2}{28}{Trapped system calls\relax }{table.caption.66}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}System Call Hooking}{28}{subsection.3.3.3}}
+\newlabel{sub:hooking}{{3.3.3}{28}{System Call Hooking}{subsection.3.3.3}{}}
 \acronymused{VM}
 \acronymused{CPU}
 \acronymused{EPT}
@@ -567,10 +614,10 @@
 \acronymused{VM}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Trap Handling}{30}{subsection.3.3.5}}
 \newlabel{sub:handling}{{3.3.5}{30}{Trap Handling}{subsection.3.3.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{30}{figure.caption.59}}
-\newlabel{fig:getfile}{{3.7}{30}{Getting the file being accessed\relax }{figure.caption.59}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{30}{figure.caption.67}}
+\newlabel{fig:getfile}{{3.7}{30}{Getting the file being accessed\relax }{figure.caption.67}{}}
 \AC@undonewlabel{acro:PWD}
-\newlabel{acro:PWD}{{3.3.5}{31}{Trap Handling}{section*.60}{}}
+\newlabel{acro:PWD}{{3.3.5}{30}{Trap Handling}{section*.68}{}}
 \acronymused{PWD}
 \acronymused{PWD}
 \acronymused{SACL}
@@ -579,15 +626,15 @@
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces sys\_unlink and sys\_unlinkat skeleton code flow\relax }}{32}{figure.caption.61}}
-\newlabel{fig:unlink}{{3.8}{32}{sys\_unlink and sys\_unlinkat skeleton code flow\relax }{figure.caption.61}{}}
 \acronymused{SACL}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces sys\_unlink and sys\_unlinkat skeleton code flow\relax }}{32}{figure.caption.69}}
+\newlabel{fig:unlink}{{3.8}{32}{sys\_unlink and sys\_unlinkat skeleton code flow\relax }{figure.caption.69}{}}
 \acronymused{OS}
 \acronymused{SACL}
 \acronymused{VM}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces sys\_open and sys\_openat permission checks\relax }}{33}{figure.caption.62}}
-\newlabel{fig:open}{{3.9}{33}{sys\_open and sys\_openat permission checks\relax }{figure.caption.62}{}}
 \acronymused{SACL}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces sys\_open and sys\_openat permission checks\relax }}{33}{figure.caption.70}}
+\newlabel{fig:open}{{3.9}{33}{sys\_open and sys\_openat permission checks\relax }{figure.caption.70}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Evaluation}{35}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -609,34 +656,33 @@
 \bibcite{rosenblum2005virtual}{5}
 \bibcite{xen}{6}
 \bibcite{payne2007secure}{7}
-\bibcite{lars_2016}{8}
-\bibcite{chisnall2008definitive}{9}
-\bibcite{bauman2015survey}{10}
-\bibcite{sharif2009secure}{11}
-\bibcite{dolan2011virtuoso}{12}
-\bibcite{payne2008lares}{13}
+\bibcite{chisnall2008definitive}{8}
+\bibcite{bauman2015survey}{9}
+\bibcite{sharif2009secure}{10}
+\bibcite{dolan2011virtuoso}{11}
+\bibcite{payne2008lares}{12}
+\bibcite{sailer2005building}{13}
 \@writefile{toc}{\contentsline {chapter}{List of References}{39}{chapter.5}}
-\bibcite{sailer2005building}{14}
-\bibcite{hay2008forensics}{15}
-\bibcite{xiao2016hyperlink}{16}
-\bibcite{hofmann2013inktag}{17}
-\bibcite{chen2008overshadow}{18}
-\bibcite{baumann2015shielding}{19}
-\bibcite{xu2015controlled}{20}
-\bibcite{dunlap2002revirt}{21}
-\bibcite{macko2011collecting}{22}
-\bibcite{crawford2013insider}{23}
-\bibcite{wang2005detecting}{24}
-\bibcite{riley2009multi}{25}
-\bibcite{jiang2007stealthy}{26}
-\bibcite{mahapatra2011online}{27}
-\bibcite{srinivasan2011process}{28}
-\bibcite{seshadri2007secvisor}{29}
-\bibcite{xiong2011practical}{30}
-\bibcite{srivastava2012efficient}{31}
-\bibcite{baliga2008automated}{32}
-\bibcite{nasab2012security}{33}
-\bibcite{rekall}{34}
-\@writefile{toc}{\contentsline {chapter}{Initial Distribution List}{43}{chapter*.64}}
+\bibcite{hay2008forensics}{14}
+\bibcite{xiao2016hyperlink}{15}
+\bibcite{hofmann2013inktag}{16}
+\bibcite{chen2008overshadow}{17}
+\bibcite{baumann2015shielding}{18}
+\bibcite{xu2015controlled}{19}
+\bibcite{dunlap2002revirt}{20}
+\bibcite{macko2011collecting}{21}
+\bibcite{crawford2013insider}{22}
+\bibcite{wang2005detecting}{23}
+\bibcite{riley2009multi}{24}
+\bibcite{jiang2007stealthy}{25}
+\bibcite{mahapatra2011online}{26}
+\bibcite{srinivasan2011process}{27}
+\bibcite{seshadri2007secvisor}{28}
+\bibcite{xiong2011practical}{29}
+\bibcite{srivastava2012efficient}{30}
+\bibcite{baliga2008automated}{31}
+\bibcite{nasab2012security}{32}
+\bibcite{rekall}{33}
+\@writefile{toc}{\contentsline {chapter}{Initial Distribution List}{43}{chapter*.72}}
 \ttl@finishall
 \newlabel{TotPages}{{63}{43}{}{page.43}{}}

@@ -52,11 +52,6 @@ B.~D. Payne, D.~d.~A. Martim, and W.~Lee, ``Secure and flexible monitoring of
   virtual machines,'' in \emph{Computer Security Applications Conference, 2007.
   ACSAC 2007. Twenty-Third Annual}. IEEE, 2007, pp. 385--397.
 
-\bibitem{lars_2016}
-K.~Lars, ``Virtual machine introspection: A security innovation with new
-  commercial applications,'' Aug 2016, accessed: 2017-05-09. Available:
-  \url{https://www.linux.com/news/virtual-machine-introspection-security-innovation-new-commercial-applications}
-
 \bibitem{chisnall2008definitive}
 D.~Chisnall, \emph{The definitive guide to the xen hypervisor}. Upper Saddle
   River, NJ: Pearson Education, 2008, ch.~5.
