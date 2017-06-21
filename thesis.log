@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  21 JUN 2017 09:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  21 JUN 2017 10:24
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1648,12 +1648,12 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
 
 ]
 Package acronym Info: Label `acro:IDS' newly defined as it shall be overridden
-although it is yet undefined on input line 69.
+although it is yet undefined on input line 70.
 pdfTeX warning (ext4): destination with the same identifier (name{HAP}) has bee
 n already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.77 \acro{HAP}{hardware assisted paging}
+l.78 \acro{HAP}{hardware assisted paging}
                                          ) [14.16] [15.17
 
 
@@ -1790,22 +1790,25 @@ LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
 Chapter 3.
 [23.43]
 Package acronym Info: Label `acro:SACL' overridden on input line 33.
- [24.44] (figs/overview.tikz) [25.45] [26.46]
+ [24.44] (figs/overview.tikz) [25.45] [26.46] [27.47]
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
-although it is yet undefined on input line 104.
- [27.47] [28.48] [29.49]
+although it is yet undefined on input line 106.
+ [28.48] [29.49]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [30.50] [31.51]
 Package acronym Info: Label `acro:PWD' newly defined as it shall be overridden
-although it is yet undefined on input line 253.
- [32.52] [33.53]) (chapter4.tex [34.54]
+although it is yet undefined on input line 255.
+ [32.52] [33.53] [34.54]) (chapter4.tex [35.55]
 
-LaTeX Warning: Text page 35 contains only floats.
+LaTeX Warning: Text page 36 contains only floats.
 
-[35.55] [36.56
-
-]
+[36.56]
 Chapter 4.
-) (chapter5.tex [37.57] [38.58
+) (chapter5.tex [37.57
+
+] [38.58
 
 ]
 Chapter 5.
@@ -1836,10 +1839,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 27446 strings out of 493328
- 465778 string characters out of 3139125
- 688139 words of memory out of 3000000
- 30022 multiletter control sequences out of 15000+200000
+ 27448 strings out of 493328
+ 465798 string characters out of 3139125
+ 686159 words of memory out of 3000000
+ 30024 multiletter control sequences out of 15000+200000
  83494 words of font info for 113 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,94p,1488b,1282s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1857,9 +1860,9 @@ type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr
 i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (65 pages, 470548 bytes).
+Output written on thesis.pdf (65 pages, 472013 bytes).
 PDF statistics:
- 1446 PDF objects out of 1728 (max. 8388607)
+ 1450 PDF objects out of 1728 (max. 8388607)
  301 named destinations out of 1000 (max. 500000)
  250 words of extra memory for PDF output out of 10000 (max. 10000000)
 

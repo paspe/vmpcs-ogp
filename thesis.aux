@@ -42,6 +42,7 @@
 \newacro{VMI}[\AC@hyperlink{VMI}{VMI}]{Virtual Machine Introspection}
 \newacro{ACL}[\AC@hyperlink{ACL}{ACL}]{Access Control List}
 \newacro{SACL}[\AC@hyperlink{SACL}{SACL}]{Shadow ACL}
+\newacroplural{SACL}[SACLs]{Shadow ACLs}
 \newacro{VMPCS-OGP}[\AC@hyperlink{VMPCS-OGP}{VMPCS-OGP}]{Virtual-Machine Protection and Checking System Using Out-Of-Guest Permissions}
 \newacro{API}[\AC@hyperlink{API}{API}]{Application program interface}
 \newacroplural{API}[APIs]{Application program interfaces}
@@ -530,14 +531,19 @@
 \acronymused{SACL}
 \newlabel{fig:sacl}{{3.1}{25}{\ac {SACL} sample\relax }{figure.caption.59}{}}
 \acronymused{SACL}
+\acronymused{SACL}
+\acronymused{SACL}
+\acronymused{OS}
+\acronymused{OS}
+\acronymused{SACL}
+\acronymused{SACL}
 \acronymused{VM}
 \acronymused{SACL}
 \acronymused{SACL}
 \acronymused{OS}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Information flow during a trapped system call execution\relax }}{25}{figure.caption.60}}
-\newlabel{fig:overview}{{3.2}{25}{Information flow during a trapped system call execution\relax }{figure.caption.60}{}}
-\citation{lengyel2014drakvuf}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Information flow during a trapped system call execution\relax }}{26}{figure.caption.60}}
+\newlabel{fig:overview}{{3.2}{26}{Information flow during a trapped system call execution\relax }{figure.caption.60}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Specifications}{26}{section.3.2}}
 \newlabel{sec:specs}{{3.2}{26}{Specifications}{section.3.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Requirements}{26}{subsection.3.2.1}}
@@ -548,6 +554,7 @@
 \acronymused{OS}
 \acronymused{VM}
 \acronymused{VM}
+\citation{lengyel2014drakvuf}
 \acronymused{EPT}
 \acronymused{VM}
 \acronymused{OS}
@@ -558,8 +565,8 @@
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Guest \ac {VM} Configuration}{27}{subsection.3.2.3}}
-\newlabel{sub:conf}{{3.2.3}{27}{Guest \ac {VM} Configuration}{subsection.3.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Guest \ac {VM} Configuration}{28}{subsection.3.2.3}}
+\newlabel{sub:conf}{{3.2.3}{28}{Guest \ac {VM} Configuration}{subsection.3.2.3}{}}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
@@ -567,10 +574,10 @@
 \acronymused{OS}
 \acronymused{VM}
 \acronymused{VM}
-\acronymused{OS}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{28}{figure.caption.61}}
 \acronymused{VM}
 \newlabel{fig:conf}{{3.3}{28}{Guest \ac {VM} shutdown configuration line\relax }{figure.caption.61}{}}
+\acronymused{OS}
 \acronymused{VM}
 \AC@undonewlabel{acro:PAM}
 \newlabel{acro:PAM}{{3.2.3}{28}{Guest \ac {VM} Configuration}{section*.62}{}}
@@ -580,46 +587,46 @@
 \newlabel{fig:pam}{{3.4}{28}{Guest \ac {VM} shutdown configuration line\relax }{figure.caption.63}{}}
 \acronymused{VM}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{28}{figure.caption.64}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{29}{figure.caption.64}}
 \acronymused{SACL}
-\newlabel{fig:root_sacl}{{3.5}{28}{root user \ac {SACL} sample\relax }{figure.caption.64}{}}
+\newlabel{fig:root_sacl}{{3.5}{29}{root user \ac {SACL} sample\relax }{figure.caption.64}{}}
 \acronymused{SACL}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Design}{28}{section.3.3}}
-\newlabel{sec:design}{{3.3}{28}{Design}{section.3.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Shadow Access Control List}{28}{subsection.3.3.1}}
-\newlabel{sub:sacl}{{3.3.1}{28}{Shadow Access Control List}{subsection.3.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Design}{29}{section.3.3}}
+\newlabel{sec:design}{{3.3}{29}{Design}{section.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Shadow Access Control List}{29}{subsection.3.3.1}}
+\newlabel{sub:sacl}{{3.3.1}{29}{Shadow Access Control List}{subsection.3.3.1}{}}
 \acronymused{SACL}
 \acronymused{VM}
 \acronymused{SACL}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces \textit  {struct protected\_files} memory layout\relax }}{29}{figure.caption.65}}
 \newlabel{fig:sacl_layout}{{3.6}{29}{\textit {struct protected\_files} memory layout\relax }{figure.caption.65}{}}
 \acronymused{SACL}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}System Calls}{29}{subsection.3.3.2}}
-\newlabel{sub:syscalls}{{3.3.2}{29}{System Calls}{subsection.3.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}System Calls}{30}{subsection.3.3.2}}
+\newlabel{sub:syscalls}{{3.3.2}{30}{System Calls}{subsection.3.3.2}{}}
 \acronymused{OS}
 \acronymused{OS}
 \acronymused{OS}
 \acronymused{OS}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Trapped system calls\relax }}{30}{table.caption.66}}
-\newlabel{tbl:prototypes}{{3.2}{30}{Trapped system calls\relax }{table.caption.66}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}System Call Hooking}{30}{subsection.3.3.3}}
-\newlabel{sub:hooking}{{3.3.3}{30}{System Call Hooking}{subsection.3.3.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Trapped system calls\relax }}{31}{table.caption.66}}
+\newlabel{tbl:prototypes}{{3.2}{31}{Trapped system calls\relax }{table.caption.66}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}System Call Hooking}{31}{subsection.3.3.3}}
+\newlabel{sub:hooking}{{3.3.3}{31}{System Call Hooking}{subsection.3.3.3}{}}
 \acronymused{VM}
 \acronymused{CPU}
 \acronymused{EPT}
 \acronymused{SACL}
 \acronymused{SACL}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}The task\_struct}{31}{subsection.3.3.4}}
-\newlabel{sub:struct}{{3.3.4}{31}{The task\_struct}{subsection.3.3.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}The task\_struct}{32}{subsection.3.3.4}}
+\newlabel{sub:struct}{{3.3.4}{32}{The task\_struct}{subsection.3.3.4}{}}
 \acronymused{GMFN}
 \acronymused{MFN}
 \acronymused{VM}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Trap Handling}{32}{subsection.3.3.5}}
 \newlabel{sub:handling}{{3.3.5}{32}{Trap Handling}{subsection.3.3.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{32}{figure.caption.67}}
-\newlabel{fig:getfile}{{3.7}{32}{Getting the file being accessed\relax }{figure.caption.67}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{33}{figure.caption.67}}
+\newlabel{fig:getfile}{{3.7}{33}{Getting the file being accessed\relax }{figure.caption.67}{}}
 \AC@undonewlabel{acro:PWD}
-\newlabel{acro:PWD}{{3.3.5}{32}{Trap Handling}{section*.68}{}}
+\newlabel{acro:PWD}{{3.3.5}{33}{Trap Handling}{section*.68}{}}
 \acronymused{PWD}
 \acronymused{PWD}
 \acronymused{SACL}
@@ -627,16 +634,16 @@
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{OS}
-\acronymused{SACL}
-\acronymused{SACL}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces sys\_unlink and sys\_unlinkat skeleton code flow\relax }}{34}{figure.caption.69}}
 \newlabel{fig:unlink}{{3.8}{34}{sys\_unlink and sys\_unlinkat skeleton code flow\relax }{figure.caption.69}{}}
+\acronymused{SACL}
+\acronymused{SACL}
 \acronymused{OS}
 \acronymused{SACL}
 \acronymused{VM}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces sys\_open and sys\_openat permission checks\relax }}{35}{figure.caption.70}}
-\newlabel{fig:open}{{3.9}{35}{sys\_open and sys\_openat permission checks\relax }{figure.caption.70}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces sys\_open and sys\_openat permission checks\relax }}{36}{figure.caption.70}}
+\newlabel{fig:open}{{3.9}{36}{sys\_open and sys\_openat permission checks\relax }{figure.caption.70}{}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Evaluation}{37}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
