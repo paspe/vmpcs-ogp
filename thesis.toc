@@ -9,7 +9,7 @@
 \contentsline {section}{\numberline {2.2}Virtual Machine Introspection}{9}{section.2.2}
 \contentsline {section}{\numberline {2.3}System Calls}{13}{section.2.3}
 \contentsline {section}{\numberline {2.4}Related Work}{14}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}In-\ac {VM} Monitoring}{14}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}In-\ac {VM} Monitoring}{15}{subsection.2.4.1}
 \contentsline {subsubsection}{Detection}{15}{subsubsection*.44}
 \contentsline {subsubsection}{Prevention}{16}{subsubsection*.45}
 \contentsline {subsection}{\numberline {2.4.2}Out-\ac {VM} Monitoring}{18}{subsection.2.4.2}

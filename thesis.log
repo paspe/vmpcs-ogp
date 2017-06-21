@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  20 JUN 2017 10:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  21 JUN 2017 09:55
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1648,12 +1648,12 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
 
 ]
 Package acronym Info: Label `acro:IDS' newly defined as it shall be overridden
-although it is yet undefined on input line 68.
+although it is yet undefined on input line 69.
 pdfTeX warning (ext4): destination with the same identifier (name{HAP}) has bee
 n already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.76 \acro{HAP}{hardware assisted paging}
+l.77 \acro{HAP}{hardware assisted paging}
                                          ) [14.16] [15.17
 
 
@@ -1733,20 +1733,20 @@ although it is yet undefined on input line 46.
 [8.28] (figs/rings.tikz)
 Package acronym Info: Label `acro:VMI' overridden on input line 58.
 Package acronym Info: Label `acro:PT' newly defined as it shall be overridden
-although it is yet undefined on input line 60.
+although it is yet undefined on input line 62.
 Package acronym Info: Label `acro:GMFN' newly defined as it shall be overridden
 
-although it is yet undefined on input line 60.
+although it is yet undefined on input line 62.
 Package acronym Info: Label `acro:MFN' newly defined as it shall be overridden
-although it is yet undefined on input line 60.
+although it is yet undefined on input line 62.
  [9.29] (figs/mm.tikz)
 Package acronym Info: Label `acro:IOMMU' newly defined as it shall be overridde
 n
-although it is yet undefined on input line 69.
-Package acronym Info: Label `acro:EPT' overridden on input line 69.
+although it is yet undefined on input line 71.
+Package acronym Info: Label `acro:EPT' overridden on input line 71.
 Package acronym Info: Label `acro:HAP' newly defined as it shall be overridden
-although it is yet undefined on input line 69.
- (figs/ept.tikz) [10.30]
+although it is yet undefined on input line 71.
+ [10.30] (figs/ept.tikz)
 (figs/libvmi.tikz) [11.31] (figs/kernelsym.tikz
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 10.95pt on input line 39.
@@ -1755,35 +1755,34 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
 ) [12.32] [13.33] [14.34]
 (figs/vmevents.tikz) [15.35]
 Package acronym Info: Label `acro:MAC' newly defined as it shall be overridden
-although it is yet undefined on input line 138.
-Package acronym Info: Label `acro:OI' newly defined as it shall be overridden
-although it is yet undefined on input line 145.
+although it is yet undefined on input line 140.
  [16.36]
+Package acronym Info: Label `acro:OI' newly defined as it shall be overridden
+although it is yet undefined on input line 147.
 Package acronym Info: Label `acro:SGX' newly defined as it shall be overridden
-although it is yet undefined on input line 151.
+although it is yet undefined on input line 153.
  [17.37]
-Package acronym Info: Label `acro:IDS' overridden on input line 167.
+Package acronym Info: Label `acro:IDS' overridden on input line 169.
 Package acronym Info: Label `acro:HIDS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 167.
+although it is yet undefined on input line 169.
 Package acronym Info: Label `acro:NIDS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 167.
+although it is yet undefined on input line 169.
 Package acronym Info: Label `acro:NIC' newly defined as it shall be overridden
-although it is yet undefined on input line 167.
- [18.38]
-Package acronym Info: Label `acro:ACL' overridden on input line 181.
- [19.39]
+although it is yet undefined on input line 169.
+ [18.38] [19.39]
+Package acronym Info: Label `acro:ACL' overridden on input line 183.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 190.
+(Font)              scaled to size 10.0pt on input line 192.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 190.
+(Font)              scaled to size 7.3pt on input line 192.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 190.
+(Font)              scaled to size 5.5pt on input line 192.
 
 
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 190.
+(Font)              size <5> substituted on input line 192.
 
 ) (chapter3.tex [20.40] [21.41] [22.42
 
@@ -1837,10 +1836,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 27444 strings out of 493328
- 465760 string characters out of 3139125
- 688101 words of memory out of 3000000
- 30020 multiletter control sequences out of 15000+200000
+ 27446 strings out of 493328
+ 465778 string characters out of 3139125
+ 688139 words of memory out of 3000000
+ 30022 multiletter control sequences out of 15000+200000
  83494 words of font info for 113 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,94p,1488b,1282s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1858,9 +1857,9 @@ type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr
 i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (65 pages, 469611 bytes).
+Output written on thesis.pdf (65 pages, 470548 bytes).
 PDF statistics:
- 1444 PDF objects out of 1728 (max. 8388607)
+ 1446 PDF objects out of 1728 (max. 8388607)
  301 named destinations out of 1000 (max. 500000)
  250 words of extra memory for PDF output out of 10000 (max. 10000000)
 

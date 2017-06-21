@@ -44,6 +44,7 @@
 \newacro{SACL}[\AC@hyperlink{SACL}{SACL}]{Shadow ACL}
 \newacro{VMPCS-OGP}[\AC@hyperlink{VMPCS-OGP}{VMPCS-OGP}]{Virtual-Machine Protection and Checking System Using Out-Of-Guest Permissions}
 \newacro{API}[\AC@hyperlink{API}{API}]{Application program interface}
+\newacroplural{API}[APIs]{Application program interfaces}
 \newacro{VT}[\AC@hyperlink{VT}{VT}]{Virtualization Technology}
 \newacro{PT}[\AC@hyperlink{PT}{PT}]{Page Table}
 \newacroplural{PT}[PTs]{Page Tables}
@@ -212,6 +213,7 @@
 \AC@undonewlabel{acro:VT}
 \newlabel{acro:VT}{{2.1.2}{8}{The Xen project}{section*.30}{}}
 \acronymused{VT}
+\citation{lengyel2014drakvuf}
 \citation{garfinkel2003virtual}
 \citation{payne2007secure}
 \citation{payne2011libvmi}
@@ -222,16 +224,18 @@
 \acronymused{CPU}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Virtual Machine Introspection}{9}{section.2.2}}
 \newlabel{sec:vmi}{{2.2}{9}{Virtual Machine Introspection}{section.2.2}{}}
+\acronymused{API}
 \AC@undonewlabel{acro:VMI}
 \newlabel{acro:VMI}{{2.2}{9}{Virtual Machine Introspection}{section*.32}{}}
+\acronymused{VMI}
 \acronymused{VMI}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{API}
-\acronymused{VM}
-\acronymused{OS}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.36}}
 \newlabel{fig:hypmm}{{2.5}{10}{Hypervisor memory management concept\relax }{figure.caption.36}{}}
+\acronymused{VM}
+\acronymused{OS}
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
@@ -286,7 +290,6 @@
 \acronymused{CPU}
 \acronymused{VM}
 \acronymused{VM}
-\acronymused{VM}
 \citation{lengyel2014drakvuf}
 \acronymused{VM}
 \acronymused{VM}
@@ -295,15 +298,16 @@
 \acronymused{VM}
 \newlabel{fig:libvmi}{{2.7}{12}{LibVMI out of guest access of \ac {VM} state\relax }{figure.caption.41}{}}
 \acronymused{VM}
+\acronymused{VM}
 \acronymused{CPU}
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{EPT}
 \acronymused{CPU}
 \acronymused{EPT}
-\acronymused{VM}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.42}}
 \newlabel{fig:accesskernel}{{2.8}{13}{Using LibVMI to access the value of a kernel symbol\relax }{figure.caption.42}{}}
+\acronymused{VM}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}System Calls}{13}{section.2.3}}
 \newlabel{sec:syscalls}{{2.3}{13}{System Calls}{section.2.3}{}}
 \acronymused{OS}
@@ -312,8 +316,8 @@
 \acronymused{OS}
 \acronymused{OS}
 \acronymused{OS}
-\acronymused{OS}
 \citation{bauman2015survey}
+\acronymused{OS}
 \acronymused{OS}
 \acronymused{OS}
 \acronymused{OS}
@@ -323,14 +327,14 @@
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
-\acronymused{VM}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}In-\ac {VM} Monitoring}{14}{subsection.2.4.1}}
-\newlabel{sub:invm}{{2.4.1}{14}{In-\ac {VM} Monitoring}{subsection.2.4.1}{}}
-\acronymused{VM}
-\acronymused{VM}
-\acronymused{VM}
 \citation{sharif2009secure}
 \citation{dolan2011virtuoso}
+\acronymused{VM}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}In-\ac {VM} Monitoring}{15}{subsection.2.4.1}}
+\newlabel{sub:invm}{{2.4.1}{15}{In-\ac {VM} Monitoring}{subsection.2.4.1}{}}
+\acronymused{VM}
+\acronymused{VM}
+\acronymused{VM}
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
@@ -347,14 +351,14 @@
 \acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
-\acronymused{VM}
-\acronymused{OS}
 \citation{payne2008lares}
 \citation{sailer2005building}
 \citation{hay2008forensics}
 \citation{xiao2016hyperlink}
 \citation{hofmann2013inktag}
 \citation{hofmann2013inktag}
+\acronymused{VM}
+\acronymused{OS}
 \acronymused{VM}
 \acronymused{OS}
 \@writefile{toc}{\contentsline {subsubsection}{Prevention}{16}{subsubsection*.45}}
@@ -377,13 +381,12 @@
 \acronymused{OS}
 \acronymused{HAP}
 \acronymused{HAP}
+\citation{chen2008overshadow}
+\citation{baumann2015shielding}
 \acronymused{HAP}
 \acronymused{HAP}
 \acronymused{OS}
 \acronymused{HAP}
-\citation{chen2008overshadow}
-\citation{baumann2015shielding}
-\citation{xu2015controlled}
 \acronymused{HAP}
 \acronymused{EPT}
 \acronymused{OS}
@@ -404,11 +407,12 @@
 \acronymused{SGX}
 \acronymused{SGX}
 \acronymused{OS}
-\acronymused{OS}
+\citation{xu2015controlled}
 \citation{dunlap2002revirt}
 \citation{macko2011collecting}
 \citation{crawford2013insider}
 \citation{garfinkel2003virtual}
+\acronymused{OS}
 \acronymused{VM}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Out-\ac {VM} Monitoring}{18}{subsection.2.4.2}}
 \newlabel{sub:outvm}{{2.4.2}{18}{Out-\ac {VM} Monitoring}{subsection.2.4.2}{}}
@@ -422,22 +426,6 @@
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VMI}
-\AC@undonewlabel{acro:IDS}
-\newlabel{acro:IDS}{{2.4.2}{18}{Detection}{section*.50}{}}
-\acronymused{IDS}
-\acronymused{IDS}
-\AC@undonewlabel{acro:HIDS}
-\newlabel{acro:HIDS}{{2.4.2}{18}{Detection}{section*.51}{}}
-\acronymused{IDS}
-\acronymused{HIDS}
-\AC@undonewlabel{acro:NIDS}
-\newlabel{acro:NIDS}{{2.4.2}{18}{Detection}{section*.52}{}}
-\acronymused{IDS}
-\acronymused{NIDS}
-\acronymused{VM}
-\AC@undonewlabel{acro:NIC}
-\newlabel{acro:NIC}{{2.4.2}{18}{Detection}{section*.53}{}}
-\acronymused{NIC}
 \citation{wang2005detecting}
 \citation{riley2009multi}
 \citation{jiang2007stealthy}
@@ -446,8 +434,22 @@
 \citation{seshadri2007secvisor}
 \citation{xiong2011practical}
 \citation{srivastava2012efficient}
-\citation{baliga2008automated}
-\citation{nasab2012security}
+\AC@undonewlabel{acro:IDS}
+\newlabel{acro:IDS}{{2.4.2}{19}{Detection}{section*.50}{}}
+\acronymused{IDS}
+\acronymused{IDS}
+\AC@undonewlabel{acro:HIDS}
+\newlabel{acro:HIDS}{{2.4.2}{19}{Detection}{section*.51}{}}
+\acronymused{IDS}
+\acronymused{HIDS}
+\AC@undonewlabel{acro:NIDS}
+\newlabel{acro:NIDS}{{2.4.2}{19}{Detection}{section*.52}{}}
+\acronymused{IDS}
+\acronymused{NIDS}
+\acronymused{VM}
+\AC@undonewlabel{acro:NIC}
+\newlabel{acro:NIC}{{2.4.2}{19}{Detection}{section*.53}{}}
+\acronymused{NIC}
 \acronymused{HIDS}
 \acronymused{VM}
 \@writefile{toc}{\contentsline {subsubsection}{Prevention}{19}{subsubsection*.54}}
@@ -457,6 +459,8 @@
 \acronymused{VM}
 \acronymused{VM}
 \acronymused{VM}
+\citation{baliga2008automated}
+\citation{nasab2012security}
 \citation{sharif2009secure}
 \citation{dolan2011virtuoso}
 \citation{payne2008lares}
