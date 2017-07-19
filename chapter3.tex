@@ -13,7 +13,7 @@ As far as we know, all work on \ac{VM} monitoring and security focuses on kernel
 
 \par The concept is fairly simple. We will use DRAKVUF to create a trap on all the relevant system calls, which are shown in table~\ref{tbl:syscalls}.
 
-\begin{table}[h]
+\begin{table}[ht]
 	\centering
 	\caption{Trapped system calls}
 	\label{tbl:syscalls}
@@ -168,7 +168,7 @@ All applications running in user-space need to ask the kernel to access a file. 
 
 \par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform are passed to the kernel through the registers in the order of rdi, rsi, rdx, r10, r8, r9, while the system call number is passed in rax. Table~\ref{tbl:prototypes} shows which arguments need to be passed to each system call on each register for it to perform the requested operation.
 
-\begin{table}[h]
+\begin{table}[ht]
 	\centering
 	\footnotesize
 	\caption{Trapped system calls}
