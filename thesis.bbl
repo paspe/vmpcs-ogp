@@ -182,6 +182,10 @@ A.~Baliga, L.~Iftode, and X.~Chen, ``Automated containment of rootkits
 M.~R. Nasab, ``Security functions for virtual machines via introspection,''
   Master's thesis, Chalmers University of Technology, 2012.
 
+\bibitem{linuxkernel}
+M.~C. Daniel P.~Bovet, \emph{Understanding the Linux Kernel}. O'Reilly Media,
+  Inc., 2005, ch.~1.
+
 \bibitem{rekall}
 ``Wrekall memory forensic framework.'' Available:
   \url{http://www.rekall-forensic.com/}

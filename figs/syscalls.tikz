@@ -1,0 +1,51 @@
+\begin{tikzpicture}[
+rednode/.style={circle, draw=red!60, fill=red!30, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+
+
+
+\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=40mm, minimum height=10mm, label={[yshift=-0.8cm]Process}] at (2, 0) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]File access request}] at (0, -0.9) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]Results to the process}] at (6, -0.9) {}; 
+
+\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=40mm, minimum height=10mm, label={[yshift=-0.9cm]System Call}] at (2, -2) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]Request to the \ac{OS}}] at (0, -2.9) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]\rotatebox{270}{User Mode}}] at (-2, -3) {}; 
+
+\draw[anchor= south west, draw=black!70, line width=0.5mm,-] (-2, -3) -- (10, -3);
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.7cm]\rotatebox{270}{Kernel Mode}}] at (-2, -6) {}; 
+
+\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=40mm, minimum height=10mm, label={[yshift=-0.8cm]Kernel}] at (2, -5) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]Results from \ac{OS}}] at (6, -3.9) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]Request granted}] at (0, -5.9) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]Results from device}] at (6, -5.9) {}; 
+
+\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=40mm, minimum height=10mm, label={[yshift=-0.8cm]Device}] at (2, -7) {}; 
+
+\draw[anchor= south west, draw=red!70, line width=1mm,->] (3, 0) -- (3, -1);
+\draw[anchor= south west, draw=red!70, line width=1mm,->] (3, -2) -- (3, -4);
+\draw[anchor= south west, draw=red!70, line width=1mm,->] (3, -5) -- (3, -6);
+
+\draw[anchor= south west, draw=blue!60, line width=1mm,<-] (5, 0) -- (5, -1);
+\draw[anchor= south west, draw=blue!60, line width=1mm,<-] (5, -2) -- (5, -4);
+\draw[anchor= south west, draw=blue!60, line width=1mm,<-] (5, -5) -- (5, -6);
+
+
+%\draw[anchor= south west, draw=red!70, line width=1mm,->] (4.5, 2) -- (7.2, 2);
+%\draw[anchor= south west, draw=red!70, line width=1mm,->] (9.2, 2) -- (9.6, 2);
+%\draw[anchor= south west, draw=red!70, line width=1mm,->] (11.6, 2) -- (12.2, 2);
+
+%\draw[anchor= south west, draw=blue!60, line width=1mm,->] (12.2, 1) -- (1, 1) -- (1, 3.5);
+%\draw[anchor= south west, draw=blue!60, line width=1mm,->] (1, 4.5) -- (1, 5);
+
+
+
+\end{tikzpicture}

@@ -9,9 +9,11 @@
 \BOOKMARK [1][-]{section.2.4}{Related Work}{chapter.2}% 9
 \BOOKMARK [0][-]{chapter.3}{Design and Implementation}{}% 10
 \BOOKMARK [1][-]{section.3.1}{Overview}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.2}{Specifications}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.3}{Design}{chapter.3}% 13
-\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 14
-\BOOKMARK [0][-]{chapter.5}{Conclusion and Future Work}{}% 15
-\BOOKMARK [0][-]{chapter.5}{List of References}{}% 16
-\BOOKMARK [0][-]{chapter*.72}{Initial Distribution List}{}% 17
+\BOOKMARK [1][-]{section.3.2}{Threat Model}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.3}{Requirements}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.4}{Design}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.5}{Implementation}{chapter.3}% 15
+\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 16
+\BOOKMARK [0][-]{chapter.5}{Conclusion and Future Work}{}% 17
+\BOOKMARK [0][-]{chapter.5}{List of References}{}% 18
+\BOOKMARK [0][-]{chapter*.82}{Initial Distribution List}{}% 19
