@@ -20,7 +20,7 @@ In this chapter we will discuss the design, including the threat model and assum
 
 \par Table 12.1 in \cite{linuxkernel} shows the list of system calls relevant to filesystems. According to that table, the system calls of importance to us are \emph{open(), rename(), unlink()} and \emph{truncate()}. Some of these system calls have been evolved over time to provide better security and to eliminate problems. Such an evolved system call is \emph{openat()}. Going through the available system call list in \emph{/usr/include/asm/unistd\_64.h}, we assess that the system calls mentioned in table~\ref{tbl:syscalls}, where number is the system call number as it is passed to the kernel, provide full coverage of the possible ways a file can be accessed when being on a mounted device. 
 
-\begin{table}[h]
+\begin{table}[ht]
 	\centering
 	\caption{Trapped system calls}
 	\label{tbl:syscalls}
@@ -157,7 +157,7 @@ During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have 
 
 \par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform are passed to the kernel through the registers in the order of rdi, rsi, rdx, r10, r8, r9, while the system call number is passed in rax. Table~\ref{tbl:prototypes} shows which arguments need to be passed to each system call on each register for it to perform the requested operation.
 
-\begin{table}[h]
+\begin{table}[ht]
 	\centering
 	\footnotesize
 	\caption{Trapped system calls}
