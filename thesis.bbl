@@ -186,6 +186,10 @@ M.~R. Nasab, ``Security functions for virtual machines via introspection,''
 M.~C. Daniel P.~Bovet, \emph{Understanding the Linux Kernel}. O'Reilly Media,
   Inc., 2005, ch.~1.
 
+\bibitem{perla2010guide}
+E.~Perla and M.~Oldani, \emph{A guide to kernel exploitation: attacking the
+  core}. Burlington, MA: Elsevier, 2010.
+
 \bibitem{rekall}
 ``Wrekall memory forensic framework.'' Available:
   \url{http://www.rekall-forensic.com/}

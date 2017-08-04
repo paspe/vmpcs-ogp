@@ -15,14 +15,14 @@
 \contentsline {subsection}{\numberline {2.4.2}Out-\ac {VM} Monitoring}{18}{subsection.2.4.2}
 \contentsline {subsubsection}{Detection}{18}{subsubsection*.49}
 \contentsline {subsubsection}{Prevention}{19}{subsubsection*.54}
-\contentsline {chapter}{\numberline {3}Design and Implementation}{23}{chapter.3}
+\contentsline {chapter}{\numberline {3}Design and Implementation of Ferify}{23}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overview}{23}{section.3.1}
 \contentsline {section}{\numberline {3.2}Threat Model}{25}{section.3.2}
 \contentsline {section}{\numberline {3.3}Requirements}{26}{section.3.3}
 \contentsline {section}{\numberline {3.4}Design}{26}{section.3.4}
 \contentsline {section}{\numberline {3.5}Implementation}{27}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Shadow Access Control List}{27}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}System Calls}{30}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.2}System Calls}{29}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}System Call Hooking}{30}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}The task struct}{32}{subsection.3.5.4}
 \contentsline {subsection}{\numberline {3.5.5}Trap Handling}{33}{subsection.3.5.5}
@@ -30,5 +30,5 @@
 \contentsline {chapter}{\numberline {4}Evaluation}{39}{chapter.4}
 \contentsline {chapter}{\numberline {5}Conclusion and Future Work}{41}{chapter.5}
 \contentsline {chapter}{List of References}{43}{chapter.5}
-\contentsline {chapter}{Initial Distribution List}{47}{chapter*.82}
+\contentsline {chapter}{Initial Distribution List}{47}{chapter*.84}
 \contentsfinish 

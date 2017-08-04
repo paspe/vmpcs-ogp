@@ -1,13 +1,13 @@
 \acresetall
-\chapter{Design and Implementation}\label{ch:chapter3}
+\chapter{Design and Implementation of Ferify}\label{ch:chapter3}
 
 In this chapter we will discuss the design, including the threat model and assumptions made, and the implementation choices that we made for this research.	
 
 \section{Overview}\label{sec:overview}
 
-\par In this research, we leverage the Xen’s \ac{VMI} capabilities to create a mechanism that protects some critical files on a \ac{VM}'s mounted filesystem by monitoring the systems calls that are being invoked. We will create an additional \ac{ACL} on the hypervisor that will include modified permissions for file access. The above permissions are different compared to those on the guest \ac{VM}, allowing for the enforcement of different file access policy than the ones enforced by the guest \ac{VM}. The hypervisor will externally monitor which files are being accessed and cross-check the requested permissions with its \ac{ACL}, which we call \ac{SACL}, entries providing this way additional safety for high-value files, even while under \ac{VM} compromised attacks. Although a similar approach was employed with Paladin~\cite{baliga2008automated} and Nasab~\cite{nasab2012security}, there are some fundamental differences. 
+\par In this research, we extend the Xen hypervisor by leveraging its \ac{VMI} capabilities to create a system which we call \emph{Ferify} that protects some critical files on a \ac{VM}'s mounted filesystem by intercepting and monitoring all systems calls that may operate on these files. Ferify maintains its own file \ac{ACL} and allows a system call to read or write a file if and only if the \ac{ACL} permits the action explicitly for the \ac{UID} and \ac{GID} combination of the calling process. We call this \ac{ACL} the \ac{SACL}, to differentiate it from other \acp{ACL} configured on guest \acp{VM}. It is important to note that the content of \ac{SACL} cannot be read or modified by \emph{any} process including kernel processes from a guest \ac{VM}. The above permissions can be different compared to those on the guest \ac{VM}, allowing for the enforcement of different file access policy than the ones enforced by the guest \ac{VM}, even while under \ac{VM} compromised attacks.
 
-\par Before continuing we need to establish why our solution is secure. We chose to monitor which files are being accessed by trapping on the system calls that are being invoked. This choice covers all cases for opening a file on a mounted filesystem. The reason is the way the Linux \ac{OS} is designed. To provide higher security most \acp{OS}, including Linux, operate in two modes. One is called \emph{User Mode}, a non-privileged mode of operation used by normal applications, and \emph{Kernel Mode}, a privileged mode of operation used from the \ac{OS}, as mentioned in ~\cite{linuxkernel} and explained in more detail later in this chapter. Because the kernel is a very complex software, and to ensure secure execution of code, linux employs specific entry points to the kernel code, which is an \ac{API} for applications to interact with the kernel. This \ac{API} is called system calls. 
+\par Before presenting the design and implementation details, we first briefly discuss why our solution is secure. We chose to monitor which files are being accessed by trapping on the system calls that are being invoked. 
 
 \par As mentioned in \cite{linuxkernel}, a User Mode process cannot access directly the hardware. Each file operation must be performed in Kernel Mode. The \ac{OS} will not allow direct access to hardware. If a process needs file access, it needs to perform a system call, asking this way the \ac{OS} for the desired operation. The \ac{OS} checks if the request is valid and if it is the \ac{OS} accesses the file on behalf of the process and returns to the process the result of the operations, as shown in \ref{fig:syscall}. This requirement, to make a system call for all file operations, provides the place in the \ac{OS} executable code, which if we monitor we can extract the information of all files being accessed. So, we cannot miss any file any process will try to open.
 
@@ -19,6 +19,9 @@ In this chapter we will discuss the design, including the threat model and assum
 \end{figure}
 
 \par Table 12.1 in \cite{linuxkernel} shows the list of system calls relevant to filesystems. According to that table, the system calls of importance to us are \emph{open(), rename(), unlink()} and \emph{truncate()}. Some of these system calls have been evolved over time to provide better security and to eliminate problems. Such an evolved system call is \emph{openat()}. Going through the available system call list in \emph{/usr/include/asm/unistd\_64.h}, we assess that the system calls mentioned in table~\ref{tbl:syscalls}, where number is the system call number as it is passed to the kernel, provide full coverage of the possible ways a file can be accessed when being on a mounted device. 
+
+\par As explained in \cite{perla2010guide}, it is possible for an attacker to modify the credentials of a process after acquiring root privileges. This exploit is a significant security issue for Ferify, since it collects the \ac{UID} and \ac{GID} of the running process from the \ac{VM}'s kernel memory. To avoid the success of such an exploit, Ferify monitors the credentials of \emph{all} running processes inside the guest \ac{VM}, and additionally monitors the creation of new processes to record their credentials as well. Then, according to preset rules Ferify decides whether a change in the credentials of a process is allowed or not, and acts accordingly. This way we secure the validity of the information we collect from the guest \ac{VM}.
+
 
 \begin{table}[ht]
 	\centering
@@ -42,7 +45,7 @@ In this chapter we will discuss the design, including the threat model and assum
 	\end{tabular}	
 \end{table}
 
-
+\par LibVMI, and therefore DRAKVUF, needs for the guest \ac{VM} to have reached a state, after launching, to be able to start monitoring the guest \ac{VM}. After we launch a VM there might be a small time window when the guest \ac{VM} is running without the protection of our system. Until we find a way to find the exact time LibVMI can be initialized to protect the guest \ac{VM}, we will consider attacks that modify the running system during boot-time outside the scope of this research. To prevent the system from being attacked during that small timeframe, we do not connect the \ac{VM} to the network until this initialization process is completed. 
 
 \section{Threat Model}\label{sec:threat}
 
@@ -50,18 +53,16 @@ Computer security has been evolving because the attackers methods evolve, too. M
 
 \par For this research, we have adopted a moderate threat model where we assume that the guest \ac{VM} is insecure. That means that an adversary can gain access to it remotely. We also assume that physical access to the hosting machine is restricted and the attacker cannot use physical media like USB sticks or CD-ROMs to compromise the host system. This reflects many applications and systems working over a network connection as well as cloud solutions. The files we want to protect are on a mounted disk.
 
-\par Moreover, we assume that the \ac{OS} installed on the guest \ac{VM} is not trusted. This essentially means that the adversaries can gain root privileges, allowing them this way to modify system executables, as well as load kernel modules during runtime. This allows for kernel memory modification. Although an adversary can manipulate some of the memory values before a system call gets executed, such as the file being accessed, most of them will not affect the outcome. There are two values in a process's memory space though, which if modified can alter the overall behavior. These values are the \emph{userid} and \emph{groupid} of the process. \emph{--I don't know if I will have the time to complete this protection. We could leave it as future work. I have an idea on how to do it, I just don't think I can finish all by September.--}
+\par Moreover, we assume that the \ac{OS} installed on the guest \ac{VM} is not trusted. This essentially means that the adversaries can gain root privileges, allowing them this way to modify system executables, as well as load kernel modules during runtime. This allows for kernel memory modification.
 
 \par We consider the hypervisor along with its Dom0 to be secure and trusted. We will not address hypervisor vectored attacks.
-
-\par When launching a \ac{VM} there might be a small time window when the guest \ac{VM} is running without the protection of our system. Until we find a way to find the exact time LibVMI can be initialized to protect the guest \ac{VM}, we will consider attacks that modify the running system during boot-time outside the scope of this research.
 
 \section{Requirements}\label{sec:requirements}
 The goal of this research is to provide a virtualization extension that will extend the granular-level file access control of the Linux \ac{OS}. The requirements we defined for our system are:
 \begin{itemize}
 	\item \textbf{(R1)} The solution must be Out-VM, to avoid modification from the potential adversary. 
 	\item \textbf{(R2)} The system must remain efficient and usable, by not introducing significant overhead on the runtime of the \ac{VM}, as well as by not enforcing many restrictions to the users. 
-	\item \textbf{(R3)} The coverage of the relevant system calls must be maximum.
+	\item \textbf{(R3)} All relevant system calls must be monitored.
 \end{itemize}
 
 

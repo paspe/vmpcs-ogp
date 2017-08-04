@@ -7,7 +7,7 @@
 \BOOKMARK [1][-]{section.2.2}{Virtual Machine Introspection}{chapter.2}% 7
 \BOOKMARK [1][-]{section.2.3}{System Calls}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.4}{Related Work}{chapter.2}% 9
-\BOOKMARK [0][-]{chapter.3}{Design and Implementation}{}% 10
+\BOOKMARK [0][-]{chapter.3}{Design and Implementation of Ferify}{}% 10
 \BOOKMARK [1][-]{section.3.1}{Overview}{chapter.3}% 11
 \BOOKMARK [1][-]{section.3.2}{Threat Model}{chapter.3}% 12
 \BOOKMARK [1][-]{section.3.3}{Requirements}{chapter.3}% 13
@@ -16,4 +16,4 @@
 \BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 16
 \BOOKMARK [0][-]{chapter.5}{Conclusion and Future Work}{}% 17
 \BOOKMARK [0][-]{chapter.5}{List of References}{}% 18
-\BOOKMARK [0][-]{chapter*.82}{Initial Distribution List}{}% 19
+\BOOKMARK [0][-]{chapter*.84}{Initial Distribution List}{}% 19
