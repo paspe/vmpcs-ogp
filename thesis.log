@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  3 AUG 2017 18:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  3 AUG 2017 18:14
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1774,19 +1774,17 @@ although it is yet undefined on input line 169.
  [18.38] [19.39]
 Package acronym Info: Label `acro:ACL' overridden on input line 183.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 194.
+(Font)              scaled to size 10.0pt on input line 196.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 194.
+(Font)              scaled to size 7.3pt on input line 196.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 194.
+(Font)              scaled to size 5.5pt on input line 196.
 
 
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 194.
+(Font)              size <5> substituted on input line 196.
 
-) (chapter3.tex [20.40] [21.41] [22.42
-
-]
+[20.40]) (chapter3.tex [21.41] [22.42]
 Chapter 3.
 Package acronym Info: Label `acro:VMI' overridden on input line 8.
 Package acronym Info: Label `acro:VM' overridden on input line 8.
@@ -1797,7 +1795,9 @@ Package acronym Info: Label `acro:GID' newly defined as it shall be overridden
 although it is yet undefined on input line 8.
 Package acronym Info: Label `acro:SACL' overridden on input line 8.
 Package acronym Info: Label `acro:OS' overridden on input line 12.
-(figs/syscalls.tikz) [23.43] [24.44] [25.45]
+(figs/syscalls.tikz) [23.43
+
+] [24.44] [25.45]
 Package acronym Info: Label `acro:EPT' overridden on input line 73.
  [26.46] [27.47] [28.48] [29.49]
 Overfull \hbox (5.69997pt too wide) in paragraph at lines 166--202
@@ -1872,9 +1872,9 @@ type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr
 i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (67 pages, 490064 bytes).
+Output written on thesis.pdf (67 pages, 490685 bytes).
 PDF statistics:
- 1529 PDF objects out of 1728 (max. 8388607)
+ 1530 PDF objects out of 1728 (max. 8388607)
  319 named destinations out of 1000 (max. 500000)
  266 words of extra memory for PDF output out of 10000 (max. 10000000)
 

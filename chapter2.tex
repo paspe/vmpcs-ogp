@@ -184,6 +184,8 @@ Having a monitoring tool on the hypervisor has its benefits, but also a signific
 
 \par A more direct approach to file integrity is presented in~\cite{nasab2012security}. Nasab tries to protect the \ac{OS} from accessing maliciously modified files. The target \ac{VM} is deployed offline and all the files are signed digitally using a private key. The digests are stored on the hypervisor. When the process has been completed for all the files to be protected, the \ac{VM} gets online. During its execution, whenever a file is accessed and before it gets loaded into memory, the system retrieves its digest and compares it to the copy on the hypervisor. If the file has not changed, access or execution continues, otherwise access or execution is denied.
 
+\par Because 0-day vulnerabilities are constantly discovered and exploited, we do not want to focus in detecting specific behavior to assess the presence of malware and restrain it, since these behaviors change and evolve with the development of new attacks. We want to focus in a more generic case where we expect the running system to be hacked. We want to protect files in a compromised running \ac{VM} against insider threats, rootkits , etc.. 
+
 \par Table \ref{tbl:overview} shows a representation of the key features of the solutions presented above.
 
 \begin{table}[ht!]
