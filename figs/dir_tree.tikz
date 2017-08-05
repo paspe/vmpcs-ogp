@@ -1,0 +1,26 @@
+\begin{tikzpicture}[
+rednode/.style={circle, draw=red!60, fill=red!30, very thick, minimum size=5mm, text width=2cm, text centered},
+bluenode/.style={rectangle, draw=black!60, fill=blue!20, very thick, minimum size=5mm, text width=2cm, text centered},]
+
+
+
+\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.8cm]drakvuf/}] at (0, 0) {}; 
+
+\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.8cm]src/}] at (2.5, 0) {}; 
+
+\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]plugins/}] at (5, 0) {}; 
+
+\node (rect) [anchor= south west, fill=white, rectangle, draw=black!80, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]ferify/}] at (7.5, 0) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]ferify.h}] at (10, 0.25) {}; 
+
+\node (rect) [anchor= south west, rectangle, rounded corners, minimum width=20mm, minimum height=10mm, label={[yshift=-0.9cm]ferify.cpp}] at (10, -0.25) {}; 
+
+\draw[anchor= south west, draw=black!80, line width=0.5mm,->] (2, 0.5) -- (2.5, 0.5);
+\draw[anchor= south west, draw=black!80, line width=0.5mm,->] (4.5, 0.5) -- (5, 0.5);
+\draw[anchor= south west, draw=black!80, line width=0.5mm,->] (7, 0.5) -- (7.5, 0.5);
+\draw[anchor= south west, draw=black!80, line width=0.5mm,->] (9.5, 0.5) -- (10.1, 0.75);
+\draw[anchor= south west, draw=black!80, line width=0.5mm,->] (9.5, 0.5) -- (10.1, 0.25);
+
+
+\end{tikzpicture}

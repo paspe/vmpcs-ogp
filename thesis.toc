@@ -21,14 +21,15 @@
 \contentsline {section}{\numberline {3.3}Requirements}{26}{section.3.3}
 \contentsline {section}{\numberline {3.4}Design}{26}{section.3.4}
 \contentsline {section}{\numberline {3.5}Implementation}{27}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Shadow Access Control List}{27}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}System Call Interception and Admission Control}{30}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}System Call Hooking}{30}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}The task struct}{32}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}Trap Handling}{33}{subsection.3.5.5}
-\contentsline {subsection}{\numberline {3.5.6}Guest \ac {VM} Configuration}{36}{subsection.3.5.6}
+\contentsline {subsection}{\numberline {3.5.1}Architecture}{27}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Shadow Access Control List}{28}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}System Call Interception and Admission Control}{30}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}System Call Hooking}{31}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3.5.5}The task struct}{33}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.5.6}Trap Handling}{33}{subsection.3.5.6}
+\contentsline {subsection}{\numberline {3.5.7}Guest \ac {VM} Configuration}{37}{subsection.3.5.7}
 \contentsline {chapter}{\numberline {4}Evaluation}{39}{chapter.4}
 \contentsline {chapter}{\numberline {5}Conclusion and Future Work}{41}{chapter.5}
 \contentsline {chapter}{List of References}{43}{chapter.5}
-\contentsline {chapter}{Initial Distribution List}{47}{chapter*.84}
+\contentsline {chapter}{Initial Distribution List}{47}{chapter*.85}
 \contentsfinish 

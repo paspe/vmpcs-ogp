@@ -30,7 +30,7 @@ In this chapter we will discuss the design, including the threat model and assum
 	\label{tbl:syscalls}
 	\begin{tabular}{cc}
 		\toprule
-		System call & Number \\
+		\textbf{System call} & \textbf{Number} \\
 		\hline
 		\footnotesize{\fontfamily{qcr}\selectfont open} 					
 		& \footnotesize{\fontfamily{qcr}\selectfont 2} \\ 
@@ -92,7 +92,16 @@ The goal of this research is to provide a virtualization extension that will ext
 
 \par Following we expand on how we implemented the mechanism to provide the file access security of our system.
 
+\subsection{Architecture}\label{sub:arch}
 
+\par Ferify was developed as a plugin for DRAKVUF. As such, it is a C++ class that extends the class \emph{plugin}, as per requirements of DRAKVUF. It is located in the directory \emph{src/plugins/ferify/} and consists of two files, \emph{ferify.h} and \emph{ferify.cpp}, as show in figure \ref{fig:dir_tree}. 
+
+\begin{figure}[ht]
+	\centering
+	\input{figs/dir_tree.tikz}
+	\caption{ferify directory tree}
+	\label{fig:dir_tree}
+\end{figure}
 
 \subsection{Shadow Access Control List}\label{sub:sacl}
 During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we have created for the \ac{VM} to be protected. At this point of the research we were limited to small lists, so the initial implementation for storing and searching through the \ac{SACL}s is two linked lists and two arrays of linked lists, as explained below. Figure~\ref{fig:sacl_layout} depicts the structure created for storing each entry.
