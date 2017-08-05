@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  5 AUG 2017 10:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  5 AUG 2017 12:25
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1784,6 +1784,16 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
 (Font)              size <5> substituted on input line 194.
 
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 196.
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 196.
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <8> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 198.
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 8.0pt on input line 198.
 [20.40]) (chapter3.tex [21.41] [22.42
 
 ]
@@ -1811,12 +1821,6 @@ Overfull \hbox (5.58446pt too wide) in paragraph at lines 144--145
  []
 
 [28.48] [29.49] [30.50]
-LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 201.
-
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 201.
-
 Overfull \hbox (5.58022pt too wide) in paragraph at lines 199--289
  [][] 
  []
@@ -1876,11 +1880,11 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 27506 strings out of 493328
- 466561 string characters out of 3139125
+ 27508 strings out of 493328
+ 466592 string characters out of 3139125
  673712 words of memory out of 3000000
- 30110 multiletter control sequences out of 15000+200000
- 86710 words of font info for 115 fonts, out of 3000000 for 9000
+ 30112 multiletter control sequences out of 15000+200000
+ 89510 words of font info for 116 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,13n,94p,1488b,1219s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
@@ -1898,7 +1902,7 @@ appen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program
  Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/txfonts/txsya.pfb>
-Output written on thesis.pdf (67 pages, 504552 bytes).
+Output written on thesis.pdf (67 pages, 504814 bytes).
 PDF statistics:
  1471 PDF objects out of 1728 (max. 8388607)
  264 named destinations out of 1000 (max. 500000)
