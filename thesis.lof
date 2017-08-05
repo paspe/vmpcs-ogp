@@ -16,7 +16,7 @@
 \contentsline {figure}{\numberline {3.4}{\ignorespaces root user \ac {SACL} sample\relax }}{29}{figure.caption.69}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Information flow during a trapped system call execution\relax }}{32}{figure.caption.72}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Getting the file being accessed\relax }}{33}{figure.caption.75}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces unlink() and unlinkat() skeleton code flow\relax }}{34}{figure.caption.77}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces unlink() and unlinkat() skeleton code flow\relax }}{35}{figure.caption.77}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces open() and openat() permission checks\relax }}{36}{figure.caption.78}
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{37}{figure.caption.79}
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }}{37}{figure.caption.81}

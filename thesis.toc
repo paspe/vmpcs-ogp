@@ -22,7 +22,7 @@
 \contentsline {section}{\numberline {3.4}Design}{26}{section.3.4}
 \contentsline {section}{\numberline {3.5}Implementation}{27}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Shadow Access Control List}{27}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}System Calls}{29}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.2}System Call Interception and Admission Control}{30}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}System Call Hooking}{30}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}The task struct}{32}{subsection.3.5.4}
 \contentsline {subsection}{\numberline {3.5.5}Trap Handling}{33}{subsection.3.5.5}

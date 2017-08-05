@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  3 AUG 2017 18:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  4 AUG 2017 18:22
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1788,39 +1788,64 @@ LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
 
 ]
 Chapter 3.
-Package acronym Info: Label `acro:VMI' overridden on input line 8.
-Package acronym Info: Label `acro:VM' overridden on input line 8.
-Package acronym Info: Label `acro:ACL' overridden on input line 8.
+Package acronym Info: Label `acro:VMI' overridden on input line 9.
+Package acronym Info: Label `acro:VM' overridden on input line 9.
+Package acronym Info: Label `acro:ACL' overridden on input line 9.
 Package acronym Info: Label `acro:UID' newly defined as it shall be overridden
-although it is yet undefined on input line 8.
+although it is yet undefined on input line 9.
 Package acronym Info: Label `acro:GID' newly defined as it shall be overridden
-although it is yet undefined on input line 8.
-Package acronym Info: Label `acro:SACL' overridden on input line 8.
-Package acronym Info: Label `acro:OS' overridden on input line 12.
-(figs/syscalls.tikz) [23.43] [24.44] [25.45]
-Package acronym Info: Label `acro:EPT' overridden on input line 73.
- [26.46] [27.47] [28.48] [29.49]
-Overfull \hbox (5.69997pt too wide) in paragraph at lines 166--202
+although it is yet undefined on input line 9.
+Package acronym Info: Label `acro:SACL' overridden on input line 9.
+Package acronym Info: Label `acro:OS' overridden on input line 13.
+(figs/syscalls.tikz) [23.43]
+LaTeX Font Info:    Try loading font information for T1+qcr on input line 35.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tex-gyre\t1qcr.fd"
+File: t1qcr.fd 2009/09/25 v1.2 font definition file for T1/qcr
+) [24.44] [25.45]
+Package acronym Info: Label `acro:EPT' overridden on input line 84.
+
+[26.46] [27.47]
+Overfull \hbox (5.58446pt too wide) in paragraph at lines 135--136
+[][][][][][][][][][][][] 
+ []
+
+[28.48] [29.49]
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 192.
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 192.
+
+Overfull \hbox (5.58022pt too wide) in paragraph at lines 190--280
  [][] 
  []
 
-Package acronym Info: Label `acro:CPU' overridden on input line 206.
+Package acronym Info: Label `acro:CPU' overridden on input line 284.
 [30.50] [31.51] (figs/overview.tikz)
-Package acronym Info: Label `acro:GMFN' overridden on input line 224.
-Package acronym Info: Label `acro:MFN' overridden on input line 224.
+Package acronym Info: Label `acro:GMFN' overridden on input line 302.
+Package acronym Info: Label `acro:MFN' overridden on input line 302.
  [32.52]
-Package acronym Info: Label `acro:PWD' newly defined as it shall be overridden
-although it is yet undefined on input line 259.
- [33.53] [34.54] [35.55] [36.56]
-Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
-although it is yet undefined on input line 361.
-)
-(chapter4.tex [37.57] [38.58
+Underfull \hbox (badness 10000) in paragraph at lines 312--333
 
-]
+ []
+
+Package acronym Info: Label `acro:PWD' newly defined as it shall be overridden
+although it is yet undefined on input line 338.
+[33.53] [34.54]
+Underfull \hbox (badness 10000) in paragraph at lines 388--410
+
+ []
+
+[35.55] [36.56]
+Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
+although it is yet undefined on input line 442.
+ [37.57]) (chapter4.tex [38.58]
 Chapter 4.
 Package acronym Info: Label `acro:API' overridden on input line 4.
-) (chapter5.tex [39.59] [40.60
+) (chapter5.tex [39.59
+
+] [40.60
 
 ]
 Chapter 5.
@@ -1851,30 +1876,31 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 27498 strings out of 493328
- 466413 string characters out of 3139125
- 676574 words of memory out of 3000000
- 30053 multiletter control sequences out of 15000+200000
- 83494 words of font info for 113 fonts, out of 3000000 for 9000
+ 27488 strings out of 493328
+ 466281 string characters out of 3139125
+ 673608 words of memory out of 3000000
+ 30097 multiletter control sequences out of 15000+200000
+ 86710 words of font info for 115 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,13n,94p,1488b,1277s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 60i,13n,94p,1488b,1219s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
-ecsi1200.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\
-ec\dpi600\ecss1200.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-t
-s1.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ec-tlf.enc} <C:\U
-sers\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss2074
-.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi60
-0\ecsx0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
-n\ec\dpi600\ecsi0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
-ur\jknappen\ec\dpi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fon
-ts\pk\ljfour\jknappen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr
-i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (67 pages, 491428 bytes).
+ecsi1200.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ec.enc} <C:
+\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss12
+00.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ts1.enc}{C:/Progr
+am Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ec-tlf.enc} <C:\Users\halek\AppDa
+ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss2074.pk> <C:\Users\h
+alek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx0800.pk> <
+C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi
+0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
+pi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
+appen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex
+-gyre/qcrr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmb.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/txfonts/txsya.pfb>
+Output written on thesis.pdf (67 pages, 502425 bytes).
 PDF statistics:
- 1533 PDF objects out of 1728 (max. 8388607)
- 319 named destinations out of 1000 (max. 500000)
+ 1467 PDF objects out of 1728 (max. 8388607)
+ 262 named destinations out of 1000 (max. 500000)
  266 words of extra memory for PDF output out of 10000 (max. 10000000)
 
