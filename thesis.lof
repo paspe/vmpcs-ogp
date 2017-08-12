@@ -11,16 +11,16 @@
 \contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.43}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces System call information flow\relax }}{24}{figure.caption.64}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces ferify directory tree\relax }}{27}{figure.caption.67}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces ferify directory tree\relax }}{28}{figure.caption.67}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces \textit {struct protected\_files} memory layout\relax }}{28}{figure.caption.68}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces \ac {SACL} sample\relax }}{29}{figure.caption.69}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{29}{figure.caption.70}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Information flow during a trapped system call execution\relax }}{32}{figure.caption.73}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{30}{figure.caption.70}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Information flow during a trapped system call execution\relax }}{33}{figure.caption.73}
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{34}{figure.caption.76}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces unlink() and unlinkat() skeleton code flow\relax }}{35}{figure.caption.78}
 \contentsline {figure}{\numberline {3.9}{\ignorespaces open() and openat() permission checks\relax }}{36}{figure.caption.79}
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{37}{figure.caption.80}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }}{37}{figure.caption.82}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }}{38}{figure.caption.82}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsfinish 

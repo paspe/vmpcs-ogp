@@ -571,9 +571,11 @@
 \newlabel{sec:threat}{{3.2}{25}{Threat Model}{section.3.2}{}}
 \acronymused{OS}
 \acronymused{VM}
+\acronymused{VM}
+\acronymused{OS}
+\citation{lengyel2014drakvuf}
 \acronymused{OS}
 \acronymused{VM}
-\citation{lengyel2014drakvuf}
 \@writefile{toc}{\contentsline {section}{\numberline {3.3}Requirements}{26}{section.3.3}}
 \newlabel{sec:requirements}{{3.3}{26}{Requirements}{section.3.3}{}}
 \acronymused{OS}
@@ -587,8 +589,8 @@
 \AC@undonewlabel{acro:EPT}
 \newlabel{acro:EPT}{{3.4}{26}{Design}{section*.66}{}}
 \acronymused{EPT}
-\acronymused{VM}
 \citation{rekall}
+\acronymused{VM}
 \acronymused{OS}
 \acronymused{VM}
 \acronymused{ACL}
@@ -599,8 +601,8 @@
 \newlabel{sec:implementation}{{3.5}{27}{Implementation}{section.3.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Architecture}{27}{subsection.3.5.1}}
 \newlabel{sub:arch}{{3.5.1}{27}{Architecture}{subsection.3.5.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces ferify directory tree\relax }}{27}{figure.caption.67}}
-\newlabel{fig:dir_tree}{{3.2}{27}{ferify directory tree\relax }{figure.caption.67}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces ferify directory tree\relax }}{28}{figure.caption.67}}
+\newlabel{fig:dir_tree}{{3.2}{28}{ferify directory tree\relax }{figure.caption.67}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Shadow Access Control List}{28}{subsection.3.5.2}}
 \newlabel{sub:sacl}{{3.5.2}{28}{Shadow Access Control List}{subsection.3.5.2}{}}
 \acronymused{SACL}
@@ -622,11 +624,11 @@
 \acronymused{SACL}
 \acronymused{SACL}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{29}{figure.caption.70}}
-\acronymused{SACL}
-\newlabel{fig:root_sacl}{{3.5}{29}{root user \ac {SACL} sample\relax }{figure.caption.70}{}}
 \acronymused{VM}
 \acronymused{SACL}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces root user \ac {SACL} sample\relax }}{30}{figure.caption.70}}
+\acronymused{SACL}
+\newlabel{fig:root_sacl}{{3.5}{30}{root user \ac {SACL} sample\relax }{figure.caption.70}{}}
 \acronymused{SACL}
 \acronymused{OS}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}System Call Interception and Admission Control}{30}{subsection.3.5.3}}
@@ -642,16 +644,16 @@
 \newlabel{sub:hooking}{{3.5.4}{31}{System Call Hooking}{subsection.3.5.4}{}}
 \acronymused{VM}
 \AC@undonewlabel{acro:CPU}
-\newlabel{acro:CPU}{{3.5.4}{31}{System Call Hooking}{section*.72}{}}
+\newlabel{acro:CPU}{{3.5.4}{32}{System Call Hooking}{section*.72}{}}
 \acronymused{CPU}
 \acronymused{EPT}
 \acronymused{SACL}
 \acronymused{SACL}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.5}The task struct}{32}{subsection.3.5.5}}
+\newlabel{sub:struct}{{3.5.5}{32}{The task struct}{subsection.3.5.5}{}}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Information flow during a trapped system call execution\relax }}{32}{figure.caption.73}}
-\newlabel{fig:overview}{{3.6}{32}{Information flow during a trapped system call execution\relax }{figure.caption.73}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.5}The task struct}{33}{subsection.3.5.5}}
-\newlabel{sub:struct}{{3.5.5}{33}{The task struct}{subsection.3.5.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Information flow during a trapped system call execution\relax }}{33}{figure.caption.73}}
+\newlabel{fig:overview}{{3.6}{33}{Information flow during a trapped system call execution\relax }{figure.caption.73}{}}
 \AC@undonewlabel{acro:GMFN}
 \newlabel{acro:GMFN}{{3.5.5}{33}{The task struct}{section*.74}{}}
 \acronymused{GMFN}
@@ -665,9 +667,9 @@
 \newlabel{acro:PWD}{{3.5.6}{33}{Trap Handling}{section*.77}{}}
 \acronymused{PWD}
 \acronymused{PWD}
-\acronymused{SACL}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Getting the file being accessed\relax }}{34}{figure.caption.76}}
 \newlabel{fig:getfile}{{3.7}{34}{Getting the file being accessed\relax }{figure.caption.76}{}}
+\acronymused{SACL}
 \acronymused{SACL}
 \acronymused{VM}
 \acronymused{VM}
@@ -710,9 +712,9 @@
 \acronymused{PAM}
 \acronymused{OS}
 \acronymused{SACL}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Guest \ac {VM} configuration to deny \emph  {root} from running \emph  {su}\relax }}{37}{figure.caption.82}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.11}{\ignorespaces Guest \ac {VM} configuration to deny \emph  {root} from running \emph  {su}\relax }}{38}{figure.caption.82}}
 \acronymused{VM}
-\newlabel{fig:pam}{{3.11}{37}{Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }{figure.caption.82}{}}
+\newlabel{fig:pam}{{3.11}{38}{Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }{figure.caption.82}{}}
 \acronymused{VM}
 \acronymused{SACL}
 \acronymused{VM}

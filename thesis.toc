@@ -25,7 +25,7 @@
 \contentsline {subsection}{\numberline {3.5.2}Shadow Access Control List}{28}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}System Call Interception and Admission Control}{30}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}System Call Hooking}{31}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}The task struct}{33}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.5.5}The task struct}{32}{subsection.3.5.5}
 \contentsline {subsection}{\numberline {3.5.6}Trap Handling}{33}{subsection.3.5.6}
 \contentsline {subsection}{\numberline {3.5.7}Guest \ac {VM} Configuration}{37}{subsection.3.5.7}
 \contentsline {chapter}{\numberline {4}Evaluation}{39}{chapter.4}

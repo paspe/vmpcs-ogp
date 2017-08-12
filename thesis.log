@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  5 AUG 2017 12:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  12 AUG 2017 11:51
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1815,21 +1815,21 @@ File: t1qcr.fd 2009/09/25 v1.2 font definition file for T1/qcr
 ) [24.44] [25.45]
 Package acronym Info: Label `acro:EPT' overridden on input line 84.
 
-[26.46] (figs/dir_tree.tikz) [27.47]
+[26.46] (figs/dir_tree.tikz) [27.47] [28.48]
 Overfull \hbox (5.58446pt too wide) in paragraph at lines 144--145
 [][][][][][][][][][][][] 
  []
 
-[28.48] [29.49] [30.50]
+[29.49] [30.50]
 Overfull \hbox (5.58022pt too wide) in paragraph at lines 199--289
  [][] 
  []
 
 Package acronym Info: Label `acro:CPU' overridden on input line 293.
-[31.51] (figs/overview.tikz) [32.52]
+[31.51] (figs/overview.tikz)
 Package acronym Info: Label `acro:GMFN' overridden on input line 311.
 Package acronym Info: Label `acro:MFN' overridden on input line 311.
-
+ [32.52]
 Underfull \hbox (badness 10000) in paragraph at lines 321--342
 
  []
@@ -1902,9 +1902,9 @@ appen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program
  Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/txfonts/txsya.pfb>
-Output written on thesis.pdf (67 pages, 504814 bytes).
+Output written on thesis.pdf (67 pages, 505586 bytes).
 PDF statistics:
- 1471 PDF objects out of 1728 (max. 8388607)
+ 1473 PDF objects out of 1728 (max. 8388607)
  264 named destinations out of 1000 (max. 500000)
  266 words of extra memory for PDF output out of 10000 (max. 10000000)
 
