@@ -1,5 +1,52 @@
-
+\acresetall
 \chapter{Evaluation}\label{ch:chapter4}
 
-In this chapter, the information of the relevant software and hardware is presented. In the first section a short introduction on virtualization and its benefits is given. Then the types of hypervisors and Xen, the platform we will work on, are described. The next section refers to \ac{VMI} and Xen's capabilities in that field, the LibVMI \ac{API} and DRAKVUF, the library and main application we will leverage, as well as the system call functionality and convention. Finally, some of the existing solutions that leverage introspection are reviewed.
+In this chapter, we present the evaluation of \emph{Ferify}. The first section includes the validation tests we performed. These tests represent the cases \emph{Ferify} can be employed. The next section covers the performance overhead tests we performed to evaluate the degree our solution impacts overall system usability.
+
+\section{Validation}\label{sec:validation}
+
+\par For the validation of \emph{Ferify}, we performed specific commands on the guest \ac{VM} in order to observe the behavior of the system and whether it conforms to the expectations. The commands reflect the cases that \emph{Ferify} can be applied. To do that we created an environmental setup to assess all the test cases. 
+
+\par The configuration includes two users, \emph{alice} and \emph{bob}, both in the sudoers group, but \emph{bob} not legitimately, but through malicious actions. The intent is to check the detection of the illegal escalation of \emph{bob}'s account to \emph{root} and the effect it has.
+
+\par Additionally we created a group that includes both users, with the intention to assess the per group policy enforcement to file access. 
+
+\par Finally we will try, as \emph{root}, to access files that are being protected from root. These files include the \emph{/etc/shadow} file and the \emph{/etc/pam.d/su}, which are included in the \acp{SACL} to protect our initial \ac{VM} configuration.
+
+\par These cases by themselves cover the basic set of actions that \emph{Ferify} was initially designed to monitor. Any combination of them is handled separately from the underlying \ac{OS}, reducing our problem to these elementary cases, making it easier to monitor and handle.
+
+\subsection{Root escalation}
+
+
+\subsection{Root access}
+
+
+\subsection{Group access}
+
+
+
+
+\section{Performance overhead}\label{sec:performance}
+
+In this section we present the performance overhead we observed on the guest \ac{OS} when running \emph{Ferify}. We performed time execution measurements in four stages. 
+
+\par To have a baseline for comparison, we created a script which accesses a series of files, in order to trigger \emph{Ferify}, when it is running. Initially we timed the execution of the script over a number of iterations to extract an average time that we will use as a reference.
+
+\subsection{Hypervisor - \ac{VM} switch}
+
+\par One of the most intense operations in virtualization is the switch between the hypervisor and the \ac{VM}, as mentioned in subsection \ref{sub:invm}. \ac{CPU} virtualization extensions improve with every new model release, but this switch is still significant. To measure this overhead in performance, we ran \emph{Ferify} with empty \acp{SACL}. This way \emph{Ferify} traps the appropriate system calls and performs the switch between the \ac{VM} and the hypervisor. Because the \acp{SACL} are empty, there is insignificant computation performed while on the hypervisor, switching almost immediately back to the \ac{VM}. 
+
+\par The results of our measurements are presented in table ....
+
+
+\subsection{Small \ac{SACL} performance overhead}
+
+
+\subsection{Large \ac{SACL} performance overhead}
+
+
+
+\subsection{Full \ac{OS} \ac{SACL} performance overhead}
+
+
 
