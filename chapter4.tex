@@ -47,6 +47,24 @@ Warning: Process root identity corruption detected in task
 	\label{fig:sudo_deny_not}
 \end{figure}
 
+\par In the same manner the result of trying to change a users password shows in fig. \ref{fig:passwd_deny}
+
+\begin{figure}[ht]
+	\centering
+	\footnotesize{\fontfamily{qcr}\selectfont 
+		\begin{lstlisting}
+bob@aHVM-domU:~$ passwd alice
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: Authentication token manipulation error
+passwd: password unchanged
+bob@aHVM-domU:~$
+		\end{lstlisting}}
+	\caption{Denying password change from \emph{root} account}
+	\label{fig:passwd_deny}
+\end{figure}
+
+
 \par Having solved the issue of malicious root access, we then need to validate the expected behavior for file access, whether requested from the \emph{root} user or not.
 
 \subsection{Group access}
