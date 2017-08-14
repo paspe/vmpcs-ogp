@@ -22,5 +22,8 @@
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{37}{figure.caption.80}
 \contentsline {figure}{\numberline {3.11}{\ignorespaces Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }}{38}{figure.caption.82}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Denying \emph {sudo}\relax }}{40}{figure.caption.86}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Denying \emph {sudo} notification on the hypervisor\relax }}{40}{figure.caption.87}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Pathname length count\relax }}{42}{figure.caption.90}
 \addvspace {10\p@ }
 \contentsfinish 

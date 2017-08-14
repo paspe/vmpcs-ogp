@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+\begin{axis}[
+title={Pathname length distribution of sample \ac{OS}},
+xlabel={Pathname length},
+ylabel={Count (thousands)},
+xmin=0, xmax=600,
+ymin=0, ymax=27000,
+xtick={0,100,200,300,400,500,600},
+ytick={0, 5000, 10000, 15000, 20000, 25000},
+ymajorgrids=true,
+xmajorgrids=true,
+grid style=dashed,
+]
+
+\addplot[very thick, blue, smooth] table [
+col sep=comma,
+x = Length,
+y = Count,
+] {figs/graph1.csv};
+
+\end{axis}
+\end{tikzpicture}
