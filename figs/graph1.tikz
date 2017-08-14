@@ -15,8 +15,7 @@ grid style=dashed,
 \addplot[very thick, blue, smooth] table [
 col sep=comma,
 x = Length,
-y = Count,
-] {figs/graph1.csv};
+y = Count] {figs/graph1.csv};
 
 \end{axis}
 \end{tikzpicture}
