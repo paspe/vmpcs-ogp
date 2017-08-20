@@ -69,11 +69,45 @@ bob@aHVM-domU:~$
 
 \subsection{Group access}
 
+\par One of the issues in the Linux file access permission system is that if a file belongs to a group, all users in that group can access the file, given the \ac{ACL} allows it. There are cases when a user wants to protect a file from being accessed but cannot, because other users belong to the same group, or multiple groups can access the file. 
+
+\par For this setup we created a third user \emph{jim}, who belongs only to the group \emph{alice} and a file owned by user and group \emph{alice}. There are two configurations available in the case of group access. User \emph{bob} belongs also to group \emph{alice} as a secondary group. Therefore, in this case all three users \emph{alice, bob, jim} have access to the file. By adding an entry to the \ac{SACL} for the file, with permissions \emph{rw-r-----} or \emph{640}, we effectively can deny access to anyone who belongs to group \emph{alice} as a secondary group, in this case user \emph{bob}. The results of the read operation for \emph{bob} and \emph{jim} show in fig. \ref{fig:sec_group_deny}
+
+\begin{figure}[ht]
+	\centering
+	\footnotesize{\fontfamily{qcr}\selectfont 
+		\begin{lstlisting}
+bob@HVM-domU:~$ more /home/alice/file_in_group_alice
+more: cannot open /home/alice/file_in_group_alice: Bad address
+
+jim@HVM-domU:~$ more /home/alice/file_in_group_alice
+Bob should not read this...
+		\end{lstlisting}}
+	\caption{Denying access from secondary group users}
+	\label{fig:sec_group_deny}
+\end{figure}
+
+\par By changing the permissions of the file to \emph{rw-------} or \emph{600} we deny access to everyone except for the actual owner of the file, in this case \emph{alice}. The same setup can be accomplished directly by changing the permissions of the file, but by using this solution, we can confuse the attackers, since it seems that they should have access as a group user. Now, not even user \emph{jim} has access to the file, although he should, as shown in fig. \ref{fig:group_deny}
+
+\begin{figure}[ht]
+	\centering
+	\footnotesize{\fontfamily{qcr}\selectfont 
+		\begin{lstlisting}
+jim@HVM-domU:~$ more /home/alice/file_in_group_alice
+more: cannot open /home/alice/file_in_group_alice: Bad address
+		\end{lstlisting}}
+	\caption{Denying access from group users}
+	\label{fig:group_deny}
+\end{figure}
 
 \subsection{Root access}
 
+\par One of the biggest problems in computer security is the fact that the \emph{root} user or the \emph{administrator} of the system has access to all the files of the system. That is the reason most attacks try to result in escalation of privileges to an administrative account. Although a system administrator should have access to all \ac{OS} files for management issues, some user files with critical information are also visible or editable. With \emph{Ferify} we can change the administrator's file access permissions to those we need to enforce, whether no access at all, read-only, or write-only.
 
 
+\subsection{Append-only mode}
+
+\par Although we could not enforce partial write permissions to a file, due to the \ac{OS} limitations. A file can be opened as a whole, given the permissions the user requests. What \emph{Ferify} is capable of doing is to enforce a write-only access policy to files. This way, if attackers want to cover their tracks, they are not able to open a file in read-write mode, to select and delete the log entries that reveal their presence. They will have to blindly delete entries, or empty the entire log, action that should be noticed by the system administrator. We believe that this policy can be proven a substantial hindrance to malicious actors that try to coven their tracks in the system.
 
 \section{Performance overhead}\label{sec:performance}
 
@@ -98,8 +132,8 @@ In this section we present the performance overhead we observed on the guest \ac
 
 \begin{figure}[ht]
 	\centering
-	%\input{figs/graph1.tikz}
-	\includegraphics[scale=0.45]{images/graph1.png}
+	\input{figs/graph1.tikz}
+	%\includegraphics[scale=0.45]{images/graph1.png}
 	\caption{Pathname length count}
 	\label{fig:pathname_length}
 \end{figure}

@@ -32,13 +32,14 @@
 \contentsline {section}{\numberline {4.1}Validation}{39}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Root escalation}{40}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Group access}{41}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Root access}{41}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Performance overhead}{41}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Hypervisor - \ac {VM} switch}{41}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Small \ac {SACL} performance overhead}{41}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Large \ac {SACL} performance overhead}{42}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Full \ac {OS} \ac {SACL} performance overhead}{42}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.1.3}Root access}{42}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Append-only mode}{42}{subsection.4.1.4}
+\contentsline {section}{\numberline {4.2}Performance overhead}{42}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Hypervisor - \ac {VM} switch}{42}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Small \ac {SACL} performance overhead}{43}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Large \ac {SACL} performance overhead}{43}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Full \ac {OS} \ac {SACL} performance overhead}{43}{subsection.4.2.4}
 \contentsline {chapter}{\numberline {5}Conclusion and Future Work}{45}{chapter.5}
 \contentsline {chapter}{List of References}{47}{chapter.5}
-\contentsline {chapter}{Initial Distribution List}{51}{chapter*.93}
+\contentsline {chapter}{Initial Distribution List}{51}{chapter*.95}
 \contentsfinish 

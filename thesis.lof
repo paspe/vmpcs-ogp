@@ -25,6 +25,8 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Denying \emph {sudo}\relax }}{40}{figure.caption.86}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Denying \emph {sudo} notification on the hypervisor\relax }}{40}{figure.caption.87}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Denying password change from \emph {root} account\relax }}{40}{figure.caption.88}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Pathname length count\relax }}{42}{figure.caption.91}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Denying access from secondary group users\relax }}{41}{figure.caption.90}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Denying access from group users\relax }}{41}{figure.caption.91}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Pathname length count\relax }}{44}{figure.caption.93}
 \addvspace {10\p@ }
 \contentsfinish 

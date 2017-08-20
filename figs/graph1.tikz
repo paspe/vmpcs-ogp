@@ -2,7 +2,7 @@
 \begin{axis}[
 title={Pathname length distribution of sample \ac{OS}},
 xlabel={Pathname length},
-ylabel={Count (thousands)},
+ylabel={Count ( tens of thousands )},
 xmin=0, xmax=600,
 ymin=0, ymax=27000,
 xtick={0,100,200,300,400,500,600},
