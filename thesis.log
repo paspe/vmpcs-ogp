@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  20 AUG 2017 09:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  20 AUG 2017 09:52
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1976,18 +1976,14 @@ Package acronym Info: Label `acro:SACL' overridden on input line 14.
 Package acronym Info: Label `acro:OS' overridden on input line 16.
 [39.59
 
-]
-LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 8.0pt on input line 26.
-LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 6.2pt on input line 26.
+] [40.60]
 Package acronym Info: Label `acro:ACL' overridden on input line 73.
- [40.60] [41.61]
-Package acronym Info: Label `acro:CPU' overridden on input line 121.
+ [41.61]
+Package acronym Info: Label `acro:CPU' overridden on input line 123.
  [42.62] (figs/graph1.tikz
 PGFPlots: reading {figs/graph1.csv}
 )
-Overfull \hbox (3.21788pt too wide) in paragraph at lines 21--138
+Overfull \hbox (3.21788pt too wide) in paragraph at lines 21--140
  [][] 
  []
 
@@ -2022,11 +2018,11 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 37697 strings out of 493328
- 807733 string characters out of 3139125
- 1325169 words of memory out of 3000000
- 40093 multiletter control sequences out of 15000+200000
- 100870 words of font info for 146 fonts, out of 3000000 for 9000
+ 37674 strings out of 493328
+ 807411 string characters out of 3139125
+ 1325526 words of memory out of 3000000
+ 40070 multiletter control sequences out of 15000+200000
+ 92679 words of font info for 124 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,13n,100p,1488b,1997s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc} <C:\Users
@@ -2047,9 +2043,9 @@ X 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTeX 2.9/fonts/
 type1/public/txfonts/rtxmi.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 txfonts/txsya.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.p
 fb>
-Output written on thesis.pdf (71 pages, 560673 bytes).
+Output written on thesis.pdf (71 pages, 560958 bytes).
 PDF statistics:
- 1607 PDF objects out of 1728 (max. 8388607)
- 317 named destinations out of 1000 (max. 500000)
+ 1610 PDF objects out of 1728 (max. 8388607)
+ 319 named destinations out of 1000 (max. 500000)
  282 words of extra memory for PDF output out of 10000 (max. 10000000)
 
