@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  2 SEP 2017 14:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  2 SEP 2017 15:11
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1971,28 +1971,28 @@ Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
 although it is yet undefined on input line 451.
  [37.57]) (chapter4.tex [38.58]
 Chapter 4.
+Package acronym Info: Label `acro:OS' overridden on input line 8.
 Package acronym Info: Label `acro:VM' overridden on input line 8.
-Package acronym Info: Label `acro:SACL' overridden on input line 14.
-Package acronym Info: Label `acro:OS' overridden on input line 16.
+Package acronym Info: Label `acro:SACL' overridden on input line 8.
 [39.59
 
-] [40.60]
-Package acronym Info: Label `acro:ACL' overridden on input line 73.
- [41.61]
-Package acronym Info: Label `acro:CPU' overridden on input line 123.
+] [40.60] [41.61]
+Package acronym Info: Label `acro:CPU' overridden on input line 134.
  [42.62]
-<images/graph1.png, id=1180, 965.10562pt x 619.56468pt>
+Package acronym Info: Label `acro:ACL' overridden on input line 143.
+
+<images/graph1.png, id=1165, 965.10562pt x 619.56468pt>
 File: images/graph1.png Graphic file (type png)
 
 <use images/graph1.png>
-Package pdftex.def Info: images/graph1.png used on input line 139.
+Package pdftex.def Info: images/graph1.png used on input line 150.
 (pdftex.def)             Requested size: 434.29352pt x 278.80153pt.
 
-Overfull \hbox (0.67351pt too wide) in paragraph at lines 139--140
+Overfull \hbox (0.67351pt too wide) in paragraph at lines 150--151
  [][] 
  []
 
-) (chapter5.tex [43.63] [44.64 <./images/graph1.png>]
+[43.63 <./images/graph1.png>]) (chapter5.tex [44.64]
 Chapter 5.
 ) [45.65
 
@@ -2015,7 +2015,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 228.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 228.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 228.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 3B2C4AD1D9CAAE0171E6090F6F12B16B;1256.
+(rerunfilecheck)             Checksum: 4148F1CCA6BBE6F5BA7BB47255DE05F3;1256.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2023,10 +2023,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 37321 strings out of 493328
- 796826 string characters out of 3139125
- 1097142 words of memory out of 3000000
- 39726 multiletter control sequences out of 15000+200000
+ 37306 strings out of 493328
+ 796585 string characters out of 3139125
+ 1097022 words of memory out of 3000000
+ 39722 multiletter control sequences out of 15000+200000
  90093 words of font info for 118 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,13n,96p,1488b,1219s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2046,9 +2046,9 @@ b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program
  Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (71 pages, 608368 bytes).
+Output written on thesis.pdf (71 pages, 605517 bytes).
 PDF statistics:
- 1603 PDF objects out of 1728 (max. 8388607)
- 319 named destinations out of 1000 (max. 500000)
+ 1586 PDF objects out of 1728 (max. 8388607)
+ 308 named destinations out of 1000 (max. 500000)
  287 words of extra memory for PDF output out of 10000 (max. 10000000)
 
