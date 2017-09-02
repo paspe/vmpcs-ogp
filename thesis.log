@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  20 AUG 2017 09:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  2 SEP 2017 14:39
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1980,14 +1980,19 @@ Package acronym Info: Label `acro:OS' overridden on input line 16.
 Package acronym Info: Label `acro:ACL' overridden on input line 73.
  [41.61]
 Package acronym Info: Label `acro:CPU' overridden on input line 123.
- [42.62] (figs/graph1.tikz
-PGFPlots: reading {figs/graph1.csv}
-)
-Overfull \hbox (3.21788pt too wide) in paragraph at lines 21--140
+ [42.62]
+<images/graph1.png, id=1180, 965.10562pt x 619.56468pt>
+File: images/graph1.png Graphic file (type png)
+
+<use images/graph1.png>
+Package pdftex.def Info: images/graph1.png used on input line 139.
+(pdftex.def)             Requested size: 434.29352pt x 278.80153pt.
+
+Overfull \hbox (0.67351pt too wide) in paragraph at lines 139--140
  [][] 
  []
 
-) (chapter5.tex [43.63] [44.64]
+) (chapter5.tex [43.63] [44.64 <./images/graph1.png>]
 Chapter 5.
 ) [45.65
 
@@ -2018,34 +2023,32 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 37674 strings out of 493328
- 807411 string characters out of 3139125
- 1325526 words of memory out of 3000000
- 40070 multiletter control sequences out of 15000+200000
- 92679 words of font info for 124 fonts, out of 3000000 for 9000
+ 37321 strings out of 493328
+ 796826 string characters out of 3139125
+ 1097142 words of memory out of 3000000
+ 39726 multiletter control sequences out of 15000+200000
+ 90093 words of font info for 118 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,13n,100p,1488b,1997s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc} <C:\Users
-\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi1200.pk>
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ec.enc} <C:\Users\halek
-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss1200.pk>{C:/Pr
-ogram Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ts1.enc}{C:/Program Files/MiK
-TeX 2.9/fonts/enc/dvips/newtx/ntx-ec-tlf.enc} <C:\Users\halek\AppData\Local\MiK
-TeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss2074.pk> <C:\Users\halek\AppData
-\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx0800.pk> <C:\Users\hal
-ek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi0800.pk> <C:
-\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi10
-95.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi
-600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qcrr.p
-fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmb.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/txfonts/rtxmi.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-txfonts/txsya.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.p
-fb>
-Output written on thesis.pdf (71 pages, 560958 bytes).
+ 62i,13n,96p,1488b,1219s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
+ecsi1200.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ec.enc} <C:
+\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss12
+00.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ts1.enc}{C:/Progr
+am Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ec-tlf.enc} <C:\Users\halek\AppDa
+ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss2074.pk> <C:\Users\h
+alek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx0800.pk> <
+C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi
+0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
+pi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
+appen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex
+-gyre/qcrr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmb.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/newtx/txsys.pfb>
+Output written on thesis.pdf (71 pages, 608368 bytes).
 PDF statistics:
- 1610 PDF objects out of 1728 (max. 8388607)
+ 1603 PDF objects out of 1728 (max. 8388607)
  319 named destinations out of 1000 (max. 500000)
- 282 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 287 words of extra memory for PDF output out of 10000 (max. 10000000)
 
