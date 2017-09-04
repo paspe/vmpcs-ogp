@@ -74,10 +74,151 @@ bob@aHVM-domU:~$
 
 \subsection{Authorized user operation}
 
-\par A very important aspect of a security solution is the impact on usability for the normal user. The implementation of a secure system that remains fully usable is a challenge. In this test we evaluate whether an authorized user can normally access and work on his files. 
+\par A very important aspect of a security solution is the impact on usability for the normal user. The implementation of a secure system that remains fully usable is a challenge. In this test we evaluate whether an authorized user can normally access and work on his files. To test the file operations we create two files \emph{file1} and \emph{file2}. In the \acp{SACL} we have entries for three files, to test if the third file can be created. The permissions for the files on the guest \ac{OS} and the \acp{SACL} are explained in table \ref{fig:file_perms1}.
 
-\subsection{Attacker operation}
+\begin{table}[ht]
+	\centering
+	\footnotesize
+	\caption{File permissions for authorized user}
+	\label{fig:file_perms1}			
+	\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+		\toprule
+		\textbf{File} 
+			&\multicolumn{3}{c|}{\textbf{Owner}}
+			&\multicolumn{3}{c|}{\textbf{Group}}
+			&\multicolumn{3}{c}{\textbf{Others}}\\
+			
+		\textbf{Name} 
+			& \textbf{Read} & \textbf{Write} & \textbf{Execute} 
+			& \textbf{Read} & \textbf{Write} & \textbf{Execute} 
+			& \textbf{Read} & \textbf{Write} & \textbf{Execute} \\
+		\toprule
+		\multicolumn{10}{c}{Guest \ac{OS}}\\
+		\hline
+		\scriptsize{\fontfamily{qcr}\selectfont file1 }			
+			& \checkmark & \checkmark & - 
+			& \checkmark & - & - 
+			& \checkmark & - & - 	\\	
+		\scriptsize{\fontfamily{qcr}\selectfont file2 }			
+			& \checkmark & \checkmark & - 
+			& \checkmark & - & - 
+			& \checkmark & - & - 	\\	
+		\scriptsize{\fontfamily{qcr}\selectfont file3 }			
+			& \checkmark & \checkmark & - 
+			& \checkmark & - & - 
+			& \checkmark & - & - 	\\	
 
+		\hline
+		\multicolumn{10}{c}{Hypervisor User's \ac{SACL}}\\
+		\hline
+		\scriptsize{\fontfamily{qcr}\selectfont file1 }			
+			& \checkmark & \checkmark & - 
+			& \checkmark & - & - 
+			& \checkmark & - & - 	\\	
+		\scriptsize{\fontfamily{qcr}\selectfont file2 }			
+			& \checkmark & \checkmark & - 
+			& \checkmark & - & - 
+			& \checkmark & - & - 	\\	
+		\scriptsize{\fontfamily{qcr}\selectfont file3 }			
+			& \checkmark & \checkmark & - 
+			& \checkmark & - & - 
+			& \checkmark & - & - 	\\	
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\par After running our test script to verify the ability to normally access the user's files, the results (fig.\ref{fig:results1}) show that the files are accessible in every mode they are supposed to.
+
+\begin{figure}[ht]
+	\centering
+	\footnotesize{\fontfamily{qcr}\selectfont 
+		\begin{lstlisting}
+$ ./file_tests file1 file2 file3
+Success: Opened file for reading. Able to copy.
+Success: Opened file for writing.
+Success: created file.
+Success: File deleted.
+Success: File moved.
+		\end{lstlisting}}
+	\caption{File operations execution for authorized user.}
+	\label{fig:results1}
+\end{figure}
+
+\par All basic file operations are available to an authorized user. We assess that the usability level for a normal user remains unchanged. By modifying the \ac{SACL} permissions, we can allow or deny certain operations on user owned or group owned files, according to the desired policy to be enforced.
+
+\subsection{Attacker operation - \emph{root} access - Immutable objects}
+
+\par One of the biggest problems in information security is the fact that the \emph{root} user or the \emph{administrator} of the system has access to all the files and folders on a given system. That is the reason most attacks try to result in escalation of privileges to an administrative account. Although, usually, the administrator is someone trusted and should have access to all \ac{OS} files for management issues, there are cases that even that person should not get access to certain information. \emph{Ferify} can provide that capability, for a normal user to have full access to his files, while at the same time the administrator cannot have full or even limited access to them. By setting the relevant file permissions as per table \ref{fig:file_perms_root}, we can deny total access to the administrator on any file. This \ac{SACL} is different than the previous one, allowing for user based policy.
+
+\begin{table}[ht]
+	\centering
+	\footnotesize
+	\caption{File permissions for root}
+	\label{fig:file_perms_root}			
+	\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+		\toprule
+		\textbf{File} 
+		&\multicolumn{3}{c|}{\textbf{Owner}}
+		&\multicolumn{3}{c|}{\textbf{Group}}
+		&\multicolumn{3}{c}{\textbf{Others}}\\
+		
+		\textbf{Name} 
+		& \textbf{Read} & \textbf{Write} & \textbf{Execute} 
+		& \textbf{Read} & \textbf{Write} & \textbf{Execute} 
+		& \textbf{Read} & \textbf{Write} & \textbf{Execute} \\
+		\toprule
+		\multicolumn{10}{c}{Guest \ac{OS}}\\
+		\hline
+		\scriptsize{\fontfamily{qcr}\selectfont file1 }			
+		& \checkmark & \checkmark & - 
+		& \checkmark & - & - 
+		& \checkmark & - & - 	\\	
+		\scriptsize{\fontfamily{qcr}\selectfont file2 }			
+		& \checkmark & \checkmark & - 
+		& \checkmark & - & - 
+		& \checkmark & - & - 	\\	
+		\scriptsize{\fontfamily{qcr}\selectfont file3 }			
+		& \checkmark & \checkmark & - 
+		& \checkmark & - & - 
+		& \checkmark & - & - 	\\	
+		\hline
+		\multicolumn{10}{c}{Hypervisor root's \ac{SACL}}\\
+		\hline
+		\scriptsize{\fontfamily{qcr}\selectfont file1 }			
+			& - & - & - 
+			& - & - & - 
+			& - & - & - 	\\	
+		\scriptsize{\fontfamily{qcr}\selectfont file2 }			
+			& - & - & - 
+			& - & - & - 
+			& - & - & - 	\\	
+		\scriptsize{\fontfamily{qcr}\selectfont file3 }			
+			& - & - & - 
+			& - & - & - 
+			& - & - & - 	\\	
+		
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\par After running our test script to verify the ability to deny access to \emph{root} on the user's files, the results (fig.\ref{fig:results2}) show that the files are inaccessible in every mode they are supposed to, according to the permissions we set in the \ac{SACL}. We assess that denying file access to the \emph{root} user is an important security implementation, as it provides great confidentiality assurance, as well as it can nullify many attack vectors on a system, old and new.
+
+\par An interesting result of \emph{Ferify} is that in can be used to create immutable files on a system. By denying write access to everyone, there can be files that cannot be modified by anyone, but are still available and accessible for reading, providing this way great integrity assurance.
+
+\begin{figure}[ht]
+	\centering
+	\footnotesize{\fontfamily{qcr}\selectfont 
+		\begin{lstlisting}
+$ sudo ./file_tests file1 file2 file3
+Failure: Could not open file for reading. Cannot copy.
+Failure: Could not open file for writing.
+Failure: Could not create file.
+Failure: Could not delete file.
+Failure: Could not move file.
+		\end{lstlisting}}
+	\caption{File operations execution for non-authorized user.}
+	\label{fig:results2}
+\end{figure}
 
 
 %\par One of the issues in the Linux file access permission system is that if a file belongs to a group, all users in that group can access the file, given the \ac{ACL} allows it. There are cases when a user wants to protect a file from being accessed but cannot, because other users belong to the same group, or multiple groups can access the file. 
@@ -113,10 +254,6 @@ bob@aHVM-domU:~$
 %	\label{fig:group_deny}
 %\end{figure}
 
-\subsection{Root access}
-
-\par One of the biggest problems in computer security is the fact that the \emph{root} user or the \emph{administrator} of the system has access to all the files of the system. That is the reason most attacks try to result in escalation of privileges to an administrative account. Although a system administrator should have access to all \ac{OS} files for management issues, some user files with critical information are also visible or editable. With \emph{Ferify} we can change the administrator's file access permissions to those we need to enforce, whether no access at all, read-only, or write-only.
-
 \subsection{Malware Protection}
 
 \subsection{Append-only mode}
@@ -134,29 +271,29 @@ In this section we present the performance overhead we observed on the guest \ac
 \par One of the most intense operations in virtualization is the switch between the hypervisor and the \ac{VM}, as mentioned in subsection \ref{sub:invm}. \ac{CPU} virtualization extensions improve with every new model release, but this switch is still significant. To measure this overhead in performance, we ran \emph{Ferify} with empty \acp{SACL}. This way \emph{Ferify} traps the appropriate system calls and performs the switch between the \ac{VM} and the hypervisor. Because the \acp{SACL} are empty, there is insignificant computation performed while on the hypervisor, switching almost immediately back to the \ac{VM}. 
 
 
-\subsection{Small \ac{SACL} performance overhead}
+\subsection{\ac{SACL} performance overhead}
 
 \par The information for the files stored in the \acp{SACL} is stored in an array of linked lists. The index of the array is the length of the pathname. Then all pathnames of the same length are stored in the same linked list. When only a few files are protected, these linked lists are very short, if not of size one or two. This makes the lookup process fast and easy. 
 
-\subsection{Large \ac{SACL} performance overhead}
-
-\par Adding more files to the \acp{SACL} may add a more substantial overhead. As shown in \ref{fig:pathname_length}, there is a significant amount of pathnames with lengths between 10 and 130. Having so many elements in a linked list introduces increased time in searching for a record. To assess the performance overhead we repeated the previous test, but this time after adding more than 1000 files in the \acp{SACL}. Writing \acp{ACL} for thousands of files is extremely time-consuming and error-prone. To automate this procedure we created a standalone script that pauses the guest \ac{VM}, mounts its filesystem to the hypervisor and starting from a specified mount-point, it returns the required information. 
-
-\par After having generated a \ac{SACL} that corresponds to the current guest \ac{OS} filesystem permissions, the administrator can easily modify the permissions to reflect the desired policy to be enforced. 
-
-\begin{figure}[ht]
-	\centering
-	%\input{figs/graph1.tikz}
-	\includegraphics[scale=0.45]{images/graph1.png}
-	\caption{Pathname length count}
-	\label{fig:pathname_length}
-\end{figure}
-
-
-\subsection{Full \ac{OS} \ac{SACL} performance overhead}
-
-\par Finally, we wanted to evaluate whether \emph{Ferify} can be used on the whole filesystem of a guest \ac{OS}. To do that we just created a \ac{SACL} that was generated by the aforementioned script when providing as mount-point the root folder of the guest \ac{OS}. Since the vast majority of the files is in the same range of length, we expect significant delays in our script execution.
-
+%\subsection{Large \ac{SACL} performance overhead}
+%
+%\par Adding more files to the \acp{SACL} may add a more substantial overhead. As shown in \ref{fig:pathname_length}, there is a significant amount of pathnames with lengths between 10 and 130. Having so many elements in a linked list introduces increased time in searching for a record. To assess the performance overhead we repeated the previous test, but this time after adding more than 1000 files in the \acp{SACL}. Writing \acp{ACL} for thousands of files is extremely time-consuming and error-prone. To automate this procedure we created a standalone script that pauses the guest \ac{VM}, mounts its filesystem to the hypervisor and starting from a specified mount-point, it returns the required information. 
+%
+%\par After having generated a \ac{SACL} that corresponds to the current guest \ac{OS} filesystem permissions, the administrator can easily modify the permissions to reflect the desired policy to be enforced. 
+%
+%\begin{figure}[ht]
+%	\centering
+%	%\input{figs/graph1.tikz}
+%	\includegraphics[scale=0.45]{images/graph1.png}
+%	\caption{Pathname length count}
+%	\label{fig:pathname_length}
+%\end{figure}
+%
+%
+%\subsection{Full \ac{OS} \ac{SACL} performance overhead}
+%
+%\par Finally, we wanted to evaluate whether \emph{Ferify} can be used on the whole filesystem of a guest \ac{OS}. To do that we just created a \ac{SACL} that was generated by the aforementioned script when providing as mount-point the root folder of the guest \ac{OS}. Since the vast majority of the files is in the same range of length, we expect significant delays in our script execution.
+%
 
 
 
