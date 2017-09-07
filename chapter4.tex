@@ -1,9 +1,36 @@
 \acresetall
 \chapter{Evaluation}\label{ch:chapter4}
 
-In this chapter, we present the evaluation of \emph{Ferify}. The first section includes the validation tests we performed. These tests represent the cases \emph{Ferify} can be employed. The next section covers the performance overhead tests we performed to evaluate the degree our solution impacts overall system usability.
+In this chapter, we present the evaluation of \emph{Ferify}. In the first section we validate our design of \emph{Ferify}. Next we explain the tests we performed to verify that \emph{Ferify} has the results we expect. These tests represent the cases \emph{Ferify} can be employed. Finally we perform some tests to evaluate the performance overhead and the degree our solution impacts overall system usability.
 
 \section{Validation}\label{sec:validation}
+
+\par During the implementation of \emph{Ferify} we encountered some challenges. We can classify them by the permission level required to perform certain malicious operations. 
+
+\subsection{Ring 3 operations}
+
+\par The ring 3 operations include all the actions an attacker can perform in userspace. Assuming that the attacker has gained \emph{root} access, these actions include modification of system configuration files and programs to serve certain purposes for the attacker. 
+\par \emph{Ferify} can be employed to overcome this challenge. By adding critical system files in the \acp{SACL} along with the correct permissions, we can deny write access to any user, including \emph{root}. The administrator must decide which files are critical, depending on the security risk that is anticipated. A few basic files we assess that need protection, to ensure some of our assumptions are \emph{/etc/passwd, /etc/shadow, /etc/pam.d/su}. Tests for these cases are covered in the next section.
+
+\subsection{Ring 0 operations}
+
+\par File operations are performed by the kernel through the system calls. But the kernel can be modified by the \emph{root} user in many ways. Kernel memory can be accessed only while operating in ring 0 with the following ways:
+
+\begin{itemize}
+	\item System calls,
+	\item Kernel modules,
+	\item Kernel compilation and loading.
+\end{itemize}
+
+\par Generally, the system call \ac{API} is well defined and difficult to exploit. System call attacks usually target the system call table, to modify the address of the system call functions with others of the attackers choosing. But to do that the attacker needs to be able to load kernel modules. So, this type of attack falls already in the second category, that of the kernel modules.
+
+\par When an attacker manages to load a kernel module, everything is within reach. The module is running as part of the kernel, in ring 0, and has access to every physical and virtual resource available on the system. The module has access to all kernel functions and structures, and is able to modify them. There are protection mechanisms like module digital signing, but all these checks are running on the same privilege level.
+
+\par In this research we will not cover attacks that load a modified kernel. We can write protect the kernel binaries on the disk with \emph{Ferify}, and also the setup of the \ac{VM} will shut it down in case of a reboot, so running automatically on a modified kernel is currently prohibited. Additionally, there are solutions like SecureBoot and TPM whose purpose is to verify that the code launched by firmware is trusted.
+
+ 
+
+\section{Testing}\label{sec:testing}
 
 \par To assess that \emph{Ferify} works as intended, we assume two basic scenarios. The first is that of an authorized remotely connected user, who should be able to work as before. We want usability at the user level to remain unchanged. The second scenario is that of a hacked user account. The attacker has managed to exploit a vulnerability of the guest \ac{OS} and has remote access to the target \ac{VM}. In this case we assume even the worst case scenario that the attacker has gained \emph{root} privileges. We want to assess whether the files we protect with \emph{Ferify} are secure and cannot be accessed except from those we have allowed in the \acp{SACL}.
 
@@ -255,6 +282,8 @@ Failure: Could not move file.
 %\end{figure}
 
 \subsection{Malware Protection}
+
+Add text here if EXECVE trapping works.
 
 \subsection{Append-only mode}
 
