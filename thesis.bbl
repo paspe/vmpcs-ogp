@@ -194,4 +194,9 @@ E.~Perla and M.~Oldani, \emph{A guide to kernel exploitation: attacking the
 ``Wrekall memory forensic framework.'' Available:
   \url{http://www.rekall-forensic.com/}
 
+\bibitem{perez2006vtpm}
+R.~Perez, R.~Sailer, L.~van Doorn \emph{et~al.}, ``vtpm: virtualizing the
+  trusted platform module,'' in \emph{Proc. 15th Conf. on USENIX Security
+  Symposium}, 2006, pp. 305--320.
+
 \end{thebibliography}

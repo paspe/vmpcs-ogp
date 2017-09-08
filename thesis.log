@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  7 SEP 2017 11:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  7 SEP 2017 17:07
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1975,17 +1975,17 @@ Package acronym Info: Label `acro:SACL' overridden on input line 13.
 [39.59
 
 ]
-Package acronym Info: Label `acro:API' overridden on input line 25.
-Package acronym Info: Label `acro:VM' overridden on input line 29.
-Package acronym Info: Label `acro:OS' overridden on input line 35.
+Package acronym Info: Label `acro:API' overridden on input line 26.
+Package acronym Info: Label `acro:VM' overridden on input line 30.
+Package acronym Info: Label `acro:OS' overridden on input line 34.
  [40.60] [41.61] [42.62]
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/it' in size <14.4> not available
-(Font)              Font shape `T1/ntxtlf/b/it' tried instead on input line 176
+(Font)              Font shape `T1/ntxtlf/b/it' tried instead on input line 175
 .
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/it' will be
-(Font)              scaled to size 14.4pt on input line 176.
+(Font)              scaled to size 14.4pt on input line 175.
  [43.63] [44.64]
-Package acronym Info: Label `acro:CPU' overridden on input line 300.
+Package acronym Info: Label `acro:CPU' overridden on input line 299.
 ) (chapter5.tex [45.65] [46.66
 
 ]
@@ -2018,10 +2018,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 37331 strings out of 493328
- 796938 string characters out of 3139125
- 1107311 words of memory out of 3000000
- 39728 multiletter control sequences out of 15000+200000
+ 37335 strings out of 493328
+ 797004 string characters out of 3139125
+ 1102529 words of memory out of 3000000
+ 39731 multiletter control sequences out of 15000+200000
  92568 words of font info for 118 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,13n,96p,1488b,1219s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2042,9 +2042,9 @@ m Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTeX 2.9/fonts/
 type1/public/txfonts/txsya.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 newtx/txsys.pfb>
-Output written on thesis.pdf (73 pages, 569646 bytes).
+Output written on thesis.pdf (73 pages, 570584 bytes).
 PDF statistics:
- 1632 PDF objects out of 1728 (max. 8388607)
- 328 named destinations out of 1000 (max. 500000)
+ 1634 PDF objects out of 1728 (max. 8388607)
+ 329 named destinations out of 1000 (max. 500000)
  290 words of extra memory for PDF output out of 10000 (max. 10000000)
 

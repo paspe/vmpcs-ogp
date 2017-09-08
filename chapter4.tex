@@ -19,16 +19,15 @@ In this chapter, we present the evaluation of \emph{Ferify}. In the first sectio
 \begin{itemize}
 	\item System calls,
 	\item Kernel modules,
-	\item Kernel compilation and loading.
+	\item Kernel compilation and loading,
+	\item kernel bugs.
 \end{itemize}
 
 \par Generally, the system call \ac{API} is well defined and difficult to exploit. System call attacks usually target the system call table, to modify the address of the system call functions with others of the attackers choosing. But to do that the attacker needs to be able to load kernel modules. So, this type of attack falls already in the second category, that of the kernel modules.
 
 \par When an attacker manages to load a kernel module, everything is within reach. The module is running as part of the kernel, in ring 0, and has access to every physical and virtual resource available on the system. The module has access to all kernel functions and structures, and is able to modify them. There are protection mechanisms like module digital signing, but all these checks are running on the same privilege level.
 
-\par In this research we will not cover attacks that load a modified kernel. We can write protect the kernel binaries on the disk with \emph{Ferify}, and also the setup of the \ac{VM} will shut it down in case of a reboot, so running automatically on a modified kernel is currently prohibited. Additionally, there are solutions like SecureBoot and TPM whose purpose is to verify that the code launched by firmware is trusted.
-
- 
+\par To protect against a modified kernel, we took a simplistic approach, easily implemented with \emph{Ferify}. We block the system call \emph{kexec\_load()}, which loads a new kernel for later execution. Other than that we can detect the kernel files that are used to boot the system and write protect them from all users. Also, the setup of the \ac{VM} will shut it down in case of a reboot, so running automatically on a modified kernel is currently prohibited. We decided to not cover this specific attack vector, since there are solutions like vTPM~\cite{perez2006vtpm}, which implement a more sophisticated way of securing the system's boot procedure and verifying that the code launched by firmware is trusted. 
 
 \section{Testing}\label{sec:testing}
 
