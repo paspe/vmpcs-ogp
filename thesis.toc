@@ -13,35 +13,36 @@
 \contentsline {subsubsection}{Detection}{15}{subsubsection*.44}
 \contentsline {subsubsection}{Prevention}{16}{subsubsection*.45}
 \contentsline {subsection}{\numberline {2.4.2}Out-\ac {VM} Monitoring}{18}{subsection.2.4.2}
-\contentsline {subsubsection}{Detection}{18}{subsubsection*.49}
-\contentsline {subsubsection}{Prevention}{19}{subsubsection*.54}
+\contentsline {subsubsection}{Detection}{18}{subsubsection*.50}
+\contentsline {subsubsection}{Prevention}{19}{subsubsection*.55}
 \contentsline {chapter}{\numberline {3}Design and Implementation of Ferify}{23}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overview}{23}{section.3.1}
 \contentsline {section}{\numberline {3.2}Threat Model}{25}{section.3.2}
 \contentsline {section}{\numberline {3.3}Requirements}{26}{section.3.3}
 \contentsline {section}{\numberline {3.4}Design}{26}{section.3.4}
 \contentsline {section}{\numberline {3.5}Implementation}{27}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Architecture}{27}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.1}Architecture}{28}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}Shadow Access Control List}{28}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}System Call Interception and Admission Control}{30}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}System Call Hooking}{31}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}The task struct}{32}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.5.5}The task struct}{33}{subsection.3.5.5}
 \contentsline {subsection}{\numberline {3.5.6}Trap Handling}{33}{subsection.3.5.6}
-\contentsline {subsection}{\numberline {3.5.7}Guest \ac {VM} Configuration}{37}{subsection.3.5.7}
-\contentsline {chapter}{\numberline {4}Evaluation}{39}{chapter.4}
-\contentsline {section}{\numberline {4.1}Validation}{39}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Ring 3 operations}{39}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Ring 0 operations}{39}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Testing}{40}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Root escalation}{41}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Authorized user operation}{42}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Attacker operation - \emph {root} access - Immutable objects}{43}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Malware Protection}{44}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}Append-only mode}{45}{subsection.4.2.5}
-\contentsline {section}{\numberline {4.3}Performance overhead}{45}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Hypervisor - \ac {VM} switch}{45}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}\ac {SACL} performance overhead}{45}{subsection.4.3.2}
-\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{47}{chapter.5}
-\contentsline {chapter}{List of References}{49}{chapter.5}
-\contentsline {chapter}{Initial Distribution List}{53}{chapter*.97}
+\contentsline {subsection}{\numberline {3.5.7}Monitoring of program execution}{37}{subsection.3.5.7}
+\contentsline {subsection}{\numberline {3.5.8}Guest \ac {VM} Configuration}{37}{subsection.3.5.8}
+\contentsline {chapter}{\numberline {4}Evaluation}{41}{chapter.4}
+\contentsline {section}{\numberline {4.1}Validation}{41}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Ring 3 operations}{41}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Ring 0 operations}{41}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Testing}{42}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Root escalation}{43}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Authorized user operation}{44}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Attacker operation - \unhbox \voidb@x \hbox {\fontfamily {qcr}\selectfont root} access - Immutable objects}{45}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Malware Protection}{47}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}Append-only mode}{47}{subsection.4.2.5}
+\contentsline {section}{\numberline {4.3}Performance overhead}{47}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Hypervisor - \ac {VM} switch}{47}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}\ac {SACL} performance overhead}{48}{subsection.4.3.2}
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{49}{chapter.5}
+\contentsline {chapter}{List of References}{51}{chapter.5}
+\contentsline {chapter}{Initial Distribution List}{55}{chapter*.98}
 \contentsfinish 

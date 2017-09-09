@@ -13,7 +13,7 @@ System virtualization, which has been increasing in popularity over the last yea
 \section{Problem Statement}\label{sec:problem} 
 When an \ac{OS} runs directly on a physical machine, it allocates and uses its resources to protect itself from network or other types of attacks. But, when it runs on a virtualization platform, the hypervisor stands between the hardware and the running software, and can see what is happening inside a \ac{VM}. 
 
-\par Despite the evolution of \ac{CPU} virtualization instructions, and the continuous development of more efficient and secure hypervisors, the bottomline remains the same. A \ac{VM} is still a system, with all the vulnerabilities of its running \ac{OS} and software, and at some point in time, it will be the victim of a successful exploitation. 
+\par Despite the evolution of \ac{CPU} virtualization instructions, and the continuous development of more efficient and secure hypervisors, the bottom-line remains the same. A \ac{VM} is still a system, with all the vulnerabilities of its running \ac{OS} and software, and at some point in time, it will be the victim of a successful exploitation. 
 
 \par The native Linux file permission system, although simple to manage and efficient, lacks fine-grained user/group access to files. Once users belong to a group, nothing prohibits them from accessing all the files accessible to that group. Furthermore, when attackers gains access to a system, they will usually try to escalate their privileges by having access to the root account. From that point there is nothing out of reach; the attacker has unrestricted access to the entire system and is free to read and modify files and change the system's configuration to his liking, to serve his purposes.
 

@@ -1,20 +1,20 @@
 \acresetall
 \chapter{Evaluation}\label{ch:chapter4}
 
-In this chapter, we present the evaluation of \emph{Ferify}. In the first section we validate our design of \emph{Ferify}. Next we explain the tests we performed to verify that \emph{Ferify} has the results we expect. These tests represent the cases \emph{Ferify} can be employed. Finally we perform some tests to evaluate the performance overhead and the degree our solution impacts overall system usability.
+In this chapter, we present the evaluation of \codeft{ferify}. In the first section we validate our design of \codeft{ferify}. Next we explain the tests we performed to verify that \codeft{ferify} has the results we expect. These tests represent the cases \codeft{ferify} can be employed. Finally we perform some tests to evaluate the performance overhead and the degree our solution impacts overall system usability.
 
 \section{Validation}\label{sec:validation}
 
-\par During the implementation of \emph{Ferify} we encountered some challenges. We can classify them by the permission level required to perform certain malicious operations. 
+\par During the implementation of \codeft{ferify} we encountered some challenges. We can classify them by the permission level required to perform certain malicious operations. 
 
 \subsection{Ring 3 operations}
 
-\par The ring 3 operations include all the actions an attacker can perform in userspace. Assuming that the attacker has gained \emph{root} access, these actions include modification of system configuration files and programs to serve certain purposes for the attacker. 
-\par \emph{Ferify} can be employed to overcome this challenge. By adding critical system files in the \acp{SACL} along with the correct permissions, we can deny write access to any user, including \emph{root}. The administrator must decide which files are critical, depending on the security risk that is anticipated. A few basic files we assess that need protection, to ensure some of our assumptions are \emph{/etc/passwd, /etc/shadow, /etc/pam.d/su}. Tests for these cases are covered in the next section.
+\par The ring 3 operations include all the actions an attacker can perform in user-space. Assuming that the attacker has gained \codeft{root} access, these actions include modification of system configuration files and programs to serve certain purposes for the attacker. 
+\par \codeft{ferify} can be employed to overcome this challenge. By adding critical system files in the \acp{SACL} along with the correct permissions, we can \emph{deny} write access to any user, \emph{including} \codeft{root}. The administrator must decide which files are critical, depending on the security risk that is anticipated. A few basic files we assess that need protection, to ensure some of our assumptions are \codeft{/etc/passwd, /etc/shadow, /etc/pam.d/su}. Tests for these cases are covered in the next section.
 
 \subsection{Ring 0 operations}
 
-\par File operations are performed by the kernel through the system calls. But the kernel can be modified by the \emph{root} user in many ways. Kernel memory can be accessed only while operating in ring 0 with the following ways:
+\par File operations are performed by the kernel through the system calls. But the kernel can be modified by the \codeft{root} user, who has access to it. Kernel memory can be accessed only while operating in ring 0 with the following ways:
 
 \begin{itemize}
 	\item System calls,
@@ -23,31 +23,31 @@ In this chapter, we present the evaluation of \emph{Ferify}. In the first sectio
 	\item kernel bugs.
 \end{itemize}
 
-\par Generally, the system call \ac{API} is well defined and difficult to exploit. System call attacks usually target the system call table, to modify the address of the system call functions with others of the attackers choosing. But to do that the attacker needs to be able to load kernel modules. So, this type of attack falls already in the second category, that of the kernel modules.
+\par Generally, the system call \ac{API} is well defined and difficult to exploit. System call attacks usually target the system call table, to modify the address of the system call functions with others of the attackers choosing. But to do that the attacker needs to be \emph{able to load kernel modules}. So, this type of attack falls already in the second category, that of the kernel modules.
 
-\par When an attacker manages to load a kernel module, everything is within reach. The module is running as part of the kernel, in ring 0, and has access to every physical and virtual resource available on the system. The module has access to all kernel functions and structures, and is able to modify them. There are protection mechanisms like module digital signing, but all these checks are running on the same privilege level.
+\par When an attacker manages to load a kernel module, everything is within reach. The module is running as part of the kernel, in ring 0, and has access to \emph{every} physical and virtual resource available on the system. Kernel modules have access to all kernel functions and structures, and are able to modify them. There are protection mechanisms, like module digital signing, but all these checks are running on the same privilege level. To protect the guest \ac{OS} from that type of attacks, which can also result in the installation of \emph{root-kits}, we trap and block the \codeft{init\_mod()} and \codeft{finit\_mod()} system calls, which make module loading possible, \emph{denying} it this way impossible.
 
-\par To protect against a modified kernel, we took a simplistic approach, easily implemented with \emph{Ferify}. We block the system call \emph{kexec\_load()}, which loads a new kernel for later execution. Other than that we can detect the kernel files that are used to boot the system and write protect them from all users. Also, the setup of the \ac{VM} will shut it down in case of a reboot, so running automatically on a modified kernel is currently prohibited. We decided to not cover this specific attack vector, since there are solutions like vTPM~\cite{perez2006vtpm}, which implement a more sophisticated way of securing the system's boot procedure and verifying that the code launched by firmware is trusted. 
+\par To protect against a modified kernel, we took a simplistic approach, easily implemented with \codeft{ferify}. We block the system call \codeft{kexec\_load()}, which loads a new kernel for later execution. Other than that we can detect the kernel files that are used to boot the system and write protect them from all users. Also, the setup of the \ac{VM} will shut it down in case of a reboot, so running automatically on a modified kernel is currently prohibited. We decided to not cover this specific attack vector, since there are solutions like vTPM~\cite{perez2006vtpm}, which implement a more sophisticated way of securing the system's boot procedure and verifying that the code launched by firmware is trusted. 
 
 \section{Testing}\label{sec:testing}
 
-\par To assess that \emph{Ferify} works as intended, we assume two basic scenarios. The first is that of an authorized remotely connected user, who should be able to work as before. We want usability at the user level to remain unchanged. The second scenario is that of a hacked user account. The attacker has managed to exploit a vulnerability of the guest \ac{OS} and has remote access to the target \ac{VM}. In this case we assume even the worst case scenario that the attacker has gained \emph{root} privileges. We want to assess whether the files we protect with \emph{Ferify} are secure and cannot be accessed except from those we have allowed in the \acp{SACL}.
+\par To assess that \codeft{ferify} works as intended, we assume two basic scenarios. The first is that of an authorized remotely connected user, who should be able to work as before. We want \emph{usability} at the user level to remain unchanged. The second scenario is that of a hacked user account. The attacker has managed to exploit a vulnerability of the guest \ac{OS} and has remote access to the target \ac{VM}. In this case we assume even the worst case scenario that the attacker has gained \codeft{root} privileges. We want to assess whether the files we protect with \codeft{ferify} are secure and cannot be accessed except from those we have allowed in the \acp{SACL}.
 
-\par To emulate the actions of an attacker, we performed specific commands on the guest \ac{VM} in order to observe the behavior of the system and whether it conforms to the expectations. The commands reflect the cases that \emph{Ferify} can be applied and correspond to the most basic commands one can issue. All higher level programs and attacks eventually resort to the execution of these system calls. To do that we created an environmental setup to assess all the test cases. 
+\par To emulate the actions of an attacker, we performed specific commands on the guest \ac{VM} in order to observe the behavior of the system and whether it conforms to the expectations. The commands reflect the cases that \codeft{ferify} can be applied and correspond to the most basic commands one can issue. All higher level programs and attacks eventually resort to the execution of these system calls. To do that we created an environmental setup to assess all the test cases. 
 
-\par The configuration includes two users, \emph{alice} and \emph{bob}, both in the sudoers group, but \emph{bob} not legitimately, but through malicious actions. The intent is to check the detection of the illegal escalation of \emph{bob}'s account to \emph{root} and the effect it has.
+\par The configuration includes two users, \codeft{alice} and \codeft{bob}, both in the \emph{sudoers} group, but \codeft{bob} not legitimately, but through malicious actions. The intent is to check the detection of the illegal escalation of \codeft{bob}'s account to \codeft{root} and the effect it has.
 
 \par Additionally we created a group that includes both users, with the intention to assess the per group policy enforcement to file access. 
 
-\par Finally we will try, as \emph{root}, to access files that are being protected from root. These files include the \emph{/etc/shadow} file and the \emph{/etc/pam.d/su}, which are included in the \acp{SACL} to protect our initial \ac{VM} configuration.
+\par Finally we will try, as \codeft{root}, to access files that are being protected from this specific user. These files include the \codeft{/etc/shadow} file and the \codeft{/etc/pam.d/su}, which are included in the \acp{SACL} to protect our initial \ac{VM} configuration.
 
-\par These cases by themselves cover the basic set of actions that \emph{Ferify} was initially designed to monitor. Any combination of them is handled separately from the underlying \ac{OS}, reducing our problem to these elementary cases, making it easier to monitor and handle.
+\par These cases by themselves cover the basic set of actions that \codeft{ferify} was initially designed to monitor. Any combination of them is handled separately from the underlying \ac{OS}, reducing our problem to these elementary cases, making it easier to monitor and handle.
 
-\par First we will test if an illegal \emph{root} escalation is possible and then we will test the file operations, which include \emph{create, open, read, write, copy, move, delete, and link}.
+\par First we will test if an illegal \codeft{root} escalation is possible and then we will test the file operations, which include \emph{create, open, read, write, copy, move, delete, and link}.
 
 \subsection{Root escalation}
 
-\par One of the first actions of an attacker or malicious program is to try to escalate its privileges to that of the root account. One of those techniques is to add the compromised user to the \emph{sudoers} group. To avoid such an exploitation, every time a trap gets caught by the hypervisor we check whether the user executing a \emph{sudo} command is actually allowed to, according to the initial administrative setup of \emph{Ferify} for the specific \ac{VM}. If the user is a legitimate \emph{sudoer} the flow of our plugin continues normally to check the validity of the file operation against the \acp{SACL}. On the other hand, if the user is not supposed to have \emph{sudo} privileges, the system calls, trapped by \emph{Ferify}, that get invoked get canceled, denying the ability to perform any \emph{sudo} command. Figure \ref{fig:sudo_deny} shows the result of trying to execute a \emph{sudo} command that gets denied, while at the same time we get notified on the hypervisor of the event as shown in fig. \ref{fig:sudo_deny_not}.
+\par One of the first actions of an attacker or malicious program is to try to escalate its privileges to that of the root account. One of those techniques is to add the compromised user to the \emph{sudoers} group. To avoid such an exploitation, every time a trap gets caught by the hypervisor we check whether the user executing a \codeft{sudo} command is actually allowed to, according to the initial administrative setup of \codeft{ferify} for the specific \ac{VM}. If the user is a legitimate \codeft{sudoer} the flow of our plugin continues normally to check the validity of the file operation against the \acp{SACL}. On the other hand, if the user is \emph{not} supposed to have \codeft{sudo} privileges, the system calls, trapped by \codeft{ferify}, that get invoked get canceled, denying the ability to perform any \codeft{sudo} command. Figure \ref{fig:sudo_deny} shows the result of trying to execute a \codeft{sudo} command that gets denied, while at the same time we get notified on the hypervisor of the event as shown in fig. \ref{fig:sudo_deny_not}.
 
 \begin{figure}[ht]
 	\centering
@@ -96,11 +96,11 @@ bob@aHVM-domU:~$
 \end{figure}
 
 
-\par Having solved the issue of malicious root access, we then need to validate the expected behavior for file access, whether requested from the \emph{root} user or not.
+\par Having solved the issue of \emph{malicious root access}, we then need to validate the expected behavior for file access, whether requested from the \codeft{root} user or not.
 
 \subsection{Authorized user operation}
 
-\par A very important aspect of a security solution is the impact on usability for the normal user. The implementation of a secure system that remains fully usable is a challenge. In this test we evaluate whether an authorized user can normally access and work on his files. To test the file operations we create two files \emph{file1} and \emph{file2}. In the \acp{SACL} we have entries for three files, to test if the third file can be created. The permissions for the files on the guest \ac{OS} and the \acp{SACL} are explained in table \ref{fig:file_perms1}.
+\par A very important aspect of a security solution is the impact on \emph{usability} for the normal user. The implementation of a secure system that remains fully usable is a challenge. In this test we evaluate whether an authorized user can normally access and work on his files. To test the file operations we create two files \codeft{file1} and \codeft{file2}. In the \acp{SACL} we have entries for three files, to test if the third file can be created. The permissions for the files on the guest \ac{OS} and the \acp{SACL} are explained in table \ref{fig:file_perms1}.
 
 \begin{table}[ht]
 	\centering
@@ -170,11 +170,11 @@ Success: File moved.
 	\label{fig:results1}
 \end{figure}
 
-\par All basic file operations are available to an authorized user. We assess that the usability level for a normal user remains unchanged. By modifying the \ac{SACL} permissions, we can allow or deny certain operations on user owned or group owned files, according to the desired policy to be enforced.
+\par All basic file operations \emph{are available to an authorized user}. We assess that the usability level for a normal user remains unchanged. By modifying the \ac{SACL} permissions, we can allow or deny certain operations on user owned or group owned files, according to the desired policy to be enforced.
 
-\subsection{Attacker operation - \emph{root} access - Immutable objects}
+\subsection{Attacker operation - \codeft{root} access - Immutable objects}
 
-\par One of the biggest problems in information security is the fact that the \emph{root} user or the \emph{administrator} of the system has access to all the files and folders on a given system. That is the reason most attacks try to result in escalation of privileges to an administrative account. Although, usually, the administrator is someone trusted and should have access to all \ac{OS} files for management issues, there are cases that even that person should not get access to certain information. \emph{Ferify} can provide that capability, for a normal user to have full access to his files, while at the same time the administrator cannot have full or even limited access to them. By setting the relevant file permissions as per table \ref{fig:file_perms_root}, we can deny total access to the administrator on any file. This \ac{SACL} is different than the previous one, allowing for user based policy.
+\par One of the biggest problems in information security is the fact that the \codeft{root} user or the \codeft{administrator} of the system has access to \emph{all} the files and folders on a given system. That is the reason most attacks try to result in escalation of privileges to an administrative account. Although, usually, the administrator is someone trusted and should have access to all \ac{OS} files for management issues, there are cases that even that person should not get access to certain information. \codeft{ferify} can provide that capability, for a normal user to have full access to his files, while at the same time the administrator cannot have full or even limited access to them. By setting the relevant file permissions as per table \ref{fig:file_perms_root}, we can \emph{deny} total access to the administrator on any file. This \ac{SACL} is different than the previous one, allowing for user based policy.
 
 \begin{table}[ht]
 	\centering
@@ -227,9 +227,9 @@ Success: File moved.
 	\end{tabular}
 \end{table}
 
-\par After running our test script to verify the ability to deny access to \emph{root} on the user's files, the results (fig.\ref{fig:results2}) show that the files are inaccessible in every mode they are supposed to, according to the permissions we set in the \ac{SACL}. We assess that denying file access to the \emph{root} user is an important security implementation, as it provides great confidentiality assurance, as well as it can nullify many attack vectors on a system, old and new.
+\par After running our test script to verify the ability to deny access to \codeft{root} on the user's files, the results (fig.\ref{fig:results2}) show that the files are inaccessible in every mode they are supposed to, according to the permissions we set in the \ac{SACL}. We assess that denying file access to the \codeft{root} user is an important security implementation, as it provides great \emph{confidentiality} assurance, as well as it can nullify many attack vectors on a system, old and new.
 
-\par An interesting result of \emph{Ferify} is that in can be used to create immutable files on a system. By denying write access to everyone, there can be files that cannot be modified by anyone, but are still available and accessible for reading, providing this way great integrity assurance.
+\par A result of \codeft{ferify} is that in can be used to create immutable files on a system. By denying write access to everyone, there can be files that cannot be modified by anyone, but are still available and accessible for reading, providing this way great \emph{integrity} assurance.
 
 \begin{figure}[ht]
 	\centering
@@ -286,22 +286,22 @@ Add text here if EXECVE trapping works.
 
 \subsection{Append-only mode}
 
-\par Although we could not enforce partial write permissions to a file, due to the \ac{OS} limitations. A file can be opened as a whole, given the permissions the user requests. What \emph{Ferify} is capable of doing is to enforce a write-only access policy to files. This way, if attackers want to cover their tracks, they are not able to open a file in read-write mode, to select and delete the log entries that reveal their presence. They will have to blindly delete entries, or empty the entire log, action that should be noticed by the system administrator. We believe that this policy can be proven a substantial hindrance to malicious actors that try to coven their tracks in the system.
+\par We could not enforce partial write permissions to a file, due to the \ac{OS} limitations. A file can be opened as a whole, given the permissions the user requests. What \codeft{ferify} is capable of doing is to enforce a write-only access policy to files. This way, if attackers want to cover their tracks, they are not able to open a file in read-write mode, to select and delete the log entries that reveal their presence. They will have to blindly delete entries, or empty the entire log, action that should be noticed by the system administrator. We believe that this policy can be proven a substantial hindrance to malicious actors that try to cover their tracks in the system.
 
 \section{Performance overhead}\label{sec:performance}
 
-In this section we present the performance overhead we observed on the guest \ac{OS} when running \emph{Ferify}. We performed time execution measurements in four stages. 
+In this section we present the performance overhead we observed on the guest \ac{OS} when running \codeft{ferify}. We performed time execution measurements in four stages. 
 
-\par To have a baseline for comparison, we created a script which accesses a series of files, in order to trigger \emph{Ferify}, when it is running. Initially we timed the execution of the script over a number of iterations to extract an average time that we will use as a reference. 
+\par To have a baseline for comparison, we created a script which accesses a series of files, in order to trigger \codeft{ferify}, when it is running. Initially we timed the execution of the script over a number of iterations to extract an average time that we will use as a reference. 
 
 \subsection{Hypervisor - \ac{VM} switch}
 
-\par One of the most intense operations in virtualization is the switch between the hypervisor and the \ac{VM}, as mentioned in subsection \ref{sub:invm}. \ac{CPU} virtualization extensions improve with every new model release, but this switch is still significant. To measure this overhead in performance, we ran \emph{Ferify} with empty \acp{SACL}. This way \emph{Ferify} traps the appropriate system calls and performs the switch between the \ac{VM} and the hypervisor. Because the \acp{SACL} are empty, there is insignificant computation performed while on the hypervisor, switching almost immediately back to the \ac{VM}. 
+\par One of the most intense operations in virtualization is the switch between the hypervisor and the \ac{VM}, as mentioned in subsection \ref{sub:invm}. \ac{CPU} virtualization extensions improve with every new model release, but this switch is still significant. To measure this overhead in performance, we ran \codeft{ferify} with empty \acp{SACL}. This way \codeft{ferify} traps the appropriate system calls and performs the switch between the \ac{VM} and the hypervisor. Because the \acp{SACL} are empty, there is insignificant computation performed while on the hypervisor, switching almost immediately back to the \ac{VM}. 
 
 
 \subsection{\ac{SACL} performance overhead}
 
-\par The information for the files stored in the \acp{SACL} is stored in an array of linked lists. The index of the array is the length of the pathname. Then all pathnames of the same length are stored in the same linked list. When only a few files are protected, these linked lists are very short, if not of size one or two. This makes the lookup process fast and easy. 
+\par The information for the files stored in the \acp{SACL} is stored in a hash-table. The index of the table is the pathname. This makes storing and retrieving entries from the \ac{SACL} a complexity of \emph{O(1)}, making the algorithm efficient.
 
 %\subsection{Large \ac{SACL} performance overhead}
 %

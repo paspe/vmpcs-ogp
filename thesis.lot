@@ -1,11 +1,11 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of solutions\relax }}{21}{table.caption.56}
+\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of solutions\relax }}{21}{table.caption.57}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Trapped system calls\relax }}{25}{table.caption.65}
-\contentsline {table}{\numberline {3.2}{\ignorespaces Trapped system calls\relax }}{31}{table.caption.71}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Trapped system calls related to file operations\relax }}{25}{table.caption.66}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Arguments of trapped system calls\relax }}{31}{table.caption.72}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces File permissions for authorized user\relax }}{43}{table.caption.90}
-\contentsline {table}{\numberline {4.2}{\ignorespaces File permissions for root\relax }}{44}{table.caption.92}
+\contentsline {table}{\numberline {4.1}{\ignorespaces File permissions for authorized user\relax }}{45}{table.caption.91}
+\contentsline {table}{\numberline {4.2}{\ignorespaces File permissions for root\relax }}{46}{table.caption.93}
 \addvspace {10\p@ }
 \contentsfinish 
