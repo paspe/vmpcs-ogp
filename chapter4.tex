@@ -35,7 +35,15 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 
 \par To emulate the actions of an attacker, we performed specific commands on the guest \ac{VM} in order to observe the behavior of the system and whether it conforms to the expectations. The commands reflect the cases that \codeft{ferify} can be applied and correspond to the most basic commands one can issue. All higher level programs and attacks eventually resort to the execution of these system calls. To do that we created an environmental setup to assess all the test cases. 
 
-\par The configuration includes two users, \codeft{alice} and \codeft{bob}, both in the \emph{sudoers} group, but \codeft{bob} not legitimately, but through malicious actions. The intent is to check the detection of the illegal escalation of \codeft{bob}'s account to \codeft{root} and the effect it has.
+\par The configuration includes two users, \codeft{alice} (authorized user) and \codeft{bob} (attacker), both in the \emph{sudoers} group, but \codeft{bob} not legitimately, but through malicious actions. The intent is to check the detection of the illegal escalation of \codeft{bob}'s account to \codeft{root} and the effect it has. A high level overview of our design is illustrated in Figure \ref{fig:attack}. 
+
+\begin{figure}[ht]
+	\centering
+	\input{figs/attack.tikz}
+	\caption{Testing and validation concept}
+	\label{fig:attack}
+\end{figure}
+
 
 \par Additionally we created a group that includes both users, with the intention to assess the per group policy enforcement to file access. 
 
@@ -54,9 +62,9 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
 bob@aHVM-domU:~$ sudo ls
-sudo: unable to open /etc/sudoers: Bad address
-sudo: no valid sudoers sources found, quitting
-sudo: unable to initialize policy plugin
+   sudo: unable to open /etc/sudoers: Bad address
+   sudo: no valid sudoers sources found, quitting
+   sudo: unable to initialize policy plugin
 bob@aHVM-domU:~$
 		\end{lstlisting}}
 	\caption{Denying \emph{sudo}}
@@ -85,10 +93,10 @@ Warning: Process root identity corruption detected in task
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
 bob@aHVM-domU:~$ passwd alice
-Enter new UNIX password:
-Retype new UNIX password:
-passwd: Authentication token manipulation error
-passwd: password unchanged
+   Enter new UNIX password:
+   Retype new UNIX password:
+   passwd: Authentication token manipulation error
+   passwd: password unchanged
 bob@aHVM-domU:~$
 		\end{lstlisting}}
 	\caption{Denying password change from \emph{root} account}
@@ -160,11 +168,11 @@ bob@aHVM-domU:~$
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
 $ ./file_tests file1 file2 file3
-Success: Opened file for reading. Able to copy.
-Success: Opened file for writing.
-Success: created file.
-Success: File deleted.
-Success: File moved.
+   Success: Opened file for reading. Able to copy.
+   Success: Opened file for writing.
+   Success: created file.
+   Success: File deleted.
+   Success: File moved.
 		\end{lstlisting}}
 	\caption{File operations execution for authorized user.}
 	\label{fig:results1}
@@ -236,11 +244,11 @@ Success: File moved.
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
 $ sudo ./file_tests file1 file2 file3
-Failure: Could not open file for reading. Cannot copy.
-Failure: Could not open file for writing.
-Failure: Could not create file.
-Failure: Could not delete file.
-Failure: Could not move file.
+   Failure: Could not open file for reading. Cannot copy.
+   Failure: Could not open file for writing.
+   Failure: Could not create file.
+   Failure: Could not delete file.
+   Failure: Could not move file.
 		\end{lstlisting}}
 	\caption{File operations execution for non-authorized user.}
 	\label{fig:results2}

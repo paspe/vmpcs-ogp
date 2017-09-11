@@ -2,11 +2,13 @@
 \chapter{Conclusion and Future Work}\label{ch:chapter5}
 
 \begin{itemize}
-	\item Better \ac{ACL} storing and lookup algorithm 
-	\item Multiprocess applications. Seems like I get sometimes different process base.
+	\item Better \ac{ACL} storing and lookup algorithm \textbf{Done}
+	\item Multiprocess applications? Seems like I get sometimes different process base.
 	\item Multithreadded applications. 
-	\item Extend plugin to monitor file execution too. Can be done by trapping sys\_execve and reading the filename of the program. I think that it is always passed as absolute path, so it should be relatively easy to implement.
+	\item Extend plugin to monitor file execution too. Can be done by trapping \codeft{sys\_execve()} and reading the filename of the program. I think that it is always passed as absolute path, so it should be relatively easy to implement. Syscall number is weird. Needs to check for \emph{both execute and read permissions}.
 	\item Implement on the fly \ac{SACL} updates. 
-	\item Modify code as necessary to work in multi-CPU \acp{VM}.
+	\item Modify code as necessary to work in multi-CPU \acp{VM}. Maybe it works?
+	\item Add \codeft{readlink()} to prevent reading of other files? Is it necessary?
+	\item Check destroy of \codeft{hash-tables}.
 \end{itemize}
 

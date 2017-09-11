@@ -1,5 +1,5 @@
 \acresetall
-\newcommand\tab[1][1cm]{\hspace*{#1}}
+
 \chapter{Design and Implementation of Ferify}\label{ch:chapter3}
 
 In this chapter we will discuss the design, including the threat model and assumptions made, and the implementation choices that we made for this research.	
@@ -32,34 +32,20 @@ In this chapter we will discuss the design, including the threat model and assum
 		\toprule
 		\textbf{System call} & \textbf{Number} & \textbf{System call} & \textbf{Number} \\
 		\hline
-		\footnotesize{\fontfamily{qcr}\selectfont open()} 					
-		& \footnotesize{\fontfamily{qcr}\selectfont 2} & 
-		\footnotesize{\fontfamily{qcr}\selectfont openat()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 257} \\ 
-		\footnotesize{\fontfamily{qcr}\selectfont name\_to\_handle\_at()} 	
-		& \footnotesize{\fontfamily{qcr}\selectfont 303} &
-		\footnotesize{\fontfamily{qcr}\selectfont open\_by\_handle\_at()} 	
-		& \footnotesize{\fontfamily{qcr}\selectfont 304} \\
-		\footnotesize{\fontfamily{qcr}\selectfont rename()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 82} & 
-		\footnotesize{\fontfamily{qcr}\selectfont renameat()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 264} \\  
-		\footnotesize{\fontfamily{qcr}\selectfont renameat2()} 			
-		& \footnotesize{\fontfamily{qcr}\selectfont 316} & 
-		\footnotesize{\fontfamily{qcr}\selectfont truncate()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 76} \\
-		\footnotesize{\fontfamily{qcr}\selectfont link()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 86} &
-		\footnotesize{\fontfamily{qcr}\selectfont linkat()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 265} \\
-		\footnotesize{\fontfamily{qcr}\selectfont symlink()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 88} &
-		\footnotesize{\fontfamily{qcr}\selectfont symlinkat()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 266} \\
-		\footnotesize{\fontfamily{qcr}\selectfont unlink()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 87} &
-		\footnotesize{\fontfamily{qcr}\selectfont unlinkat()} 				
-		& \footnotesize{\fontfamily{qcr}\selectfont 263} \\
+		\codeftfs{open()} 					& \codeftfs{2} 		& 
+		\codeftfs{openat()} 				& \codeftfs{257} 	\\ 
+		\codeftfs{name\_to\_handle\_at()}	& \codeftfs{303} 	&
+		\codeftfs{open\_by\_handle\_at()} 	& \codeftfs{304} 	\\
+		\codeftfs{rename()}					& \codeftfs{82} 	& 
+		\codeftfs{renameat()}				& \codeftfs{264} 	\\  
+		\codeftfs{renameat2()} 				& \codeftfs{316} 	& 
+		\codeftfs{truncate()} 				& \codeftfs{76} 	\\
+		\codeftfs{link()} 					& \codeftfs{86} 	&
+		\codeftfs{linkat()} 				& \codeftfs{265}	\\
+		\codeftfs{symlink()} 				& \codeftfs{88} 	&
+		\codeftfs{symlinkat()} 				& \codeftfs{266} 	\\
+		\codeftfs{unlink()} 				& \codeftfs{87} 	&
+		\codeftfs{unlinkat()} 				& \codeftfs{263} 	\\
 		\bottomrule
 	\end{tabular}	
 \end{table}
@@ -102,42 +88,42 @@ The goal of this research is to provide a virtualization extension that will ext
 
 \subsection{Architecture}\label{sub:arch}
 
-\par \codeft{erify} was developed as a plugin for DRAKVUF. As such, it is a C++ class that extends the class \emph{plugin}, as per requirements of DRAKVUF. It is located in the directory \emph{src/plugins/ferify/} and consists of two files, \emph{ferify.h} and \emph{ferify.cpp}, as show in figure \ref{fig:dir_tree}. 
+\par \codeft{ferify} was developed as a plugin for DRAKVUF. As such, it is a C++ class that extends the class \codeft{plugin}, as per requirements of DRAKVUF. It is located in the directory \codeft{src/plugins/ferify/} and consists of two files, \codeft{ferify.h} and \codeft{ferify.cpp}, as show in figure \ref{fig:dir_tree}. 
 
 \begin{figure}[ht]
 	\centering
 	\input{figs/dir_tree.tikz}
-	\caption{ferify directory tree}
+	\caption{\codeft{ferify} directory tree}
 	\label{fig:dir_tree}
 \end{figure}
 
 \subsection{Shadow Access Control List}\label{sub:sacl}
-During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we had created for the \ac{VM} to be protected. The \ac{SACL} is implemented in the form of four hash-tables to improve search speed. Figure~\ref{fig:sacl_layout} depicts the structure created for storing each \ac{SACL} entry.
+During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we had created for the \ac{VM} to be protected. The \ac{SACL} is implemented in the form of four hash-tables to improve search speed. Table~\ref{tbl:sacl_layout} depicts the structure created for storing each \ac{SACL} entry.
 
-\begin{figure}[ht]
+\begin{table}[ht]
 	\centering
-	\begin{tabular}{|c|c|}
-		\hline
+	\begin{tabular}{cc}
+		%\hline
 		\textbf{Variable Name} & \textbf{Variable type} \\
 		\hline
-		\footnotesize{\fontfamily{qcr}\selectfont pathname} & 
-		\footnotesize{\fontfamily{qcr}\selectfont char *} \\
-		\hline
-		\footnotesize{\fontfamily{qcr}\selectfont mode} & 
-		\footnotesize{\fontfamily{qcr}\selectfont unsigned int} \\
-		\hline
-		\footnotesize{\fontfamily{qcr}\selectfont u} & 
-		\footnotesize{\fontfamily{qcr}\selectfont uid\_t} \\
-		\hline
-		\footnotesize{\fontfamily{qcr}\selectfont g} & 
-		\footnotesize{\fontfamily{qcr}\selectfont gid\_t} \\
+		\codeft{pathname} & 
+		\codeft{char *} \\
+		%\hline
+		\codeft{mode} & 
+		\codeft{unsigned int} \\
+		%\hline
+		\codeft{u} & 
+		\codeft{uid\_t} \\
+		%\hline
+		\codeft{g} & 
+		\codeft{gid\_t} \\
 		\hline
 	\end{tabular}
-	\caption{\textit{struct protected\_files} memory layout}
-	\label{fig:sacl_layout}
-\end{figure}
+	\caption{\codeft{struct protected\_files} memory layout}
+	\label{tbl:sacl_layout}
+\end{table}
 
-\par The above memory structure is used for both protected folders and protected files. Moreover, we create two of each; one for the \codeft{root} user and one for the rest. Searching in the \acp{SACL} is done with the pathname of the file being accessed as the hash-table key. The return value is a pointer to the structure of fig. \ref{fig:sacl_layout}. 
+\par The above memory structure is used for both protected folders and protected files. Moreover, we create two of each; one for the \codeft{root} user and one for the rest. Searching in the \acp{SACL} is done with the pathname of the file being accessed as the hash-table key. The return value is a pointer to the structure of table \ref{tbl:sacl_layout}. 
 
 \par In the \ac{SACL} file permissions are set according to the Linux permission bits schema. This means that the last 3 digits of the \textit{mode} field, when encoded in octal form, define the permissions we want to enforce. The first one defines the owner permissions, the second the group permissions, and the third the other user permissions. The number itself is the sum of the permissions 4 for read, 2 for write, and 1 for execute. As an example, if we encounter or set permissions 744, it means that the owner can read, write and execute the file, while anyone in the same group and everyone else can only read the file.
 
@@ -145,15 +131,17 @@ During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we had c
 
 \begin{figure}[ht]
 	\centering
-	\begin{lstlisting}
-Pathname			Permissions	User	Group
-	\end{lstlisting}
-	\footnotesize{\fontfamily{qcr}\selectfont 
-	\begin{lstlisting}
-/home/user/Documents/readme.txt	100644		1000	1000
-/home/user/Desktop/credit.pdf6	100400		1000	1000
-/home/user/Documents		140220		0	0
-	\end{lstlisting}}
+	\begin{tabular}{lccc}
+Pathname&Permissions&User&Group\\
+\hline
+\codeft{/home/user/Documents/readme.txt} & 
+	\codeft{100644} & \codeft{1000} & \codeft{1000}\\
+\codeft{/home/user/Desktop/credit.pdf}	 & 
+	\codeft{100400} & \codeft{1000} & \codeft{1000}\\
+\codeft{/home/user/Documents}			 & 
+	\codeft{140220} & \codeft{0}    & \codeft{0}\\
+	\hline
+	\end{tabular}
 	\caption{\ac{SACL} sample}
 	\label{fig:sacl}
 \end{figure}
@@ -167,15 +155,15 @@ Besides this coarse refinement of the \ac{SACL} entries, the level of protection
 \par As we see in figure~\ref{fig:root_sacl}, the \ac{SACL} for protecting files from the \codeft{root} user is more simple. Since it is targeted for this specific user, we do not need the entries for owner and group. Furthermore, the permission bits for group and others are ignored when parsed, since they are meaningless.
 
 \begin{figure}[ht]
-	\centering
-	\begin{lstlisting}
-	Pathname	Permissions	
-	\end{lstlisting}
-	\footnotesize{\fontfamily{qcr}\selectfont 
-	\begin{lstlisting}
-	/etc/shadow     100400
-	/etc/pam.d/su   100000
-	\end{lstlisting}}
+\centering
+\begin{tabular}{lc}
+	Pathname&Permissions	\\
+	\hline
+%	\footnotesize{\fontfamily{qcr}\selectfont 
+	\codeft{/etc/shadow}  &  \codeft{100400}\\
+	\codeft{/etc/pam.d/su} & \codeft{100000}\\
+	\hline
+\end{tabular}
 	\caption{root user \ac{SACL} sample}
 	\label{fig:root_sacl}
 \end{figure}
@@ -196,126 +184,212 @@ Besides this coarse refinement of the \ac{SACL} entries, the level of protection
 
 \par This gives us the opportunity to stop the \ac{VM} execution when these system calls are called. At this point, we access the registers related with each system call to retrieve the information we need to perform the validation of the requested call. Figure~\ref{fig:overview} gives an overview of the flow of information during a trapped system call. 
 
-\par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform are passed to the kernel through the registers in the order of rdi, rsi, rdx, r10, r8, r9, while the system call number is passed in rax. Table~\ref{tbl:prototypes} shows which arguments need to be passed to each system call on each register for it to perform the requested operation.
+\par The arguments to the system calls for the 64-bit Linux \ac{OS} we used as our test platform are passed to the kernel through the registers in the order of \codeft{rdi}, \codeft{rsi}, \codeft{rdx}, \codeft{r10}, \codeft{r8}, \codeft{r9}, while the system call number is passed in \codeft{rax}. Table~\ref{tbl:prototypes} shows which arguments need to be passed to each system call on each register for it to perform the requested operation.
 
 \begin{table}[ht]
-	\centering
-	\footnotesize
-	\caption{Arguments of trapped system calls}
-	\label{tbl:prototypes}			
-	\begin{tabular}{ccccccc}
-		\toprule
-		\textbf{Syscall} &&&&&&\\
-		\textbf{Name} & \textbf{rax} & \textbf{rdi} & \textbf{rsi} & \textbf{rdx} & \textbf{r10} & \textbf{r8}\\
-		\toprule
-		\scriptsize{\fontfamily{qcr}\selectfont open }					& 
-		\scriptsize{\fontfamily{qcr}\selectfont 2} 						&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont int flags}				&
-		\scriptsize{\fontfamily{qcr}\selectfont int mode}				&&\\
-		&&	\scriptsize{\fontfamily{qcr}\selectfont *pathname}			&&&&\\
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont openat	}				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 257 } 					&	
-		\scriptsize{\fontfamily{qcr}\selectfont int dirfd	}			&
-		\scriptsize{\fontfamily{qcr}\selectfont const char }			&
-		\scriptsize{\fontfamily{qcr}\selectfont int flags}				&
-		\scriptsize{\fontfamily{qcr}\selectfont int mode}				&\\
-		&&& \scriptsize{\fontfamily{qcr}\selectfont *pathname} 			&&&\\
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont name\_to\_handle\_at }	&
-		\scriptsize{\fontfamily{qcr}\selectfont  303 }  				&	
-		\scriptsize{\fontfamily{qcr}\selectfont int dirfd}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont struct}					&	
-		\scriptsize{\fontfamily{qcr}\selectfont int}					&	
-		\scriptsize{\fontfamily{qcr}\selectfont int}	 				\\
-		&&&\scriptsize{\fontfamily{qcr}\selectfont *pathname}			& \scriptsize{\fontfamily{qcr}\selectfont file\_handle} 			&
-		\scriptsize{\fontfamily{qcr}\selectfont mount\_id}				&
-		\scriptsize{\fontfamily{qcr}\selectfont flags}					\\
-		&&&&\scriptsize{\fontfamily{qcr}\selectfont *handle}			&&\\
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont open\_by\_handle\_at} 	& 
-		\scriptsize{\fontfamily{qcr}\selectfont 304}  					&	
-		\scriptsize{\fontfamily{qcr}\selectfont int mountfd}			&	
-		\scriptsize{\fontfamily{qcr}\selectfont struct}					&	
-		\scriptsize{\fontfamily{qcr}\selectfont int	flags}				&&\\
-		&&& \scriptsize{\fontfamily{qcr}\selectfont file\_handle}		&&&\\
-		&&&	\scriptsize{\fontfamily{qcr}\selectfont *handle}			&&&\\
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont rename} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 82}  					&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&&&\\
-		&&	\scriptsize{\fontfamily{qcr}\selectfont *oldpath}			&	
-		\scriptsize{\fontfamily{qcr}\selectfont *newpath}				&&&\\
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont renameat} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 264}  					&	
-		\scriptsize{\fontfamily{qcr}\selectfont int} 					&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char} 			&	
-		\scriptsize{\fontfamily{qcr}\selectfont int} 					&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char} 			&\\
-		&&	\scriptsize{\fontfamily{qcr}\selectfont olddirfd}			&	
-		\scriptsize{\fontfamily{qcr}\selectfont *oldpath}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont newdirfd}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont *newpath}				&\\ 
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont renameat2} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 316}  					&	\scriptsize{\fontfamily{qcr}\selectfont int}					&	\scriptsize{\fontfamily{qcr}\selectfont const char} 			&	\scriptsize{\fontfamily{qcr}\selectfont int} 					&		
-		\scriptsize{\fontfamily{qcr}\selectfont const char} 			&	
-		\scriptsize{\fontfamily{qcr}\selectfont unsigned}				\\
-		&&	\scriptsize{\fontfamily{qcr}\selectfont olddirfd}			&	
-		\scriptsize{\fontfamily{qcr}\selectfont *oldpath}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont newdirfd}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont *newpath}				& 	
-		\scriptsize{\fontfamily{qcr}\selectfont int flags}				\\ 
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont link} 					& 
-		\scriptsize{\fontfamily{qcr}\selectfont 86}  						&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&&&&\\
-		&&	\scriptsize{\fontfamily{qcr}\selectfont *pathname}			&&&&\\ 
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont linkat} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 265}  						&	
-		\scriptsize{\fontfamily{qcr}\selectfont int dirfd}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont int flag}				&&\\
-		&&&	\scriptsize{\fontfamily{qcr}\selectfont *pathname}			&&&\\
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont symlink} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 88}  						&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&&&&\\
-		&&	\scriptsize{\fontfamily{qcr}\selectfont *pathname}			&&&&\\ 
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont symlinkat} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 266}  						&	
-		\scriptsize{\fontfamily{qcr}\selectfont int dirfd}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont int flag}				&&\\
-		&&&	\scriptsize{\fontfamily{qcr}\selectfont *pathname}			&&&\\
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont unlink} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 87}  					&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&&&&\\
-		&&	\scriptsize{\fontfamily{qcr}\selectfont *pathname}			&&&&\\ 
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont unlinkat} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 263}  					&	
-		\scriptsize{\fontfamily{qcr}\selectfont int dirfd}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont int flag}				&&\\
-		&&&	\scriptsize{\fontfamily{qcr}\selectfont *pathname}			&&&\\
-		\hline
-		\scriptsize{\fontfamily{qcr}\selectfont truncate} 				& 
-		\scriptsize{\fontfamily{qcr}\selectfont 76}  					&	
-		\scriptsize{\fontfamily{qcr}\selectfont const char}				&	
-		\scriptsize{\fontfamily{qcr}\selectfont off\_t}					&	
-		\scriptsize{\fontfamily{qcr}\selectfont int flag}				&&\\
-		&&	\scriptsize{\fontfamily{qcr}\selectfont *pathname}			&	
-		\scriptsize{\fontfamily{qcr}\selectfont length}					&&&\\
-		\bottomrule
-	\end{tabular}
+\centering
+\footnotesize
+\caption{Arguments of file related trapped system calls}
+\label{tbl:prototypes}			
+\begin{tabular}{ccccccc}
+	\toprule
+	\textbf{Syscall} &&&&&&\\
+	\textbf{Name} & \textbf{rax} & \textbf{rdi} & \textbf{rsi} & \textbf{rdx} & \textbf{r10} & \textbf{r8}\\
+	\toprule
+	%%%
+	\codeftsm{open}					& 
+	\codeftsm{2} 					&		
+	\codeftsm{const char}			&	
+	\codeftsm{int}					&
+	\codeftsm{int}					&&\\
+	%%%
+	&&	
+	\codeftsm{*pathname}			&
+	\codeftsm{flags}				&
+	\codeftsm{mode}					&&\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{openat}				& 
+	\codeftsm{257} 					&	
+	\codeftsm{int}					&
+	\codeftsm{const char}			&
+	\codeftsm{int}					&
+	\codeftsm{int}					&\\
+	%%%
+									&&		
+	\codeftsm{dirfd}				&
+	\codeftsm{*pathname}			&
+	\codeftsm{flags}				&
+	\codeftsm{mode}					&\\
+	%%%
+	\hline
+	%%%	
+	\codeftsm{name\_to\_handle\_at} &
+	\codeftsm{303}  				&	
+	\codeftsm{int}					&	
+	\codeftsm{const char}			&	
+	\codeftsm{struct}				&	
+	\codeftsm{int}					&	
+	\codeftsm{int}	 				\\
+	%%%
+	&&
+	\codeftsm{dirfd}				&	
+	\codeftsm{*pathname}			& 
+	\codeftsm{file\_handle} 		&
+	\codeftsm{mount\_id}			&
+	\codeftsm{flags}				\\
+	%%%
+	&&&&
+	\codeftsm{*handle}				&&\\
+	%%%
+	\hline
+	%%%	
+	\codeftsm{open\_by\_handle\_at} & 
+	\codeftsm{304}  				&	
+	\codeftsm{int}					&	
+	\codeftsm{struct}				&	
+	\codeftsm{int}					&&\\
+	%%%
+	&&	
+	\codeftsm{mountfd}				&	
+	\codeftsm{file\_handle}			&
+ 	\codeftsm{flags}				&&\\
+ 	%%%
+	&&&	
+	\codeftsm{*handle}				&&&\\
+	%%%
+	\hline
+	%%%	
+	\codeftsm{rename} 				& 
+	\codeftsm{82}  					&	
+	\codeftsm{const char}			&	
+	\codeftsm{const char}			&&&\\
+	%%%
+	&&	
+	\codeftsm{*oldpath}				&	
+	\codeftsm{*newpath}				&&&\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{renameat} 			& 
+	\codeftsm{264}  				&	
+	\codeftsm{int} 					&	
+	\codeftsm{const char} 			&	
+	\codeftsm{int} 					&	
+	\codeftsm{const char} 			&\\
+	%%%
+	&&	
+	\codeftsm{olddirfd}				&	
+	\codeftsm{*oldpath}				&	
+	\codeftsm{newdirfd}				&	
+	\codeftsm{*newpath}				&\\ 
+	%%%
+	\hline
+	%%%
+	\codeftsm{renameat2} 			& 
+	\codeftsm{316}  				&
+	\codeftsm{int}					&	
+	\codeftsm{const char} 			&	
+	\codeftsm{int} 					&		
+	\codeftsm{const char} 			&	
+	\codeftsm{int}					\\
+	%%%
+	&&	
+	\codeftsm{olddirfd}				&	
+	\codeftsm{*oldpath}				&	
+	\codeftsm{newdirfd}				&	
+	\codeftsm{*newpath}				&
+	\codeftsm{flags}				\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{link} 				& 
+	\codeftsm{86}  					&	
+	\codeftsm{const char}			&	
+	\codeftsm{const char}			&&&\\
+	%%%
+	&&	
+	\codeftsm{*oldpath}				&	
+	\codeftsm{*newpath}				&&&\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{linkat} 				& 
+	\codeftsm{265}  				&	
+	\codeftsm{int}					&	
+	\codeftsm{const char} 			&	
+	\codeftsm{int} 					&		
+	\codeftsm{const char} 			&	
+	\codeftsm{int}					\\
+	%%%
+	&&	
+	\codeftsm{olddirfd}				&	
+	\codeftsm{*oldpath}				&	
+	\codeftsm{newdirfd}				&	
+	\codeftsm{*newpath}				&
+	\codeftsm{flags}				\\		
+	%%%
+	\hline
+	%%%
+	\codeftsm{symlink} 				& 
+	\codeftsm{88}  					&	
+	\codeftsm{const char}			&	
+	\codeftsm{const char}			&&&\\
+	%%%
+	&&	
+	\codeftsm{*oldpath}				&	
+	\codeftsm{*newpath}				&&&\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{symlinkat} 			& 
+	\codeftsm{266}  				&	
+	\codeftsm{const char}			&
+	\codeftsm{int}					&
+	\codeftsm{const char}			&&\\
+	%%%
+	&&	
+	\codeftsm{*oldpath}				&
+	\codeftsm{newdirfd}				&	
+	\codeftsm{*newpath}				&&\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{unlink} 				& 
+	\codeftsm{87}  					&	
+	\codeftsm{const char}			&&&&\\
+	%%%
+	&&	
+	\codeftsm{*pathname}			&&&&\\ 
+	%%%
+	\hline
+	%%%
+	\codeftsm{unlinkat} 			& 
+	\codeftsm{263}  				&	
+	\codeftsm{int}					&	
+	\codeftsm{const char}			&	
+	\codeftsm{int}					&&\\
+	%%%
+	&&
+	\codeftsm{dirfd}				&	
+	\codeftsm{*pathname}			&
+	\codeftsm{flag}					&&\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{truncate} 			& 
+	\codeftsm{76}  					&	
+	\codeftsm{const char}			&	
+	\codeftsm{off\_t}				&	
+	\codeftsm{int}					&&\\
+	%%%
+	&&	
+	\codeftsm{*pathname}			&	
+	\codeftsm{length}				&
+	\codeftsm{flag}					&&\\
+	\bottomrule
+\end{tabular}
 \end{table}
 
 \subsection{System Call Hooking}\label{sub:hooking}
@@ -347,25 +421,25 @@ After a hooked system call gets executed, our callback function is called. We fi
 \begin{figure}[ht]
 \footnotesize {
 	{\fontfamily{qcr}\selectfont 
-currpid = vmi\_dtb\_to\_pid(vmi, info->regs->cr3);\\
-switch (info->regs->rax)\{\\
-case S\_OPEN:\\
-case S\_RENAME:\\
-case S\_UNLINK:\\
-\tab	addr=vmi\_translate\_uv2p(vmi,info->regs->rdi,currpid);\\
-\tab	filename=vmi\_read\_str\_pa(vmi,addr);\\
-\tab	.\\
-\tab	.\\
-\tab	break;\\
-case S\_OPENAT:\\
-case S\_UNLINKAT:\\
-case S\_RENAMEAT:\\
-case S\_RENAMEAT2:\\
-\tab	addr=vmi\_translate\_uv2p(vmi,info->regs->rsi,currpid);\\
-\tab	filename=vmi\_read\_str\_pa(vmi,addr);\\
-\tab	.\\
-\tab	.\\
-\tab	break; \} \\
+\tab currpid = vmi\_dtb\_to\_pid(vmi, info->regs->cr3);\\
+\tab switch (info->regs->rax)\{\\
+\tab case S\_OPEN:\\
+\tab case S\_RENAME:\\
+\tab case S\_UNLINK:\\
+\tab \tab	addr=vmi\_translate\_uv2p(vmi,info->regs->rdi,currpid);\\
+\tab \tab	filename=vmi\_read\_str\_pa(vmi,addr);\\
+\tab \tab	.\\
+\tab \tab	.\\
+\tab \tab	break;\\
+\tab case S\_OPENAT:\\
+\tab case S\_UNLINKAT:\\
+\tab case S\_RENAMEAT:\\
+\tab case S\_RENAMEAT2:\\
+\tab \tab	addr=vmi\_translate\_uv2p(vmi,info->regs->rsi,currpid);\\
+\tab \tab	filename=vmi\_read\_str\_pa(vmi,addr);\\
+\tab \tab	.\\
+\tab \tab	.\\
+\tab \tab	break; \} \\
 	}
 }
 	\caption{Getting the file being accessed}
@@ -391,26 +465,26 @@ case S\_RENAMEAT2:\\
 \begin{figure}[ht]
 \footnotesize {
 	{\fontfamily{qcr}\selectfont 
-case S\_UNLINK:\\          
-case S\_UNLINKAT:\\
-\tab  switch(info->userid)\{\\
-\tab \tab case ROOT: // root user\\
-\tab \tab \tab 	if(strcmp(check->pathname,filename)==0)\{\\
-\tab \tab \tab \tab 		check\_permissions(check,info,vmi,ROOT);\\			
-\tab .\\
-\tab .\\
-\tab \tab \tab break;\\
-\tab \tab default: // other users\\
-\tab \tab \tab if (strcmp(check->pathname,filename)==0)\{\\
-\tab \tab \tab \tab if (check->u == info->userid)\{\\
-\tab \tab \tab \tab \tab check\_permissions(check,info,vmi,USER);\}\\
-\tab \tab \tab \tab else if (check->g == info->groupid)\{\\
-\tab \tab \tab \tab \tab check\_permissions(check,info,vmi,GROUP);\}\\
-\tab \tab \tab else \{\\
-\tab \tab \tab \tab check\_permissions(check,info,vmi,OTHER);\}\}\\
-\tab .\\
-\tab .\\
-\tab \tab \tab break;\}}}
+\tab case S\_UNLINK:\\          
+\tab case S\_UNLINKAT:\\
+\tab \tab  switch(info->userid)\{\\
+\tab \tab \tab case ROOT: // root user\\
+\tab \tab \tab \tab 	if(strcmp(check->pathname,filename)==0)\{\\
+\tab \tab \tab \tab \tab 		check\_permissions(check,info,vmi,ROOT);\\			
+\tab \tab .\\
+\tab \tab .\\
+\tab \tab \tab \tab break;\\
+\tab \tab \tab default: // other users\\
+\tab \tab \tab \tab if (strcmp(check->pathname,filename)==0)\{\\
+\tab \tab \tab \tab \tab if (check->u == info->userid)\{\\
+\tab \tab \tab \tab \tab \tab check\_permissions(check,info,vmi,USER);\}\\
+\tab \tab \tab \tab \tab else if (check->g == info->groupid)\{\\
+\tab \tab \tab \tab \tab \tab check\_permissions(check,info,vmi,GROUP);\}\\
+\tab \tab \tab \tab else \{\\
+\tab \tab \tab \tab \tab check\_permissions(check,info,vmi,OTHER);\}\}\\
+\tab \tab .\\
+\tab \tab .\\
+\tab \tab \tab \tab break;\}}}
 	\caption{unlink() and unlinkat() skeleton code flow}
 	\label{fig:unlink}
 \end{figure}
@@ -427,27 +501,27 @@ case S\_UNLINKAT:\\
 \begin{figure}[ht!]
 \footnotesize {
 	{\fontfamily{qcr}\selectfont 
-switch(info->regs->rax)\{\\
-\tab case S\_OPEN:\\
-\tab case S\_OPENAT:\\
-\tab if ( ((info->regs->rsi \& 07) | O\_RDONLY) == O\_RDONLY)\{\\
-\tab \tab if ( !(check->mode \& r) ) \{\\
-\tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
-\tab \tab \tab return 1; \}\\
-\tab \} else if ( ((info->regs->rsi \& 07) | O\_WRONLY) == O\_WRONLY) \{\\
-\tab \tab if ( !(check->mode \& w) ) \{\\
-\tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
-\tab \tab \tab return 1; \}\\
-\tab \} else if ( ((info->regs->rsi \& 07) | O\_RDWR) == O\_RDWR) \{\\
-\tab \tab if ( !(check->mode \& w) \&\& !(check->mode \& r) ) \{\\
-\tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
-\tab \tab \tab return 1;\\
-\tab \tab \} else if ( !(check->mode \& w) )\{\\
-\tab \tab \tab vmi\_set\_vcpureg(vmi, 0, RSI, info->vcpu);\\
-\tab \tab \tab return 1; \}\\
+\tab switch(info->regs->rax)\{\\
+\tab \tab case S\_OPEN:\\
+\tab \tab case S\_OPENAT:\\
+\tab \tab if ( ((info->regs->rsi \& 07) | O\_RDONLY) == O\_RDONLY)\{\\
+\tab \tab \tab if ( !(check->mode \& r) ) \{\\
+\tab \tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
+\tab \tab \tab \tab return 1; \}\\
+\tab \tab \} else if ( ((info->regs->rsi \& 07) | O\_WRONLY) == O\_WRONLY) \{\\
+\tab \tab \tab if ( !(check->mode \& w) ) \{\\
+\tab \tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
+\tab \tab \tab \tab return 1; \}\\
+\tab \tab \} else if ( ((info->regs->rsi \& 07) | O\_RDWR) == O\_RDWR) \{\\
+\tab \tab \tab if ( !(check->mode \& w) \&\& !(check->mode \& r) ) \{\\
+\tab \tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
+\tab \tab \tab \tab return 1;\\
+\tab \tab \tab \} else if ( !(check->mode \& w) )\{\\
+\tab \tab \tab \tab vmi\_set\_vcpureg(vmi, 0, RSI, info->vcpu);\\
+\tab \tab \tab \tab return 1; \}\\
+\tab \tab \}\\
+\tab \tab break;\\
 \tab \}\\
-\tab break;\\
-\}\\
 }}
 	\caption{open() and openat() permission checks}
 	\label{fig:open}
@@ -456,15 +530,15 @@ switch(info->regs->rax)\{\\
 \par When one of the trapped system calls gets executed, LibVMI pauses the \ac{VM} execution. It then passes the \ac{VM}s state information to DRAKVUF, where our running plugin retrieves it. At this point the guest \ac{OS} is paused and none of its processes continue running, being unable to bypass and alter the \ac{VM}'s state. Going through some \ac{VM} memory accesses, the plugin gets the file being accessed, the \codeft{userid}, and the \codeft{groupid}. With this information, it goes through the \ac{SACL} to find any matching files or folders that are being protected. If none are found, it returns control to LibVMI, which then resumes the \ac{VM}'s execution. If an entry in the \ac{SACL} is found, then the plugin checks if the requested file access is prohibited. If it is allowed, execution continues normally. If it is prohibited, on the other hand, then the plugin changes the value of some registers related to the system call so that it will fail.
 
 
-\subsection{Monitoring of program execution}
+\section{Monitoring of program execution}
 
-\par In addition to the system calls of table \ref{tbl:syscalls}, we trapped also the \codeft{execve()} and \codeft{execveat()} system calls. Following the same technique, we retrieve the pathname of the program that is requested to be executed. We then check the permissions stored in the \acp{SACL} and decide on allowing execution or not.
+\par In addition to the system calls of table \ref{tbl:syscalls}, we trapped also the \codeft{execve()} and \codeft{execveat()} system calls. Following the technique described in \ref{sub:handling}, we retrieve the pathname of the program that is requested to be executed. We then check the permissions stored in the \acp{SACL} and decide on allowing execution or not.
 
 \par In addition to checking the \ac{SACL} permissions, to deny execution immediately if the file is not in the \ac{SACL}. This creates an efficient application white-list monitoring tool, that can mitigate a broad variety of viruses and malware in general. The reason for this is that most of the malware will save its code on a file for later use. When it tries to execute this file, since it is not part of the original file-system, execution will cancel. We must note that for a malware to create a persistence mechanism on a compromised system, it must write its code on a file. By write protecting the already present executable files, and denying execution of new files, we mitigate a significant volume of old and new malware, including \emph{zero-day} attacks.
 
 
 
-\subsection{Guest \ac{VM} Configuration}\label{sub:conf}
+\section{Guest \ac{VM} Configuration}\label{sub:conf}
 
 As mentioned before, there is no significant setup for the guest \ac{VM} in order for our system to run. The only requirement coming from LibVMI and DRAKVUF is the creation and export of a Rekall profile in the guest \ac{VM}. Because this profile depends on the kernel version running, it is imperative to recreate the profile in the case of a kernel version update. 
 
@@ -472,12 +546,11 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 
 \begin{figure}[ht]
 	\centering
-	\footnotesize{\fontfamily{qcr}\selectfont 
-	\begin{lstlisting}
-		on_poweroff = "destroy"
-		on_reboot = "destroy"
-		on_crash = "destroy"
-	\end{lstlisting}}
+	\begin{tabular}{c}
+		\codeft{on\_poweroff = "destroy"}	\\
+		\codeft{on\_reboot = "destroy"}		\\
+		\codeft{on\_crash = "destroy"}		\\
+	\end{tabular}
 	\caption{Guest \ac{VM} shutdown configuration line}
 	\label{fig:conf}
 \end{figure}
@@ -486,10 +559,9 @@ As mentioned before, there is no significant setup for the guest \ac{VM} in orde
 
 \begin{figure}[ht]
 	\centering
-	\footnotesize{\fontfamily{qcr}\selectfont 
-	\begin{lstlisting}
-	auth       required   pam_wheel.so deny group=root	
-	\end{lstlisting}}
+	\codeft{
+     auth       required   pam\_wheel.so deny group=root	
+	}
 	\caption{Guest \ac{VM} configuration to deny \emph{root} from running \emph{su}}
 	\label{fig:pam}
 \end{figure}

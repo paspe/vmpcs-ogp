@@ -19,8 +19,13 @@
 \usepackage{listings}
 \usepackage{acronym}
 \usepackage{color}
+\usetikzlibrary{shapes.geometric}
+\usepackage{graphicx}
 
-\newcommand{\codeft}[1]{\mbox{\fontfamily{qcr}\selectfont #1}}
+\newcommand{\codeft}[1]{\mbox{\small{\fontfamily{qcr}\selectfont #1}}}
+\newcommand{\codeftsm}[1]{\mbox{\scriptsize{\fontfamily{qcr}\selectfont #1}}}
+\newcommand{\codeftfs}[1]{\mbox{\footnotesize{\fontfamily{qcr}\selectfont #1}}}
+\newcommand\tab[1][0.6cm]{\hspace*{#1}}
 %
 % For Example: you might find one of these useful:
 
