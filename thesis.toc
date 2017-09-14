@@ -25,24 +25,24 @@
 \contentsline {subsection}{\numberline {3.5.2}Shadow Access Control List}{28}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}System Call Interception and Admission Control}{30}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}System Call Hooking}{31}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}The task struct}{32}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.5.5}The task struct}{33}{subsection.3.5.5}
 \contentsline {subsection}{\numberline {3.5.6}Trap Handling}{33}{subsection.3.5.6}
 \contentsline {section}{\numberline {3.6}Monitoring of program execution}{37}{section.3.6}
 \contentsline {section}{\numberline {3.7}Guest \ac {VM} Configuration}{37}{section.3.7}
-\contentsline {chapter}{\numberline {4}Evaluation}{39}{chapter.4}
-\contentsline {section}{\numberline {4.1}Validation}{39}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Ring 3 operations}{39}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Ring 0 operations}{39}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Testing}{40}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Root escalation}{42}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Authorized user operation}{43}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Attacker operation - \unhbox \voidb@x \hbox {\relax \fontsize {10.95}{13.6}\selectfont \abovedisplayskip 11\p@ plus3\p@ minus6\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \def \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ {\leftmargin \leftmargini \topsep 9\p@ plus3\p@ minus5\p@ \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {\fontfamily {qcr}\selectfont root}} access - Immutable objects}{44}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Malware Protection}{45}{subsection.4.2.4}
-\contentsline {subsection}{\numberline {4.2.5}Append-only mode}{45}{subsection.4.2.5}
-\contentsline {section}{\numberline {4.3}Performance overhead}{45}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Hypervisor - \ac {VM} switch}{46}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}\ac {SACL} performance overhead}{46}{subsection.4.3.2}
-\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{47}{chapter.5}
-\contentsline {chapter}{List of References}{49}{chapter.5}
-\contentsline {chapter}{Initial Distribution List}{53}{chapter*.98}
+\contentsline {chapter}{\numberline {4}Evaluation}{41}{chapter.4}
+\contentsline {section}{\numberline {4.1}Validation}{41}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Ring 3 operations}{41}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Ring 0 operations}{41}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Testing}{42}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Root escalation}{44}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Authorized user operation}{45}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Attacker operation - \unhbox \voidb@x \hbox {\relax \fontsize {10.95}{13.6}\selectfont \abovedisplayskip 11\p@ plus3\p@ minus6\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \def \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ {\leftmargin \leftmargini \topsep 9\p@ plus3\p@ minus5\p@ \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {\fontfamily {qcr}\selectfont root}} access - Immutable objects}{46}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Malware Protection}{47}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}Append-only mode}{47}{subsection.4.2.5}
+\contentsline {section}{\numberline {4.3}Performance overhead}{48}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Hypervisor - \ac {VM} switch}{48}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}\ac {SACL} performance overhead}{49}{subsection.4.3.2}
+\contentsline {chapter}{\numberline {5}Conclusion and Future Work}{51}{chapter.5}
+\contentsline {chapter}{List of References}{53}{chapter.5}
+\contentsline {chapter}{Initial Distribution List}{57}{chapter*.101}
 \contentsfinish 

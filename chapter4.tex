@@ -5,7 +5,7 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 
 \section{Validation}\label{sec:validation}
 
-\par During the implementation of \codeft{ferify} we encountered some challenges. We can classify them by the permission level required to perform certain malicious operations. 
+\par In \ref{sec:overview} we discussed why \codeft{ferify} is secure. To expand more on this and evaluate that our claim is correct we will present the security challenges we identified and tried to solve during the implementation of \codeft{ferify}. We can classify them by the permission level required to perform certain malicious operations on the running \ac{OS}. 
 
 \subsection{Ring 3 operations}
 
@@ -290,7 +290,9 @@ $ sudo ./file_tests file1 file2 file3
 
 \subsection{Malware Protection}
 
-Add text here if EXECVE trapping works.
+\par For the \codeft{execve()} and \codeft{execveat()} system calls we implemented a slightly different logic, to make \codeft{ferify} work as a white-listing security application. The results of our testing seem promising. 
+
+\par We have successfully managed to apply different execution permissions and block application execution on a \emph{per-user} level. The difference from the rest of the system call handling is that \emph{if} the executable \emph{is not} in the \ac{SACL} we \emph{deny} execution. Since we assume that the system is secure when we launch \codeft{ferify}, any file in the file-system should not be malicious. Keeping in mind that for a malware to create a persistence mechanism, it will have to write executable code on the victim system, and run it at some point. Since that file will not be in the \ac{SACL}, we automatically block that executable from running, having this way mitigated efficiently a large attack vector of malware.
 
 \subsection{Append-only mode}
 
@@ -298,18 +300,104 @@ Add text here if EXECVE trapping works.
 
 \section{Performance overhead}\label{sec:performance}
 
-In this section we present the performance overhead we observed on the guest \ac{OS} when running \codeft{ferify}. We performed time execution measurements in four stages. 
+In this section we present the performance overhead we observed on the guest \ac{OS} when running \codeft{ferify}. We performed time execution measurements in three stages. 
 
-\par To have a baseline for comparison, we created a script which accesses a series of files, in order to trigger \codeft{ferify}, when it is running. Initially we timed the execution of the script over a number of iterations to extract an average time that we will use as a reference. 
+\par To have a baseline for comparison, we created a \codeft{Python} script that performs some of the trapped system calls and measures the execution time. It performs the execution and calculates the average execution time and the standard deviation. We performed three runs of testing. The first was under normal \ac{CPU} scheduling preferences. For the second run we set the \codeft{niceness} of the process to \codeft{-20}. \emph{Niceness} for Linux is how favorable the scheduling will be for the process, with \codeft{-20} being the best value. Finally, for the third run, besides changing the niceness of the process, we additionally set the I/O niceness to the best available value. This changes the I/O scheduling of processes, giving our test script I/O priority over all other processes. Initially we timed the execution of the script over a number of one million iterations to extract an average time that we will use as a reference, \emph{without} running \codeft{ferify}. Fig. \ref{fig:script} shows the three commands we used to run the test script.
+
+\begin{figure}[ht]
+	\centering
+	\footnotesize{\fontfamily{qcr}\selectfont 
+		\begin{lstlisting}
+$ sudo ./ferify_test.py 1000000
+$ sudo nice -n -30 ./ferify_test.py 1000000
+$ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
+	\end{lstlisting}}
+	\caption{Test script command-line settings.}
+	\label{fig:script}
+\end{figure}
+
 
 \subsection{Hypervisor - \ac{VM} switch}
 
 \par One of the most intense operations in virtualization is the switch between the hypervisor and the \ac{VM}, as mentioned in subsection \ref{sub:invm}. \ac{CPU} virtualization extensions improve with every new model release, but this switch is still significant. To measure this overhead in performance, we ran \codeft{ferify} with empty \acp{SACL}. This way \codeft{ferify} traps the appropriate system calls and performs the switch between the \ac{VM} and the hypervisor. Because the \acp{SACL} are empty, there is insignificant computation performed while on the hypervisor, switching almost immediately back to the \ac{VM}. 
 
+\par  Table \ref{tbl:measure1} shows the results and the performance overhead of the \ac{VM} context-switch. As expected the cost of VM-exit and VM-entry is significant. 
+
+\begin{table}[ht]
+\centering
+\caption{Context-switch performance overhead measurements}
+\label{tbl:measure1}
+\begin{tabular}{c|cc|cc|c}
+	\toprule
+	& \multicolumn{2}{c|}{With \codeft{ferify}} 
+	& \multicolumn{2}{c|}{Without \codeft{ferify}}
+	& \\
+	System call 		& Avg time (msec) & Std dev & Avg time (msec) & Std dev & Increase \\	
+	\toprule
+	\multicolumn{6}{c}{No scheduler priority set}\\
+	\hline
+	\codeft{open()} 	& 0.139568 & 0.149873 & 0.010482 & 0.011007 & 1331.50\%\\
+	\codeft{rename()} 	& 0.130636 & 0.152204 & 0.003966 & 0.004409 & 3293.89\%\\
+	\codeft{unlink()} 	& 0.127103 & 0.153161 & 0.003701 & 0.004258 & 3434.28\%\\
+	\hline
+	\multicolumn{6}{c}{With best \codeft{nice} value}\\
+	\hline
+	\codeft{open()} 	& 0.139860 & 0.151600 & 0.010345 & 0.010674 & 1351.95\%\\
+	\codeft{rename()} 	& 0.131188 & 0.134321 & 0.004087 & 0.004329 & 3209.88\%\\
+	\codeft{unlink()} 	& 0.127132 & 0.131674 & 0.003713 & 0.003966 & 3426.96\%\\
+	\hline
+	\multicolumn{6}{c}{With best \codeft{nice} and \codeft{ionice} values}\\
+	\hline
+	\codeft{open()} 	& 0.137672 & 0.140117 & 0.010366 & 0.011140 & 1328.11\%\\
+	\codeft{rename()} 	& 0.128105 & 0.138182 & 0.004110 & 0.004440 & 3116.90\%\\
+	\codeft{unlink()} 	& 0.125161 & 0.131322 & 0.003778 & 0.004190 & 3312.89\%\\
+	\bottomrule
+\end{tabular}	
+\end{table}
+
 
 \subsection{\ac{SACL} performance overhead}
 
-\par The information for the files stored in the \acp{SACL} is stored in a hash-table. The index of the table is the pathname. This makes storing and retrieving entries from the \ac{SACL} a complexity of \emph{O(1)}, making the algorithm efficient.
+\par The information for the files stored in the \acp{SACL} is stored in a hash-table. The index of the table is the pathname. This makes storing and retrieving entries from the \ac{SACL} a complexity of \emph{O(1)}, making the algorithm efficient. Nevertheless, we need to measure \codeft{ferify}'s total performance overhead when running on a full file-system. We ran the same script as before, but this time we included a full file-system \ac{SACL}, to evaluate \codeft{ferify}'s efficiency. The \ac{SACL} contained \emph{417,461} entries. 
+
+\par Table \ref{tbl:measure2} shows the result of the second run of our test. We observe that the total performance overhead remains in the same magnitude. We assess that the hash\_table implementation and the permission checking algorithm has an insignificant impact on performance, compared to the cost of switching between the hypervisor and the guest \ac{VM}.
+
+\par Although the increase in execution time seems extremely large, the average execution time of a single system call seems to remain within usable limits. While using the guest \ac{VM} to evaluate the use experience, we did not notice any delays. 
+
+
+\begin{table}[ht]
+\centering
+\caption{\codeft{ferify}'s performance overhead measurements}
+\label{tbl:measure2}
+\begin{tabular}{c|cc|cc|c}
+	\toprule
+						& \multicolumn{2}{c|}{With \codeft{ferify}} 
+						& \multicolumn{2}{c|}{Without \codeft{ferify}}
+						& \\
+	System call 		& Avg time (msec) & Std dev & Avg time (msec) & Std dev & Increase \\	
+	\toprule
+	\multicolumn{6}{c}{No scheduler priority set}\\
+	\hline
+	\codeft{open()} 	& 0.251433 & 0.258587 & 0.010500 & 0.011618 & 2394.60\%\\
+	\codeft{rename()} 	& 0.297373 & 0.307451 & 0.003917 & 0.004532 & 7591.85\%\\
+	\codeft{unlink()} 	& 0.240050 & 0.257848 & 0.003713 & 0.004476 & 6465.12\%\\
+	\hline
+	\multicolumn{6}{c}{With best \codeft{nice} value}\\
+	\hline
+	\codeft{open()} 	& 0.136804 & 0.146983 & 0.010478 & 0.010743 & 1305.63\%\\
+	\codeft{rename()} 	& 0.127728 & 0.150706 & 0.004144 & 0.004387 & 3082.23\%\\
+	\codeft{unlink()} 	& 0.125051 & 0.235790 & 0.003749 & 0.004016 & 3335.58\%\\
+	\hline
+	\multicolumn{6}{c}{With best \codeft{nice} and \codeft{ionice} values}\\
+	\hline
+	\codeft{open()} 	& 0.141293 & 0.143097 & 0.011300 & 0.012296 & 1250.38\%\\
+	\codeft{rename()} 	& 0.131271 & 0.133869 & 0.004304 & 0.005099 & 3049.97\%\\
+	\codeft{unlink()} 	& 0.128175 & 0.132942 & 0.003919 & 0.004685 & 3270.60\%\\
+	\bottomrule
+\end{tabular}	
+\end{table}
+
+
 
 %\subsection{Large \ac{SACL} performance overhead}
 %

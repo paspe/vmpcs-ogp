@@ -46,6 +46,9 @@ In this chapter we will discuss the design, including the threat model and assum
 		\codeftfs{symlinkat()} 				& \codeftfs{266} 	\\
 		\codeftfs{unlink()} 				& \codeftfs{87} 	&
 		\codeftfs{unlinkat()} 				& \codeftfs{263} 	\\
+		\codeftfs{execve()} 				& \codeftfs{59} 	&
+		\codeftfs{execveat()} 				& \codeftfs{322} 	\\
+		
 		\bottomrule
 	\end{tabular}	
 \end{table}
@@ -193,8 +196,7 @@ Besides this coarse refinement of the \ac{SACL} entries, the level of protection
 \label{tbl:prototypes}			
 \begin{tabular}{ccccccc}
 	\toprule
-	\textbf{Syscall} &&&&&&\\
-	\textbf{Name} & \textbf{rax} & \textbf{rdi} & \textbf{rsi} & \textbf{rdx} & \textbf{r10} & \textbf{r8}\\
+	\textbf{Syscall Name} & \textbf{rax} & \textbf{rdi} & \textbf{rsi} & \textbf{rdx} & \textbf{r10} & \textbf{r8}\\
 	\toprule
 	%%%
 	\codeftsm{open}					& 
@@ -388,6 +390,37 @@ Besides this coarse refinement of the \ac{SACL} entries, the level of protection
 	\codeftsm{*pathname}			&	
 	\codeftsm{length}				&
 	\codeftsm{flag}					&&\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{execve} 				& 
+	\codeftsm{59}  					&	
+	\codeftsm{const char}			&	
+	\codeftsm{char *const}			&	
+	\codeftsm{char *const}			&&\\
+	%%
+	&&	
+	\codeftsm{*filename}			&	
+	\codeftsm{argv[]}				&
+	\codeftsm{envp[]}				&&\\
+	%%%
+	\hline
+	%%%
+	\codeftsm{execveat} 			& 
+	\codeftsm{322}  				&	
+	\codeftsm{int}					&	
+	\codeftsm{const char}			&	
+	\codeftsm{char *const}			&
+	\codeftsm{char *const} 			&
+	\codeftsm{int}					\\
+	%%%
+	&&	
+	\codeftsm{dirfd}				&	
+	\codeftsm{*pathname}			&
+	\codeftsm{argv[]}				&
+	\codeftsm{envp[]}				&
+	\codeftsm{flags}				\\
+
 	\bottomrule
 \end{tabular}
 \end{table}
