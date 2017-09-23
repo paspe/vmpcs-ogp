@@ -20,5 +20,13 @@
 \BOOKMARK [1][-]{section.4.2}{Testing}{chapter.4}% 20
 \BOOKMARK [1][-]{section.4.3}{Performance overhead}{chapter.4}% 21
 \BOOKMARK [0][-]{chapter.5}{Conclusion and Future Work}{}% 22
-\BOOKMARK [0][-]{chapter.5}{List of References}{}% 23
-\BOOKMARK [0][-]{chapter*.101}{Initial Distribution List}{}% 24
+\BOOKMARK [1][-]{section.5.1}{Conclusion}{chapter.5}% 23
+\BOOKMARK [1][-]{section.5.2}{Benefits of ferify}{chapter.5}% 24
+\BOOKMARK [1][-]{section.5.3}{Lessons learned}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.4}{Limitations}{chapter.5}% 26
+\BOOKMARK [1][-]{section.5.5}{Future Work}{chapter.5}% 27
+\BOOKMARK [0][-]{appendix.A}{File access test script}{}% 28
+\BOOKMARK [0][-]{appendix.B}{Performace overhead test script}{}% 29
+\BOOKMARK [0][-]{appendix.C}{ferify code}{}% 30
+\BOOKMARK [0][-]{lstnumber.-10.2179}{List of References}{}% 31
+\BOOKMARK [0][-]{appendix*.101}{Initial Distribution List}{}% 32

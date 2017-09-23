@@ -1,0 +1,2420 @@
+\label{app:C}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+	%backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{magenta},
+	basicstyle=\scriptsize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	%numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
+}
+
+This appendix contains the two files of \codeft{ferify}.
+
+\textbf{ferify.h}
+\footnotesize{\fontfamily{qcr}\selectfont
+\begin{lstlisting}[style=CStyle]
+#ifndef FERIFY_H
+#define FERIFY_H
+
+#define MAX_PATHNAME_LEN 4096
+#define MAX_FILENAME_LEN 256
+#define AT_FDCWD1 0xFFFFFFFFFFFFFF9C
+#define AT_FDCWD2 0xFFFFFF9C
+#define PERMISSIONS 07
+#define S_ISDIR 040000
+#define MATCH 0
+#define ROOT 0
+#define USER 1
+#define GROUP 2
+#define OTHER 3
+#define INV -1
+#define SOURCE 0
+#define DEST 1
+#define IS_FILE 0
+#define IS_DIR 16384
+#define MAX_SUDOERS_COUNT 16
+
+#define S_OPEN 2
+#define S_CLOSE 3
+#define S_CLONE 56
+#define S_FORK 57
+#define S_VFORK 58
+#define S_OPENAT 257
+#define S_RENAME 82
+#define S_RENAMEAT 264
+#define S_RENAMEAT2 316
+#define S_UNLINK 87
+#define S_UNLINKAT 263
+#define S_SYMLINK 88
+#define S_SYMLINKAT 266
+#define S_LINK 86
+#define S_LINKAT 265
+#define S_EXECVE 59
+#define S_EXECVEAT 322
+#define S_INIT_MOD 175
+#define S_FINIT_MOD 313
+#define S_TRUNCATE 76
+#define S_EXIT 60
+#define S_EXIT_GROUP 231
+
+#define S_NAME_TO_HANDLE_AT 303
+#define S_OPEN_BY_HANDLE_AT 304
+#define S_KEXEC_LOAD 246
+#define S_KEXEC_FILE_LOAD 320
+
+#include <glib.h>
+#include <openssl/sha.h>
+#include "plugins/plugins.h"
+#include "plugins/private.h"
+
+typedef struct protected_files{
+	char * pathname;
+	unsigned int mode;
+	uid_t u, g;
+	struct protected_files * next = NULL;
+} p_files;
+
+typedef struct task_t{
+	addr_t task_addr;
+	pid_t pid;
+	uint64_t uid;
+	gid_t gid;
+	uint32_t threads = 0;
+	short checked = 1;
+} task;
+
+typedef struct task_entry_t {
+	addr_t task_addr;
+	struct task ;
+} task_entry;
+
+typedef struct entry_t {
+	unsigned int mode;
+	uid_t u;
+	gid_t g;
+} entry;
+
+class ferify: public plugin {
+
+	private:
+		GSList *traps;
+
+	public:
+		uint8_t reg_size;
+		output_format_t format;
+		os_t os;
+		addr_t rva = 0;
+		addr_t kaslr = 0;
+
+		addr_t s_open = 0;
+		addr_t s_openat = 0;
+		addr_t s_rename = 0;
+		addr_t s_renameat = 0;
+		addr_t s_renameat2 = 0;
+		addr_t s_unlink = 0;
+		addr_t s_unlinkat = 0;
+		addr_t s_close = 0;
+		addr_t s_execve = 0;
+		addr_t s_execveat = 0;
+		addr_t s_exit = 0;
+		addr_t s_exit_group = 0;
+		addr_t s_truncate = 0;
+		addr_t fork_ret = 0;
+		addr_t s_clone = 0;
+		addr_t s_fork = 0;
+		addr_t s_vfork = 0;
+		addr_t s_symlink = 0;
+		addr_t s_symlinkat = 0;
+		addr_t s_link = 0;
+		addr_t s_linkat = 0;
+		addr_t s_init_mod = 0;
+		addr_t s_finit_mod = 0;
+		addr_t s_kexec_load = 0;
+		addr_t s_kexec_file_load = 0;
+		task * task_list[32768] = { NULL };
+		vmi_pid_t p_pid = -1;
+
+		GHashTable * filelist = NULL;
+		GHashTable * filelist_root = NULL;
+		GHashTable * folderlist = NULL;
+		GHashTable * folderlist_root = NULL;
+
+		uint32_t sudoers[MAX_SUDOERS_COUNT] = { 0 };
+		ferify(drakvuf_t drakvuf, const void *config, output_format_t output);
+		~ferify();
+};
+
+int permissions_check2(drakvuf_t drakvuf, char * filename, entry * e, drakvuf_trap_info_t * info, int id, int reg);
+int identity_check(drakvuf_t drakvuf, drakvuf_trap_info_t * info, vmi_pid_t current_pid);
+int add_task(ferify * f, vmi_pid_t current_pid, uid_t u, gid_t g, addr_t process, short checked);
+void intercept_print(drakvuf_trap_info_t *info, char * filename, char * filename2, vmi_pid_t currpid);
+void process_list(drakvuf_t drakvuf, ferify * s, vmi_instance_t vmi);
+void check_syscall_table_corruption(ferify *s, drakvuf_trap_info_t *info);
+char * get_pathname(drakvuf_t drakvuf, drakvuf_trap_info_t *info, char *filename, int append_filename);
+char * get_dirfd(drakvuf_t drakvuf, drakvuf_trap_info_t *info, vmi_instance_t vmi, char *filename, vmi_pid_t currpid, addr_t process_base);
+char * get_pathname_from_reg(drakvuf_t drakvuf, drakvuf_trap_info_t *info, vmi_instance_t vmi, vmi_pid_t currpid, int reg);
+char * get_pathname_from_reg_at(drakvuf_t drakvuf, drakvuf_trap_info_t *info, vmi_instance_t vmi, vmi_pid_t currpid, addr_t process_base, int reg);
+static event_response_t fork_cb(drakvuf_t drakvuf, drakvuf_trap_info_t *info);
+static event_response_t exit_cb(drakvuf_t drakvuf, drakvuf_trap_info_t *info);
+void free_entry(gpointer key, gpointer value, gpointer user_data);
+
+#endif
+
+\end{lstlisting}}
+
+\newpage
+\textbf{ferify.cpp}
+\footnotesize{\fontfamily{qcr}\selectfont
+\begin{lstlisting}[style=CStyle]
+#include <config.h>
+#include <glib.h>
+#include <inttypes.h>
+#include <libvmi/libvmi.h>
+#include <fcntl.h>
+#include "ferify.h"
+
+#include "libdrakvuf/private.h"
+#include "libdrakvuf/linux-offsets.h"
+
+static event_response_t linux_cb(drakvuf_t drakvuf, drakvuf_trap_info_t *info) {
+	ferify *s = (ferify*)info->trap->data;
+	char * name, * filename = NULL, * filename2 = NULL, * dirfd = NULL;
+	size_t t = 0, len = 0, len2 = 0;
+	p_files * check = NULL, * check2 = NULL;
+	vmi_instance_t vmi = NULL; 
+	vmi_pid_t currpid;
+	uid_t uid = 0;
+	gid_t gid = 0;
+	uint64_t val = 0;
+	uint64_t mode = 0;
+	addr_t addr = 0, process_base = 0;
+
+	void * k = NULL, * v = NULL;
+	entry * e = NULL;
+	gchar * f = NULL, * f2 = NULL;
+	gchar * h = NULL, * h2 = NULL;
+
+	uint32_t fd = 3;
+	access_context_t ctx;
+
+	vmi = drakvuf_lock_and_get_vmi(drakvuf); 
+
+	currpid = vmi_dtb_to_pid(vmi, info->regs->cr3);
+	process_base = drakvuf_get_current_process(drakvuf, info->vcpu);
+	if (process_base == 0) {
+		printf("[ ERROR ] Could not get current process base.\n");
+	}
+
+	check_syscall_table_corruption(s, info);
+
+	switch (info->regs->rax){
+
+		case S_OPEN:
+		case S_RENAME:
+		case S_UNLINK:
+		case S_TRUNCATE:
+		case S_LINK:
+		case S_SYMLINK:
+		case S_SYMLINKAT:
+
+			filename = get_pathname_from_reg(drakvuf, info, vmi, currpid, 1);
+			break;
+
+		case S_OPENAT:
+		case S_UNLINKAT:
+		case S_RENAMEAT:
+		case S_RENAMEAT2:
+		case S_LINKAT:
+		case S_EXECVEAT:
+
+			filename = get_pathname_from_reg_at(drakvuf, info, vmi, currpid, process_base, 2);
+			break;
+
+		default:
+			if (info->regs->rax == s->s_execve)
+				filename = get_pathname_from_reg(drakvuf, info, vmi, currpid, 1);
+			else if (info->regs->rax == s->s_execveat)
+				filename = get_pathname_from_reg_at(drakvuf, info, vmi, currpid, process_base, 2);
+			break;
+	}
+
+	if (filename != NULL){
+		if (strncmp(filename, "/dev/", 5) == 0){
+			drakvuf_release_vmi(drakvuf);
+			return 0;
+		}
+		if (strncmp(filename, "/run/user/", 10) == 0){
+			drakvuf_release_vmi(drakvuf);
+			return 0;
+		}
+		if (strncmp(filename, "/sys/", 5) == 0){
+			drakvuf_release_vmi(drakvuf);
+			return 0;
+		}
+	}
+
+	switch (info->regs->rax){
+	
+		case S_OPEN:		// Open syscall
+		case S_OPENAT:		// openat syscall
+			if (identity_check(drakvuf, info, currpid) == false) {
+				intercept_print(info, filename, NULL, currpid);
+				vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+				break;			
+			}
+			
+			if (filename == NULL){
+				break;			
+			}
+			
+			switch (info->userid){
+				case ROOT:  // Cases for filtering root access
+				// Check root folder list
+					if ( filename != NULL) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist_root, h, &k, &v)){
+								e = (entry *)v;
+								permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+								break;
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+			
+				// Check root file list
+						if(g_hash_table_lookup_extended(s->filelist_root, filename, &k, &v)){
+							e = (entry *)v;
+							permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+							break;
+						}
+					}
+				
+					break;
+			
+			default:    // other users
+			// Check folder list
+				if ( filename != NULL ) {
+					h = g_strdup(filename);
+					f = g_strrstr(h, "/");
+					while (f != NULL) {
+						f[1] = '\0';
+						if(g_hash_table_lookup_extended(s->filelist, h, &k, &v)){
+							e = (entry *)v;
+							if (e->u == info->userid){
+								permissions_check2(drakvuf, filename, e, info, USER, INV); 
+								break;
+							}
+							else if (e->g == info->groupid){
+								permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+								break;
+							}
+							else {
+								permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+								break;
+							}
+						}
+						f[0] = '\0';
+						f = g_strrstr(h, "/");
+					}
+			
+					// Check file list
+					if(g_hash_table_lookup_extended(s->filelist, filename, &k, &v)){
+						e = (entry *)v;
+						if (e->u == info->userid){
+							permissions_check2(drakvuf, filename, e, info, USER, INV);
+							break;
+						}
+						else if (e->g == info->groupid){
+							permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+							break;
+						}
+						else {
+							permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+							break;
+						}
+					}
+					break;
+				}
+			}
+			break;
+		
+		case S_RENAME:        // Rename syscall
+		case S_RENAMEAT:		// renameat syscall
+		case S_RENAMEAT2:
+		case S_LINK:
+		case S_SYMLINK:
+		case S_LINKAT:
+		case S_SYMLINKAT:
+		
+			switch(info->regs->rax){
+				case S_RENAME:
+				case S_LINK:
+				case S_SYMLINK:
+				
+					filename2 = get_pathname_from_reg(drakvuf, info, vmi, currpid, 2);
+					if (identity_check(drakvuf, info, currpid) == false) {
+						intercept_print(info, filename, filename2, currpid);
+						vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+						vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+						break;
+					}
+					
+					break;
+				
+				case S_RENAMEAT:
+				case S_RENAMEAT2:
+				case S_LINKAT:
+				
+					filename2 = get_pathname_from_reg_at(drakvuf, info, vmi, currpid, process_base, 4);
+					
+					if (identity_check(drakvuf, info, currpid) == false) {
+						intercept_print(info, filename, filename2, currpid);
+						vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+						vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+						break;
+					}
+					
+					break;
+				
+				case S_SYMLINKAT:
+					filename2 = get_pathname_from_reg_at(drakvuf, info, vmi, currpid, process_base, 3);
+					
+					if (identity_check(drakvuf, info, currpid) == false) {
+						intercept_print(info, filename, filename2, currpid);
+						vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+						vmi_set_vcpureg(drakvuf->vmi, 0, RDX, info->vcpu);
+						break;
+					}
+					break;
+			}
+			
+			switch (info->userid){
+			
+				case ROOT: // Cases for filtering root access
+				
+					// Check root folder list
+					if ( filename != NULL ) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist_root, h, &k, &v)){
+								e = (entry *)v;
+								permissions_check2(drakvuf, filename, e, info, ROOT, SOURCE);
+								break;
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+						// Check root file list
+						if(g_hash_table_lookup_extended(s->filelist_root, filename, &k, &v)){
+							e = (entry *)v;
+							permissions_check2(drakvuf, filename, e, info, ROOT, SOURCE);
+							break;
+						}
+					}
+					
+					if ( filename2 != NULL ) {
+						h2 = g_strdup(filename2);
+						f2 = g_strrstr(h, "/");
+						while (f2 != NULL) {
+							f2[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist_root, h2, &k, &v)){
+								e = (entry *)v;
+								permissions_check2(drakvuf, filename2, e, info, ROOT, DEST);
+								break;
+							}
+						
+							f2[0] = '\0';
+							f2 = g_strrstr(h2, "/");
+						}
+						// Check root file list
+						if(g_hash_table_lookup_extended(s->filelist_root, filename2, &k, &v)){
+							e = (entry *)v;
+							permissions_check2(drakvuf, filename2, e, info, ROOT, DEST);
+							break;
+						}
+					}	
+					break;
+	
+				default:    // other users
+				
+					if ( filename != NULL ) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist, h, &k, &v)){
+								e = (entry *)v;
+								if (e->u == info->userid){
+									permissions_check2(drakvuf, filename, e, info, USER, SOURCE);
+									break;
+								}
+								else if (e->g == info->groupid){
+									permissions_check2(drakvuf, filename, e, info, GROUP, SOURCE);
+									break;
+								}
+								else {
+									permissions_check2(drakvuf, filename, e, info, OTHER, SOURCE);
+									break;
+								}
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+					}
+					
+					if ( filename2 != NULL ) {
+						h2 = g_strdup(filename2);
+						f2 = g_strrstr(h, "/");
+							while (f2 != NULL) {
+							f2[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist, h2, &k, &v)){
+								e = (entry *)v;
+								if (e->u == info->userid){
+									permissions_check2(drakvuf, filename2, e, info, USER, DEST);
+									break;
+								}
+								else if (e->g == info->groupid){
+									permissions_check2(drakvuf, filename2, e, info, GROUP, DEST);
+									break;
+								}
+								else {
+									permissions_check2(drakvuf, filename2, e, info, OTHER, DEST);
+									break;
+								}
+							}
+						
+							f2[0] = '\0';
+							f2 = g_strrstr(h2, "/");
+						}
+					}
+					
+					if ( filename != NULL ) {
+						if(g_hash_table_lookup_extended(s->filelist, filename, &k, &v)){
+							e = (entry *)v;
+							if (e->u == info->userid){
+								permissions_check2(drakvuf, filename, e, info, USER, SOURCE);
+								break;
+							} else if (e->g == info->groupid){
+								permissions_check2(drakvuf, filename, e, info, GROUP, SOURCE);
+								break;
+							} else {
+								permissions_check2(drakvuf, filename, e, info, OTHER, SOURCE);
+								break;
+							}
+						}
+					}
+					
+					if ( filename2 != NULL ) {
+						if(g_hash_table_lookup_extended(s->filelist_root, filename2, &k, &v)){
+							e = (entry *)v;
+							if (e->u == info->userid){
+								permissions_check2(drakvuf, filename2, e, info, USER, 	DEST);
+								break;
+							} else if (e->g == info->groupid){
+								permissions_check2(drakvuf, filename2, e, info, GROUP, DEST);
+								break;
+							} else {
+								permissions_check2(drakvuf, filename2, e, info, OTHER, DEST);
+								break;
+							}
+						}
+					}
+				
+				}
+				break;
+		
+		case S_UNLINK:			// unlink syscall (to prevent deletion of a file)
+		case S_UNLINKAT:		// unlinkat syscall (to prevent deletion of a file)
+		
+			if (identity_check(drakvuf, info, currpid) == false) {
+				intercept_print(info, filename, NULL, currpid);
+				vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+				break;
+			}
+			
+			switch (info->userid){
+			
+				case ROOT:     // Cases for filtering root access
+				
+					if ( filename != NULL ) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist_root, h, &k, &v)){
+								e = (entry *)v;
+								permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+								break;
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+						
+						if(g_hash_table_lookup_extended(s->filelist_root, filename, &k, &v)){
+							e = (entry *)v;
+							permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+						}
+					}
+					
+					break;
+				
+				default:    // other users
+				
+					if ( filename != NULL ) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist, h, &k, &v)){
+								e = (entry *)v;
+								if (e->u == info->userid){
+									permissions_check2(drakvuf, filename, e, info, USER, INV); 
+									break;
+								}
+								else if (e->g == info->groupid){
+									permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+									break;
+								}
+								else {
+									permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+									break;
+								}
+							
+								break;
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+					
+						if(g_hash_table_lookup_extended(s->filelist, filename, &k, &v)){
+							e = (entry *)v;
+							if (e->u == info->userid){
+								permissions_check2(drakvuf, filename, e, info, USER, INV);
+								break;
+							} else if (e->g == info->groupid){
+								permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+								break;
+							} else {
+								permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+								break;
+							}
+						}
+					}
+				break;		
+			}
+			break;
+		
+		case S_TRUNCATE:			// unlink syscall (to prevent deletion of a file)
+			if (identity_check(drakvuf, info, currpid) == false) {
+				intercept_print(info, filename, NULL, currpid);
+				vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+				break;
+			}
+			
+			switch (info->userid){
+			
+				case ROOT:     // Cases for filtering root access
+				
+					if ( filename != NULL ) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist_root, h, &k, &v)){
+								e = (entry *)v;
+								permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+								break;
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+						
+						if(g_hash_table_lookup_extended(s->filelist_root, filename, &k, &v)){
+							e = (entry *)v;
+							permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+						}
+					}
+					break;
+				
+				default:    // other users
+				
+					if ( filename != NULL ) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist, h, &k, &v)){
+								e = (entry *)v;
+								if (e->u == info->userid){
+									permissions_check2(drakvuf, filename, e, info, USER, INV); 
+									break;
+								}
+								else if (e->g == info->groupid){
+									permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+									break;
+								}
+								else {
+									permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+									break;
+								}
+								
+								break;
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+						
+						
+						if(g_hash_table_lookup_extended(s->filelist, filename, &k, &v)){
+							e = (entry *)v;
+							if (e->u == info->userid){
+								permissions_check2(drakvuf, filename, e, info, USER, INV);
+								break;
+							} else if (e->g == info->groupid){
+								permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+								break;
+							} else {
+								permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+								break;
+							}
+						}
+					}
+				break;		
+			}
+			break;
+		
+		case S_NAME_TO_HANDLE_AT:
+			vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+			intercept_print(info, NULL, NULL, currpid);
+			break;
+		
+		case S_OPEN_BY_HANDLE_AT:
+			vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+			intercept_print(info, NULL, NULL, currpid);
+			break;
+		
+		case S_INIT_MOD:
+			vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+			break;
+		
+		case S_FINIT_MOD:
+			vmi_set_vcpureg(drakvuf->vmi, -1, RDI, info->vcpu);
+			break;	
+		
+		case S_KEXEC_LOAD:
+			vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+			vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+			vmi_set_vcpureg(drakvuf->vmi, 0, RDX, info->vcpu);
+			vmi_set_vcpureg(drakvuf->vmi, 0, R10, info->vcpu);
+			break;	
+		
+		case S_KEXEC_FILE_LOAD:
+			vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+			vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+			vmi_set_vcpureg(drakvuf->vmi, 0, RDX, info->vcpu);
+			vmi_set_vcpureg(drakvuf->vmi, 0, R10, info->vcpu);
+			vmi_set_vcpureg(drakvuf->vmi, 0, R8, info->vcpu);
+			break;	
+		
+		case S_FORK:
+		case S_VFORK:
+			s->p_pid = currpid;
+			if (s->task_list[currpid] == NULL) {
+				add_task(s, currpid, info->userid, info->groupid, process_base, 1);
+			}
+			intercept_print(info, NULL, NULL, currpid);
+			break;
+			
+			case S_CLONE:
+			s->p_pid = currpid;
+			if (s->task_list[currpid] == NULL) {
+				add_task(s, currpid, info->userid, info->groupid, process_base, 1);
+			}
+			intercept_print(info, NULL, NULL, currpid);
+			break;
+		
+		case S_EXECVE:
+		case S_EXECVEAT:
+		
+			if (identity_check(drakvuf, info, currpid) == false) {
+				intercept_print(info, filename, NULL, currpid);
+				vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+				break;
+			}
+			
+			switch (info->userid){
+			
+				case ROOT:     // Cases for filtering root access
+				
+					if ( filename != NULL ) {
+					h = g_strdup(filename);
+					f = g_strrstr(h, "/");
+					while (f != NULL) {
+					f[1] = '\0';
+					if(g_hash_table_lookup_extended(s->filelist_root, h, &k, &v)){
+					e = (entry *)v;
+					permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+					break;
+					}
+					f[0] = '\0';
+					f = g_strrstr(h, "/");
+					}
+					
+					if(g_hash_table_lookup_extended(s->filelist_root, filename, &k, &v)){
+					e = (entry *)v;
+					permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+					}
+					}
+					
+					break;
+				
+				default:    // other users
+				
+					if ( filename != NULL ) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+							if(g_hash_table_lookup_extended(s->filelist, h, &k, &v)){
+								e = (entry *)v;
+								if (e->u == info->userid){
+									permissions_check2(drakvuf, filename, e, info, USER, INV); 
+									break;
+								}
+								else if (e->g == info->groupid){
+									permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+									break;
+								}
+								else {
+									permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+									break;
+								}
+								
+								break;
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+						
+						if(g_hash_table_lookup_extended(s->filelist, filename, &k, &v) != 0){
+							e = (entry *)v;
+							if (e->u == info->userid){
+								permissions_check2(drakvuf, filename, e, info, USER, INV);
+								break;
+							} else if (e->g == info->groupid){
+								permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+								break;
+							} else {
+								permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+								break;
+							}
+						}
+					}
+				break;		
+			}
+			break;
+		
+		default:
+		
+			if ((info->regs->rax == s->s_execve) || (info->regs->rax == s->s_execveat)){
+				if (identity_check(drakvuf, info, currpid) == false) {
+				intercept_print(info, filename, NULL, currpid);
+				vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+				break;
+				}
+				
+				switch (info->userid){
+				
+				case ROOT:     // Cases for filtering root access
+				
+				if ( filename != NULL ) {
+				h = g_strdup(filename);
+				f = g_strrstr(h, "/");
+				while (f != NULL) {
+				f[1] = '\0';
+				if(g_hash_table_lookup_extended(s->filelist_root, h, &k, &v)){
+				e = (entry *)v;
+				permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+				break;
+				}
+				f[0] = '\0';
+				f = g_strrstr(h, "/");
+				}
+				
+				if(g_hash_table_lookup_extended(s->filelist_root, filename, &k, &v)){
+				e = (entry *)v;
+				permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+				}
+				}
+				
+				break;
+				
+				default:    // other users
+				
+					if ( filename != NULL ) {
+						h = g_strdup(filename);
+						f = g_strrstr(h, "/");
+						while (f != NULL) {
+							f[1] = '\0';
+								if(g_hash_table_lookup_extended(s->filelist, h, &k, &v)){
+								e = (entry *)v;
+								if (e->u == info->userid){
+									permissions_check2(drakvuf, filename, e, info, USER, INV); 
+									break;
+								}
+								else if (e->g == info->groupid){
+									permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+									break;
+								}
+								else {
+									permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+									break;
+								}
+								
+								break;
+							}
+							f[0] = '\0';
+							f = g_strrstr(h, "/");
+						}
+						
+						if(g_hash_table_lookup_extended(s->filelist, filename, &k, &v) != 0){
+							e = (entry *)v;
+							if (e->u == info->userid){
+								permissions_check2(drakvuf, filename, e, info, USER, INV);
+								break;
+							} else if (e->g == info->groupid){
+								permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+								break;
+							} else {
+								permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+								break;
+							}
+						} else {
+							vmi_set_vcpureg (drakvuf->vmi, 0, RDI, info->vcpu);
+							intercept_print(info, filename, NULL, currpid);
+							printf("[ WARNING ] Blocked execution of %s for user: %ld because it was NOT in the SACL.\n", filename, info->userid);
+						}
+					}
+					break;		
+				}
+			
+			} else if ( (info->regs->rax == s->s_clone) ||
+			(info->regs->rax == s->s_fork)  ||
+			(info->regs->rax == s->s_vfork) ) {
+			
+				if (identity_check(drakvuf, info, currpid) == false) {
+					intercept_print(info, filename, NULL, currpid);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					break;
+				}
+				
+				s->p_pid = currpid;
+				if (s->task_list[currpid] == NULL) {
+					add_task(s, currpid, info->userid, info->groupid, process_base, 1);
+				}
+			}
+			
+			break;
+	}
+	
+	drakvuf_release_vmi(drakvuf);
+	return 0;
+}
+
+----------------------------------------------------------
+
+static GSList* create_trap_config(drakvuf_t drakvuf, ferify *s, symbols_t *symbols, const char* rekall_profile) {
+
+	GSList *ret = NULL;
+	unsigned long i,j;
+	
+	uint64_t sc = 0;
+	
+	PRINT_DEBUG("Received %lu symbols\n", symbols->count);
+	
+	if ( s->os == VMI_OS_WINDOWS )
+	{
+		printf("OS not supported.\n");
+		throw -1;
+	}
+	
+	if ( s->os == VMI_OS_LINUX )
+	{
+		addr_t rva = 0;
+		addr_t offset = 0x0001000000000000;
+		
+		if ( !drakvuf_get_constant_rva(rekall_profile, "_text", &rva) )
+			return NULL;
+		
+		s->rva = rva;
+		addr_t kaslr = drakvuf_get_kernel_base(drakvuf) - rva;
+		
+		s->kaslr = kaslr;
+		
+		for (i=0; i < symbols->count; i++)
+		{
+			const struct symbol *symbol = &symbols->symbols[i];
+			
+			if (strcmp(symbol->name, "system_call") == 0) {
+				printf("%s\n", symbol->name);
+			}
+			
+			if (strcmp(symbol->name, "ret_from_fork") == 0) {
+				printf("[ INFO ] Adding trap to ret_from_fork in %" PRIx64 "\n", symbol->rva + kaslr);
+				
+				drakvuf_trap_t *trap = (drakvuf_trap_t *)g_malloc0(sizeof(drakvuf_trap_t));
+				trap->breakpoint.lookup_type = LOOKUP_PID;
+				trap->breakpoint.pid = 0;
+				trap->breakpoint.addr_type = ADDR_VA;
+				trap->breakpoint.addr = symbol->rva + kaslr;
+				trap->breakpoint.module = "linux";
+				trap->name = g_strdup(symbol->name);
+				trap->type = BREAKPOINT;
+				trap->cb = fork_cb;
+				trap->data = s;
+				
+				ret = g_slist_prepend(ret, trap);
+				
+				s->fork_ret = symbol->rva + kaslr + offset;
+			}
+			
+			if (strncmp(symbol->name, "sys_exit", 8) == 0){
+				PRINT_DEBUG("[ INFO ] Adding trap to %s at 0x%lx (kaslr 0x%lx)\n", symbol->name, symbol->rva + kaslr, kaslr);
+				printf("[ INFO ] Adding trap to %s in %" PRIx64 "\n", symbol->name, symbol->rva + kaslr);
+				
+				drakvuf_trap_t *trap = (drakvuf_trap_t *)g_malloc0(sizeof(drakvuf_trap_t));
+				trap->breakpoint.lookup_type = LOOKUP_PID;
+				trap->breakpoint.pid = 0;
+				trap->breakpoint.addr_type = ADDR_VA;
+				trap->breakpoint.addr = symbol->rva + kaslr;
+				trap->breakpoint.module = "linux";
+				trap->name = g_strdup(symbol->name);
+				trap->type = BREAKPOINT;
+				trap->cb = exit_cb;
+				trap->data = s;
+				
+				ret = g_slist_prepend(ret, trap);
+				
+				if(strcmp(symbol->name, "sys_exit") == 0)
+					s->s_exit = symbol->rva + kaslr + offset;
+				if(strcmp(symbol->name, "sys_exit_group") == 0)
+					s->s_exit_group = symbol->rva + kaslr + offset;
+			}
+			
+			if ((strcmp(symbol->name, "sys_open")) &&
+			(strcmp(symbol->name, "sys_openat")) &&
+			(strcmp(symbol->name, "sys_link")) &&
+			(strcmp(symbol->name, "sys_linkat")) &&
+			(strcmp(symbol->name, "sys_fork")) &&
+			(strcmp(symbol->name, "sys_clone")) &&
+			(strcmp(symbol->name, "sys_vfork")) &&
+			(strcmp(symbol->name, "sys_symlink")) &&
+			(strcmp(symbol->name, "sys_symlinkat")) &&
+			(strcmp(symbol->name, "sys_execve")) &&
+			(strcmp(symbol->name, "sys_execveat")) &&
+			(strcmp(symbol->name, "sys_init_module")) &&
+			(strcmp(symbol->name, "sys_finit_module")) &&
+			// (strcmp(symbol->name, "sys_close")) &&
+			(strcmp(symbol->name, "sys_rename")) && 
+			(strncmp(symbol->name, "sys_renameat", 12)) && 
+			(strncmp(symbol->name, "sys_unlink", 10)) &&
+			(strcmp(symbol->name, "sys_truncate")) ) 
+				continue;
+			
+			/* This is the address of the table itself so skip it */
+			if (!strcmp(symbol->name, "sys_call_table") ){
+				continue;
+			}
+			
+			PRINT_DEBUG("[ INFO ] Adding trap to %s at 0x%lx (kaslr 0x%lx)\n", symbol->name, symbol->rva + kaslr, kaslr);
+			printf("[ INFO ] Adding trap to %s in %" PRIx64 "\n", symbol->name, symbol->rva + kaslr);
+			
+			drakvuf_trap_t *trap = (drakvuf_trap_t *)g_malloc0(sizeof(drakvuf_trap_t));
+			trap->breakpoint.lookup_type = LOOKUP_PID;
+			trap->breakpoint.pid = 0;
+			trap->breakpoint.addr_type = ADDR_VA;
+			trap->breakpoint.addr = symbol->rva + kaslr;
+			trap->breakpoint.module = "linux";
+			trap->name = g_strdup(symbol->name);
+			trap->type = BREAKPOINT;
+			trap->cb = linux_cb;
+			trap->data = s;
+			
+			ret = g_slist_prepend(ret, trap);
+			
+			if(strcmp(symbol->name, "sys_open") == 0)
+				s->s_open = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_openat") == 0)
+				s->s_openat = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_execve") == 0)
+				s->s_execve = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_execveat") == 0)
+				s->s_execveat = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_clone") == 0)
+				s->s_clone = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_fork") == 0)
+				s->s_fork = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_vfork") == 0)
+				s->s_vfork = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_rename") == 0)
+				s->s_rename = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_renameat") == 0)
+				s->s_renameat = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_renameat2") == 0)
+				s->s_renameat2 = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_unlink") == 0)
+				s->s_unlink = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_unlinkat") == 0)
+				s->s_unlinkat = symbol->rva + kaslr + offset;
+			else if(strcmp(symbol->name, "sys_truncate") == 0)
+				s->s_truncate = symbol->rva + kaslr + offset;
+		}
+	}
+	
+	return ret;
+}
+
+----------------------------------------------------------
+
+ferify::ferify(drakvuf_t drakvuf, const void *config, output_format_t output) {
+
+	FILE *fp = NULL;
+	
+	char tmp[MAX_PATHNAME_LEN];
+	
+	int i = 0;
+	int q = 0;
+	unsigned int uu, gg, mm;
+	int len = 0;
+	int count = 0;
+	
+	p_files * file = NULL,* next = NULL;
+	const char *rekall_profile = (const char *)config;
+	
+	char * name;
+	char filename[MAX_FILENAME_LEN] = { '\0' };
+	char sudo_file[MAX_FILENAME_LEN] = { '\0' };
+	char c[11] = { '\0' };
+	uint32_t sudoer = 0;
+	entry * e = NULL, * v1 = NULL;
+	
+	void * k = NULL, * v = NULL;
+	
+	this->filelist = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+	this->filelist_root = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+	
+	symbols_t *symbols = drakvuf_get_symbols_from_rekall(rekall_profile);
+	if (!symbols)
+	{
+		fprintf(stderr, "Failed to parse Rekall profile at %s\n", rekall_profile);
+		throw -1;
+	}
+	
+	this->os = drakvuf_get_os_type(drakvuf);
+	this->traps = create_trap_config(drakvuf, this, symbols, rekall_profile);
+	this->format = output;
+	
+	vmi_instance_t vmi = drakvuf_lock_and_get_vmi(drakvuf);
+	this->reg_size = vmi_get_address_width(vmi); // 4 or 8 (bytes)
+	drakvuf_release_vmi(drakvuf);
+	
+	vmi_pause_vm(vmi);
+	name = vmi_get_name(vmi);
+	
+	strncat(filename, "/root/", 255 - strlen(filename));
+	strncat(sudo_file, "/root/", 255 - strlen(sudo_file));
+	strncat(filename, name, 255 - strlen(filename));
+	strncat(sudo_file, name, 255 - strlen(sudo_file));
+	strncat(filename, "_pfiles", 255 - strlen(filename));
+	strncat(sudo_file, "_sudoers", 255 - strlen(sudo_file));
+	
+	fp = fopen(sudo_file, "r");
+	printf("[ INFO ] Reading sudoers: ");
+	if(fp != NULL) {
+		while(fscanf(fp, "%u", &sudoer) == 1) {
+			this->sudoers[i] = sudoer;
+			printf("%u ", sudoer);
+			i++;
+		}
+	}
+	printf("\n");
+	
+	fclose(fp);
+	fp = NULL;
+	fp = fopen(filename, "r");
+	if (fp != NULL){
+	
+		while(fscanf(fp, "%s\t%o\t%u\t%u", tmp, &mm, &uu, &gg) == 4){
+			count++;
+			e = (entry *)malloc(sizeof(entry));
+			
+			if (e == NULL){
+				printf("Error allocating memory in ubuntu1_pfiles file.\n");
+				throw -1;
+			}
+			
+			len = strlen(tmp);
+			e->u = uu;
+			e->g = gg;
+			e->mode = mm;
+			
+			if(!g_hash_table_insert(filelist, g_strdup(tmp), e)){
+				printf("Found duplicate entry. Updating.\n");
+				g_hash_table_lookup_extended(filelist, tmp, &k, &v);
+				v1 = (entry*)v;
+				v1->mode = mm;
+				v1->u = uu;
+				v1->g = gg;
+				v = NULL;
+				k = NULL;
+			}
+		}
+		fclose(fp);
+		fp = NULL;
+	}
+	
+	printf("%d\n", count);	
+	strncat(filename, "_root", 255 - strlen(filename));	
+	fp = fopen(filename, "r");	
+	if (fp != NULL){
+		
+	while(fscanf(fp, "%s\t%o", tmp, &mm) == 2){
+	
+		e = (entry *)malloc(sizeof(entry));
+		if (e == NULL){
+			printf("Error allocating memory in root ubuntu1_pfiles_root file.\n");
+			throw -1;
+		}
+		
+		len = strlen(tmp);	
+		e->mode = mm;
+		e->u = 0;
+		e->g = 0;	
+	
+		if(!g_hash_table_insert(filelist_root, g_strdup(tmp), e)){
+			printf("Found duplicate entry. Updating.\n");
+			g_hash_table_lookup_extended(filelist_root, tmp, &k, &v);
+			v1 = (entry*)v;
+			v1->mode = mm;
+			v1->u = uu;
+			v1->g = gg;
+			v = NULL;
+			k = NULL;
+		}	
+	}
+	
+	fclose(fp);
+	fp = NULL;
+	}
+	
+	drakvuf_free_symbols(symbols);
+	printf("[ INFO ] Done parsing files.\n");
+	process_list(drakvuf, this, vmi);
+	GSList *loop = this->traps;
+	vmi_resume_vm(vmi);
+	
+	while(loop) {
+		drakvuf_trap_t *trap = (drakvuf_trap_t *)loop->data;
+		if ( !drakvuf_add_trap(drakvuf, trap) ){
+			printf("Error with trap.\n");	
+			throw -1;
+		}
+	
+	loop = loop->next;
+	}
+}
+
+----------------------------------------------------------
+
+ferify::~ferify() {
+	
+	int q = 0;
+	
+	GSList *loop = this->traps;
+	while(loop) {
+		drakvuf_trap_t *trap = (drakvuf_trap_t *)loop->data;
+		g_free((char*)trap->name);
+		if (trap->data != (void*)this) {
+			g_free(trap->data);
+		}
+		g_free(loop->data);
+		loop = loop->next;
+	}
+	
+	p_files * current = NULL, * next = NULL;
+	
+	for (q = 0;q < 32768;q++) {
+		if (this->task_list[q] != NULL){
+			free(this->task_list[q]);
+		}
+	}
+	
+	g_hash_table_foreach(filelist, free_entry, NULL);
+	g_hash_table_foreach(filelist_root, free_entry, NULL);
+	g_hash_table_destroy(filelist);
+	g_hash_table_destroy(filelist_root);
+	
+	g_slist_free(this->traps);
+	printf("[ INFO ] Exited cleanly.\n");
+}
+
+----------------------------------------------------------
+
+int permissions_check2(drakvuf_t drakvuf, char * filename, entry * e, drakvuf_trap_info_t * info, int id, int reg) {
+
+	ferify *s = (ferify*)info->trap->data;
+	vmi_pid_t currpid = vmi_dtb_to_pid(drakvuf->vmi, info->regs->cr3);
+	int r, w, x, id_check;
+	switch (id) {
+		case ROOT:
+		case USER:
+			r = 0400;
+			w = 0200;
+			x = 0100;
+			if (e->u != info->userid) {
+				id_check = 0;
+				printf("Process user different than saved user %u vs %ld.\n", e->u, info->userid);
+			}
+			else
+				id_check = 1;
+			break;
+		case GROUP:
+			r = 040;
+			w = 020;
+			x = 010;
+			if (e->g != info->groupid)
+				id_check = 0;
+			else
+				id_check = 1;
+			break;
+		case OTHER:
+			r = 04;
+			w = 02;
+			x = 01;
+			id_check = 1;
+			break;
+		default:
+			return -1;
+	}
+	
+	switch(info->regs->rax){
+		case S_OPEN:
+		
+			if ( ((info->regs->rsi & PERMISSIONS) | O_RDONLY) == O_RDONLY){
+				if ( !((e->mode & r) && (id_check))) {
+					printf("%d\t%d", e->mode, r);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked read access for user: %ld\n", info->userid);
+					return 1;
+				}
+			
+			} else if ( ((info->regs->rsi & PERMISSIONS) & O_WRONLY) == O_WRONLY) {
+				if ( !((e->mode & w) && (id_check))) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked write access for user: %ld\n", info->userid);
+					return 1;
+				} 
+			
+			} else if ( ((info->regs->rsi & PERMISSIONS) & O_RDWR) == O_RDWR) {
+				if ( !((e->mode & w) && (e->mode & r) && (id_check)) ) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked access for user: %ld\n", info->userid);
+					return 1;
+				} 
+				else if ( !((e->mode & w) && (id_check)) ){
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked write access for user: %ld\n", info->userid);
+					return 1;
+				}
+				else if ( !((e->mode & r) && (id_check)) ){
+					vmi_set_vcpureg(drakvuf->vmi, 1, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked read access for user: %ld\n", info->userid);
+					return 1;
+				}
+			}
+			
+			
+			break;
+		
+		case S_OPENAT:
+		
+			if ( ((info->regs->rsi & PERMISSIONS) | O_RDONLY) == O_RDONLY){
+				if ( !((e->mode & r) && (id_check))) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked read access for user: %ld\n", info->userid);
+					return 1;
+				}
+			} else if ( ((info->regs->rsi & PERMISSIONS) & O_WRONLY) == O_WRONLY) {
+				if ( !((e->mode & w) && (id_check))) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked write access for user: %ld\n", info->userid);
+					return 1;
+				}
+			} else if ( ((info->regs->rsi & PERMISSIONS) & O_RDWR) == O_RDWR) {
+				if ( !((e->mode & w) && (e->mode & r) && (id_check)) ) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked access for user: %ld\n", info->userid);
+					return 1;
+				} 
+				else if ( !((e->mode & w) && (id_check)) ){
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDX, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked write access for user: %ld\n", info->userid);
+					return 1;
+				}
+				else if ( !((e->mode & r) && (id_check)) ){
+					vmi_set_vcpureg(drakvuf->vmi, 1, RDX, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked read access for user: %ld\n", info->userid);
+					return 1;
+				}
+			}
+			break;
+		
+		case S_RENAME:
+		case S_LINK:
+		case S_SYMLINK:
+		
+			if (reg == SOURCE){
+				if ( !((e->mode & r) && (e->mode & w) && (id_check)) ) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked read access for user: %ld\n", info->userid);
+					return 1;
+				}
+			} else if (reg == DEST) {
+				if ( !((e->mode & w) && (id_check)) ) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked write access for user: %ld\n", info->userid);
+					return 1;
+				} 
+			
+			}
+			break;
+		
+		case S_RENAMEAT:	
+		case S_RENAMEAT2:
+		case S_LINKAT:
+		
+			if (reg == SOURCE){
+				if ( !((e->mode & r) && (e->mode & w) && (id_check)) ) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked read access for user: %ld\n", info->userid);
+					return 1;
+				}
+			} else if (reg == DEST){
+				if ( !((e->mode & w) && (id_check)) ) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked write access for user: %ld\n", info->userid);
+					return 1;
+				} 
+			
+			}
+			
+			break;
+		
+		case S_SYMLINKAT:
+		
+			if (reg == SOURCE){
+				if ( !((e->mode & r) && (e->mode & w) && (id_check)) ) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDX, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked read access for user: %ld\n", info->userid);
+					return 1;
+				}
+			} else if (reg == DEST){
+				if ( !((e->mode & w) && (id_check)) ) {
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDI, info->vcpu);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RDX, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked write access for user: %ld\n", info->userid);
+					return 1;
+				} 
+			
+			}
+			
+			break;
+		
+		case S_UNLINK:
+		
+			if ( !((e->mode & w) && (id_check)) ) {
+				vmi_set_vcpureg (drakvuf->vmi, 0, RDI, info->vcpu);
+				intercept_print(info, filename, NULL, currpid);
+				printf("[ WARNING ] Blocked delete for user: %ld\n", info->userid);
+				return 1;
+			}
+			break;
+		
+		case S_UNLINKAT:
+		
+			if ( !((e->mode & w) && (id_check)) ) {
+				vmi_set_vcpureg (drakvuf->vmi, 0, RSI, info->vcpu);
+				intercept_print(info, filename, NULL, currpid);
+				printf("[ WARNING ] Blocked delete for user: %ld\n", info->userid);
+				return 1;
+			}
+			break;
+		
+		
+		case S_TRUNCATE:
+		
+			if ( !((e->mode & w) && (id_check)) ) {
+				vmi_set_vcpureg (drakvuf->vmi, 0, RDI, info->vcpu);
+				intercept_print(info, filename, NULL, currpid);
+				printf("[ WARNING ] Blocked truncate for user: %ld\n", info->userid);
+				return 1;
+			}
+			break;
+		
+		case S_EXECVE:
+		
+			if ( !((e->mode & x) && (e->mode & r) && (id_check)) ) {
+				vmi_set_vcpureg (drakvuf->vmi, 0, RDI, info->vcpu);
+				intercept_print(info, filename, NULL, currpid);
+				printf("[ WARNING ] Blocked execution of %s for user: %ld\n", filename, info->userid);
+				return 1;
+			}
+			break;
+		
+		case S_EXECVEAT:
+		
+			if ( !((e->mode & x) && (id_check)) ) {
+				vmi_set_vcpureg (drakvuf->vmi, 0, RSI, info->vcpu);
+				intercept_print(info, filename, NULL, currpid);
+				printf("[ WARNING ] Blocked execution of %s for user: %ld\n", filename, info->userid);
+				return 1;
+			}
+			break;
+		
+		default:
+		
+			if (info->regs->rax == s->s_execve) {
+			
+				if ( !((e->mode & x) && (e->mode & r) && (id_check)) ) {
+					vmi_set_vcpureg (drakvuf->vmi, 0, RDI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked execution of %s for user: %ld\n", filename, info->userid);
+					return 1;
+				}
+			
+			} else if (info->regs->rax == s->s_execveat) {
+			
+				if ( !((e->mode & x) && (e->mode & r) && (id_check)) ) {
+					vmi_set_vcpureg (drakvuf->vmi, 0, RSI, info->vcpu);
+					intercept_print(info, filename, NULL, currpid);
+					printf("[ WARNING ] Blocked execution of %s for user: %ld\n", filename, info->userid);
+					return 1;
+				}
+			
+			}
+			break;
+	}
+	return 0;
+}
+
+----------------------------------------------------------
+
+void intercept_print(drakvuf_trap_info_t *info, char * filename, char * filename2, vmi_pid_t currpid) {
+
+	ferify *s = (ferify*)info->trap->data;
+	uint64_t mode = 0;
+	
+	switch(info->regs->rax){
+	
+		case S_OPEN:
+		
+			if ((info->regs->rsi & O_CREAT) == O_CREAT)
+				mode = info->regs->rdx;
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants %lo access to file: %s (mode:%lo)\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid, info->regs->rsi, filename, mode);
+			break;	
+		
+		case S_OPENAT:
+		
+			if ((info->regs->rdx & O_CREAT) == O_CREAT)
+				mode = info->regs->r10;
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants %lo access to file: %s (mode:%lo)\n",
+				info->regs->rax, info->regs->cr3, info->regs->rsi, info->procname,
+				currpid, info->userid, info->groupid, info->regs->rdx, filename, mode);
+			break;	
+		
+		case S_RENAME:
+		
+			printf("[SYSCALL: %3" PRIu64 "] RDI: 0x%-12" PRIx64 " RSI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants to execute move with file: %s\n",
+				info->regs->rax, info->regs->rdi, info->regs->rsi, info->procname, currpid, info->userid, info->groupid, filename);
+			break;
+		
+		case S_RENAMEAT:
+		case S_RENAMEAT2:
+		
+			printf("[SYSCALL: %3" PRIu64 "] RDI: 0x%-12" PRIx64 " RSI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants to execute move with file: %s\n",
+				info->regs->rax, info->regs->rsi, info->regs->r10, info->procname, currpid, info->userid, info->groupid, filename);
+			break;
+		
+		case S_UNLINK:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants to delete file %s\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid, filename);
+			break;	
+		
+		case S_EXECVE:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants to execute file %s\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid, filename);
+			break;	
+		
+		case S_EXECVEAT:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants to execute file %s\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid, filename);
+			break;	
+		
+		case S_UNLINKAT:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants to delete file %s\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid, filename);
+			break;	
+		
+		case S_TRUNCATE:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants to truncate file %s to size %" PRIu64 "\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid, filename, info->regs->rsi);
+			break;	
+		
+		case S_CLOSE:
+			
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] wants to close fd %" PRIu64 ".\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid, info->regs->rdi);
+			break;	
+		
+		case S_EXIT:
+		
+			if (s->task_list[currpid]->threads == 0)
+				printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is exiting. Deleting from s->task_list.\n",
+					info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+					currpid, info->userid, info->groupid);
+			else
+				printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is exiting. Deleting thread.\n",
+					info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+					currpid, info->userid, info->groupid);
+			break;
+		
+		case S_EXIT_GROUP:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is exiting. Deleting from s->task_list.\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid);
+			break;	
+		
+		case S_CLONE:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is cloning.\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid);
+			break;	
+		
+		case S_FORK:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is forking.\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid);
+			break;	
+		
+		case S_VFORK:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is forking.\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid);
+			break;	
+		
+		case S_NAME_TO_HANDLE_AT:
+		case S_OPEN_BY_HANDLE_AT:
+		
+			printf("[SYSCALL: %3" PRIu64 "] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld]. [ WARNING ] Not supported\n",
+				info->regs->rax, info->regs->cr3, info->regs->rdi, info->procname,
+				currpid, info->userid, info->groupid);
+			break;
+		
+		default:
+		
+			if (info->regs->rax == s->s_clone)
+				printf("[SYSCALL:  56] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is clonig\n",
+					info->regs->cr3, info->regs->rdi, info->procname,
+					currpid, info->userid, info->groupid);
+			else if (info->regs->rax == s->s_execve)
+				printf("[SYSCALL:  59] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is executing %s\n",
+					info->regs->cr3, info->regs->rdi, info->procname,
+					currpid, info->userid, info->groupid, filename);
+			else if (info->regs->rax == s->s_execveat)
+				printf("[SYSCALL:  59] CR3:0x%-10" PRIx64 ", RDI: 0x%-12" PRIx64 " ,%s PID:%d [%ld:%ld] is executing %s\n",
+					info->regs->cr3, info->regs->rdi, info->procname,
+						currpid, info->userid, info->groupid, filename);
+	}
+	return;
+}
+
+----------------------------------------------------------
+
+char * get_pathname(drakvuf_t drakvuf, drakvuf_trap_info_t *info, char *filename, int append_filename){
+
+	char * ret, * cut;
+	int tmp;
+	
+	if (filename[0] != '/'){
+		if ( (filename[0] == '.') && (filename[1] == '/') ){
+			filename += 2;
+			ret = drakvuf_get_current_process_parent_folder(drakvuf, info->vcpu);
+			ret = (char *)realloc(ret, strlen(ret) + strlen(filename) + 1);
+			if(append_filename)
+				strcat(ret, filename);
+			filename = ret;
+		} else if((filename[0] == '.') && (filename[1] == '.')){
+			ret = drakvuf_get_current_process_parent_folder(drakvuf, info->vcpu);
+			while ( (filename[0] == '.') && (filename[1] == '.') ){
+				filename += 2;
+				tmp = strlen(ret);
+				ret[tmp - 1] = '\0';
+				cut = strrchr(ret, '/');
+				*cut = '\0';
+				filename++;
+			}
+			filename--;
+			if(append_filename) {
+				ret = (char *)realloc(ret, strlen(ret) + strlen(filename) + 1);
+				strcat(ret, filename);
+			}
+			filename = ret;
+		} else {
+			ret = drakvuf_get_current_process_parent_folder(drakvuf, info->vcpu);
+			if (append_filename) {
+				ret = (char *)realloc(ret, strlen(ret) + strlen(filename) + 1);
+				strcat(ret, filename);
+			}
+			filename = ret;
+		}
+	}
+	return filename;
+}
+
+----------------------------------------------------------
+
+char * get_dirfd(drakvuf_t drakvuf, drakvuf_trap_info_t *info, vmi_instance_t vmi, char *filename, vmi_pid_t currpid, addr_t process_base){
+
+	addr_t fs, pwd, dentry, parent, parent_name, parent_d_name, d_name, name, fdd, path;
+	char * dirfd = NULL;
+	addr_t files = 0, fd_array = 0, filp = 0, f_dentry = 0, f_name = 0, fdt = 0;
+	access_context_t ctx;
+	char slash[] = "/";
+	char * dir = NULL;
+	char ** strings = (char **)calloc(sizeof(char *), 10);
+	char ** strings_ = (char **)calloc(sizeof(char *), 10);
+	char * ret = (char *)calloc(4096, 1);
+	
+	int i = 0, q;
+	
+	ctx = {
+		.translate_mechanism = VMI_TM_PROCESS_DTB,
+		.dtb = drakvuf->regs[info->vcpu]->cr3,
+		.addr = process_base + drakvuf->offsets[TASK_STRUCT_FILES]
+	};
+	
+	if ( VMI_FAILURE == vmi_read_addr(vmi, &ctx, &files) ) {
+		printf("[ ERROR ] Could not read task_struct files entry for PID %d\n", currpid);
+		vmi_resume_vm(vmi);
+		return 0;
+	}
+	
+	ctx.addr = files + drakvuf->offsets[FILES_STRUCT_FDT];
+	if (VMI_FAILURE == vmi_read_addr(vmi, &ctx, &fdt)){
+		printf("[ ERROR ] Could not read fdt for PID %d.\n", currpid);
+		vmi_resume_vm(vmi);
+		return 0;
+	} 
+	
+	ctx.addr = fdt + drakvuf->offsets[FDTABLE_FD];
+	if (VMI_FAILURE == vmi_read_addr(vmi, &ctx, &fd_array)){
+		printf("[ ERROR ] Could not read fd_array for PID %d.\n", currpid);
+		vmi_resume_vm(vmi);
+		return 0;
+	} 
+	
+	ctx.addr = fd_array + (8 * (info->regs->rdi));
+	if (VMI_FAILURE == vmi_read_addr(vmi, &ctx, &filp)){
+		printf("[ ERROR ] Could not read fd_array for PID %d.\n", currpid);
+		vmi_resume_vm(vmi);
+		return 0;
+	} 
+	
+	ctx.addr = filp + drakvuf->offsets[FILE_STRUCT_F_PATH] + drakvuf->offsets[PATH_STRUCT_DENTRY];
+	if (VMI_FAILURE == vmi_read_addr(vmi, &ctx, &dentry)){
+		printf("[ ERROR ] Could not read fd_array for PID %d.\n", currpid);
+		vmi_resume_vm(vmi);
+		return 0;
+	} 
+	d_name = dentry + drakvuf->offsets[DENTRY_STRUCT_DNAME];
+	
+	ctx.addr = d_name + drakvuf->offsets[QSTR_STRUCT_NAME];
+	if ( VMI_FAILURE == vmi_read_addr(vmi, &ctx, &name) ){
+		printf("[ ERROR ] Could not read fd_array for PID %d.\n", currpid);
+		vmi_resume_vm(vmi);
+		return 0;
+	} 
+	
+	ctx.addr = name;
+	dirfd = vmi_read_str(vmi, &ctx);
+	
+	strings[i++] = dirfd;
+	parent = dentry;
+	
+	if (strcmp(slash, dirfd) != 0){
+	
+		while(strcmp(slash, vmi_read_str(drakvuf->vmi, &ctx)) != 0){
+		
+			ctx.addr = parent + drakvuf->offsets[DENTRY_STRUCT_PARENT];
+			if ( VMI_FAILURE == vmi_read_addr(drakvuf->vmi, &ctx, &parent) )
+				return NULL;
+			
+			parent_d_name = parent + drakvuf->offsets[DENTRY_STRUCT_DNAME];
+			
+			ctx.addr = parent_d_name + drakvuf->offsets[QSTR_STRUCT_NAME];
+			if ( VMI_FAILURE == vmi_read_addr(drakvuf->vmi, &ctx, &parent_name) )
+				return NULL;
+			
+			ctx.addr = parent_name;
+			strings[i++] = vmi_read_str(drakvuf->vmi, &ctx);
+			if (i > 9) {
+				strings_ = strings;
+				*strings = (char *)malloc(sizeof(char *) * (i + 1));
+				if (strings == NULL){
+					printf("{ ERROR ] Cannot allocate memory.\n");
+					vmi_resume_vm(vmi);
+					return 0;
+				}
+				for(int q = 0;q < i;q++){
+					strings[q] = strings_[q];
+				}
+				free(strings_);
+			}
+		}
+	}
+	
+	strcat(ret, slash);
+	for (q = i - 2;q >= 0;q--){
+		strcat(ret, strings[q]);
+		strcat(ret, slash);
+	}
+	
+	dir = (char*)malloc(strlen(ret) + strlen(filename) + 2);
+	strncpy(dir, ret, strlen(ret) + 1);
+	strncat(dir, filename, strlen(filename) + 1);
+	free(filename);
+	free(ret);
+	
+	return dir;
+}
+
+----------------------------------------------------------
+
+void process_list(drakvuf_t drakvuf, ferify * s, vmi_instance_t vmi){
+
+	int counter = 0;
+	addr_t list_head = 0, next_list_entry = 0, prev_list_entry = 0;
+	addr_t current_process = 0, cred = 0, real_cred = 0;
+	uid_t uid = -1, suid = -1, euid = -1;
+	gid_t gid = -1, sgid = -1, egid = -1;
+	uid_t r_uid = -1, r_suid = -1, r_euid = -1;
+	gid_t r_gid = -1, r_sgid = -1, r_egid = -1;
+	char *procname = NULL;
+	vmi_pid_t pid = 0;
+	unsigned long tasks_offset = 0, pid_offset = 0, name_offset = 0;
+	status_t status;
+	
+	tasks_offset = vmi_get_offset(vmi, "linux_tasks");
+	name_offset = vmi_get_offset(vmi, "linux_name");
+	pid_offset = vmi_get_offset(vmi, "linux_pid");
+	
+	list_head = vmi_translate_ksym2v(vmi, "init_task") + tasks_offset;
+	next_list_entry = list_head;
+	
+	/* walk the task list */
+	do {
+	
+		current_process = next_list_entry - tasks_offset;
+		
+		procname = vmi_read_str_va(vmi, current_process + name_offset, 0);
+		
+		if (!procname) {
+			printf("[ ERROR ] Failed to find procname\n");
+		}
+		
+		if(vmi_read_addr_va(vmi, current_process + drakvuf->offsets[TASK_STRUCT_CRED], 0, &cred) == VMI_FAILURE){
+			printf("[ ERROR ] Failed to read cred struct\n");
+		}
+		if(vmi_read_addr_va(vmi, current_process + drakvuf->offsets[TASK_STRUCT_REAL_CRED], 0, &real_cred) == VMI_FAILURE){
+			printf("[ ERROR ] Failed to read cred struct\n");
+		}
+		
+		if(vmi_read_32_va(vmi, cred + drakvuf->offsets[CRED_UID], 0, &uid) == VMI_FAILURE){
+			printf("[ ERROR ] Failed to read uid\n");
+		}
+		if(vmi_read_32_va(vmi, cred + drakvuf->offsets[CRED_GID], 0, &gid) == VMI_FAILURE){
+			printf("[ ERROR ] Failed to read gid\n");
+		}
+	
+		if (VMI_FAILURE == vmi_read_32_va(vmi, current_process + pid_offset, 0, (uint32_t*)&pid))
+			continue;
+		
+		add_task(s, pid, uid, gid, current_process, 0);
+		counter += 1;
+		
+		printf("%3d. [%5d] %-20s ( %5u:%-5u ) (struct addr:%" PRIx64 ")\n", 
+			counter, pid, procname, uid, gid, current_process);
+		
+		status = vmi_read_addr_va(vmi, next_list_entry, 0, &next_list_entry);
+		if (status == VMI_FAILURE) {
+			printf("[ ERROR ] Failed to read next pointer in loop at %" PRIx64 "\n", next_list_entry);
+		}
+	
+	} while(next_list_entry != list_head);
+	
+	printf("[ INFO ] Found and added %d processes.\n", counter);
+	return;
+}
+
+----------------------------------------------------------
+
+static event_response_t fork_cb(drakvuf_t drakvuf, drakvuf_trap_info_t *info) {
+
+	ferify *s = (ferify*)info->trap->data;
+	addr_t parent_process = 0, child_process = 0, parent_cred = 0, child_cred = 0, t_process = 0;
+	vmi_pid_t parent_pid = -1, child_pid = -1, t_pid = -1;
+	unsigned long tasks_offset = 0, pid_offset = 0, name_offset = 0;
+	vmi_instance_t vmi = NULL;
+	char * parent_name = NULL, *child_name = NULL, *t_name = NULL;
+	uid_t parent_uid = -1, child_uid = -1, t_uid = -1;
+	gid_t parent_gid = -1, child_gid = -1, t_gid = -1;
+	task *t = NULL;
+	int i = 0;
+	
+	int p_pid = s->p_pid;
+	s->p_pid = -1;
+	
+	vmi = drakvuf_lock_and_get_vmi(drakvuf); 
+	drakvuf_release_vmi(drakvuf);
+	
+	tasks_offset = vmi_get_offset(vmi, "linux_tasks");
+	name_offset = vmi_get_offset(vmi, "linux_name");
+	pid_offset = vmi_get_offset(vmi, "linux_pid");
+	
+	// Get parent and child process base address
+	parent_process = info->regs->rax;
+	
+	child_process = drakvuf_get_current_process(drakvuf, info->vcpu);
+	
+	// Get parent and child pid
+	vmi_read_32_va(vmi, parent_process + pid_offset, 0, (uint32_t*)&parent_pid);
+	child_pid = vmi_dtb_to_pid(vmi, info->regs->cr3);
+	
+	if ( (parent_pid == -1) || (child_pid == -1) ) {
+		printf("[ ERROR ] ret_from_fork returned -1.\n");
+		return 0;
+	}
+	
+	// Get parent and child procname
+	parent_name = vmi_read_str_va(vmi, parent_process + name_offset, 0);
+	child_name = vmi_read_str_va(vmi, child_process + name_offset, 0);
+	
+	// Get parent and child uid and gid
+	if(vmi_read_addr_va(vmi, parent_process + drakvuf->offsets[TASK_STRUCT_CRED], 0, &parent_cred) == VMI_FAILURE){
+		printf("[ ERROR ] Failed to read cred struct\n");
+	}
+	if(vmi_read_addr_va(vmi, child_process + drakvuf->offsets[TASK_STRUCT_CRED], 0, &child_cred) == VMI_FAILURE){
+		printf("[ ERROR ] Failed to read cred struct\n");
+	}
+	if(vmi_read_32_va(vmi, parent_cred + drakvuf->offsets[CRED_UID], 0, &parent_uid) == VMI_FAILURE){
+		printf("[ ERROR ] Failed to read uid\n");
+	}
+	if(vmi_read_32_va(vmi, parent_cred + drakvuf->offsets[CRED_GID], 0, &parent_gid) == VMI_FAILURE){
+		printf("[ ERROR ] Failed to read gid\n");
+	}	
+	if(vmi_read_32_va(vmi, child_cred + drakvuf->offsets[CRED_UID], 0, &child_uid) == VMI_FAILURE){
+		printf("[ ERROR ] Failed to read uid\n");
+	}
+	if(vmi_read_32_va(vmi, child_cred + drakvuf->offsets[CRED_GID], 0, &child_gid) == VMI_FAILURE){
+		printf("[ ERROR ] Failed to read gid\n");
+	}	
+	
+	if (p_pid != -1) {	
+		if (p_pid == parent_pid) {
+		
+			if (s->task_list[parent_pid] == NULL) {
+				if (add_task(s, parent_pid, parent_uid, parent_gid, parent_process, 0) == -1){
+					printf("[ ERROR ] Could not add parent process to the task_list.\n");
+				}
+			}
+			
+			if (s->task_list[child_pid] == NULL) {
+				if (add_task(s, child_pid, child_uid, child_gid, child_process, 0) == -1){
+					printf("[ ERROR ] Could not add child process to the task_list.\n");
+				}
+			}
+			else {
+				s->task_list[child_pid]->threads++;
+			}
+		
+		} else if (p_pid == child_pid) {
+		
+			t_pid = parent_pid;
+			parent_pid = child_pid;
+			child_pid = t_pid;
+			t_uid = parent_uid;
+			parent_uid = child_uid;
+			child_uid = t_uid;
+			t_gid = parent_gid;
+			parent_gid = child_gid;
+			child_gid = t_gid;
+			t_process = parent_process;
+			parent_process = child_process;
+			child_process = t_process;
+			
+			if (s->task_list[parent_pid] == NULL) {
+				if (add_task(s, parent_pid, parent_uid, parent_gid, parent_process, 0) == -1){
+					printf("[ ERROR ] Could not add parent process to the task_list.\n");
+				}
+			}
+			
+			if (s->task_list[child_pid] == NULL) {
+				if (add_task(s, child_pid, child_uid, child_gid, child_process, 0) == -1){
+					printf("[ ERROR ] Could not add child process to the task_list.\n");
+				}
+			}
+			else {
+				s->task_list[child_pid]->threads++;
+			}
+		
+		} 
+	
+	} else {
+		printf("[ WARNING ] Lost track of parent process forking.\n");
+		return 0;
+	}
+	
+	printf("[ INFO ] Process [%u] ( %5u:%-5u ) added to task list from parent %d.\n", child_pid, child_uid, child_gid, p_pid);
+	
+	if (s->task_list[parent_pid] == NULL) {
+		if (add_task(s, parent_pid, parent_uid, parent_gid, parent_process, 0) != 0)
+			return 0;
+	}
+	
+	if ((parent_uid == ROOT) && (s->task_list[parent_pid]->uid != ROOT)){
+		while(s->sudoers[i] != 0) {
+			if(s->task_list[parent_pid]->uid == s->sudoers[i]){
+				s->task_list[parent_pid]->uid = parent_uid;
+			}
+			i++;
+		}
+		if(s->task_list[parent_pid]->uid < 1000) {
+			s->task_list[parent_pid]->uid = parent_uid;
+		}
+		
+		if(s->task_list[parent_pid]->uid != parent_uid){
+			printf("[ WARNING ] Found corrupted credentials in task %u. UID is %u and should be %ld\n", parent_pid, parent_uid, s->task_list[parent_pid]->uid);
+			s->task_list[child_pid]->uid = s->task_list[parent_pid]->uid;
+		}
+	} else if ((parent_uid != s->task_list[parent_pid]->uid) && (s->task_list[parent_pid]->uid != ROOT)){
+		//TODO: check for system users
+		printf("[ WARNING ] Found corrupted credentials in task %u. UID is %u and should be %ld\n\t", parent_pid, parent_uid, s->task_list[parent_pid]->uid);
+		s->task_list[child_pid]->uid = s->task_list[parent_pid]->uid;
+	}
+	return 0;
+}
+
+----------------------------------------------------------
+
+int identity_check(drakvuf_t drakvuf, drakvuf_trap_info_t * info, vmi_pid_t current_pid){
+	ferify *s = (ferify*)info->trap->data;
+	int flag = 1, i = 0;
+	
+	addr_t process = info->regs->cr3; // drakvuf_get_current_process(drakvuf, info->vcpu);	
+	
+	if (s->task_list[current_pid] != NULL) {
+	
+		if ((s->task_list[current_pid]->checked == 0) && (s->task_list[current_pid]->task_addr != process)) {
+		
+			printf("[ INFO ] Updating PID %d address base from %" PRIx64 " to %" PRIx64 ".\n", 
+				current_pid, s->task_list[current_pid]->task_addr, process);
+			s->task_list[current_pid]->task_addr = process;
+			s->task_list[current_pid]->checked = 1;
+		
+		} else if (s->task_list[current_pid]->checked == 0){
+			s->task_list[current_pid]->checked = 1;
+		}
+		
+		if (process != s->task_list[current_pid]->task_addr) {
+			//TODO
+			// printf("[ WARNING ] Current process PID: %d-%s base seems different: %" PRIx64 " saved: %" PRIx64 ".\n", current_pid, info->procname, process, s->task_list[current_pid]->task_addr);
+		} 
+	}
+	
+	switch(info->userid){
+		case ROOT:
+		
+			if ((s->task_list[current_pid] != NULL) && (s->task_list[current_pid]->uid != 0)) {
+				flag = 0;
+				while(s->sudoers[i] != 0){
+					if (s->task_list[current_pid]->uid == s->sudoers[i]) {
+						flag = 1;
+						break;
+					}
+					i++;
+				}
+			}
+			
+			if (flag == 0){
+				if ((s->task_list[current_pid]->uid == 118) || (s->task_list[current_pid]->uid < 100)) {
+					flag = 1;
+					break;
+				}
+				printf("[ WARNING ] Process root identity corruption detected in task %u! Is %" PRIu64 " and should be %ld. Invalidating syscall.\n\t", 
+					current_pid, info->userid, s->task_list[current_pid]->uid);
+			}
+			break;
+		
+		default:
+		
+			if (s->task_list[current_pid] != NULL) {
+				if ((info->userid != s->task_list[current_pid]->uid) && (info->userid < 1000)) {
+					if (s->task_list[current_pid]->uid == 0) {
+						s->task_list[current_pid]->uid = (uid_t)info->userid;
+						s->task_list[current_pid]->gid = (gid_t)info->groupid;
+						printf("[ INFO ] Assessing valid user change from 0 to %ld for [%u]\n", info->userid, current_pid);
+						break;
+					}	
+					printf("[ WARNING ] Process root identity corruption detected in task %u! Is %" PRIu64 " and should be %ld. Invalidating syscall.\n\t", 
+						current_pid, info->userid, s->task_list[current_pid]->uid);
+					flag = 0;
+				}
+			}
+			break;
+	}	
+	return flag;	
+}
+
+----------------------------------------------------------
+
+static event_response_t exit_cb(drakvuf_t drakvuf, drakvuf_trap_info_t *info) {
+	ferify *s = (ferify*)info->trap->data;
+	vmi_instance_t vmi = NULL; 
+	vmi_pid_t current_pid = 0;
+	
+	vmi = drakvuf_lock_and_get_vmi(drakvuf); 
+	drakvuf_release_vmi(drakvuf);
+	
+	if (vmi == NULL) {
+		printf("Could not get vmi.\n");
+		return -1;
+	}
+	
+	current_pid = vmi_dtb_to_pid(vmi, info->regs->cr3);
+	
+	if (current_pid == 0) {
+		printf("Could not get pid.\n");
+		return -1;
+	}
+
+	switch (info->regs->rax){
+		case S_EXIT_GROUP:	
+
+			free(s->task_list[current_pid]);
+			s->task_list[current_pid] = NULL;
+			break;
+		
+		case S_EXIT:
+	
+			s->task_list[current_pid]->threads--;
+		
+			break;
+	}
+	return 0;
+}
+
+----------------------------------------------------------
+
+int add_task(ferify * f, vmi_pid_t current_pid, uid_t u, gid_t g, addr_t process, short checked){
+
+	task * t = (task *)calloc(sizeof(task), 1);
+	if (t == NULL) {
+		printf("[ ERROR ] Could not allocate memory.\n");
+		return -1;
+	}
+	t->pid = current_pid;
+	t->uid = (uint64_t) u;
+	t->gid = g;
+	t->task_addr = process;
+	t->threads++;
+	t->checked = checked;
+	
+	f->task_list[current_pid] = t;
+	t = NULL;
+	return 0;
+}
+
+----------------------------------------------------------
+
+void check_syscall_table_corruption(ferify * s, drakvuf_trap_info_t * info) {
+		
+	switch (info->regs->rax){
+	
+		case S_OPEN:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_open) 	
+				printf("[ ERROR ] Corruption in sys_open %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_open);
+			break;
+		
+		case S_RENAME:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_rename) 	
+				printf("[ ERROR ] Corruption in sys_rename %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_rename);
+			break;
+		
+		case S_UNLINK:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_unlink) 	
+				printf("[ ERROR ] Corruption in sys_unlink %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_unlink);
+			break;
+		
+		case S_TRUNCATE:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_truncate) 	
+				printf("[ ERROR ] Corruption in sys_truncate %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_truncate);
+			break;
+		
+		case S_OPENAT:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_openat) 	
+				printf("[ ERROR ] Corruption in sys_openat %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_openat);
+			break;
+		
+		case S_UNLINKAT:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_unlinkat) 	
+				printf("[ ERROR ] Corruption in sys_unlinkat %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_unlinkat);
+			break;
+		
+		case S_RENAMEAT:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_renameat) 	
+				printf("[ ERROR ] Corruption in sys_renameat %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_renameat);
+			break;
+		
+		case S_RENAMEAT2:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_renameat2) 	
+				printf("[ ERROR ] Corruption in sys_renameat2 %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_renameat2);
+			break;
+		
+		case S_EXIT:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_exit) 	
+				printf("[ ERROR ] Corruption in sys_exit %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_exit);
+			break;
+		
+		case S_EXIT_GROUP:
+			if ((uint64_t)info->regs->rip != (uint64_t)s->s_exit_group) 	
+				printf("[ ERROR ] Corruption in sys_exit_group %" PRIx64 " instead of saved RIP: %" PRIx64 "\n", info->regs->rip, s->s_exit_group);
+			break;
+		
+	
+	}	
+	return;
+}
+
+----------------------------------------------------------
+
+char * get_pathname_from_reg(drakvuf_t drakvuf, drakvuf_trap_info_t *info, vmi_instance_t vmi, vmi_pid_t currpid, int reg){
+
+	char * filename = NULL;
+	int len = 0;
+	reg_t reg1;
+	
+	switch (reg){
+		case 1:
+			reg1 = info->regs->rdi;
+			break;
+		case 2:
+			reg1 = info->regs->rsi;
+			break;
+		default:
+			return NULL;
+			break;
+	}
+	
+	filename = vmi_read_str_va(vmi, reg1, currpid);
+	if (filename == NULL) {
+		printf("[ ERROR ] Syscall [ %3" PRIi64 " ] Could not read filename (0x%" PRIx64 ") for PID %d: %s.\n", info->regs->rax, reg1, currpid, info->procname);
+
+		return NULL;
+	}
+	filename = get_pathname(drakvuf, info, filename, TRUE);
+	
+	len = strlen(filename);
+	if (len > MAX_PATHNAME_LEN) {
+		printf("[ WARNING ] Weird filename length detected for PID %d. Truncating.\n\n", currpid);
+		filename[0] = '\0';
+		len = 0;
+	}
+		
+	return filename;
+}
+
+----------------------------------------------------------
+
+char * get_pathname_from_reg_at(drakvuf_t drakvuf, drakvuf_trap_info_t *info, vmi_instance_t vmi, vmi_pid_t currpid, addr_t process_base, int reg){
+
+	char * filename = NULL;
+	int len = 0;
+	addr_t addr = 0;
+	
+	reg_t reg1, reg2;
+	switch (reg){
+		case 2:
+			reg1 = info->regs->rdi;
+			reg2 = info->regs->rsi;
+			break;
+		case 3:
+			reg1 = info->regs->rsi;
+			reg2 = info->regs->rdx;
+			break;
+		case 4:
+			reg1 = info->regs->rdx;
+			reg2 = info->regs->r10;
+			break;
+		default:
+			return NULL;
+			break;
+	}
+		
+	addr = vmi_translate_uv2p(vmi, reg2, currpid);
+	if (addr == 0) {
+		printf("[ ERROR ] Syscall [ %3" PRIi64 " ] Could not read address: %" PRIx64 " address for PID %d.\n", info->regs->rax, reg2, currpid);
+		return NULL;
+	}
+	filename = vmi_read_str_pa(vmi, addr);
+	if (filename == NULL) {
+		printf("[ ERROR ] Syscall [ %3" PRIi64 " ] Could not read filename for PID %d: %s.\n", info->regs->rax, currpid, info->procname);
+		return NULL;
+	}
+	
+	if ((reg1 == AT_FDCWD1) || (reg1 == AT_FDCWD2)){
+		filename = get_pathname(drakvuf, info, filename, TRUE);
+	} else {
+		filename = get_dirfd(drakvuf, info, vmi, filename, currpid, process_base);	
+	}
+	
+	len = strlen(filename);
+	if (len > MAX_PATHNAME_LEN) {
+		printf("[ WARNING ] Weird filename length detected for PID %d. Truncating.\n\n", currpid);
+		filename[0] = '\0';
+		len = 0;
+	}
+	
+	return filename;
+}
+
+----------------------------------------------------------
+
+void free_entry(gpointer key, gpointer value, gpointer user_data){
+}
+
+\end{lstlisting}}	
+
+%\lipsum*[65]
+%
+%When an equation occurs in the middle of a sentence, such as this one involving $e \in \mathbb{R}$,
+%\begin{eqnarray}
+% e^x &\approx& 1+x+x^2/2! \nonumber \\
+%   && \hphantom{1} + x^3/3! + x^4/4! \nonumber \\
+%   && \hphantom{1} + x^5/5!,
+%\end{eqnarray}
+%then we need proper punctuation (such as the comma above) and the sentence ends here, on the next line.
+%
+%\section{Section Example}
+%\lipsum[47]
+%
+%\begin{figure}[!htb]
+%\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[65]}}
+%\caption{Short figure title, with \emph{emph} and \textit{italics} in a caption.}
+%\caption*{\small This is the long caption that explains the figure in detail and
+%expounds on its relevance to the text.
+%All figures need to be referenced in the text before the image or table.
+%Full source citation, as applicable, is required.
+%%Source~\cite{IEEEexample:bibtexguide}: \bibentry{IEEEexample:bibtexguide}
+%}
+%\end{figure}
+%
+%\subsection{Subsection Example}
+%\lipsum[56]
+%
+%\section{Another Section}
+%\lipsum[55-56]
+%
+%\begin{figure}[!htb]
+%\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[65]}}
+%\caption{Some styled math in a caption, $\mathsf{Func}(x, \sigma) = x^2 + \overline{\sigma} + \pi$.}
+%\caption*{\small This is the long caption that explains the figure in detail
+%and expounds on its relevance to the text.
+%This figure is original and requires no citation.}
+%\end{figure}
+%
+%\begin{figure}[!htb]
+%\centering
+%\subfloat[First sub-figure]{
+%   \framebox[0.47\textwidth]{\parbox{0.45\textwidth}{\lipsum[65]}}
+%}
+%\hfill
+%\subfloat[Second sub-figure]{
+%   \framebox[0.47\textwidth]{\parbox{0.45\textwidth}{\lipsum[65]}}
+%}
+%\caption{Caption using subfigure package.}
+%\caption*{\small This is the long caption that explains the figure in detail
+%and expounds on its relevance to the text.
+%This figure is original and requires no citation.}
+%\end{figure}
+%
+%

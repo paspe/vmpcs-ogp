@@ -1,15 +1,55 @@
 
 \chapter{Conclusion and Future Work}\label{ch:chapter5}
 
-\begin{itemize}
-	\item Better \ac{ACL} storing and lookup algorithm \textbf{Done}
-	\item Multiprocess applications? Seems like I get sometimes different process base.
-	\item Multithreadded applications. 
-	\item Extend plugin to monitor file execution too. Can be done by trapping \codeft{sys\_execve()} and reading the filename of the program. I think that it is always passed as absolute path, so it should be relatively easy to implement. Syscall number is weird. Needs to check for \emph{both execute and read permissions}.
-	\item Implement on the fly \ac{SACL} updates. 
-	\item Modify code as necessary to work in multi-CPU \acp{VM}. Maybe it works?
-	\item Add \codeft{readlink()} to prevent reading of other files? Is it necessary?
-	\item Check destroy of \codeft{hash-tables}.
-	\item Refinement of what files and folders should be in the \ac{SACL}. Some, due to group privileges might pose a hindrance to usability. Better leave these out, or even better, just be more precise of what is in. Or we can add the corresponding permission to the OTHER.
-\end{itemize}
+\par In this chapter we present the benefits of \codeft{ferify}, and the lessons we leanred during its development. We present some limitations of a security solution that is completely transparent to the guest \ac{VM}, as we encountered them. Finally, we present some ideas for future development of \codeft{ferify}.
+
+\section{Conclusion}
+
+\par In this thesis we developed \codeft{ferify}, a virtual file protection system against \emph{zero-day} attacks. As mentioned in chapter \ref{ch:background}, other virtualization solutions exist, and others are continuously developed. We believe that \codeft{ferify} has some unique characteristics, which make it more efficient, until something new gets developed.
+
+\section{Benefits of ferify}
+
+\par We decided to use DRAKVUF~\cite{lengyel2014drakvuf} as our base platform. This gives inherently to \codeft{ferify} a \emph{zero-footprint} in the guest \ac{VM}, making in it a full \emph{out-\ac{VM}} solution, which \emph{cannot be detected} from the guest \ac{VM}. Although there are techniques to detect if an \ac{OS} is vitrualized or not, there is no way to detect if \codeft{ferify} is running or not.
+
+\par Making \codeft{ferify} a complete out-\ac{VM} solution, which means that all the code and information is stored onthe hypervisor, gives our solution a great isolation from the guest \ac{OS}, making almost impossible to interact and subvert \codeft{ferify}. There are hypervisor-based attacks, which are outside the scope of this thesis, and we expect that hypervisors will become more secure and robust over time.
+
+\par Using \codeft{ferify} can have a significant improvement in an \ac{OS}'s file \emph{confidentiality}, \emph{integrity} and \emph{availability}. We have managed to tighten the Linux file permissions. We can enforce a different \emph{user-based}  \ac{ACL} policy than the one in the guest \ac{OS}, in a transparent way, protecting this way critical files and information stored in them. We can deny reading of files, modification and deletion of them, as well as execution of programs,  \emph{white-list} basis. Doing all these also for the \emph{root} account, is a significant improvement in information security and system integrity, as the system's administrator could till now access everything stored on the \ac{OS}.
+
+\par \codeft{ferify} also provides for \emph{kernel security} and \emph{integrity} by denying kernel module loading and new kernel booting. This step ensures that the guest \ac{OS} kernel will remain \emph{unmodified} by attackers, ensuring that existing and new \emph{zero-day} attacks will not work on a \codeft{ferify} protected \ac{VM}. 
+
+\section{Lessons learned}
+
+\par During the development of \codeft{ferify} we encountered some problems, which we were called to solve to continue progressing.  
+
+\par Creating an out-\ac{VM} solution has some challenges, with the most important the semantic gap we mentioned in chapter~\ref{ch:background}. Although for \codeft{ferify}, the way it was designed, there is no need for much context of what is happening in the guest \ac{VM}, we need to bridge that gap in some cases. This bridging required deep research of the Linux kernel to locate where the required information is stored and how to recreate some information that is not directly stored in the kernel. In the case of the development of a solution that needs to make some decisions and inferences based on higher level information, bridging this semantic gap can be extremely challenging.
+
+\par Building a security solution is a complex process, which requires a number of iterations, revisiting of already implemented parts for improvements and integration of newer features, to make a more complete and robust application. During this thesis, we initially considered trapping only \emph{three} system calls. But as \codeft{ferify} evolved, and we discovered other vectors of file access, we finally resulted in trapping a total of \emph{nineteen} system calls, so that we could monitor \emph{all} possible ways of accessing a file.
+
+\section{Limitations}
+
+\par There are some inherent limitations of a security solution that is completely transparent to the guest \ac{VM}. LibVMI currently provides an \ac{API} for accessing and modifying a \ac{VM}'s \ac{CPU} registers or memory contents. It does not provide functions to access files and devices. 
+
+\par The semantic gap, mentioned before, is a huge obstacle and limitation of an out-\ac{VM} security solution. In the case of \codeft{ferify}, the design was such that we did not need to make any inferences about the state of the guest \ac{OS}. The file access control policy monitoring does not need to implement intricate relations between different kernel memory structures or user-space memory. This allowed for a simpler design, but might become more complex as new features might need access to additional data.
+
+\section{Future Work}
+
+\par As in every case of a developed application, \codeft{ferify} can also be improved to provide improved efficiency and better monitoring. Although we assess that we have addressed \emph{all} possible ways a file can be accessed, there are ways \codeft{ferify} can be improved.
+
+\par Although we keep track of the running and newly created processes, there are cases of multi-threaded processes that need better handling. Finding the thread count of a process and monitoring additions and exits of these threads should be added in \codeft{ferify}'s logic. Although the basic functionality is present, missing the initial thread count of a process does not allow us no know when a process completely terminates, keeping it this way in our list. This can result in some errors in the validation of the process' identity, in the case of the creation of a new process with the same \codeft{pid} as the one we did not detect exiting. Furthermore, more research must be done to verify whether multi-threaded processes have the same \codeft{CR3} value or not and keep track of it, for use in the process identity validation.
+
+\par In our test environment we used a single-\ac{CPU} \ac{VM}. Future work might be needed to modify \codeft{ferify} to work on multi-\ac{CPU} \acp{VM}. 
+
+\par Currently if there is a need to change the \acp{SACL}, we need to terminate \codeft{ferify} and relaunch it, for the changes to take effect. This procedure currently leaves a window of vulnerability between the termination and re-initialization of \codeft{ferify}. Reloading the \acp{SACL} while \codeft{ferify} is running is a desired feature that will also make \codeft{ferify} more robust and secure.
+
+\par Finally, some testing must be done to ensure compatibility with other Linux distribution, as during our development we only used the Ubuntu distribution.
+
+\par The above issues that need development are by no means exhaustive. As any application evolves, new problems or desired features surface, that need to be solved or integrated. 
+
+
+%\begin{itemize}
+%	\item Multiprocess applications? Seems like I get sometimes different process base.
+%	\item Multithreadded applications. 
+%	\item Implement on the fly \ac{SACL} updates. 
+%	\item Modify code as necessary to work in multi-CPU \acp{VM}. Maybe it works?
+%\end{itemize}
 

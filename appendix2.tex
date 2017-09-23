@@ -1,0 +1,182 @@
+\label{app:B}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+	%backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{magenta},
+	basicstyle=\scriptsize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	%numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=Python
+}
+
+This appendix contains the script we created to measure the performance overhead of \codeft{ferify}.
+\footnotesize{\fontfamily{qcr}\selectfont
+\begin{lstlisting}[style=CStyle]
+#!/usr/bin/python3
+
+import time
+from timeit import default_timer as timer
+import math
+import os
+import sys
+
+def test(iterations = 100000):
+	o_results = []
+	o_total = 0
+	o_avg = 0
+	o_s = 0
+	o_var = 0
+
+	u_results = []
+	u_total = 0
+	u_avg = 0
+	u_s = 0
+	u_var = 0
+
+	r_results = []
+	r_total = 0
+	r_avg = 0
+	r_s = 0
+	r_var = 0
+
+	for i in range(iterations):
+		o_start = timer()
+		f = open("test.txt", "w")
+		o_stop = timer()
+		f.close()
+		o_results.append(1000 * (o_stop - o_start))
+
+		r_start = timer()
+		os.rename("test.txt", "test1.txt")
+		r_stop = timer()
+		r_results.append(1000 * (r_stop - r_start))
+
+		u_start = timer()
+		os.unlink("test1.txt")
+		u_stop = timer()
+		u_results.append(1000 * (u_stop - u_start))
+
+	for e in o_results:
+		o_total += e
+		o_s += (e * e)
+
+	o_avg = o_total / iterations
+	o_var = math.sqrt(o_s / iterations)
+
+	for e in r_results:
+		r_total += e
+		r_s += (e * e)
+
+	r_avg = r_total / iterations
+	r_var = math.sqrt(r_s / iterations)
+
+	for e in u_results:
+		u_total += e
+		u_s += (e * e)
+
+	u_avg = u_total / iterations
+	u_var = math.sqrt(u_s / iterations)
+	
+	print("----------------------------------------------------")
+	print("Test measurements over " + str(iterations) + " iterations.")
+	print("----------------------------------------------------")
+	print("Results for open()")
+	print("Total runtime: " + str(o_total))
+	print("Average runtime: " + str(o_avg))
+	print("Variance of runtime: " + str(o_s))
+	print("Std dev of runtime: " + str(o_var))
+
+	print("----------------------------------------------------")
+	print("Results for rename()")
+	print("Total runtime: " + str(r_total))
+	print("Average runtime: " + str(r_avg))
+	print("Variance of runtime: " + str(r_s))
+	print("Std dev of runtime: " + str(r_var))
+
+	print("----------------------------------------------------")
+	print("Results for unlink()")
+	print("Total runtime: " + str(u_total))
+	print("Average runtime: " + str(u_avg))
+	print("Variance of runtime: " + str(u_s))
+	print("Std dev of runtime: " + str(u_var))
+	print("----------------------------------------------------")
+
+
+if __name__ == '__main__':
+	if len(sys.argv) == 2:
+		test(int(sys.argv[1]))
+	else:
+		test(1000)
+\end{lstlisting}}
+
+
+%\lipsum*[65]
+%
+%When an equation occurs in the middle of a sentence, such as this one involving $e \in \mathbb{R}$,
+%\begin{eqnarray}
+% e^x &\approx& 1+x+x^2/2! \nonumber \\
+%   && \hphantom{1} + x^3/3! + x^4/4! \nonumber \\
+%   && \hphantom{1} + x^5/5!,
+%\end{eqnarray}
+%then we need proper punctuation (such as the comma above) and the sentence ends here, on the next line.
+%
+%\section{Section Example}
+%\lipsum[47]
+%
+%\begin{figure}[!htb]
+%\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[65]}}
+%\caption{Short figure title, with \emph{emph} and \textit{italics} in a caption.}
+%\caption*{\small This is the long caption that explains the figure in detail and
+%expounds on its relevance to the text.
+%All figures need to be referenced in the text before the image or table.
+%Full source citation, as applicable, is required.
+%%Source~\cite{IEEEexample:bibtexguide}: \bibentry{IEEEexample:bibtexguide}
+%}
+%\end{figure}
+%
+%\subsection{Subsection Example}
+%\lipsum[56]
+%
+%\section{Another Section}
+%\lipsum[55-56]
+%
+%\begin{figure}[!htb]
+%\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[65]}}
+%\caption{Some styled math in a caption, $\mathsf{Func}(x, \sigma) = x^2 + \overline{\sigma} + \pi$.}
+%\caption*{\small This is the long caption that explains the figure in detail
+%and expounds on its relevance to the text.
+%This figure is original and requires no citation.}
+%\end{figure}
+%
+%\begin{figure}[!htb]
+%\centering
+%\subfloat[First sub-figure]{
+%   \framebox[0.47\textwidth]{\parbox{0.45\textwidth}{\lipsum[65]}}
+%}
+%\hfill
+%\subfloat[Second sub-figure]{
+%   \framebox[0.47\textwidth]{\parbox{0.45\textwidth}{\lipsum[65]}}
+%}
+%\caption{Caption using subfigure package.}
+%\caption*{\small This is the long caption that explains the figure in detail
+%and expounds on its relevance to the text.
+%This figure is original and requires no citation.}
+%\end{figure}
+%
+%

@@ -1,7 +1,7 @@
 \acresetall
 \chapter{Evaluation}\label{ch:chapter4}
 
-In this chapter, we present the evaluation of \codeft{ferify}. In the first section we validate our design of \codeft{ferify}. Next we explain the tests we performed to verify that \codeft{ferify} has the results we expect. These tests represent the cases \codeft{ferify} can be employed. Finally we perform some tests to evaluate the performance overhead and the degree our solution impacts overall system usability.
+In this chapter, we present the evaluation of \codeft{ferify}. In the first section we validate our design of \codeft{ferify}. Next we explain the tests we performed to verify that \codeft{ferify} has the results we expect. These tests cover typical use cases where \codeft{ferify} can be employed. Finally we perform some tests to evaluate the performance overhead and the degree our solution impacts overall system usability.
 
 \section{Validation}\label{sec:validation}
 
@@ -29,6 +29,8 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 
 \par To protect against a modified kernel, we took a simplistic approach, easily implemented with \codeft{ferify}. We block the system call \codeft{kexec\_load()}, which loads a new kernel for later execution. Other than that we can detect the kernel files that are used to boot the system and write protect them from all users. Also, the setup of the \ac{VM} will shut it down in case of a reboot, so running automatically on a modified kernel is currently prohibited. We decided to not cover this specific attack vector, since there are solutions like vTPM~\cite{perez2006vtpm}, which implement a more sophisticated way of securing the system's boot procedure and verifying that the code launched by firmware is trusted. 
 
+\par The kernel of an \ac{OS} is a program, and as such has some bugs. Some of them might just crash parts of the kernel without any other consequences. Some of these bugs can potentially be used to manipulate kernel memory structures and contents. These types of attacks require a very deep knowledge of the intricate Linux kernel to successfully work. We assess these attacks as out of scope for this research, as the Linux kernel is constantly evolving. Security patches are rolled frequently to fix these bugs, or secure against them.
+
 \section{Testing}\label{sec:testing}
 
 \par To assess that \codeft{ferify} works as intended, we assume two basic scenarios. The first is that of an authorized remotely connected user, who should be able to work as before. We want \emph{usability} at the user level to remain unchanged. The second scenario is that of a hacked user account. The attacker has managed to exploit a vulnerability of the guest \ac{OS} and has remote access to the target \ac{VM}. In this case we assume even the worst case scenario that the attacker has gained \codeft{root} privileges. We want to assess whether the files we protect with \codeft{ferify} are secure and cannot be accessed except from those we have allowed in the \acp{SACL}.
@@ -51,7 +53,7 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 
 \par These cases by themselves cover the basic set of actions that \codeft{ferify} was initially designed to monitor. Any combination of them is handled separately from the underlying \ac{OS}, reducing our problem to these elementary cases, making it easier to monitor and handle.
 
-\par First we will test if an illegal \codeft{root} escalation is possible and then we will test the file operations, which include \emph{create, open, read, write, copy, move, delete, and link}.
+\par First we will test if an illegal \codeft{root} escalation is possible and then we will test the file operations, which include \emph{create, open, read, write, copy, move, delete,} and \emph{link}.
 
 \subsection{Root escalation}
 
@@ -161,7 +163,7 @@ bob@aHVM-domU:~$
 	\end{tabular}
 \end{table}
 
-\par After running our test script to verify the ability to normally access the user's files, the results (fig.\ref{fig:results1}) show that the files are accessible in every mode they are supposed to.
+\par After running our test script, included in appendix~\ref{app:A} to verify the ability to normally access the user's files, the results (fig.\ref{fig:results1}) show that the files are accessible in every mode they are supposed to.
 
 \begin{figure}[ht]
 	\centering
@@ -292,9 +294,11 @@ $ sudo ./file_tests file1 file2 file3
 
 \par For the \codeft{execve()} and \codeft{execveat()} system calls we implemented a slightly different logic, to make \codeft{ferify} work as a white-listing security application. The results of our testing seem promising. 
 
-\par We have successfully managed to apply different execution permissions and block application execution on a \emph{per-user} level. The difference from the rest of the system call handling is that \emph{if} the executable \emph{is not} in the \ac{SACL} we \emph{deny} execution. Since we assume that the system is secure when we launch \codeft{ferify}, any file in the file-system should not be malicious. Keeping in mind that for a malware to create a persistence mechanism, it will have to write executable code on the victim system, and run it at some point. Since that file will not be in the \ac{SACL}, we automatically block that executable from running, having this way mitigated efficiently a large attack vector of malware.
+\par We have successfully managed to apply different execution permissions and block application execution on a \emph{per-user} level. The difference from the rest of the system call handling is that \emph{if} the executable \emph{is not} in the \ac{SACL} we \emph{deny} execution. Since we assume that the system is secure when we launch \codeft{ferify}, any file in the file-system should not be malicious. Keeping in mind that for a malware to create a persistence mechanism, it will have to write executable code on the victim system, and run it at some point. Since that file will not be in the \ac{SACL}, we automatically block that executable from running, having this way mitigated efficiently a large attack vector of malware. System executables should also be marked as \emph{non-writable} in the \acp{SACL} to prevent modification and ensure their \emph{integrity}, to mitigate against attacks that modify \ac{OS} executables with malicious ones.
 
 \subsection{Append-only mode}
+
+\par Once attackers have achieved system penetration they start accessing the \ac{OS} in many ways. Accessing of files for \emph{information gathering}, creation of \emph{persistence mechanisms}, and installation of \emph{back-doors} are just a few. But to remain undetected they must \emph{hide their tracks}. To do that, attackers usually edit system logs to erase their presence. Log files are created by appending entries at the end of the file. But this is not an enforced file access policy. That makes log files generally accessible and editable from attackers. Forcing log files to be writable only at the end of the file can prevent attackers from hiding their tracks.
 
 \par We could not enforce partial write permissions to a file, due to the \ac{OS} limitations. A file can be opened as a whole, given the permissions the user requests. What \codeft{ferify} is capable of doing is to enforce a write-only access policy to files. This way, if attackers want to cover their tracks, they are not able to open a file in read-write mode, to select and delete the log entries that reveal their presence. They will have to blindly delete entries, or empty the entire log, action that should be noticed by the system administrator. We believe that this policy can be proven a substantial hindrance to malicious actors that try to cover their tracks in the system.
 
@@ -302,7 +306,7 @@ $ sudo ./file_tests file1 file2 file3
 
 In this section we present the performance overhead we observed on the guest \ac{OS} when running \codeft{ferify}. We performed time execution measurements in three stages. 
 
-\par To have a baseline for comparison, we created a \codeft{Python} script that performs some of the trapped system calls and measures the execution time. It performs the execution and calculates the average execution time and the standard deviation. We performed three runs of testing. The first was under normal \ac{CPU} scheduling preferences. For the second run we set the \codeft{niceness} of the process to \codeft{-20}. \emph{Niceness} for Linux is how favorable the scheduling will be for the process, with \codeft{-20} being the best value. Finally, for the third run, besides changing the niceness of the process, we additionally set the I/O niceness to the best available value. This changes the I/O scheduling of processes, giving our test script I/O priority over all other processes. Initially we timed the execution of the script over a number of one million iterations to extract an average time that we will use as a reference, \emph{without} running \codeft{ferify}. Fig. \ref{fig:script} shows the three commands we used to run the test script.
+\par To have a baseline for comparison, we created a \codeft{Python} script, as shown in appendix~\ref{app:B} that performs some of the trapped system calls and measures the execution time. It performs the execution and calculates the average execution time and the standard deviation. We performed three runs of testing. The first was under normal \ac{CPU} scheduling preferences. For the second run we set the \codeft{niceness} of the process to \codeft{-20}. \emph{Niceness} for Linux is how favorable the scheduling will be for the process, with \codeft{-20} being the best value. Finally, for the third run, besides changing the niceness of the process, we additionally set the I/O niceness to the best available value. This changes the I/O scheduling of processes, giving our test script I/O priority over all other processes. Initially we timed the execution of the script over a number of one million iterations to extract an average time that we will use as a reference, \emph{without} running \codeft{ferify}. Fig. \ref{fig:script} shows the three commands we used to run the test script.
 
 \begin{figure}[ht]
 	\centering
@@ -358,9 +362,9 @@ $ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
 
 \subsection{\ac{SACL} performance overhead}
 
-\par The information for the files stored in the \acp{SACL} is stored in a hash-table. The index of the table is the pathname. This makes storing and retrieving entries from the \ac{SACL} a complexity of \emph{O(1)}, making the algorithm efficient. Nevertheless, we need to measure \codeft{ferify}'s total performance overhead when running on a full file-system. We ran the same script as before, but this time we included a full file-system \ac{SACL}, to evaluate \codeft{ferify}'s efficiency. The \ac{SACL} contained \emph{417,461} entries. 
+\par The information for the files stored in the \acp{SACL} is stored in a hash-table. The index of the table is the pathname. This makes storing and retrieving entries from the \ac{SACL} a complexity of \emph{O(1)}, making the algorithm efficient. Nevertheless, we need to measure \codeft{ferify}'s total performance overhead when running on a full file-system. We ran the same script as before, but this time we included a full file-system \ac{SACL}, to evaluate \codeft{ferify}'s efficiency. The \ac{SACL} contained more than \emph{400,000} entries, although we expect many more entries, as our test \ac{VM} had no extra programs installed and we had created just a few user files, for the purposes of testing. 
 
-\par Table \ref{tbl:measure2} shows the result of the second run of our test. We observe that the total performance overhead remains in the same magnitude. We assess that the hash\_table implementation and the permission checking algorithm has an insignificant impact on performance, compared to the cost of switching between the hypervisor and the guest \ac{VM}.
+\par Table \ref{tbl:measure2} shows the result of the second run of our test. We observe that the total performance overhead remains in the same magnitude. Some numbers might seem contradicting, but this is normal, as the Linux kernel schedules differently each running process, and continuously creates more. This is the reason we focus in the magnitude instead of the actual numbers. We assess that the hash\_table implementation and the permission checking algorithm has an insignificant impact on performance, compared to the cost of switching between the hypervisor and the guest \ac{VM}, which dominates. This is the exact reason we decided to trap each system call individually, instead of trapping the system call handler, which is the kernel's entry point to all system calls. This case would cause an even more significant overhead, as the \ac{VM} context switch would happen for \emph{each and every} system call invoked by \emph{all} processes running on the \ac{OS}.
 
 \par Although the increase in execution time seems extremely large, the average execution time of a single system call seems to remain within usable limits. While using the guest \ac{VM} to evaluate the use experience, we did not notice any delays. 
 

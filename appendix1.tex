@@ -1,54 +1,101 @@
-\lipsum*[65]
+\label{app:A}
 
-When an equation occurs in the middle of a sentence, such as this one involving $e \in \mathbb{R}$,
-\begin{eqnarray}
- e^x &\approx& 1+x+x^2/2! \nonumber \\
-   && \hphantom{1} + x^3/3! + x^4/4! \nonumber \\
-   && \hphantom{1} + x^5/5!,
-\end{eqnarray}
-then we need proper punctuation (such as the comma above) and the sentence ends here, on the next line.
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
 
-\section{Section Example}
-\lipsum[47]
-
-\begin{figure}[!htb]
-\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[65]}}
-\caption{Short figure title, with \emph{emph} and \textit{italics} in a caption.}
-\caption*{\small This is the long caption that explains the figure in detail and
-expounds on its relevance to the text.
-All figures need to be referenced in the text before the image or table.
-Full source citation, as applicable, is required.
-%Source~\cite{IEEEexample:bibtexguide}: \bibentry{IEEEexample:bibtexguide}
+\lstdefinestyle{CStyle}{
+	%backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{magenta},
+	basicstyle=\scriptsize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	%numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
 }
-\end{figure}
 
-\subsection{Subsection Example}
-\lipsum[56]
+This appendix contains the script we created to test the various file access methods.
+\fontfamily{qcr}\selectfont
+\begin{lstlisting}[style=CStyle]
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
 
-\section{Another Section}
-\lipsum[55-56]
+int main(int argc, char** argv){
 
-\begin{figure}[!htb]
-\framebox[\textwidth]{\parbox{\textwidth}{\lipsum[65]}}
-\caption{Some styled math in a caption, $\mathsf{Func}(x, \sigma) = x^2 + \overline{\sigma} + \pi$.}
-\caption*{\small This is the long caption that explains the figure in detail
-and expounds on its relevance to the text.
-This figure is original and requires no citation.}
-\end{figure}
+  int fp = 0, r = 0;
+  void * buf = malloc(64);
+  char * a = "a";
 
-\begin{figure}[!htb]
-\centering
-\subfloat[First sub-figure]{
-   \framebox[0.47\textwidth]{\parbox{0.45\textwidth}{\lipsum[65]}}
+  fp = open(argv[1], O_RDONLY);
+  if (fp < 0){
+    printf("Failure: Could not open file for reading. 
+    Cannot copy.\n");
+  } else {
+    printf("Success: Opened file for reading. 
+    Able to copy.\n");
+    close(fp);
+  }
+
+  fp = open(argv[1], O_WRONLY);
+  if (fp < 0){
+    printf("Failure: Could not open file for writing.\n");
+  } else {
+    printf("Success: Opened file for writing.\n");
+    close(fp);
+  }
+
+  fp = open(argv[2], O_RDWR | O_CREAT, 0666);
+  if (fp < 0){
+    printf("Failure: Could not create file.\n");
+  } else {
+    printf("Success: created file.\n");
+
+    r = read(fp, buf, 1);
+    if (r < 0) {
+      printf("Failure: Could not write to file.\n");
+    } else {
+      printf("Success: Can read from file.\n");
+    }
+
+    r = write(fp, a, 1);
+    if (r < 1) {
+      printf("Failure: could not write to file.\n");
+    } else {
+      printf("Success: Can write to file.\n");
+    }
+
+    close(fp);
+  }
+
+  fp = unlink(argv[2]);
+  if (fp != 0) {
+    printf("Failure: Could not delete file.\n");
+  } else {
+    printf("Success: File deleted.\n");
+  }
+
+  fp = rename(argv[1], argv[3]);
+  if (fp != 0) {
+    printf("Failure: Could not move file.\n");
+  } else {
+    printf("Success: File moved.\n");
+    fp = rename(argv[3], argv[1]);
+  }
+
+  return 0;
 }
-\hfill
-\subfloat[Second sub-figure]{
-   \framebox[0.47\textwidth]{\parbox{0.45\textwidth}{\lipsum[65]}}
-}
-\caption{Caption using subfigure package.}
-\caption*{\small This is the long caption that explains the figure in detail
-and expounds on its relevance to the text.
-This figure is original and requires no citation.}
-\end{figure}
 
-
+\end{lstlisting}

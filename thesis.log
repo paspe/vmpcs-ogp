@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  13 SEP 2017 16:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  23 SEP 2017 16:15
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1621,7 +1621,7 @@ LaTeX Info: Redefining \nameref on input line 133.
 
 LaTeX Info: Redefining \Ref on input line 133.
 
-<figs/nps_logo_3clr_cymk.pdf, id=125, 222.8325pt x 153.57375pt>
+<figs/nps_logo_3clr_cymk.pdf, id=158, 222.8325pt x 153.57375pt>
 File: figs/nps_logo_3clr_cymk.pdf Graphic file (type pdf)
 
 <use figs/nps_logo_3clr_cymk.pdf>
@@ -1743,17 +1743,13 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (thesis.toc
 Package acronym Info: Label `acro:VM' newly defined as it shall be overridden
 although it is yet undefined on input line 31.
-)
+ [7.9
+
+])
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
 
-
-Underfull \vbox (badness 2903) has occurred while \output is active []
-
- [7.9
-
-]
-[8.10] (thesis.lof
+ [8.10] (thesis.lof
 Package acronym Info: Label `acro:OS' newly defined as it shall be overridden
 although it is yet undefined on input line 3.
 Package acronym Info: Label `acro:EPT' newly defined as it shall be overridden
@@ -1761,7 +1757,8 @@ although it is yet undefined on input line 8.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 10.95pt on input line 14.
 LaTeX Font Info:    Try loading font information for T1+qcr on input line 14.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\tex-gyre\t1qcr.fd"
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tex-gyre\t1qcr.fd"
 File: t1qcr.fd 2009/09/25 v1.2 font definition file for T1/qcr
 )
 Package acronym Info: Label `acro:SACL' newly defined as it shall be overridden
@@ -1953,10 +1950,10 @@ Package acronym Info: Label `acro:EPT' overridden on input line 81.
 (figs/dir_tree.tikz) [28.48] [29.49] [30.50]
 Package acronym Info: Label `acro:CPU' overridden on input line 430.
  [31.51] (figs/overview.tikz)
-[32.52]
 Package acronym Info: Label `acro:GMFN' overridden on input line 447.
 Package acronym Info: Label `acro:MFN' overridden on input line 447.
 
+[32.52]
 Underfull \hbox (badness 10000) in paragraph at lines 457--478
 
  []
@@ -1971,7 +1968,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 537--559
 [36.56] [37.57]
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
 although it is yet undefined on input line 591.
-) (chapter4.tex [38.58] [39.59] [40.60
+ [38.58]) (chapter4.tex [39.59] [40.60
 
 ]
 Chapter 4.
@@ -1981,43 +1978,81 @@ Package acronym Info: Label `acro:SACL' overridden on input line 13.
 Package acronym Info: Label `acro:API' overridden on input line 26.
 Package acronym Info: Label `acro:VM' overridden on input line 30.
  [42.62] (figs/attack.tikz
-<figs/traffic-light2.png, id=1141, 322.20375pt x 347.79938pt>
+<figs/traffic-light2.png, id=1190, 322.20375pt x 347.79938pt>
 File: figs/traffic-light2.png Graphic file (type png)
 
 <use figs/traffic-light2.png>
 Package pdftex.def Info: figs/traffic-light2.png used on input line 37.
 (pdftex.def)             Requested size: 11.38092pt x 12.28035pt.
-) [43.63 <./figs/traffic-light2.png>] [44.64]
+) [43.63] [44.64 <./figs/traffic-light2.png>]
 [45.65]
 LaTeX Font Info:    Font shape `T1/qcr/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/qcr/b/n' tried instead on input line 183.
+(Font)              Font shape `T1/qcr/b/n' tried instead on input line 185.
  [46.66] [47.67]
-Package acronym Info: Label `acro:CPU' overridden on input line 305.
- [48.68] [49.69]) (chapter5.tex [50.70]
-Chapter 5.
-Package acronym Info: Label `acro:ACL' overridden on input line 5.
-) [51.71
-
-] [52.72
-
-] (thesis.bbl [53.73
+Package acronym Info: Label `acro:CPU' overridden on input line 309.
+ [48.68] [49.69]) (chapter5.tex [50.70] [51.71] [52.72
 
 ]
-Underfull \hbox (badness 1077) in paragraph at lines 103--108
-[]\T1/ntxtlf/m/n/12 X. Chen, T. Garfinkel, E. C. Lewis, P. Sub-rah-manyam, C. A
-. Wald-spurger, 
+Chapter 5.
+Package acronym Info: Label `acro:ACL' overridden on input line 16.
+[53.73] [54.74]) [55.75] [56.76]
+Appendix A.
+(appendix1.tex ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+)
+LaTeX Font Info:    Try loading font information for TS1+qcr on input line 36.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tex-gyre\ts1qcr.fd"
+File: ts1qcr.fd 2009/09/25 v1.2 font definition file for TS1/qcr
+) [57.77
+
+
+]) [58.78]
+Appendix B.
+(appendix2.tex ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+Overfull \hbox (27.1798pt too wide) in paragraph at lines 28--30
+\T1/qcr/m/n/12 This ap-pendix con-tains the script we cre-ated to mea-sure the 
+per-
  []
 
-[54.74]) [55.75] [56.76
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 63.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 6.2pt on input line 63.
+[59.79
 
-] [57.77]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 235.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 235.
+] [60.80]) [61.81] [62.82
+
+]
+Appendix C.
+(appendix3.tex
+LaTeX Font Info:    Font shape `T1/qcr/bx/n' in size <10> not available
+(Font)              Font shape `T1/qcr/b/n' tried instead on input line 30.
+ [63.83] [64.84] [65.85] [66.86] [67.87] [68.88] [69.89] [70.90]
+[71.91] [72.92] [73.93] [74.94] [75.95] [76.96] [77.97] [78.98] [79.99]
+[80.100] [81.101] [82.102] [83.103] [84.104] [85.105] [86.106] [87.107]
+[88.108] [89.109] [90.110] [91.111] [92.112] [93.113] [94.114] [95.115]
+[96.116] [97.117] [98.118] [99.119] [100.120] [101.121] [102.122] [103.123]
+[104.124] [105.125] [106.126] [107.127] [108.128] [109.129] [110.130] [111.131]
+[112.132] [113.133]) [114.134] (thesis.bbl [115.135
+
+
+] [116.136]) [117.137]
+[118.138
+
+] [119.139]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 240.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 240.
  (thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 235.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 235.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 240.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 240.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 4CD9EFAD0BA08E49B764EDCEB7D2825F;1461.
+(rerunfilecheck)             Checksum: 6D113C7B1BE1BEC1A26218A5ECC875CF;1955.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2025,33 +2060,37 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 38057 strings out of 493328
- 813632 string characters out of 3139125
- 1123196 words of memory out of 3000000
- 40445 multiletter control sequences out of 15000+200000
- 91205 words of font info for 120 fonts, out of 3000000 for 9000
+ 41850 strings out of 493328
+ 873027 string characters out of 3139125
+ 1324684 words of memory out of 3000000
+ 41649 multiletter control sequences out of 15000+200000
+ 101686 words of font info for 149 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,13n,96p,1488b,1216s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ec.enc} <C:\Users\hal
-ek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi1200.pk> <C:
-\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss12
-00.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ts1.enc}{C:/Progr
-am Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ec-tlf.enc} <C:\Users\halek\AppDa
-ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss2074.pk> <C:\Users\h
-alek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx0800.pk> <
-C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi
-0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
-pi600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
-appen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex
--gyre/qcrb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qcrr.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmb.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/txfonts/txsya.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/n
-ewtx/txsys.pfb>
-Output written on thesis.pdf (77 pages, 607518 bytes).
+ 62i,13n,97p,1488b,2135s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{lstnumber.-10.2179} has been referenced but does 
+not exist, replaced by a fixed one
+
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ec.enc}{C:/Program File
+s/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ts1.enc} <C:\Users\halek\AppData\Local\
+MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi1200.pk> <C:\Users\halek\AppD
+ata\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss1200.pk>{C:/Program
+ Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-ec-tlf.enc} <C:\Users\halek\AppData
+\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss2074.pk> <C:\Users\hal
+ek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx0800.pk> <C:
+\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi08
+00.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi
+600\ecsi1095.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ecsx1440.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-g
+yre/qcrb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qcrr.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qcrri.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tx
+fonts/txsya.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb
+>
+Output written on thesis.pdf (139 pages, 1104351 bytes).
 PDF statistics:
- 1674 PDF objects out of 1728 (max. 8388607)
- 325 named destinations out of 1000 (max. 500000)
- 311 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5028 PDF objects out of 5155 (max. 8388607)
+ 2888 named destinations out of 2984 (max. 500000)
+ 375 words of extra memory for PDF output out of 10000 (max. 10000000)
 
