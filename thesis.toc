@@ -39,9 +39,9 @@
 \contentsline {subsection}{\numberline {4.2.3}Attacker operation - \unhbox \voidb@x \hbox {\relax \fontsize {10.95}{13.6}\selectfont \abovedisplayskip 11\p@ plus3\p@ minus6\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \def \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ {\leftmargin \leftmargini \topsep 9\p@ plus3\p@ minus5\p@ \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {\fontfamily {qcr}\selectfont root}} access - Immutable objects}{46}{subsection.4.2.3}
 \contentsline {subsection}{\numberline {4.2.4}Malware Protection}{47}{subsection.4.2.4}
 \contentsline {subsection}{\numberline {4.2.5}Append-only mode}{48}{subsection.4.2.5}
-\contentsline {section}{\numberline {4.3}Performance overhead}{48}{section.4.3}
+\contentsline {section}{\numberline {4.3}Performance overhead}{49}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Hypervisor - \ac {VM} switch}{49}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}\ac {SACL} performance overhead}{49}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.2}\ac {SACL} performance overhead}{50}{subsection.4.3.2}
 \contentsline {chapter}{\numberline {5}Conclusion and Future Work}{53}{chapter.5}
 \contentsline {section}{\numberline {5.1}Conclusion}{53}{section.5.1}
 \contentsline {section}{\numberline {5.2}Benefits of ferify}{53}{section.5.2}
