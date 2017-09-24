@@ -1,7 +1,7 @@
 \acresetall
 \chapter{Evaluation}\label{ch:chapter4}
 
-In this chapter, we present the evaluation of \codeft{ferify}. In the first section we validate our design of \codeft{ferify}. Next we explain the tests we performed to verify that \codeft{ferify} has the results we expect. These tests cover typical use cases where \codeft{ferify} can be employed. Finally we perform some tests to evaluate the performance overhead and the degree our solution impacts overall system usability.
+In this chapter, we present the evaluation of \codeft{ferify}. In the first section we validate our design of \codeft{ferify}. Next we explain the tests we performed to verify that \codeft{ferify} has the results we expect. These tests cover typical use cases in which \codeft{ferify} can be employed. Finally we perform some tests to evaluate the performance overhead and the degree to which our solution impacts overall system usability.
 
 \section{Validation}\label{sec:validation}
 
@@ -57,7 +57,7 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 
 \subsection{Root escalation}
 
-\par One of the first actions of an attacker or malicious program is to try to escalate its privileges to that of the root account. One of those techniques is to add the compromised user to the \emph{sudoers} group. To avoid such an exploitation, every time a trap gets caught by the hypervisor we check whether the user executing a \codeft{sudo} command is actually allowed to, according to the initial administrative setup of \codeft{ferify} for the specific \ac{VM}. If the user is a legitimate \codeft{sudoer} the flow of our plugin continues normally to check the validity of the file operation against the \acp{SACL}. On the other hand, if the user is \emph{not} supposed to have \codeft{sudo} privileges, the system calls, trapped by \codeft{ferify}, that get invoked get canceled, denying the ability to perform any \codeft{sudo} command. Figure \ref{fig:sudo_deny} shows the result of trying to execute a \codeft{sudo} command that gets denied, while at the same time we get notified on the hypervisor of the event as shown in fig. \ref{fig:sudo_deny_not}.
+\par One of the first actions of an attacker or malicious program is to try to escalate its privileges to that of the root account. One of the techniques commonly employed is to add the compromised user to the \emph{sudoers} group. To avoid such an exploitation, every time a trap gets caught by the hypervisor we check whether the user executing a \codeft{sudo} command is actually allowed to do so, according to the initial administrative setup of \codeft{ferify} for the specific \ac{VM}. If the user is a legitimate \codeft{sudoer}, the flow of our plugin continues normally to check the validity of the file operation against the \acp{SACL}. On the other hand, if the user is \emph{not} supposed to have \codeft{sudo} privileges, the system calls trapped by \codeft{ferify} that get invoked then get canceled, denying the ability to perform any \codeft{sudo} commands. Figure \ref{fig:sudo_deny} shows the result of trying to execute a \codeft{sudo} command that gets denied, while also notifying the hypervisor of the event as shown in fig. \ref{fig:sudo_deny_not}.
 
 \begin{figure}[ht]
 	\centering
@@ -88,7 +88,7 @@ Warning: Process root identity corruption detected in task
 	\label{fig:sudo_deny_not}
 \end{figure}
 
-\par In the same manner the result of trying to change a users password shows in fig. \ref{fig:passwd_deny}
+\par In the same manner the result of trying to change a user's password is shown in fig. \ref{fig:passwd_deny}
 
 \begin{figure}[ht]
 	\centering
@@ -106,7 +106,7 @@ bob@aHVM-domU:~$
 \end{figure}
 
 
-\par Having solved the issue of \emph{malicious root access}, we then need to validate the expected behavior for file access, whether requested from the \codeft{root} user or not.
+\par Having solved the issue of \emph{malicious root access}, we then needed to validate the expected behavior for file access, whether requested from the \codeft{root} user or not.
 
 \subsection{Authorized user operation}
 
@@ -300,13 +300,11 @@ $ sudo ./file_tests file1 file2 file3
 
 \par Once attackers have achieved system penetration they start accessing the \ac{OS} in many ways. Accessing of files for \emph{information gathering}, creation of \emph{persistence mechanisms}, and installation of \emph{back-doors} are just a few. But to remain undetected they must \emph{hide their tracks}. To do that, attackers usually edit system logs to erase their presence. Log files are created by appending entries at the end of the file. But this is not an enforced file access policy. That makes log files generally accessible and editable from attackers. Forcing log files to be writable only at the end of the file can prevent attackers from hiding their tracks.
 
-\par We could not enforce partial write permissions to a file, due to the \ac{OS} limitations. A file can be opened as a whole, given the permissions the user requests. What \codeft{ferify} is capable of doing is to enforce a write-only access policy to files. This way, if attackers want to cover their tracks, they are not able to open a file in read-write mode, to select and delete the log entries that reveal their presence. They will have to blindly delete entries, or empty the entire log, action that should be noticed by the system administrator. We believe that this policy can be proven a substantial hindrance to malicious actors that try to cover their tracks in the system.
+\par Due to the \ac{OS} limitations, we could not enforce partial write permissions to a file. Given the permissions the user requests, a file can be opened as a whole. What \codeft{ferify} is capable of doing is enforcing a write-only access policy to files. This way, if attackers want to cover their tracks, they are not able to open a file in read-write mode to select and delete the log entries that reveal their presence. They will have to blindly delete entries or empty the entire log, actions that should be noticed by the system administrator. We believe that this policy can be proven as a substantial hindrance to malicious actors that try to cover their tracks in the system.
 
 \section{Performance overhead}\label{sec:performance}
 
-In this section we present the performance overhead we observed on the guest \ac{OS} when running \codeft{ferify}. We performed time execution measurements in three stages. 
-
-\par To have a baseline for comparison, we created a \codeft{Python} script, as shown in appendix~\ref{app:B} that performs some of the trapped system calls and measures the execution time. It performs the execution and calculates the average execution time and the standard deviation. We performed three runs of testing. The first was under normal \ac{CPU} scheduling preferences. For the second run we set the \codeft{niceness} of the process to \codeft{-20}. \emph{Niceness} for Linux is how favorable the scheduling will be for the process, with \codeft{-20} being the best value. Finally, for the third run, besides changing the niceness of the process, we additionally set the I/O niceness to the best available value. This changes the I/O scheduling of processes, giving our test script I/O priority over all other processes. Initially we timed the execution of the script over a number of one million iterations to extract an average time that we will use as a reference, \emph{without} running \codeft{ferify}. Fig. \ref{fig:script} shows the three commands we used to run the test script.
+In this section we present the performance overhead we observed on the guest \ac{OS} when running \codeft{ferify}. We performed time execution measurements in three stages: to have a baseline for comparison, we created a \codeft{Python} script, as shown in appendix~\ref{app:B} that performs some of the trapped system calls and measures the execution time. It performs the execution and calculates the average execution time and the standard deviation. We performed three runs of testing. The first was under normal \ac{CPU} scheduling preferences. For the second run we set the \codeft{niceness} of the process to \codeft{-20}. \emph{Niceness} for Linux is how favorable the scheduling will be for the process, with \codeft{-20} being the best value. Finally, for the third run, besides changing the niceness of the process, we additionally set the I/O niceness to the best available value. This changes the I/O scheduling of processes, giving our test script I/O priority over all other processes. Initially we timed the execution of the script over a number of one million iterations to extract an average time that we will use as a reference, \emph{without} running \codeft{ferify}. Fig. \ref{fig:script} shows the three commands we used to run the test script.
 
 \begin{figure}[ht]
 	\centering
@@ -323,7 +321,7 @@ $ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
 
 \subsection{Hypervisor - \ac{VM} switch}
 
-\par One of the most intense operations in virtualization is the switch between the hypervisor and the \ac{VM}, as mentioned in subsection \ref{sub:invm}. \ac{CPU} virtualization extensions improve with every new model release, but this switch is still significant. To measure this overhead in performance, we ran \codeft{ferify} with empty \acp{SACL}. This way \codeft{ferify} traps the appropriate system calls and performs the switch between the \ac{VM} and the hypervisor. Because the \acp{SACL} are empty, there is insignificant computation performed while on the hypervisor, switching almost immediately back to the \ac{VM}. 
+\par One of the most intense operations in virtualization is the switch between the hypervisor and the \ac{VM}, as mentioned in subsection \ref{sub:invm}. \ac{CPU} virtualization extensions improve with every new model release, but this switch is still significant. To measure this overhead in performance, we ran \codeft{ferify} with empty \acp{SACL}. This way \codeft{ferify} trapped the appropriate system calls and performed the switch between the \ac{VM} and the hypervisor. Because the \acp{SACL} were empty, there was insignificant computation performed while on the hypervisor, almost immediately switching back to the \ac{VM}. 
 
 \par  Table \ref{tbl:measure1} shows the results and the performance overhead of the \ac{VM} context-switch. As expected the cost of VM-exit and VM-entry is significant. 
 
