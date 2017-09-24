@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  24 SEP 2017 13:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  24 SEP 2017 14:11
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1994,27 +1994,27 @@ File: ts1qcr.fd 2009/09/25 v1.2 font definition file for TS1/qcr
 [57.77
 
 
-]) [58.78]
+]
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 102.
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd"
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)) [58.78]
 Appendix B.
 (appendix2.tex ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
-Overfull \hbox (27.1798pt too wide) in paragraph at lines 28--30
-\T1/qcr/m/n/12 This ap-pendix con-tains the script we cre-ated to mea-sure the 
-per-
- []
-
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 8.0pt on input line 63.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 6.2pt on input line 63.
+
 [59.79
 
 ]) [60.80]
 Appendix C.
 (appendix3.tex
-LaTeX Font Info:    Font shape `T1/qcr/bx/n' in size <10> not available
-(Font)              Font shape `T1/qcr/b/n' tried instead on input line 30.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 30.
  [61.81
 
 ] [62.82] [63.83] [64.84] [65.85] [66.86] [67.87] [68.88]
@@ -2044,38 +2044,40 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 42119 strings out of 493328
- 877120 string characters out of 3139125
+ 42157 strings out of 493328
+ 877601 string characters out of 3139125
  1328572 words of memory out of 3000000
- 41861 multiletter control sequences out of 15000+200000
- 103470 words of font info for 151 fonts, out of 3000000 for 9000
+ 41890 multiletter control sequences out of 15000+200000
+ 116797 words of font info for 158 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,13n,97p,1523b,2135s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,13n,97p,1523b,2129s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{lstnumber.-13.2179} has been referenced but does 
 not exist, replaced by a fixed one
 
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ec.enc}{C:/Program File
-s/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ts1.enc} <C:\Users\halek\AppData\Local\
-MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi1200.pk> <C:\Users\halek\AppD
-ata\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss1200.pk>{C:/Program
- Files/MiKTeX 2.9/fonts/enc/dvips/base/ec.enc}{C:/Program Files/MiKTeX 2.9/font
-s/enc/dvips/newtx/ntx-ec-tlf.enc} <C:\Users\halek\AppData\Local\MiKTeX\2.9\font
-s\pk\ljfour\jknappen\ec\dpi600\ecss2074.pk> <C:\Users\halek\AppData\Local\MiKTe
-X\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx0800.pk> <C:\Users\halek\AppData\L
-ocal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi0800.pk> <C:\Users\halek
-\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi1095.pk> <C:\U
-sers\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx1440
-.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/ntxsups-Regular.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qcrb.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/tex-gyre/qcrr.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/tex-gyre/qcrri.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-
-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb>
-Output written on thesis.pdf (137 pages, 1120364 bytes).
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{C:/Program Files/MiKT
+eX 2.9/fonts/enc/dvips/tex-gyre/q-ts1.enc}{C:/Program Files/MiKTeX 2.9/fonts/en
+c/dvips/tex-gyre/q-ec.enc} <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\lj
+four\jknappen\ec\dpi600\ecsi1200.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\f
+onts\pk\ljfour\jknappen\ec\dpi600\ecss1200.pk>{C:/Program Files/MiKTeX 2.9/font
+s/enc/dvips/base/ec.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/newtx/ntx-
+ec-tlf.enc} <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\e
+c\dpi600\ecss2074.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
+jknappen\ec\dpi600\ecsx0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\2.9\fonts\
+pk\ljfour\jknappen\ec\dpi600\ecsi0800.pk> <C:\Users\halek\AppData\Local\MiKTeX\
+2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsi1095.pk> <C:\Users\halek\AppData\Loc
+al\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecsx1440.pk><C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/newtx/ntxsups-Regular.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/tex-gyre/qcrb.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/tex-gyre/qcrr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/t
+ex-gyre/qtmb.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Prog
+ram Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/newtx/txsys.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/ut
+mr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on thesis.pdf (137 pages, 1139064 bytes).
 PDF statistics:
- 5096 PDF objects out of 5155 (max. 8388607)
+ 5105 PDF objects out of 5155 (max. 8388607)
  2941 named destinations out of 2984 (max. 500000)
  375 words of extra memory for PDF output out of 10000 (max. 10000000)
 
