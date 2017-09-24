@@ -19,7 +19,7 @@
 \contentsline {figure}{\numberline {3.7}{\ignorespaces unlink() and unlinkat() skeleton code flow\relax }}{35}{figure.caption.78}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces open() and openat() permission checks\relax }}{37}{figure.caption.79}
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{38}{figure.caption.80}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }}{38}{figure.caption.82}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }}{39}{figure.caption.82}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Testing and validation concept\relax }}{44}{figure.caption.87}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Denying \emph {sudo}\relax }}{45}{figure.caption.88}

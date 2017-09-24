@@ -1,5 +1,28 @@
 \acresetall
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
 
+\lstdefinestyle{CStyle}{
+	%backgroundcolor=\color{backgroundColour},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{magenta},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	%numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
+}
 \chapter{Design and Implementation of Ferify}\label{ch:chapter3}
 
 In this chapter we will discuss the design, including the threat model and assumptions made, and the implementation choices that we made for this research.	
@@ -126,7 +149,7 @@ During the initialization of our DRAKVUF plugin, we read the \ac{SACL}s we had c
 	\label{tbl:sacl_layout}
 \end{table}
 
-\par The above memory structure is used for both protected folders and protected files. Moreover, we create two of each; one for the \codeft{root} user and one for the rest. Searching in the \acp{SACL} is done with the pathname of the file being accessed as the hash-table key. The return value is a pointer to the structure of table \ref{tbl:sacl_layout}. 
+\par The above memory structure is used for both protected folders and protected files, as they are handled the same. Moreover, we create two; one for the \codeft{root} user and one for the rest. Searching in the \acp{SACL} is done with the pathname of the file being accessed as the hash-table key. The return value is a pointer to the structure of table \ref{tbl:sacl_layout}. 
 
 \par In the \ac{SACL} file permissions are set according to the Linux permission bits schema. This means that the last 3 digits of the \textit{mode} field, when encoded in octal form, define the permissions we want to enforce. The first one defines the owner permissions, the second the group permissions, and the third the other user permissions. The number itself is the sum of the permissions 4 for read, 2 for write, and 1 for execute. As an example, if we encounter or set permissions 744, it means that the owner can read, write and execute the file, while anyone in the same group and everyone else can only read the file.
 
@@ -427,7 +450,7 @@ Besides this coarse refinement of the \ac{SACL} entries, the level of protection
 
 \subsection{System Call Hooking}\label{sub:hooking}
 
-To achieve the above mentioned system call intercept we need to place traps to the system calls of interest. This gets implemented by DRAKVUF. LibVMI reads the Rekall profile of the guest \ac{VM} to get the base address of the kernel symbol table. DRAKVUF then starts from that base address and searches for the system call table. This table includes the function pointers for all supported system calls. Going through that table makes possible the detection and trapping of the system calls.  This is achieved by reading the address of the system call from the system call table, going to that address and placing the \codeft{INT3 (0xCC)} byte at the beginning of the system call function. This byte is executed by the \ac{CPU} as a debugging interrupt, a breakpoint. This in its turn triggers a VM-exit, which is caught by DRAKVUF and handled by our callback function. DRAKVUF implements multiple \ac{EPT}s with different permissions for the same page. This allows placing the trap in the system calls, while at the same time when accessed for read, the original functions are accessed, not revealing this way the injected breakpoint. This process is transparent to the \ac{VM} because the contents of the pages are exactly the same, with the exception of the breakpoint, and all this happens when the \ac{VM} is paused.
+To achieve the above mentioned system call intercept we need to place traps to the system calls of interest. This gets implemented by DRAKVUF. LibVMI reads the Rekall profile of the guest \ac{VM} to get the base address of the kernel symbol table. DRAKVUF then starts from that base address and searches for the system call table. This table includes the function pointers for all supported system calls. Going through that table makes possible the detection and trapping of system calls.  This is achieved by reading the address of the system call from the system call table, going to that address and placing the \codeft{INT3 (0xCC)} byte at the beginning of the system call function. This does not alter the system call table; the system call table is stored information, while the injected byte is written in the actual code section. This byte is executed by the \ac{CPU} as a debugging interrupt, a breakpoint. This in its turn triggers a VM-exit, which is caught by DRAKVUF and handled by our callback function. DRAKVUF implements multiple \ac{EPT}s with different permissions for the same page. This allows placing the trap in the system calls, while at the same time when accessed for read, the original functions are accessed, not revealing this way the injected breakpoint. This process is transparent to the \ac{VM} because the contents of the pages are exactly the same, with the exception of the breakpoint, and all this happens when the \ac{VM} is paused.
 
 \par Table~\ref{tbl:prototypes} shows that there are two generic cases we need to examine. One case is for the \codeft{open()}, \codeft{rename()}, \codeft{link()}, \codeft{symlink()}, \codeft{unlink()}, and \codeft{truncate()} system calls, where we have to find the string pointed by the pointer in the \codeft{rdi} register, and in the \codeft{rsi} register in the case of \codeft{rename()}. 
 
@@ -452,29 +475,29 @@ A crucial part in the design of our solution is the Linux kernel \codeft{task\_s
 After a hooked system call gets executed, our callback function is called. We firstly retrieve the file that is being accessed and by which process, by getting its process id (figure~\ref{fig:getfile}). 
 
 \begin{figure}[ht]
-\footnotesize {
-	{\fontfamily{qcr}\selectfont 
-\tab currpid = vmi\_dtb\_to\_pid(vmi, info->regs->cr3);\\
-\tab switch (info->regs->rax)\{\\
-\tab case S\_OPEN:\\
-\tab case S\_RENAME:\\
-\tab case S\_UNLINK:\\
-\tab \tab	addr=vmi\_translate\_uv2p(vmi,info->regs->rdi,currpid);\\
-\tab \tab	filename=vmi\_read\_str\_pa(vmi,addr);\\
-\tab \tab	.\\
-\tab \tab	.\\
-\tab \tab	break;\\
-\tab case S\_OPENAT:\\
-\tab case S\_UNLINKAT:\\
-\tab case S\_RENAMEAT:\\
-\tab case S\_RENAMEAT2:\\
-\tab \tab	addr=vmi\_translate\_uv2p(vmi,info->regs->rsi,currpid);\\
-\tab \tab	filename=vmi\_read\_str\_pa(vmi,addr);\\
-\tab \tab	.\\
-\tab \tab	.\\
-\tab \tab	break; \} \\
+\fontfamily{qcr}\selectfont
+\begin{lstlisting}[style=CStyle]
+	currpid = vmi_dtb_to_pid(vmi, info->regs->cr3);
+	switch (info->regs->rax){
+		case S_OPEN:
+		case S_RENAME:
+		case S_UNLINK:
+			addr=vmi_translate_uv2p(vmi,info->regs->rdi,currpid);
+			filename=vmi_read_str_pa(vmi,addr);
+			.
+			.
+			break;
+		case S_OPENAT:
+		case S_UNLINKAT:
+		case S_RENAMEAT:
+		case S_RENAMEAT2:
+			addr=vmi_translate_uv2p(vmi,info->regs->rsi,currpid);
+			filename=vmi_read_str_pa(vmi,addr);
+			.
+			.
+			break;	
 	}
-}
+\end{lstlisting}
 	\caption{Getting the file being accessed}
 	\label{fig:getfile}
 \end{figure}
@@ -496,28 +519,31 @@ After a hooked system call gets executed, our callback function is called. We fi
 \par In the first case, where the system calls are used for linking and file deletion the procedure is straightforward. Once we look in the \ac{SACL}, if there is an entry, we verify that the user or group accessing the file, has sufficient permissions. If that is true, the callback function returns control to the \ac{VM} to resume execution. If permissions do not match, the pointer to the filename string is modified to \codeft{NULL}, so that the system call, after the \ac{VM} resumes execution, fails (figure~\ref{fig:unlink}). By hooking and preventing execution of these system calls we prevent deletion and linking of the protected files, improving this way the availability and confidentiality assurances of the underlying \ac{OS}.
 
 \begin{figure}[ht]
-\footnotesize {
-	{\fontfamily{qcr}\selectfont 
-\tab case S\_UNLINK:\\          
-\tab case S\_UNLINKAT:\\
-\tab \tab  switch(info->userid)\{\\
-\tab \tab \tab case ROOT: // root user\\
-\tab \tab \tab \tab 	if(strcmp(check->pathname,filename)==0)\{\\
-\tab \tab \tab \tab \tab 		check\_permissions(check,info,vmi,ROOT);\\			
-\tab \tab .\\
-\tab \tab .\\
-\tab \tab \tab \tab break;\\
-\tab \tab \tab default: // other users\\
-\tab \tab \tab \tab if (strcmp(check->pathname,filename)==0)\{\\
-\tab \tab \tab \tab \tab if (check->u == info->userid)\{\\
-\tab \tab \tab \tab \tab \tab check\_permissions(check,info,vmi,USER);\}\\
-\tab \tab \tab \tab \tab else if (check->g == info->groupid)\{\\
-\tab \tab \tab \tab \tab \tab check\_permissions(check,info,vmi,GROUP);\}\\
-\tab \tab \tab \tab else \{\\
-\tab \tab \tab \tab \tab check\_permissions(check,info,vmi,OTHER);\}\}\\
-\tab \tab .\\
-\tab \tab .\\
-\tab \tab \tab \tab break;\}}}
+\fontfamily{qcr}\selectfont
+\begin{lstlisting}[style=CStyle]
+
+	case S_UNLINK:
+	case S_UNLINKAT:
+		switch(info->userid){
+			case ROOT: // root user
+				if(strcmp(check->pathname,filename)==0){
+					check_permissions(check,info,vmi,ROOT);			
+					.
+					.
+				break;
+			default: // other users
+				if (strcmp(check->pathname,filename)==0){
+					if (check->u == info->userid){
+						check_permissions(check,info,vmi,USER);}
+					else if (check->g == info->groupid){
+						check_permissions(check,info,vmi,GROUP);}
+				else {
+					check_permissions(check,info,vmi,OTHER);}
+					.
+					.
+				break;
+		}
+\end{lstlisting}
 	\caption{unlink() and unlinkat() skeleton code flow}
 	\label{fig:unlink}
 \end{figure}
@@ -532,30 +558,30 @@ After a hooked system call gets executed, our callback function is called. We fi
 
 
 \begin{figure}[ht!]
-\footnotesize {
-	{\fontfamily{qcr}\selectfont 
-\tab switch(info->regs->rax)\{\\
-\tab \tab case S\_OPEN:\\
-\tab \tab case S\_OPENAT:\\
-\tab \tab if ( ((info->regs->rsi \& 07) | O\_RDONLY) == O\_RDONLY)\{\\
-\tab \tab \tab if ( !(check->mode \& r) ) \{\\
-\tab \tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
-\tab \tab \tab \tab return 1; \}\\
-\tab \tab \} else if ( ((info->regs->rsi \& 07) | O\_WRONLY) == O\_WRONLY) \{\\
-\tab \tab \tab if ( !(check->mode \& w) ) \{\\
-\tab \tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
-\tab \tab \tab \tab return 1; \}\\
-\tab \tab \} else if ( ((info->regs->rsi \& 07) | O\_RDWR) == O\_RDWR) \{\\
-\tab \tab \tab if ( !(check->mode \& w) \&\& !(check->mode \& r) ) \{\\
-\tab \tab \tab \tab vmi\_set\_vcpureg (vmi, 0, RDI, info->vcpu);\\
-\tab \tab \tab \tab return 1;\\
-\tab \tab \tab \} else if ( !(check->mode \& w) )\{\\
-\tab \tab \tab \tab vmi\_set\_vcpureg(vmi, 0, RSI, info->vcpu);\\
-\tab \tab \tab \tab return 1; \}\\
-\tab \tab \}\\
-\tab \tab break;\\
-\tab \}\\
-}}
+\fontfamily{qcr}\selectfont
+\begin{lstlisting}[style=CStyle]
+	switch(info->regs->rax){
+		case S_OPEN:
+		case S_OPENAT:
+			if ( ((info->regs->rsi & 07) | O_RDONLY) == O_RDONLY){
+				if ( !(check->mode & r) ) {
+					vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+					return 1; }
+			} else if ( ((info->regs->rsi & 07) | O_WRONLY) == O_WRONLY) {
+				if ( !(check->mode & w) ) {
+					vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+					return 1; }
+			} else if ( ((info->regs->rsi & 07) | O_RDWR) == O_RDWR) {
+				if ( !(check->mode & w) && !(check->mode & r) ) {
+					vmi_set_vcpureg (vmi, 0, RDI, info->vcpu);
+					return 1;
+				} else if ( !(check->mode & w) ){
+					vmi_set_vcpureg(vmi, 0, RSI, info->vcpu);
+					return 1; }
+			}
+			break;
+	}
+\end{lstlisting}
 	\caption{open() and openat() permission checks}
 	\label{fig:open}
 \end{figure}

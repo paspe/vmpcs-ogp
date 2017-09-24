@@ -75,21 +75,17 @@ def test(iterations = 100000):
 	for e in o_results:
 		o_total += e
 		o_s += (e * e)
-
-	o_avg = o_total / iterations
-	o_var = math.sqrt(o_s / iterations)
-
 	for e in r_results:
 		r_total += e
 		r_s += (e * e)
-
-	r_avg = r_total / iterations
-	r_var = math.sqrt(r_s / iterations)
-
 	for e in u_results:
 		u_total += e
 		u_s += (e * e)
 
+	o_avg = o_total / iterations
+	o_var = math.sqrt(o_s / iterations)
+	r_avg = r_total / iterations
+	r_var = math.sqrt(r_s / iterations)
 	u_avg = u_total / iterations
 	u_var = math.sqrt(u_s / iterations)
 	
@@ -117,12 +113,11 @@ def test(iterations = 100000):
 	print("Std dev of runtime: " + str(u_var))
 	print("----------------------------------------------------")
 
-
 if __name__ == '__main__':
 	if len(sys.argv) == 2:
 		test(int(sys.argv[1]))
 	else:
-		test(1000)
+		test(1000000)
 \end{lstlisting}}
 
 

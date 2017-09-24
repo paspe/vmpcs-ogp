@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  23 SEP 2017 16:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  23 SEP 2017 18:20
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1935,39 +1935,36 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 
 ]
 Chapter 3.
-Package acronym Info: Label `acro:VMI' overridden on input line 9.
-Package acronym Info: Label `acro:VM' overridden on input line 9.
-Package acronym Info: Label `acro:ACL' overridden on input line 9.
+Package acronym Info: Label `acro:VMI' overridden on input line 32.
+Package acronym Info: Label `acro:VM' overridden on input line 32.
+Package acronym Info: Label `acro:ACL' overridden on input line 32.
 Package acronym Info: Label `acro:UID' newly defined as it shall be overridden
-although it is yet undefined on input line 9.
+although it is yet undefined on input line 32.
 Package acronym Info: Label `acro:GID' newly defined as it shall be overridden
-although it is yet undefined on input line 9.
-Package acronym Info: Label `acro:SACL' overridden on input line 9.
-Package acronym Info: Label `acro:OS' overridden on input line 9.
+although it is yet undefined on input line 32.
+Package acronym Info: Label `acro:SACL' overridden on input line 32.
+Package acronym Info: Label `acro:OS' overridden on input line 32.
 [23.43] (figs/syscalls.tikz) [24.44] [25.45] [26.46]
-Package acronym Info: Label `acro:EPT' overridden on input line 81.
+Package acronym Info: Label `acro:EPT' overridden on input line 104.
  [27.47]
 (figs/dir_tree.tikz) [28.48] [29.49] [30.50]
-Package acronym Info: Label `acro:CPU' overridden on input line 430.
+Package acronym Info: Label `acro:CPU' overridden on input line 453.
  [31.51] (figs/overview.tikz)
-Package acronym Info: Label `acro:GMFN' overridden on input line 447.
-Package acronym Info: Label `acro:MFN' overridden on input line 447.
+Package acronym Info: Label `acro:GMFN' overridden on input line 470.
+Package acronym Info: Label `acro:MFN' overridden on input line 470.
 
-[32.52]
-Underfull \hbox (badness 10000) in paragraph at lines 457--478
-
- []
-
+[32.52] ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+)
 Package acronym Info: Label `acro:PWD' newly defined as it shall be overridden
-although it is yet undefined on input line 483.
-[33.53] [34.54] [35.55]
-Underfull \hbox (badness 10000) in paragraph at lines 537--559
-
- []
-
-[36.56] [37.57]
+although it is yet undefined on input line 506.
+ [33.53] [34.54]
+[35.55] [36.56] [37.57]
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
-although it is yet undefined on input line 591.
+although it is yet undefined on input line 617.
  [38.58]) (chapter4.tex [39.59] [40.60
 
 ]
@@ -1978,7 +1975,7 @@ Package acronym Info: Label `acro:SACL' overridden on input line 13.
 Package acronym Info: Label `acro:API' overridden on input line 26.
 Package acronym Info: Label `acro:VM' overridden on input line 30.
  [42.62] (figs/attack.tikz
-<figs/traffic-light2.png, id=1190, 322.20375pt x 347.79938pt>
+<figs/traffic-light2.png, id=1257, 322.20375pt x 347.79938pt>
 File: figs/traffic-light2.png Graphic file (type png)
 
 <use figs/traffic-light2.png>
@@ -1990,24 +1987,19 @@ LaTeX Font Info:    Font shape `T1/qcr/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/qcr/b/n' tried instead on input line 185.
  [46.66] [47.67]
 Package acronym Info: Label `acro:CPU' overridden on input line 309.
- [48.68] [49.69]) (chapter5.tex [50.70] [51.71] [52.72
+ [48.68] [49.69] [50.70]) (chapter5.tex [51.71] [52.72
 
 ]
 Chapter 5.
 Package acronym Info: Label `acro:ACL' overridden on input line 16.
 [53.73] [54.74]) [55.75] [56.76]
 Appendix A.
-(appendix1.tex ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
-File: lstlang1.sty 2015/06/04 1.6 listings language file
-)
-("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
-File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-)
+(appendix1.tex
 LaTeX Font Info:    Try loading font information for TS1+qcr on input line 36.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\tex-gyre\ts1qcr.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\tex-gyre\ts1qcr.fd"
 File: ts1qcr.fd 2009/09/25 v1.2 font definition file for TS1/qcr
-) [57.77
+)
+[57.77
 
 
 ]) [58.78]
@@ -2026,33 +2018,33 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 6.2pt on input line 63.
 [59.79
 
-] [60.80]) [61.81] [62.82
-
-]
+]) [60.80]
 Appendix C.
 (appendix3.tex
 LaTeX Font Info:    Font shape `T1/qcr/bx/n' in size <10> not available
 (Font)              Font shape `T1/qcr/b/n' tried instead on input line 30.
- [63.83] [64.84] [65.85] [66.86] [67.87] [68.88] [69.89] [70.90]
-[71.91] [72.92] [73.93] [74.94] [75.95] [76.96] [77.97] [78.98] [79.99]
-[80.100] [81.101] [82.102] [83.103] [84.104] [85.105] [86.106] [87.107]
-[88.108] [89.109] [90.110] [91.111] [92.112] [93.113] [94.114] [95.115]
-[96.116] [97.117] [98.118] [99.119] [100.120] [101.121] [102.122] [103.123]
-[104.124] [105.125] [106.126] [107.127] [108.128] [109.129] [110.130] [111.131]
-[112.132] [113.133]) [114.134] (thesis.bbl [115.135
+ [61.81
+
+] [62.82] [63.83] [64.84] [65.85] [66.86] [67.87] [68.88]
+[69.89] [70.90] [71.91] [72.92] [73.93] [74.94] [75.95] [76.96] [77.97]
+[78.98] [79.99] [80.100] [81.101] [82.102] [83.103] [84.104] [85.105] [86.106]
+[87.107] [88.108] [89.109] [90.110] [91.111] [92.112] [93.113] [94.114]
+[95.115] [96.116] [97.117] [98.118] [99.119] [100.120] [101.121] [102.122]
+[103.123] [104.124] [105.125] [106.126] [107.127] [108.128] [109.129] [110.130]
+[111.131]) [112.132] (thesis.bbl [113.133
 
 
-] [116.136]) [117.137]
-[118.138
+] [114.134]) [115.135] [116.136
 
-] [119.139]
+]
+[117.137]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 240.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 240.
  (thesis.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 240.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 240.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 6D113C7B1BE1BEC1A26218A5ECC875CF;1955.
+(rerunfilecheck)             Checksum: 886F2B58E00935A9A7B1168BD31F52F9;1955.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2060,14 +2052,14 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 41850 strings out of 493328
- 873027 string characters out of 3139125
- 1324684 words of memory out of 3000000
- 41649 multiletter control sequences out of 15000+200000
+ 42055 strings out of 493328
+ 875816 string characters out of 3139125
+ 1328665 words of memory out of 3000000
+ 41795 multiletter control sequences out of 15000+200000
  101686 words of font info for 149 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,13n,97p,1488b,2135s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{lstnumber.-10.2179} has been referenced but does 
+ 62i,13n,97p,1534b,2135s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{lstnumber.-13.2179} has been referenced but does 
 not exist, replaced by a fixed one
 
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex-gyre/q-ec.enc}{C:/Program File
@@ -2088,9 +2080,9 @@ Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmb.pfb><C:/Program Files/MiKTeX
 e1/public/tex-gyre/qtmri.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tx
 fonts/txsya.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/txsys.pfb
 >
-Output written on thesis.pdf (139 pages, 1104351 bytes).
+Output written on thesis.pdf (137 pages, 1113076 bytes).
 PDF statistics:
- 5028 PDF objects out of 5155 (max. 8388607)
- 2888 named destinations out of 2984 (max. 500000)
+ 5092 PDF objects out of 5155 (max. 8388607)
+ 2947 named destinations out of 2984 (max. 500000)
  375 words of extra memory for PDF output out of 10000 (max. 10000000)
 
