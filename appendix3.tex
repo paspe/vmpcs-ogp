@@ -841,86 +841,90 @@ static event_response_t linux_cb(drakvuf_t drakvuf, drakvuf_trap_info_t *info) {
 		
 			if ((info->regs->rax == s->s_execve) || (info->regs->rax == s->s_execveat)){
 				if (identity_check(drakvuf, info, currpid) == false) {
-				intercept_print(info, filename, NULL, currpid);
-				vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
-				break;
+					intercept_print(info, filename, NULL, currpid);
+					vmi_set_vcpureg(drakvuf->vmi, 0, RSI, info->vcpu);
+					break;
 				}
 				
 				switch (info->userid){
 				
-				case ROOT:     // Cases for filtering root access
-				
-				if ( filename != NULL ) {
-				h = g_strdup(filename);
-				f = g_strrstr(h, "/");
-				while (f != NULL) {
-				f[1] = '\0';
-				if(g_hash_table_lookup_extended(s->filelist_root, h, &k, &v)){
-				e = (entry *)v;
-				permissions_check2(drakvuf, filename, e, info, ROOT, INV);
-				break;
-				}
-				f[0] = '\0';
-				f = g_strrstr(h, "/");
-				}
-				
-				if(g_hash_table_lookup_extended(s->filelist_root, filename, &k, &v)){
-				e = (entry *)v;
-				permissions_check2(drakvuf, filename, e, info, ROOT, INV);
-				}
-				}
-				
-				break;
-				
-				default:    // other users
-				
-					if ( filename != NULL ) {
-						h = g_strdup(filename);
-						f = g_strrstr(h, "/");
-						while (f != NULL) {
-							f[1] = '\0';
-								if(g_hash_table_lookup_extended(s->filelist, h, &k, &v)){
+					case ROOT:     // Cases for filtering root access
+						
+						if ( filename != NULL ) {
+							h = g_strdup(filename);
+							f = g_strrstr(h, "/");
+							while (f != NULL) {
+								f[1] = '\0';
+								if(g_hash_table_lookup_extended(s->filelist_root, h, &k, &v)){
+									e = (entry *)v;
+									permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+									break;
+								}
+								f[0] = '\0';
+								f = g_strrstr(h, "/");
+							}
+						
+							if(g_hash_table_lookup_extended(s->filelist_root, filename, &k, &v)){
+								e = (entry *)v;
+								permissions_check2(drakvuf, filename, e, info, ROOT, INV);
+							} else {
+								vmi_set_vcpureg (drakvuf->vmi, 0, RDI, info->vcpu);
+								intercept_print(info, filename, NULL, currpid);
+								printf("[ WARNING ] Blocked execution of %s for user: %ld because it was NOT in the SACL.\n", filename, info->userid);
+							}
+						}
+						
+						break;
+					
+					default:    // other users
+					
+						if ( filename != NULL ) {
+							h = g_strdup(filename);
+							f = g_strrstr(h, "/");
+							while (f != NULL) {
+								f[1] = '\0';
+									if(g_hash_table_lookup_extended(s->filelist, h, &k, &v)){
+									e = (entry *)v;
+									if (e->u == info->userid){
+										permissions_check2(drakvuf, filename, e, info, USER, INV); 
+										break;
+									}
+									else if (e->g == info->groupid){
+										permissions_check2(drakvuf, filename, e, info, GROUP, INV);
+										break;
+									}
+									else {
+										permissions_check2(drakvuf, filename, e, info, OTHER, INV);
+										break;
+									}
+									
+									break;
+								}
+								f[0] = '\0';
+								f = g_strrstr(h, "/");
+							}
+							
+							if(g_hash_table_lookup_extended(s->filelist, filename, &k, &v) != 0){
 								e = (entry *)v;
 								if (e->u == info->userid){
-									permissions_check2(drakvuf, filename, e, info, USER, INV); 
+									permissions_check2(drakvuf, filename, e, info, USER, INV);
 									break;
-								}
-								else if (e->g == info->groupid){
+								} else if (e->g == info->groupid){
 									permissions_check2(drakvuf, filename, e, info, GROUP, INV);
 									break;
-								}
-								else {
+								} else {
 									permissions_check2(drakvuf, filename, e, info, OTHER, INV);
 									break;
 								}
-								
-								break;
-							}
-							f[0] = '\0';
-							f = g_strrstr(h, "/");
-						}
-						
-						if(g_hash_table_lookup_extended(s->filelist, filename, &k, &v) != 0){
-							e = (entry *)v;
-							if (e->u == info->userid){
-								permissions_check2(drakvuf, filename, e, info, USER, INV);
-								break;
-							} else if (e->g == info->groupid){
-								permissions_check2(drakvuf, filename, e, info, GROUP, INV);
-								break;
 							} else {
-								permissions_check2(drakvuf, filename, e, info, OTHER, INV);
-								break;
+								vmi_set_vcpureg (drakvuf->vmi, 0, RDI, info->vcpu);
+								intercept_print(info, filename, NULL, currpid);
+								printf("[ WARNING ] Blocked execution of %s for user: %ld because it was NOT in the SACL.\n", filename, info->userid);
 							}
-						} else {
-							vmi_set_vcpureg (drakvuf->vmi, 0, RDI, info->vcpu);
-							intercept_print(info, filename, NULL, currpid);
-							printf("[ WARNING ] Blocked execution of %s for user: %ld because it was NOT in the SACL.\n", filename, info->userid);
 						}
+						break;		
 					}
-					break;		
-				}
-			
+				
 			} else if ( (info->regs->rax == s->s_clone) ||
 			(info->regs->rax == s->s_fork)  ||
 			(info->regs->rax == s->s_vfork) ) {
