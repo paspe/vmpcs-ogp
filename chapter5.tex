@@ -41,6 +41,8 @@
 
 \par Currently if there is a need to change the \acp{SACL}, we need to terminate \codeft{ferify} and relaunch it, for the changes to take effect. This procedure currently leaves a window of vulnerability between the termination and re-initialization of \codeft{ferify}. Reloading the \acp{SACL} while \codeft{ferify} is running is a desired feature that will also make \codeft{ferify} more robust and secure.
 
+\par \codeft{ferify} currently blocks all kernel modules that users try to load. Although, usually, after the system has booted, there is no need to load a new kernel module, there is room for improvement. Allowing digitally signed modules can improve usability of the system, as they can be considered trusted and allowed to execute.
+
 \par Finally, some testing must be done to ensure compatibility with other Linux distribution, as during our development we only used the Ubuntu distribution.
 
 \par The above issues that need development are by no means exhaustive. As any application evolves, new problems or desired features surface, that need to be solved or integrated. 
