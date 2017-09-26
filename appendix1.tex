@@ -38,60 +38,45 @@ int main(int argc, char** argv){
   int fp = 0, r = 0;
   void * buf = malloc(64);
   char * a = "a";
-
+  uid_t user = geteuid();
+ 
   fp = open(argv[1], O_RDONLY);
+  
   if (fp < 0){
-    printf("Failure: Could not open file for reading. 
-    Cannot copy.\n");
+    printf("Failure: Could not open %s for reading by user %u. Cannot copy.\n", argv[1], user);
   } else {
-    printf("Success: Opened file for reading. 
-    Able to copy.\n");
+    printf("Success: Opened %s for reading by user %u. Able to copy.\n", argv[1], user);
     close(fp);
   }
-
+  
   fp = open(argv[1], O_WRONLY);
   if (fp < 0){
-    printf("Failure: Could not open file for writing.\n");
+    printf("Failure: Could not open %s for writing by user %u.\n", argv[1], user);
   } else {
-    printf("Success: Opened file for writing.\n");
+    printf("Success: Opened %s for writing by user %u.\n", argv[1], user);
     close(fp);
   }
-
+  
   fp = open(argv[2], O_RDWR | O_CREAT, 0666);
   if (fp < 0){
-    printf("Failure: Could not create file.\n");
+    printf("Failure: %s could not be created by user %u.\n", argv[2], user);
   } else {
-    printf("Success: created file.\n");
-
-    r = read(fp, buf, 1);
-    if (r < 0) {
-      printf("Failure: Could not write to file.\n");
-    } else {
-      printf("Success: Can read from file.\n");
-    }
-
-    r = write(fp, a, 1);
-    if (r < 1) {
-      printf("Failure: could not write to file.\n");
-    } else {
-      printf("Success: Can write to file.\n");
-    }
-
+    printf("Success: %s created by user %u.\n", argv[2], user);
     close(fp);
   }
-
+  
   fp = unlink(argv[2]);
   if (fp != 0) {
-    printf("Failure: Could not delete file.\n");
+    printf("Failure: user %u could not delete %s.\n", user, argv[2]);
   } else {
-    printf("Success: File deleted.\n");
+    printf("Success: user %u deleted %s.\n", user, argv[2]);
   }
 
   fp = rename(argv[1], argv[3]);
   if (fp != 0) {
-    printf("Failure: Could not move file.\n");
+    printf("Failure: user %u could not move %s to %s.\n", user, argv[1], argv[3]);
   } else {
-    printf("Success: File moved.\n");
+    printf("Success: user %u moved %s to %s.\n", user, argv[1], argv[3]);
     fp = rename(argv[3], argv[1]);
   }
 

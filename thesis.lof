@@ -18,7 +18,7 @@
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Getting the file being accessed\relax }}{34}{figure.caption.61}
 \contentsline {figure}{\numberline {3.7}{\ignorespaces unlink() and unlinkat() skeleton code flow\relax }}{36}{figure.caption.63}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces open() and openat() permission checks\relax }}{37}{figure.caption.64}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{38}{figure.caption.65}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{39}{figure.caption.65}
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }}{39}{figure.caption.67}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Testing and validation concept\relax }}{44}{figure.caption.72}

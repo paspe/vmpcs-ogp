@@ -26,8 +26,8 @@
 \contentsline {subsection}{\numberline {3.5.3}System Call Interception and Admission Control}{30}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}System Call Hooking}{32}{subsection.3.5.4}
 \contentsline {subsection}{\numberline {3.5.5}The task struct}{32}{subsection.3.5.5}
-\contentsline {subsection}{\numberline {3.5.6}Trap Handling}{33}{subsection.3.5.6}
-\contentsline {section}{\numberline {3.6}Monitoring of program execution}{37}{section.3.6}
+\contentsline {subsection}{\numberline {3.5.6}Trap Handling}{34}{subsection.3.5.6}
+\contentsline {section}{\numberline {3.6}Monitoring of program execution}{38}{section.3.6}
 \contentsline {section}{\numberline {3.7}Guest \ac {VM} Configuration}{38}{section.3.7}
 \contentsline {chapter}{\numberline {4}Evaluation}{41}{chapter.4}
 \contentsline {section}{\numberline {4.1}Validation}{41}{section.4.1}
@@ -44,15 +44,13 @@
 \contentsline {subsection}{\numberline {4.3.2}\ac {SACL} performance overhead}{50}{subsection.4.3.2}
 \contentsline {chapter}{\numberline {5}Conclusion and Future Work}{53}{chapter.5}
 \contentsline {section}{\numberline {5.1}Conclusion}{53}{section.5.1}
-\contentsline {section}{\numberline {5.2}Benefits of ferify}{53}{section.5.2}
-\contentsline {section}{\numberline {5.3}Lessons learned}{54}{section.5.3}
-\contentsline {section}{\numberline {5.4}Limitations}{54}{section.5.4}
-\contentsline {section}{\numberline {5.5}Future Work}{55}{section.5.5}
+\contentsline {section}{\numberline {5.2}Lessons learned}{54}{section.5.2}
+\contentsline {section}{\numberline {5.3}Future Work}{55}{section.5.3}
 \renewcommand *\cftchappresnum {Appendix\ }
 \setlength {\cftchapnumwidth }{\widthof {\textbf {Appendix\nobreakspace {}999\nobreakspace {}}}}
 \contentsline {chapter}{\numberline {A}File access test script}{57}{appendix.A}
 \contentsline {chapter}{\numberline {B}Performace overhead test script}{59}{appendix.B}
 \contentsline {chapter}{\numberline {C}ferify code}{61}{appendix.C}
-\contentsline {chapter}{List of References}{113}{lstnumber.-13.2179}
-\contentsline {chapter}{Initial Distribution List}{117}{appendix*.86}
+\contentsline {chapter}{List of References}{113}{lstnumber.-13.2183}
+\contentsline {chapter}{Initial Distribution List}{117}{appendix*.87}
 \contentsfinish 

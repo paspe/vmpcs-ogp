@@ -12,7 +12,7 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 \par The ring 3 operations include all the actions an attacker can perform in user-space. Assuming that the attacker has gained \codeft{root} access, these actions include modification of system configuration files and programs to serve certain purposes for the attacker. 
 \par \codeft{ferify} can be employed to overcome this challenge. By adding critical system files in the \acp{SACL} along with the correct permissions, we can \emph{deny} write access to any user, \emph{including} \codeft{root}. The administrator must decide which files are critical, depending on the security risk that is anticipated. A few basic files we assess that need protection, to ensure some of our assumptions are \codeft{/etc/passwd, /etc/shadow, /etc/pam.d/su}. Tests for these cases are covered in the next section.
 
-\subsection{Ring 0 operations}
+\subsection{Ring 0 operations}\label{sub:ring0}
 
 \par File operations are performed by the kernel through the system calls. But the kernel can be modified by the \codeft{root} user, who has access to it. Kernel memory can be accessed only while operating in ring 0 with the following ways:
 
@@ -25,15 +25,16 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 
 \par Generally, the system call \ac{API} is well defined and difficult to exploit. System call attacks usually target the system call table, to modify the address of the system call functions with others of the attackers choosing. But to do that the attacker needs to be \emph{able to load kernel modules}. So, this type of attack falls already in the second category, that of the kernel modules.
 
-\par When an attacker manages to load a kernel module, everything is within reach. The module is running as part of the kernel, in ring 0, and has access to \emph{every} physical and virtual resource available on the system. Kernel modules have access to all kernel functions and structures, and are able to modify them. There are protection mechanisms, like module digital signing, but all these checks are running on the same privilege level. To protect the guest \ac{OS} from that type
+\par When an attacker manages to load a kernel module, everything is within reach. The module is running as part of the kernel, in ring 0, and has access to \emph{every} physical and virtual resource available on the system. Kernel modules have access to all kernel functions and structures, and are able to modify them. There are protection mechanisms, like module digital signing, but all these checks are running on the same privilege level. To protect the guest \ac{OS} from that category
 %category vs. type (CDP)
 of attacks
 %remove plural from attack (CDP)
-, which can also result in the installation of \emph{root-kits}, we trap and block the \codeft{init\_mod()} and \codeft{finit\_mod()} system calls
+, which can also result in the installation of \emph{root-kits}, we trap and block the \codeft{init\_mod()} and \codeft{finit\_mod()} system calls.
 %end sentence and then: By blocking the use of kernel module system calls we make module loading impossible. (CDP)
-, which make module loading possible, \emph{denying} it this way impossible.
+%, which make module loading possible, \emph{denying} it this way impossible.
+By blocking the use of kernel module system calls we make module loading \emph{impossible}.
 
-\par To protect against a modified kernel, we took a simplistic approach, easily implemented with \codeft{ferify}. We block the system call \codeft{kexec\_load()}, which loads a new kernel for later execution. Other than that we can detect the kernel files that are used to boot the system and write protect them from all users. Also, the setup of the \ac{VM} will shut it down in case of a reboot, so running automatically on a modified kernel is currently prohibited. We decided to not cover this specific attack vector, since there are solutions like vTPM~\cite{perez2006vtpm}, which implement a more sophisticated way of securing the system's boot procedure and verifying that the code launched by firmware is trusted. 
+\par To protect against a modified kernel, we took a simplistic approach, easily implemented with \codeft{ferify}. We block the system call \codeft{kexec\_load()}, which loads a new kernel for later execution. Other than that, we can detect the kernel files that are used to boot the system and write protect them from all users. Also, the setup of the \ac{VM} will shut it down in case of a reboot, so running automatically on a modified kernel is currently prohibited. Besides these protection measures, we decided to not expand on this specific attack vector more; there are solutions like vTPM~\cite{perez2006vtpm}, which implement a more sophisticated way of securing the system's boot procedure and verifying that the code launched by firmware is trusted. 
 
 \par The kernel of an \ac{OS} is a program, and as such has some bugs. Some of them might just crash parts of the kernel without any other consequences. Some of these bugs can potentially be used to manipulate kernel memory structures and contents, or generally allow arbitrary code execution. These types of attacks require a very deep knowledge of the intricate Linux kernel to successfully work. We assess these attacks as out of scope for this research, as the Linux kernel is constantly evolving. Security patches are rolled frequently to fix these bugs, or secure against them.
 
@@ -59,7 +60,7 @@ of attacks
 
 \par These cases by themselves cover the basic set of actions that \codeft{ferify} was initially designed to monitor. Any combination of them is handled separately from the underlying \ac{OS}, reducing our problem to these elementary cases, making it easier to monitor and handle.
 
-\par First we will test if an illegal \codeft{root} escalation is possible and then we will test the file operations, which include \emph{create, open, read, write, copy, move, delete,} and \emph{link}.
+\par First we will test if an illegal \codeft{root} escalation is possible and then we will test the file operations, which include \emph{create, open, read, write, copy, move,} and \emph{delete}.
 
 \subsection{Root escalation}
 
@@ -116,7 +117,7 @@ bob@aHVM-domU:~$
 
 \subsection{Authorized user operation}
 
-\par A very important aspect of a security solution is the impact on \emph{usability} for the normal user. The implementation of a secure system that remains fully usable is a challenge. In this test we evaluate whether an authorized user can normally access and work on his files. To test the file operations we create two files \codeft{file1} and \codeft{file2}. In the \acp{SACL} we have entries for three files, to test if the third file can be created. The permissions for the files on the guest \ac{OS} and the \acp{SACL} are explained in table \ref{fig:file_perms1}.
+\par A very important aspect of a security solution is the impact on \emph{usability} for the normal user. The implementation of a secure system that remains fully usable is a challenge. In this test we evaluate whether an authorized user can normally access and work on his files. To test the file operations we create two files \codeft{file1} and \codeft{file2} and check whether we can open them, move them or overwrite one with the other. In the \acp{SACL} we have entries for three files, to test if the third file can be created. The permissions for the files on the guest \ac{OS} and the \acp{SACL} are explained in table \ref{fig:file_perms1}.
 
 \begin{table}[ht]
 	\centering
@@ -176,11 +177,12 @@ bob@aHVM-domU:~$
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
 $ ./file_tests file1 file2 file3
-   Success: Opened file for reading. Able to copy.
-   Success: Opened file for writing.
-   Success: created file.
-   Success: File deleted.
-   Success: File moved.
+   Success: Opened file1 for reading by user 0. Able to copy.
+   Success: Opened file1 for writing by user 0.
+   Success: file2 created by user 0.
+   Success: user 0 deleted file2.
+   Success: user 0 moved file1 to file3.
+
 		\end{lstlisting}}
 	\caption{File operations execution for authorized user.}
 	\label{fig:results1}
@@ -252,11 +254,13 @@ $ ./file_tests file1 file2 file3
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
 $ sudo ./file_tests file1 file2 file3
-   Failure: Could not open file for reading. Cannot copy.
-   Failure: Could not open file for writing.
-   Failure: Could not create file.
-   Failure: Could not delete file.
-   Failure: Could not move file.
+   Failure: Could not open file1 for reading by user 0. 
+            Cannot copy.
+   Failure: Could not open file1 for writing by user 0.
+   Failure: file2 could not be created by user 0.
+   Failure: user 0 could not delete file2.
+   Failure: user 0 could not move file1 to file3.
+
 		\end{lstlisting}}
 	\caption{File operations execution for non-authorized user.}
 	\label{fig:results2}
@@ -366,11 +370,29 @@ $ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
 
 \subsection{\ac{SACL} performance overhead}
 
-\par The information for the files stored in the \acp{SACL} is stored in a hash-table. The index of the table is the pathname. This makes storing and retrieving entries from the \ac{SACL} a complexity of \emph{O(1)}, making the algorithm efficient. Nevertheless, we need to measure \codeft{ferify}'s total performance overhead when running on a full file-system. We ran the same script as before, but this time we included a full file-system \ac{SACL}, to evaluate \codeft{ferify}'s efficiency. The \ac{SACL} contained more than \emph{400,000} entries. We expect, in a normally used \ac{OS} many more entries, as our test \ac{VM} had no extra programs installed and we had created just a few user files, for the purposes of testing. 
+\par The information for the files stored in the \acp{SACL} is stored in a hash-table. The index of the table is the pathname. Since the lookups we make in the hash-table depends on the depth of the file's directory tree, the searching of a file in the \ac{SACL} is of \emph{O(d)} complexity, where \codeft{d} is the afore-mentioned depth. Since, usually, the depth of a directory tree is relatively small, we assess the algorithm to be efficient. To verify this claim, that the search time does not depend on the entries of the \ac{SACL}, we run the same test, with the same settings, using the same files, but with different \ac{SACL} size each time, as shown in table \ref{tbl:measure}. To avoid as much \ac{OS} interference as we could, we set both settings of \codeft{niceness} to the maximum value. The results seem to support our claim; the average execution time of the tested system calls is of the same magnitude. 
 
-\par Table \ref{tbl:measure2} shows the result of the second run of our test. We observe that the total performance overhead remains in the same magnitude. Some numbers might seem contradicting, but this is normal, as the Linux kernel schedules differently each running process, and continuously creates more. This is the reason we focus in the magnitude instead of the actual numbers. We assess that the hash\_table implementation and the permission checking algorithm has an insignificant impact on performance, compared to the cost of switching between the hypervisor and the guest \ac{VM}, which dominates. This is the exact reason we decided to trap each system call individually, instead of trapping the system call handler, which is the kernel's entry point to all system calls. This case would cause an even more significant overhead, as the \ac{VM} context switch would happen for \emph{each and every} system call invoked by \emph{all} processes running on the \ac{OS}.
+\begin{table}[ht]
+\centering
+\caption{Hash-table search times(msec)}
+\label{tbl:measure}
+\begin{tabular}{ c | c | c | c | c }
+	\toprule
+	& \multicolumn{4}{c}{\ac{SACL} size} \\
+	System call & 100 & 1,000 & 10,000 & 100,000 \\	
+	\toprule
+	\codeft{open()} & \tab0.203920\tab & \tab0.204899\tab & \tab0.206650\tab & \tab0.202786\tab \\
+	\codeft{rename()} 	& 0.256427 & 0.256371 & 0.259813 & 0.255484 \\
+	\codeft{unlink()} 	& 0.191526 & 0.193019 & 0.194595 & 0.190740 \\
+	\bottomrule
+\end{tabular}	
+\end{table}
+
+\par Nevertheless, we needed to measure \codeft{ferify}'s total performance overhead when running on a full file-system. We ran the same script as before, but this time we included a full file-system \ac{SACL}, to evaluate \codeft{ferify}'s efficiency. The \ac{SACL} contained more than \emph{400,000} entries. We expect, in a normally used \ac{OS} many more entries, as our test \ac{VM} had no extra programs installed and we had created just a few user files, for the purposes of testing. 
 
 \par Although the increase in execution time seems extremely large, the average execution time of a single system call seems to remain within usable limits. While using the guest \ac{VM} to evaluate the use experience, we did not notice any delays. 
+
+\par Table \ref{tbl:measure2} shows the result of the second run of our test. We observe that the total performance overhead remains in the same magnitude. Some numbers might seem contradicting, but this is normal, as the Linux kernel schedules differently each running process, and continuously creates more. This is the reason we focus in the magnitude instead of the actual numbers. We assess that the hash\_table implementation and the permission checking algorithm has an insignificant impact on performance, compared to the cost of switching between the hypervisor and the guest \ac{VM}, which dominates. This is the exact reason we decided to trap each system call individually, instead of trapping the system call handler, which is the kernel's entry point to all system calls. This case would cause an even more significant overhead, as the \ac{VM} context switch would happen for \emph{each and every} system call invoked by \emph{all} processes running on the \ac{OS}.
 
 
 \begin{table}[ht]

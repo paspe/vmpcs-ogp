@@ -194,6 +194,10 @@ E.~Perla and M.~Oldani, \emph{A guide to kernel exploitation: attacking the
 ``Wrekall memory forensic framework.'' Available:
   \url{http://www.rekall-forensic.com/}
 
+\bibitem{syscalls}
+R.~A. Chapman, ``Linux system call table for x86-64,'' Nov 2012. Available:
+  \url{http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/}
+
 \bibitem{perez2006vtpm}
 R.~Perez, R.~Sailer, L.~van Doorn \emph{et~al.}, ``vtpm: virtualizing the
   trusted platform module,'' in \emph{Proc. 15th Conf. on USENIX Security
