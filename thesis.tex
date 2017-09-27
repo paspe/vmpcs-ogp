@@ -53,7 +53,7 @@
 % they are referenced in the text.
 
 
-\title{Protecting Compromised Systems with a Virtual-Machine Protection and Checking System Using Out-Of-Guest Permissions}
+\title{Protecting Files Hosted on Virtual Machines with Out-Of-Guest Access Control}
 
 % Student info
 \author{Alexis Peppas}
@@ -76,9 +76,10 @@
 
 % Your abstract.  New paragraphs start after an empty line.
 \abstract{%
-When an OS runs directly on a physical machine, it allocates and uses its resources to protect itself from network or other types of attacks. When it runs on a virtualization platform however, the hypervisor, the software that facilitates virtualization, stands between the hardware and the running software, and can monitor what is happening inside a VM, a capability called introspection.\\
-Despite the evolution of CPU virtualization instructions and the continuous development of more efficient and secure hypervisors, the bottom-line remains the same: a VM is still a system with all the vulnerabilities of its running OS and software. At some point in time, it will be the victim of a successful exploitation.\\
-In this research, we developed a virtualization security solution; it leverages introspection to monitor which files are being accessed and with the use of access control lists, kept on the hypervisor, allows or denies access to them. This solution improves data confidentiality, integrity and availability on a VM, and additionally acts as a white-list application filter, which allows or denies program execution; this last capability makes it an efficient virtual machine file protection system against zero-day attacks..
+When an operating system (OS) runs directly on a physical machine, it allocates and uses its resources to protect itself from network or other types of attacks, but when it runs on a virtualization platform, the hypervisor, the software that facilitates virtualization, stands between the hardware and the running software, and can monitor the internal state of a virtual machine (VM), a capability called introspection.\\
+In this research, we developed a virtualization security solution; it leverages introspection to monitor and protect critical user's files that are being accessed and with the use of access control lists, kept on the hypervisor, allows or denies access to them. This solution improves data confidentiality, integrity and availability, and additionally acts as a white-list application filter, which allows or denies program execution; this last capability makes it an efficient virtual machine file protection system against a range of zero-day attacks.\\
+The evaluation of our solution shows that it can successfully protect user files against unauthorized access. The performance overhead, although significant, remains within usable levels and is mainly attributed to the context switch between the hypervisor and the VM.\\
+Despite the evolution of CPU virtualization instructions and the continuous development of more efficient and secure hypervisors, the bottom-line remains the same: a VM is still a system with all the vulnerabilities of its running OS and software. At some point in time, it will be the victim of a successful exploitation.
 }
 
 % Switch the below lines around, if FOUO
@@ -168,7 +169,7 @@ In this research, we developed a virtualization security solution; it leverages 
 %
 \NPSacknowledgements{%
 I would like to thank my wife Evi for all her love, patience, support and motivation she gave me during my studies. I would not have been here and accomplished what I have without her help. \\
-I would also like to thank my advisors, Geoffry Xie and Carl Prince for their support and guidance. My special thanks goes to Chris Eagle and Michael Thompson, who both also helped me and were always there for my questions.  
+I would also like to thank my advisors, Geoffrey Xie and Carl Prince for their support and guidance. My special thanks goes to Chris Eagle and Michael Thompson, who both also helped me and were always there for my questions.  
 }
 
 % Start layout for the NPS body

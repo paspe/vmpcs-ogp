@@ -5,7 +5,7 @@
 
 \section{Conclusion}
 
-\par In this thesis we developed \codeft{ferify}, a virtual file protection system against \emph{zero-day} attacks. As mentioned in chapter \ref{ch:background}, other virtualization solutions exist, and others are continuously developed. We believe that \codeft{ferify} has some unique characteristics, which make it more efficient, until something new gets developed. The benefits of \codeft{ferify}, as well as some limitations of a security solution that is completely transparent to the guest \ac{VM}, as we observed them, can be summarized as follows:
+\par In this thesis we developed \codeft{ferify}, a virtual file protection system against \emph{zero-day} attacks. As mentioned in chapter \ref{ch:background}, other virtualization solutions exist, and others are continuously developed. We believe that \codeft{ferify} has some unique characteristics, which make it more efficient than the already existing solutions. The benefits of \codeft{ferify}, as well as some limitations of a security solution that is completely transparent to the guest \ac{VM}, as we observed them, can be summarized as follows:
 
 \begin{itemize}
 \item We decided to use DRAKVUF~\cite{lengyel2014drakvuf} as our base platform. This gives inherently to \codeft{ferify} a \emph{zero-footprint} in the guest \ac{VM}, making in it a full \emph{out-\ac{VM}} solution, which \emph{cannot be detected} from the guest \ac{VM}. Although there are techniques to detect if an \ac{OS} is vitrualized or not, there is no way to detect if \codeft{ferify} is running or not.
@@ -16,9 +16,11 @@
 
 \item \codeft{ferify} also provides for \emph{kernel security} and \emph{integrity} by denying kernel module loading and new kernel booting. This step ensures that the guest \ac{OS} kernel will remain \emph{unmodified} by attackers, ensuring that existing and new \emph{zero-day} attacks will not work on a \codeft{ferify} protected \ac{VM}.
 
-\item LibVMI currently provides an \ac{API} for accessing and modifying a \ac{VM}'s \ac{CPU} registers or memory contents. It does not provide functions to access files and devices. 
+\item LibVMI currently provides an \ac{API} for accessing and modifying a \ac{VM}'s \ac{CPU} registers or memory contents. It does not provide functions to access files and devices. This is an important limitation on what introspection can achieve. For cases like \codeft{ferify}, protecting files must be done on a different level, than that of the actual file. This is the reason we had to trap the system calls and introduce an insignificant performance overhead.
 
-\item The semantic gap, mentioned before, is a huge obstacle and limitation of an out-\ac{VM} security solution. In the case of \codeft{ferify}, the design was such that we did not need to make any inferences about the state of the guest \ac{OS}. The file access control policy monitoring does not need to implement intricate relations between different kernel memory structures or user-space memory. This allowed for a simpler design, but might become more complex as new features might need access to additional data.
+\item The performance overhead, as measured in section \ref{sec:performance}, is a significant factor that needs to be considered. Trapping of many system calls can result in a less usable environment. Our measurements were performed using only one \ac{VM}. In a more expanded environment, where many \acp{VM} are running, the hypervisor-\ac{VM} switch overhead can increase significantly and be a limiting factor in the use of virtualization security applications.
+
+\item In chapter~\ref{ch:background} we mentioned the data semantic gap that exists between the hypervisor and a \ac{VM}. Making assumptions and inferences of the high-level actions in a \ac{VM} by examining the internal state of a \ac{VM} is at least extremely difficult, if not impossible. To achieve that we need to know the internals of the guest \ac{OS} at a deep level in order to be able to retrieve information that allows us to recreate the high-level actions. This data semantic gap is a huge obstacle and limitation of an out-\ac{VM} security solution. In the case of \codeft{ferify}, the design was such that we did not need to make any inferences about the state of the guest \ac{OS}. The file access control policy monitoring does not need to implement intricate relations between different kernel memory structures or user-space memory. This allowed for a simpler design, but might become more complex as new features might need access to additional data.
  
 \end{itemize} 
 
@@ -27,7 +29,7 @@
 
 \par During the development of \codeft{ferify} we encountered some problems, which we were called to solve to continue progressing.  
 
-\par Creating an out-\ac{VM} solution has some challenges, with the most important the semantic gap we mentioned in chapter~\ref{ch:background}. Although for \codeft{ferify}, the way it was designed, there is no need for much context of what is happening in the guest \ac{VM}, we need to bridge that gap in some cases. This bridging required deep research of the Linux kernel to locate where the required information is stored and how to recreate some information that is not directly stored in the kernel. In the case of the development of a solution that needs to make some decisions and inferences based on higher level information, bridging this semantic gap can be extremely challenging.
+\par Creating an out-\ac{VM} solution has some challenges, with the most important the data semantic gap we mentioned in chapter~\ref{ch:background}. Although for \codeft{ferify}, the way it was designed, there is no need for much context of what is happening in the guest \ac{VM}, we need to bridge that gap in some cases. This bridging required deep research of the Linux kernel to locate where the required information is stored and how to recreate some information that is not directly stored in the kernel. In the case of the development of a solution that needs to make some decisions and inferences based on higher level information, bridging this semantic gap can be extremely challenging.
 
 \par Building a security solution is a complex process, which requires a number of iterations, revisiting of already implemented parts for improvements and integration of newer features, to make a more complete and robust application. During this thesis, we initially considered trapping only \emph{three} system calls. But as \codeft{ferify} evolved, and we discovered other vectors of file access, we finally resulted in trapping a total of \emph{nineteen} system calls, so that we could monitor \emph{all} possible ways of accessing a file.
 
@@ -40,19 +42,19 @@
 
 \item Although we keep track of the running and newly created processes, there are cases of multi-threaded processes that need better handling. Finding the thread count of a process and monitoring additions and exits of these threads should be added in \codeft{ferify}'s logic. Although the basic functionality is present, missing the initial thread count of a process does not allow us no know when a process completely terminates, keeping it this way in our list. This can result in some errors in the validation of the process' identity, in the case of the creation of a new process with the same \codeft{pid} as the one we did not detect exiting.  
 
-\item More research must be done to verify whether multi-threaded processes have the same \codeft{CR3} value between threads, or not, and keep track of it, for use in the process identity validation.
-
 \item In our test environment we used a single-\ac{CPU} \ac{VM}. Future work might be needed to modify \codeft{ferify} to work on multi-\ac{CPU} \acp{VM}. DRAKVUF, when running a callback function, provides the information about the virtual-\ac{CPU} that causes the \ac{VM}-exit event. That information can be used to adjust \codeft{ferify}'s code, if needed, to trap and handle \emph{all} system calls from \emph{all} virtual-\acp{CPU} of the guest \ac{VM}.
 
 \item Currently if there is a need to change the \acp{SACL}, we need to terminate \codeft{ferify} and relaunch it, for the changes to take effect. This procedure currently leaves a window of vulnerability between the termination and re-initialization of \codeft{ferify}. Reloading the \acp{SACL} while \codeft{ferify} is running is a desired feature that will also make \codeft{ferify} more robust and secure. This could be done by registering a new signal handler, or modifying an existing one, to destroy and recreate the hash-tables from the new \acp{SACL}.
 
 \item \codeft{ferify} currently blocks all kernel modules that users try to load. Although, usually, after the system has booted, there is no need to load a new kernel module, there is room for improvement. Allowing digitally signed modules can improve usability of the system, as they can be considered trusted and allowed to execute. This could be implemented by reading the digital signature from the hypervisor and then checking its correctness before continuing execution of the guest \ac{VM}.
 
-\item Finally, some testing must be done to ensure compatibility with other Linux distribution, as during our development we only used the Ubuntu distribution. We expect that there will be no issue, as most Linux distributions use the same kernel.
+\item Additional testing must be done to ensure compatibility with other Linux distribution, as during our development we only used the Ubuntu distribution. We expect that there will be no issue, as most Linux distributions use the same kernel.
+Furthermore, more research and testing is required to verify whether multi-threaded processes have the same \codeft{CR3} value between threads, or not, and keep track of it, for use in the process identity validation.
+
 
 \end{itemize}
 
-\par The above issues that need development are by no means exhaustive. As any application evolves, new problems or desired features surface, that need to be solved or integrated. 
+\par The above list is by no means exhaustive. As new problems or desired features surface, other features or enhancements to existing ones are likely to be required. 
 
 
 %\begin{itemize}
