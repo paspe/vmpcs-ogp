@@ -1,16 +1,16 @@
 
 \chapter{Conclusion and Future Work}\label{ch:chapter5}
 
-\par In this chapter, we present the benefits of \codeft{ferify}, and the lessons we leanred during its development. We also present some limitations of a security solution that is completely transparent to the guest \ac{VM}, as we encountered them. Finally, we present some ideas for future development of \codeft{ferify}.
+\par In this chapter, we present the benefits of \codeft{ferify}, and the lessons we learned during its development. We also present some limitations of a security solution that is completely transparent to the guest \ac{VM}, as we encountered them. Finally, we present some ideas for future development of \codeft{ferify}.
 
 \section{Conclusion}
 
 \par In this thesis we developed \codeft{ferify}, a virtual file protection system against \emph{zero-day} attacks. As mentioned in chapter \ref{ch:background}, other virtualization solutions exist, and others are continuously developed. We believe that \codeft{ferify} has some unique characteristics, which make it more efficient than the already existing solutions. The benefits of \codeft{ferify}, as well as some limitations of a security solution that is completely transparent to the guest \ac{VM}, as we observed them, can be summarized as follows:
 
 \begin{itemize}
-\item We decided to use DRAKVUF~\cite{lengyel2014drakvuf} as our base platform. This gives inherently to \codeft{ferify} a \emph{zero-footprint} in the guest \ac{VM}, making in it a full \emph{out-\ac{VM}} solution, which \emph{cannot be detected} from the guest \ac{VM}. Although there are techniques to detect if an \ac{OS} is vitrualized or not, there is no way to detect if \codeft{ferify} is running or not.
+\item We decided to use DRAKVUF~\cite{lengyel2014drakvuf} as our base platform. This gives inherently to \codeft{ferify} a \emph{zero-footprint} in the guest \ac{VM}, making in it a full \emph{out-\ac{VM}} solution, which \emph{cannot be detected} from the guest \ac{VM}. Although there are techniques to detect if an \ac{OS} is virtualized or not, there is no way to detect if \codeft{ferify} is running or not.
 
-\item Making \codeft{ferify} a complete out-\ac{VM} solution, which means that all the code and information is stored onthe hypervisor, gives our solution a great isolation from the guest \ac{OS}, making almost impossible to interact and subvert \codeft{ferify}. There are hypervisor-based attacks, which are outside the scope of this thesis, and we expect that hypervisors will become more secure and robust over time.
+\item Making \codeft{ferify} a complete out-\ac{VM} solution, which means that all the code and information is stored on the hypervisor, gives our solution a great isolation from the guest \ac{OS}, making almost impossible to interact and subvert \codeft{ferify}. There are hypervisor-based attacks, which are outside the scope of this thesis, and we expect that hypervisors will become more secure and robust over time.
 
 \item Using \codeft{ferify} can have a significant improvement in an \ac{OS}'s file \emph{confidentiality}, \emph{integrity} and \emph{availability}. We have managed to tighten the Linux file permissions. We can enforce a different \emph{user-based}  \ac{ACL} policy than the one in the guest \ac{OS}, in a transparent way, protecting this way critical files and information stored in them. We can deny reading of files, modification and deletion of them, as well as execution of programs,  \emph{white-list} basis. Doing all these also for the \emph{root} account, is a significant improvement in information security and system integrity, as the system's administrator could till now access everything stored on the \ac{OS}.
 
@@ -31,7 +31,7 @@
 
 \par Creating an out-\ac{VM} solution has some challenges, with the most important the data semantic gap we mentioned in chapter~\ref{ch:background}. Although for \codeft{ferify}, the way it was designed, there is no need for much context of what is happening in the guest \ac{VM}, we need to bridge that gap in some cases. This bridging required deep research of the Linux kernel to locate where the required information is stored and how to recreate some information that is not directly stored in the kernel. In the case of the development of a solution that needs to make some decisions and inferences based on higher level information, bridging this semantic gap can be extremely challenging.
 
-\par Building a security solution is a complex process, which requires a number of iterations, revisiting of already implemented parts for improvements and integration of newer features, to make a more complete and robust application. During this thesis, we initially considered trapping only \emph{three} system calls. But as \codeft{ferify} evolved, and we discovered other vectors of file access, we finally resulted in trapping a total of \emph{nineteen} system calls, so that we could monitor \emph{all} possible ways of accessing a file.
+\par Building a security solution is a complex process, which requires several iterations, revisiting of already implemented parts for improvements and integration of newer features, to make a more complete and robust application. During this thesis, we initially considered trapping only \emph{three} system calls. But as \codeft{ferify} evolved, and we discovered other vectors of file access, we finally resulted in trapping a total of \emph{nineteen} system calls, so that we could monitor \emph{all} possible ways of accessing a file.
 
 
 \section{Future Work}
@@ -40,7 +40,9 @@
 
 \begin{itemize}
 
-\item Although we keep track of the running and newly created processes, there are cases of multi-threaded processes that need better handling. Finding the thread count of a process and monitoring additions and exits of these threads should be added in \codeft{ferify}'s logic. Although the basic functionality is present, missing the initial thread count of a process does not allow us no know when a process completely terminates, keeping it this way in our list. This can result in some errors in the validation of the process' identity, in the case of the creation of a new process with the same \codeft{pid} as the one we did not detect exiting.  
+\item Although we keep track of the running and newly created processes, there are cases of multi-threaded processes that need better handling. Finding the thread count of a process and monitoring additions and exits of these threads should be added in \codeft{ferify}'s logic. Although the basic functionality is present, missing the initial thread count of a process does not allow us to know when a process completely terminates, keeping it this way in our list. This can result in some errors during the validation of the process' identity, in the case of the creation of a new process with the same \codeft{pid} as the one we did not detect exiting. Although we have trapped the \codeft{exit\_group()} system call, we cannot be sure that the last thread will invoke it and not the \codeft{exit()} system call.
+Furthermore, more research and testing is required to verify whether multi-threaded processes have the same \codeft{CR3} value between threads, or not, and keep track of it, for use in the process identity validation.
+
 
 \item In our test environment we used a single-\ac{CPU} \ac{VM}. Future work might be needed to modify \codeft{ferify} to work on multi-\ac{CPU} \acp{VM}. DRAKVUF, when running a callback function, provides the information about the virtual-\ac{CPU} that causes the \ac{VM}-exit event. That information can be used to adjust \codeft{ferify}'s code, if needed, to trap and handle \emph{all} system calls from \emph{all} virtual-\acp{CPU} of the guest \ac{VM}.
 
@@ -48,8 +50,7 @@
 
 \item \codeft{ferify} currently blocks all kernel modules that users try to load. Although, usually, after the system has booted, there is no need to load a new kernel module, there is room for improvement. Allowing digitally signed modules can improve usability of the system, as they can be considered trusted and allowed to execute. This could be implemented by reading the digital signature from the hypervisor and then checking its correctness before continuing execution of the guest \ac{VM}.
 
-\item Additional testing must be done to ensure compatibility with other Linux distribution, as during our development we only used the Ubuntu distribution. We expect that there will be no issue, as most Linux distributions use the same kernel.
-Furthermore, more research and testing is required to verify whether multi-threaded processes have the same \codeft{CR3} value between threads, or not, and keep track of it, for use in the process identity validation.
+\item Finally, additional testing must be done to ensure compatibility with other Linux distribution, as during our development we only used the Ubuntu distribution. We expect that there will be no issue, as most Linux distributions use the same kernel.
 
 
 \end{itemize}

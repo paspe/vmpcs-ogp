@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  27 SEP 2017 16:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  27 SEP 2017 17:40
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1878,8 +1878,8 @@ Package acronym Info: Label `acro:IOMMU' newly defined as it shall be overridde
 n
 although it is yet undefined on input line 71.
 Package acronym Info: Label `acro:EPT' overridden on input line 71.
-Package acronym Info: Label `acro:HAP(1)' newly defined as it shall be overridd
-en
+Package acronym Info: Label `acro:HAP (1)' newly defined as it shall be overrid
+den
 although it is yet undefined on input line 71.
  [10.28] (figs/ept.tikz)
 (figs/libvmi.tikz) [11.29] (figs/kernelsym.tikz
@@ -1889,8 +1889,8 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
 (figs/vmevents.tikz) [15.33]
 Package acronym Info: Label `acro:MAC' newly defined as it shall be overridden
 although it is yet undefined on input line 140.
-Package acronym Info: Label `acro:HAP(2)' newly defined as it shall be overridd
-en
+Package acronym Info: Label `acro:HAP (2)' newly defined as it shall be overrid
+den
 although it is yet undefined on input line 142.
  [16.34]
 Package acronym Info: Label `acro:OI' newly defined as it shall be overridden
@@ -2044,8 +2044,8 @@ LaTeX Font Warning: Size substitutions with differences
  ) 
 Here is how much of TeX's memory you used:
  42143 strings out of 493328
- 877358 string characters out of 3139125
- 1327759 words of memory out of 3000000
+ 877376 string characters out of 3139125
+ 1327763 words of memory out of 3000000
  41888 multiletter control sequences out of 15000+200000
  116797 words of font info for 158 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2074,7 +2074,7 @@ ram Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/newtx/txsys.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/ut
 mr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (135 pages, 1147087 bytes).
+Output written on thesis.pdf (135 pages, 1147334 bytes).
 PDF statistics:
  5099 PDF objects out of 5155 (max. 8388607)
  2929 named destinations out of 2984 (max. 500000)
