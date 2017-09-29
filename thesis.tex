@@ -76,10 +76,9 @@
 
 % Your abstract.  New paragraphs start after an empty line.
 \abstract{%
-When an operating system (OS) runs on a virtual machine (VM), a hypervisor, the software that facilitates virtualization of computer hardware, provides a service called introspection for monitoring the internal state of the VM using. In this research, we develop a security solution leveraging introspection and enforcement of a separate shadow access control list (SACL) in the hypervisor to protect critical user files hosted on VMs against a range of zero-day attacks.\\
-Despite the evolution of CPU virtualization instructions and the continuous development
-of more efficient and secure hypervisors, the bottom-line remains the same: a VM is still a system with all the vulnerabilities of its running OS and software. At some point in time, it will be the victim of a successful exploitation. To achieve data confidentiality, integrity, and availability, our solution features: zero-footprint in the guest VM to avoid detection, out-of-guest SACL to prevent malicious access to the mechanism, protection of critical user files and not only OS files, application white-listing to prevent malware execution, and kernel protection by denying module and new kernel loading.\\
-By evaluating our solution, we concluded that it can successfully protect user files against unauthorized access. The performance overhead, although significant, remains within usable levels and is mainly attributed to the context switch between the hypervisor and the VM.
+When an operating system (OS) runs on a virtual machine (VM), a hypervisor, the software that facilitates virtualization of computer hardware, provides a service called introspection for monitoring the internal state of the VM. But, a VM is still a system with all the vulnerabilities of its running OS and software. At some point in time, it will be the victim of a successful exploitation. In this research, we develop a security solution leveraging introspection and enforcement of a separate shadow access control list (SACL) in the hypervisor to protect critical user files hosted on a VM against a range of zero-day attacks.\\
+The main security features of our solution include (i) zero-footprint in the guest VM by maintaining an out-of-guest SACL and other required security information in the hypervisor, (ii) protection of critical user files from unauthorized access even if an attacker has managed to obtain root privileges on the VM, (iii) application white-listing to thwart malware execution, and (iv) kernel protection by denying both kernel reboot and runtime addition of  kernel modules.\\
+By evaluating the solution, we conclude that it can successfully protect user files against unauthorized access. The observed performance overhead, although significant, remains within usable levels and is mainly attributed to the context switch between the hypervisor and the VM.
 }
 
 % Switch the below lines around, if FOUO
@@ -91,7 +90,7 @@ By evaluating our solution, we concluded that it can successfully protect user f
 \ReportType{Master's Thesis}
 \ReportDate{December 2017}       % for a thesis, graduation date
 \SponsoringAgency{N/A}          % really, for technical reports
-\DatesCovered{MM-DD-YYYY to MM-DD-YYYY}
+\DatesCovered{04-03-2017 to 12-15-2017}
 \ReportClassification{Unclassified}
 \AbstractClassification{Unclassified}
 \PageClassification{Unclassified}
@@ -169,7 +168,7 @@ By evaluating our solution, we concluded that it can successfully protect user f
 %
 \NPSacknowledgements{%
 I would like to thank my wife Evi for all her love, patience, support and motivation she gave me during my studies. I would not have been here and accomplished what I have without her help. \\
-I would also like to thank my advisors, Geoffrey Xie and Carl Prince for their support and guidance. My special thanks goes to Chris Eagle and Michael Thompson, who both also helped me and were always there for my questions.  
+I would also like to thank my advisors, Geoffrey Xie and Carl Prince, who conceived the idea, for their support and guidance. My special thanks goes to Chris Eagle and Michael Thompson, who both also helped me and were always there for my questions.  
 }
 
 % Start layout for the NPS body

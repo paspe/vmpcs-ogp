@@ -14,7 +14,7 @@ In this chapter, we present the evaluation of \codeft{ferify}. In the first sect
 
 \subsection{Ring 0 operations}\label{sub:ring0}
 
-\par File operations are performed by the kernel through the system calls. But the kernel can be modified by the \codeft{root} user, who has access to it. Kernel memory can be accessed only while operating in ring 0 with the following ways:
+\par File operations are performed by the kernel through system calls. The kernel can be modified only by the \codeft{root} user, who has access to it, and therefore, kernel memory can be accessed only while operating in ring 0 with the following ways:
 
 \begin{itemize}
 	\item System calls,
@@ -44,7 +44,7 @@ By blocking the use of kernel module system calls we make module loading \emph{i
 
 \par To emulate the actions of an attacker, we performed specific commands on the guest \ac{VM} in order to observe the behavior of the system and whether it conforms to the expectations. The commands reflect the cases that \codeft{ferify} can be applied and correspond to the most basic commands one can issue. All higher-level programs and attacks eventually resort to the execution of these system calls. To do that we created an environmental setup to assess all the test cases. 
 
-\par The configuration includes two users, \codeft{alice} (authorized user) and \codeft{bob} (attacker), both in the \emph{sudoers} group, but \codeft{bob} not legitimately, but through malicious actions. The intent is to check the detection of the illegal escalation of \codeft{bob}'s account to \codeft{root} and the effect it has. A high level overview of our design is illustrated in Figure \ref{fig:attack}. 
+\par The configuration includes two user accounts, an \emph{authorized} and a hacked by an \emph{attacker}, both in the \emph{sudoers} group; the hacked account is assumed to have become a sudoer not legitimately, but through malicious actions. The intent is to check the detection of the illegal escalation of \codeft{bob}'s account to \codeft{root} and the effect it has. A high level overview of our design is illustrated in Figure \ref{fig:attack}. 
 
 \begin{figure}[ht]
 	\centering
@@ -177,11 +177,11 @@ bob@aHVM-domU:~$
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
 $ ./file_tests file1 file2 file3
-   Success: Opened file1 for reading by user 0. Able to copy.
-   Success: Opened file1 for writing by user 0.
-   Success: file2 created by user 0.
-   Success: user 0 deleted file2.
-   Success: user 0 moved file1 to file3.
+   Success: Opened file1 for reading by user alex. Able to copy.
+   Success: Opened file1 for writing by user alex.
+   Success: file2 created by user alex.
+   Success: user alex deleted file2.
+   Success: user alex moved file1 to file3.
 
 		\end{lstlisting}}
 	\caption{File operations execution for authorized user.}
@@ -247,19 +247,19 @@ $ ./file_tests file1 file2 file3
 
 \par After running our test script to verify the ability to deny access to \codeft{root} on the user's files, the results (fig.\ref{fig:results2}) show that the files are inaccessible in every mode they are supposed to, according to the permissions we set in the \ac{SACL}. We assess that denying file access to the \codeft{root} user is an important security implementation, as it provides great \emph{confidentiality} assurance, as well as it can nullify many attack vectors on a system, old and new.
 
-\par A result of \codeft{ferify} is that in can be used to create immutable files on a system. By denying write access to everyone, there can be files that cannot be modified by anyone, but are still available and accessible for reading, providing this way great \emph{integrity} assurance.
+\par A result of \codeft{ferify} is that it can be used to create immutable files on a system. By denying write access to everyone, there can be files that cannot be modified by anyone, but are still available and accessible for reading, providing this way great \emph{integrity} assurance.
 
 \begin{figure}[ht]
 	\centering
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
 $ sudo ./file_tests file1 file2 file3
-   Failure: Could not open file1 for reading by user 0. 
+   Failure: Could not open file1 for reading by user root. 
             Cannot copy.
-   Failure: Could not open file1 for writing by user 0.
-   Failure: file2 could not be created by user 0.
-   Failure: user 0 could not delete file2.
-   Failure: user 0 could not move file1 to file3.
+   Failure: Could not open file1 for writing by user root.
+   Failure: file2 could not be created by user root.
+   Failure: user root could not delete file2.
+   Failure: user root could not move file1 to file3.
 
 		\end{lstlisting}}
 	\caption{File operations execution for non-authorized user.}

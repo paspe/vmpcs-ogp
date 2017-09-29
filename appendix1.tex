@@ -32,51 +32,53 @@ This appendix contains the script we created to test the various file access met
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
 
 int main(int argc, char** argv){
 
   int fp = 0, r = 0;
   void * buf = malloc(64);
   char * a = "a";
-  uid_t user = geteuid();
+  struct passwd *p = getpwuid(getuid());
  
   fp = open(argv[1], O_RDONLY);
   
   if (fp < 0){
-    printf("Failure: Could not open %s for reading by user %u. Cannot copy.\n", argv[1], user);
+    printf("Failure: Could not open %s for reading by user %s. Cannot copy.\n", argv[1], p->pw_name);
   } else {
-    printf("Success: Opened %s for reading by user %u. Able to copy.\n", argv[1], user);
+    printf("Success: Opened %s for reading by user %s. Able to copy.\n", argv[1], p->pw_name);
     close(fp);
   }
   
   fp = open(argv[1], O_WRONLY);
   if (fp < 0){
-    printf("Failure: Could not open %s for writing by user %u.\n", argv[1], user);
+    printf("Failure: Could not open %s for writing by user %s.\n", argv[1], p->pw_name);
   } else {
-    printf("Success: Opened %s for writing by user %u.\n", argv[1], user);
+    printf("Success: Opened %s for writing by user %s.\n", argv[1], p->pw_name);
     close(fp);
   }
   
   fp = open(argv[2], O_RDWR | O_CREAT, 0666);
   if (fp < 0){
-    printf("Failure: %s could not be created by user %u.\n", argv[2], user);
+    printf("Failure: %s could not be created by user %s.\n", argv[2], p->pw_name);
   } else {
-    printf("Success: %s created by user %u.\n", argv[2], user);
+    printf("Success: %s created by user %s.\n", argv[2], p->pw_name);
     close(fp);
   }
   
   fp = unlink(argv[2]);
   if (fp != 0) {
-    printf("Failure: user %u could not delete %s.\n", user, argv[2]);
+    printf("Failure: user %s could not delete %s.\n", p->pw_name, argv[2]);
   } else {
-    printf("Success: user %u deleted %s.\n", user, argv[2]);
+    printf("Success: user %s deleted %s.\n", p->pw_name, argv[2]);
   }
 
   fp = rename(argv[1], argv[3]);
   if (fp != 0) {
-    printf("Failure: user %u could not move %s to %s.\n", user, argv[1], argv[3]);
+    printf("Failure: user %s could not move %s to %s.\n", p->pw_name, argv[1], argv[3]);
   } else {
-    printf("Success: user %u moved %s to %s.\n", user, argv[1], argv[3]);
+    printf("Success: user %s moved %s to %s.\n", p->pw_name, argv[1], argv[3]);
     fp = rename(argv[3], argv[1]);
   }
 
