@@ -51,6 +51,6 @@
 \contentsline {chapter}{\numberline {A}File access test script}{57}{appendix.A}
 \contentsline {chapter}{\numberline {B}Performace overhead test script}{59}{appendix.B}
 \contentsline {chapter}{\numberline {C}ferify code}{61}{appendix.C}
-\contentsline {chapter}{List of References}{113}{lstnumber.-13.2183}
-\contentsline {chapter}{Initial Distribution List}{117}{appendix*.86}
+\contentsline {chapter}{List of References}{115}{lstnumber.-13.2183}
+\contentsline {chapter}{Initial Distribution List}{119}{appendix*.86}
 \contentsfinish 
