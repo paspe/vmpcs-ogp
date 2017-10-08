@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  29 SEP 2017 14:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  8 OCT 2017 12:00
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1937,9 +1937,9 @@ Package acronym Info: Label `acro:UID' newly defined as it shall be overridden
 although it is yet undefined on input line 32.
 Package acronym Info: Label `acro:GID' newly defined as it shall be overridden
 although it is yet undefined on input line 32.
-(figs/syscalls.tikz) [23.41
+[23.41
 
-] [24.42] [25.43] [26.44] [27.45]
+] (figs/syscalls.tikz) [24.42] [25.43] [26.44] [27.45]
 (figs/dir_tree.tikz) [28.46] [29.47] [30.48] [31.49] (figs/overview.tikz)
 [32.50] [33.51] ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -1962,22 +1962,28 @@ Package acronym Info: Label `acro:SACL' overridden on input line 13.
 Package acronym Info: Label `acro:API' overridden on input line 26.
 Package acronym Info: Label `acro:VM' overridden on input line 37.
  [42.60] (figs/attack.tikz
-<figs/traffic-light2.png, id=1245, 322.20375pt x 347.79938pt>
+<figs/traffic-light2.png, id=1249, 322.20375pt x 347.79938pt>
 File: figs/traffic-light2.png Graphic file (type png)
 
 <use figs/traffic-light2.png>
 Package pdftex.def Info: figs/traffic-light2.png used on input line 37.
 (pdftex.def)             Requested size: 11.38092pt x 12.28035pt.
 ) [43.61] [44.62 <./figs/traffic-light2.png>]
+
+LaTeX Warning: Reference `:file_perms1' on page 45 undefined on input line 117.
+
+
 [45.63]
-Overfull \hbox (27.1837pt too wide) in paragraph at lines 180--181
+Overfull \hbox (27.1837pt too wide) in paragraph at lines 177--178
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 LaTeX Font Info:    Font shape `T1/qcr/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/qcr/b/n' tried instead on input line 193.
+(Font)              Font shape `T1/qcr/b/n' tried instead on input line 190.
 [46.64] [47.65]
-Package acronym Info: Label `acro:CPU' overridden on input line 317.
+Package acronym Info: Label `acro:CPU' overridden on input line 314.
+Package acronym Info: Label `acro:I/O' newly defined as it shall be overridden
+although it is yet undefined on input line 314.
  [48.66] [49.67] [50.68]) (chapter5.tex [51.69] [52.70
 
 ]
@@ -2035,18 +2041,21 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 244.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 244.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 244.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 1E74C779203A8F923664E275740ADF21;1829.
+(rerunfilecheck)             Checksum: B70FAD6423D0292BB7B37FBD6D451174;1829.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 42261 strings out of 493328
- 879290 string characters out of 3139125
- 1628893 words of memory out of 3000000
- 41898 multiletter control sequences out of 15000+200000
+ 42273 strings out of 493328
+ 879408 string characters out of 3139125
+ 1628385 words of memory out of 3000000
+ 41904 multiletter control sequences out of 15000+200000
  116797 words of font info for 158 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,13n,97p,1788b,2129s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2074,9 +2083,9 @@ ram Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/newtx/txsys.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/ut
 mr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (137 pages, 1173679 bytes).
+Output written on thesis.pdf (137 pages, 1176451 bytes).
 PDF statistics:
- 5238 PDF objects out of 6186 (max. 8388607)
- 3037 named destinations out of 3580 (max. 500000)
+ 5250 PDF objects out of 6186 (max. 8388607)
+ 3043 named destinations out of 3580 (max. 500000)
  359 words of extra memory for PDF output out of 10000 (max. 10000000)
 
