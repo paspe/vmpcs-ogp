@@ -2,32 +2,32 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Evolution of software deployment from single \ac {OS} to virtualization\relax }}{6}{figure.caption.21}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Architectural difference between type-I and type-II hypervisors\relax }}{7}{figure.caption.22}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen Hypervisor Architecture\relax }}{8}{figure.caption.23}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings\relax }}{9}{figure.caption.25}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept\relax }}{10}{figure.caption.29}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment\relax }}{11}{figure.caption.33}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out-of-guest access of \ac {VM} state\relax }}{12}{figure.caption.34}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol\relax }}{13}{figure.caption.35}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Xen hypervisor architecture. Source:\nobreakspace {}\cite {xen}\relax }}{8}{figure.caption.23}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings. Adapted from\nobreakspace {}\cite {rings}\relax }}{9}{figure.caption.25}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept. Source:\nobreakspace {}\cite {chisnall2008definitive}\relax }}{10}{figure.caption.29}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment. Source:\nobreakspace {}\cite {xen1}\relax }}{11}{figure.caption.33}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out-of-guest access of \ac {VM} state. Source:\nobreakspace {}\cite {libvmi}\relax }}{12}{figure.caption.34}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol. Source:\nobreakspace {}\cite {libvmi}\relax }}{13}{figure.caption.35}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events\relax }}{15}{figure.caption.36}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces System call information flow\relax }}{24}{figure.caption.52}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces \unhbox \voidb@x \hbox {\relax \fontsize {10.95}{13.6}\selectfont \abovedisplayskip 11\p@ plus3\p@ minus6\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \def \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ {\leftmargin \leftmargini \topsep 9\p@ plus3\p@ minus5\p@ \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {\fontfamily {qcr}\selectfont ferify}} directory tree\relax }}{28}{figure.caption.54}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces \ac {SACL} sample\relax }}{29}{figure.caption.56}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces root user \ac {SACL} sample\relax }}{29}{figure.caption.57}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Information flow during a trapped system call execution\relax }}{33}{figure.caption.59}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Information flow during a trapped system call execution\relax }}{32}{figure.caption.59}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Getting the file being accessed\relax }}{34}{figure.caption.60}
 \contentsline {figure}{\numberline {3.7}{\ignorespaces unlink() and unlinkat() skeleton code flow\relax }}{36}{figure.caption.62}
 \contentsline {figure}{\numberline {3.8}{\ignorespaces open() and openat() permission checks\relax }}{37}{figure.caption.63}
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Guest \ac {VM} shutdown configuration line\relax }}{39}{figure.caption.64}
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Guest \ac {VM} configuration to deny \emph {root} from running \emph {su}\relax }}{39}{figure.caption.66}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Testing and validation concept\relax }}{44}{figure.caption.71}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Denying \emph {sudo}\relax }}{45}{figure.caption.72}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Denying \emph {sudo} notification on the hypervisor\relax }}{45}{figure.caption.73}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Denying password change from \emph {root} account\relax }}{45}{figure.caption.74}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces File operations execution for authorized user.\relax }}{46}{figure.caption.76}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces File operations execution for non-authorized user.\relax }}{47}{figure.caption.78}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Test script command-line settings.\relax }}{49}{figure.caption.81}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Testing and validation concept\relax }}{44}{figure.caption.67}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Denying \emph {sudo}\relax }}{45}{figure.caption.68}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Denying \emph {sudo} notification on the hypervisor\relax }}{45}{figure.caption.69}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Denying password change from \emph {root} account\relax }}{45}{figure.caption.70}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces File operations execution for authorized user.\relax }}{46}{figure.caption.72}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces File operations execution for non-authorized user.\relax }}{47}{figure.caption.74}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Test script command-line settings.\relax }}{49}{figure.caption.76}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

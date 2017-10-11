@@ -15,31 +15,40 @@ between the "START" and "END" comments, and start a fresh bib file.
 These examples are taken from http://libguides.nps.edu/citation/ieee
 
 @InProceedings{garfinkel2003virtual,
-	author 		= "Garfinkel, Tal and Rosenblum, Mendel and others",
-	title 		= "A Virtual Machine Introspection Based Architecture for Intrusion Detection.",
+	author 		= "Garfinkel, Tal and Rosenblum, Mendel",
+	title 		= "{A virtual machine introspection based architecture for intrusion detection}",
 	booktitle 	= "Ndss",
 	pages 	= "191--206",
 	year 	= "2003",
 	volume 	= "3",
 }
 
-@techreport{payne2011libvmi,
-	title		= "LibVMI",
+@techreport{payne2011libvmi1,
+	title		= "{LibVMI}",
 	author		= "Payne, Bryan D",
 	year		=	"2011",
 	institution	= "Sandia National Laboratories",
 }
 
+@techreport{payne2011libvmi,
+	author="Payne, Bryan D",
+	title="{Simplifying virtual machine introspection using LibVMI}",
+	institution="Sandia report",
+	address = "Albuquerque, NM, USA",
+	number = "{SAND2012-7818}",
+	year="2012"
+}
+
 @inproceedings{lengyel2014drakvuf,
-	author 		= "Lengyel, Tamas K. and Maresca, Steve and Payne, Bryan D. and Webster, George D. and Vogl, Sebastian and Kiayias, Aggelos",
-	title 		= "Scalability, Fidelity and Stealth in the DRAKVUF Dynamic Malware Analysis System",
-	booktitle 	= "Proceedings of the 30th Annual Computer Security Applications Conference",
+	author 		= "Lengyel, Tamas K. and others",
+	title 		= "{Scalability, fidelity and stealth in the DRAKVUF dynamic malware analysis system}",
+	booktitle 	= "{Proceedings of the 30th Annual Computer Security Applications Conference}",
 	year 		= "2014"
 }
 
 @book{mell2011nist,
 	author		= "Mell, Peter and Grance, Timothy",
-	title		= "The NIST definition of cloud computing",
+	title		= "{The NIST definition of cloud computing}",
 	address		= "Gaithersburg",
 	publisher	= "NIST",
 	year		= "2011",
@@ -48,7 +57,7 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 
 
 @article{rosenblum2005virtual,
-	title		= "Virtual machine monitors: Current technology and future trends",
+	title		= "{Virtual machine monitors: Current technology and future trends}",
 	author		= "Rosenblum, Mendel and Garfinkel, Tal",
 	journal		= "Computer",
 	volume		= "38",
@@ -60,44 +69,63 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 
 
 @misc{xen, 
-	title		= "Xen Project Software Overview", 
-	url			= "https://wiki.xenproject.org/wiki/Xen_Project_Software_Overview", 
-	journal		= "Xen Project Software Overview - Xen",
-	note 		= "Accessed: 2017-05-09"
+	title		= "{Xen Project software overview}",
+	note = "{Xen Project. March 21, 2016. [Online].}",
+	url			= "https://wiki.xenproject.org/wiki/Xen_Project_Software_Overview"
 }
 
-@misc{syscalls, 
+@online{rings,
+	author = "Mohamed Fawzi.",
+	year = "{May 24, 2009}",
+	title	=	"{``Virtualization and Protection Rings (Welcome to Ring -1) Part I''}",
+	url 	=	"https://fawzi.wordpress.com/2009/05/24/virtualization-and-protection-rings-welcome-to-ring-1-part-i/"
+}
+
+@online{xen1, 
+	author = "Tamas K Lengyel",
+	year="April 13, 2016",
+	title		= "{``Stealthy monitoring with Xen altp2m''}", 
+	url			= "https://blog.xenproject.org/2016/04/13/stealthy-monitoring-with-xen-altp2m/"
+}
+
+@misc{libvmi, 
+	title	= "{``Introduction to LibVMI''}", 
+	url			= "http://libvmi.com/docs/gcode-intro.html", 
+	published		= "LibVMI",
+	note 		= "{LibVMI. Accessed: May 09, 2017. [Online]}"
+}
+
+@online{syscalls, 
 	author		= "Ryan A. Chapman",
-	year		= "2012",
-	month		= "Nov",
-	title		= "Linux system call table for x86-64", 
+	year		= "Nov 29, 2012",
+	title		= "{``Linux system call table for x86-64''}", 
 	url			= "http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/"
 }
 
 
 @inproceedings{payne2007secure,
-	title		= "Secure and flexible monitoring of virtual machines",
-	author		= "Payne, Bryan D and Martim, DP de A and Lee, Wenke",
-	booktitle	= "Computer Security Applications Conference, 2007. ACSAC 2007. Twenty-Third Annual",
+	title		= "{Secure and flexible monitoring of virtual machines}",
+	author		= "Payne, Bryan D and others",
+	booktitle	= "{Computer Security Applications Conference, 2007. ACSAC 2007. Twenty-Third Annual}",
 	pages		= "385--397",
 	year		= "2007",
 	organization= "IEEE"
 }
 
 @misc{lars_2016, 
-	title		= "Virtual Machine Introspection: A Security Innovation With New Commercial Applications", 
+	title		= "{Virtual machine introspection: A security innovation with new commercial applications}", 
 	url			= "https://www.linux.com/news/virtual-machine-introspection-security-innovation-new-commercial-applications", 
-	journal		= "Linux.com | The source for Linux information", 
+	journal		= "{Linux.com | The source for Linux information}", 
 	author		= "Lars, Kurth", 
 	year		= "2016", 
 	month		= "Aug",
-	note 		= "Accessed: 2017-05-09"
+	note 		= "{Accessed: May 09, 2017}"
 	}
 
 @article{bauman2015survey,
-	title		= "A survey on hypervisor-based monitoring: approaches, applications, and evolutions",
-	author		= "Bauman, Erick and Ayoade, Gbadebo and Lin, Zhiqiang",
-	journal		= "ACM Computing Surveys (CSUR)",
+	title		= "{A survey on hypervisor-based monitoring: Approaches, applications, and evolutions}",
+	author		= "Bauman, Erick and others",
+	journal		= "{ACM Computing Surveys (CSUR)}",
 	volume		= "48",
 	number		= "1",
 	pages		= "10",
@@ -106,36 +134,36 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @inproceedings{sharif2009secure,
-	title		= "Secure in-vm monitoring using hardware virtualization",
-	author		= "Sharif, Monirul I and Lee, Wenke and Cui, Weidong and Lanzi, Andrea",
-	booktitle	= "Proceedings of the 16th ACM conference on Computer and communications security",
+	title		= "{Secure in-VM monitoring using hardware virtualization}",
+	author		= "Sharif, Monirul I and others",
+	booktitle	= "{Proceedings of the 16th ACM Conference on Computer and Communications Security}",
 	pages		= "477--487",
 	year		= "2009",
 	organization= "ACM"
 }
 
 @inproceedings{dolan2011virtuoso,
-	title		= "Virtuoso: Narrowing the semantic gap in virtual machine introspection",
-	author		= "Dolan-Gavitt, Brendan and Leek, Tim and Zhivich, Michael and Giffin, Jonathon and Lee, Wenke",
-	booktitle	= "Security and Privacy (SP), 2011 IEEE Symposium on",
+	title		= "{Virtuoso: Narrowing the semantic gap in virtual machine introspection}",
+	author		= "Dolan-Gavitt, Brendan and others",
+	booktitle	= "{2011 IEEE Symposium on Security and Privacy (SP)}",
 	pages		= "297--312",
 	year		= "2011",
 	organization= "IEEE"
 }
 
 @inproceedings{payne2008lares,
-	title		= "Lares: An architecture for secure active monitoring using virtualization",
-	author		= "Payne, Bryan D and Carbone, Martim and Sharif, Monirul and Lee, Wenke",
-	booktitle	= "Security and Privacy, 2008. SP 2008. IEEE Symposium on",
+	title		= "{Lares: An architecture for secure active monitoring using virtualization}",
+	author		= "Payne, Bryan D and others",
+	booktitle	= "{2008 IEEE Symposium on Security and Privacy (SP)}",
 	pages		= "233--247",
 	year		= "2008",
 	organization= "IEEE"
 }
 
 @inproceedings{sailer2005building,
-	title		= "Building a MAC-based security architecture for the Xen open-source hypervisor",
-	author		= "Sailer, Reiner and Jaeger, Trent and Valdez, Enriquillo and Caceres, Ramon and Perez, Ronald and Berger, Stefan and Griffin, John Linwood and Van Doorn, Leendert",
-	booktitle	= "Computer security applications conference, 21st Annual",
+	title		= "{Building a MAC-based security architecture for the Xen open-source hypervisor}",
+	author		= "Sailer, Reiner and others",
+	booktitle	= "{21st Annual Computer Security Applications Conference}",
 	pages		= "10--pp",
 	year		= "2005",
 	organization= "IEEE"
@@ -144,7 +172,7 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 @article{hay2008forensics,
 	title		= "Forensics examination of volatile system data using virtual introspection",
 	author		= "Hay, Brian and Nance, Kara",
-	journal		= "ACM SIGOPS Operating Systems Review",
+	journal		= "{ACM SIGOPS Operating Systems Review}",
 	volume		= "42",
 	number		= "3",
 	pages		= "74--82",
@@ -153,18 +181,18 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @inproceedings{xiao2016hyperlink,
-	title		= "HyperLink: Virtual Machine Introspection and Memory Forensic Analysis without Kernel Source Code",
-	author		= "Xiao, Jidong and Lu, Lei and Wang, Haining and Zhu, Xiaoyun",
-	booktitle	= "Autonomic Computing (ICAC), 2016 IEEE International Conference on",
+	title		= "{HyperLink: Virtual machine introspection and memory forensic analysis without kernel source code}",
+	author		= "Xiao, Jidong and others",
+	booktitle	= "{2016 IEEE International Conference on Autonomic Computing (ICAC)}",
 	pages		= "127--136",
 	year		= "2016",
 	organization= "IEEE"
 }
 
 @inproceedings{hofmann2013inktag,
-	title		= "Inktag: Secure applications on an untrusted operating system",
-	author		= "Hofmann, Owen S and Kim, Sangman and Dunn, Alan M and Lee, Michael Z and Witchel, Emmett",
-	booktitle	= "ACM SIGARCH Computer Architecture News",
+	title		= "{InkTag: Secure applications on an untrusted operating system}",
+	author		= "Hofmann, Owen S and others",
+	booktitle	= "{ACM SIGARCH Computer Architecture News}",
 	volume		= "41",
 	number		= "1",
 	pages		= "265--278",
@@ -173,9 +201,9 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @inproceedings{chen2008overshadow,
-	title		= "Overshadow: a virtualization-based approach to retrofitting protection in commodity operating systems",
-	author		= "Chen, Xiaoxin and Garfinkel, Tal and Lewis, E Christopher and Subrahmanyam, Pratap and Waldspurger, Carl A and Boneh, Dan and Dwoskin, Jeffrey and Ports, Dan RK",
-	booktitle	= "ACM SIGARCH Computer Architecture News",
+	title		= "{Overshadow: A virtualization-based approach to retrofitting protection in commodity operating systems}",
+	author		= "Chen, Xiaoxin and others",
+	booktitle	= "{ACM SIGARCH Computer Architecture News}",
 	volume		= "36",
 	number		= "1",
 	pages		= "2--13",
@@ -184,9 +212,9 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @article{baumann2015shielding,
-	title		= "Shielding applications from an untrusted cloud with haven",
-	author		= "Baumann, Andrew and Peinado, Marcus and Hunt, Galen",
-	journal		= "ACM Transactions on Computer Systems (TOCS)",
+	title		= "{Shielding applications from an untrusted cloud with Haven}",
+	author		= "Baumann, Andrew and others",
+	journal		= "{ACM Transactions on Computer Systems (TOCS)}",
 	volume		= "33",
 	number		= "3",
 	pages		= "8",
@@ -195,18 +223,18 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @inproceedings{xu2015controlled,
-	title		= "Controlled-channel attacks: Deterministic side channels for untrusted operating systems",
-	author		= "Xu, Yuanzhong and Cui, Weidong and Peinado, Marcus",
-	booktitle	= "Security and Privacy (SP), 2015 IEEE Symposium on",
+	title		= "{Controlled-channel attacks: Deterministic side channels for untrusted operating systems}",
+	author		= "Xu, Yuanzhong and others",
+	booktitle	= "{2015 IEEE Symposium on Security and Privacy (SP)}",
 	pages		= "640--656",
 	year		= "2015",
 	organization= "IEEE"
 }
 
 @article{dunlap2002revirt,
-	title		= "ReVirt: Enabling intrusion analysis through virtual-machine logging and replay",
-	author		= "Dunlap, George W and King, Samuel T and Cinar, Sukru and Basrai, Murtaza A and Chen, Peter M",
-	journal		= "ACM SIGOPS Operating Systems Review",
+	title		= "{ReVirt: Enabling intrusion analysis through virtual-machine logging and replay}",
+	author		= "Dunlap, George W and others",
+	journal		= "{ACM SIGOPS Operating Systems Review}",
 	volume		= "36",
 	number		= "SI",
 	pages		= "211--224",
@@ -215,9 +243,9 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @inproceedings{wang2005detecting,
-	title		= "Detecting stealth software with strider ghostbuster",
-	author		= "Wang, Y-M and Beck, Doug and Vo, Binh and Roussev, Roussi and Verbowski, Chad",
-	booktitle	= "Dependable Systems and Networks, 2005. DSN 2005. Proceedings. International Conference on",
+	title		= "{Detecting stealth software with Strider Ghostbuster}",
+	author		= "Wang, Y-M and others",
+	booktitle	= "{Proceedings of International Conference on Dependable Systems and Networks, 2005}",
 	pages		= "368--377",
 	year		= "2005",
 	organization= "IEEE"
@@ -225,17 +253,17 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 
 @inproceedings{riley2009multi,
 	title		= "Multi-aspect profiling of kernel rootkit behavior",
-	author		= "Riley, Ryan and Jiang, Xuxian and Xu, Dongyan",
-	booktitle	= "Proceedings of the 4th ACM European conference on Computer systems",
+	author		= "Riley, Ryan and others",
+	booktitle	= "{Proceedings of the 4th ACM European conference on Computer systems}",
 	pages		= "47--60",
 	year		= "2009",
 	organization= "ACM"
 }
 
 @inproceedings{jiang2007stealthy,
-	title		= "Stealthy malware detection through vmm-based out-of-the-box semantic view reconstruction",
-	author		= "Jiang, Xuxian and Wang, Xinyuan and Xu, Dongyan",
-	booktitle	= "Proceedings of the 14th ACM conference on Computer and communications security",
+	title		= "{Stealthy malware detection through VMM-based out-of-the-box semantic view reconstruction}",
+	author		= "Jiang, Xuxian and others",
+	booktitle	= "{Proceedings of the 14th ACM conference on Computer and communications security}",
 	pages		= "128--138",
 	year		= "2007",
 	organization= "ACM"
@@ -244,7 +272,7 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 @article{mahapatra2011online,
 	title		= "An online cross view difference and behavior based kernel rootkit detector",
 	author		= "Mahapatra, Chandrabhanu and Selvakumar, S",
-	journal		= "ACM SIGSOFT Software Engineering Notes",
+	journal		= "{ACM SIGSOFT Software Engineering Notes}",
 	volume		= "36",
 	number		= "4",
 	pages		= "1--9",
@@ -253,18 +281,18 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @inproceedings{srinivasan2011process,
-	title		= "Process out-grafting: an efficient out-of-vm approach for fine-grained process execution monitoring",
-	author		= "Srinivasan, Deepa and Wang, Zhi and Jiang, Xuxian and Xu, Dongyan",
-	booktitle	= "Proceedings of the 18th ACM conference on Computer and communications security",
+	title		= "{Process out-grafting: An efficient out-of-VM approach for fine-grained process execution monitoring}",
+	author		= "Srinivasan, Deepa and others",
+	booktitle	= "{Proceedings of the 18th ACM conference on Computer and communications security}",
 	pages		= "363--374",
 	year		= "2011",
 	organization= "ACM"
 }
 
 @inproceedings{seshadri2007secvisor,
-	title		= "SecVisor: A tiny hypervisor to provide lifetime kernel code integrity for commodity OSes",
-	author		= "Seshadri, Arvind and Luk, Mark and Qu, Ning and Perrig, Adrian",
-	booktitle	= "ACM SIGOPS Operating Systems Review",
+	title		= "{SecVisor: A tiny hypervisor to provide lifetime kernel code integrity for commodity OSes}",
+	author		= "Seshadri, Arvind and others",
+	booktitle	= "{ACM SIGOPS Operating Systems Review}",
 	volume		= "41",
 	number		= "6",
 	pages		= "335--350",
@@ -273,9 +301,9 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @inproceedings{xiong2011practical,
-	title		= "Practical Protection of Kernel Integrity for Commodity OS from Untrusted Extensions.",
-	author		= "Xiong, Xi and Tian, Donghai and Liu, Peng and others",
-	booktitle	= "NDSS",
+	title		= "{Practical protection of kernel integrity for commodity OS from untrusted extensions}",
+	author		= "Xiong, Xi and others",
+	booktitle	= "{NDSS}",
 	volume		= "11",
 	year		= "2011"
 }
@@ -283,23 +311,23 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 @inproceedings{srivastava2012efficient,
 	title		= "Efficient protection of kernel data structures via object partitioning",
 	author		= "Srivastava, Abhinav and Giffin, Jonathon",
-	booktitle	= "Proceedings of the 28th annual computer security applications conference",
+	booktitle	= "{Proceedings of the 28th annual computer security applications conference}",
 	pages		= "429--438",
 	year		= "2012",
 	organization= "ACM"
 }
 
 @inproceedings{macko2011collecting,
-	title		= "Collecting Provenance via the Xen Hypervisor.",
-	author		= "Macko, Peter and Chiarini, Marc and Seltzer, Margo and Harvard, SEAS",
-	booktitle	= "TaPP",
+	title		= "{Collecting provenance via the Xen hypervisor}",
+	author		= "Macko, Peter and others",
+	booktitle	= "{TaPP}",
 	year		= "2011"
 }
 
 @inproceedings{crawford2013insider,
-	title		= "Insider Threat Detection using Virtual Machine Introspection",
+	title		= "{Insider threat detection using virtual machine introspection}",
 	author		= "Crawford, Martin and Peterson, Gilbert",
-	booktitle	= "System Sciences (HICSS), 2013 46th Hawaii International Conference on",
+	booktitle	= "{2013 46th Hawaii International Conference on System Sciences (HICSS)}",
 	pages		= "1821--1830",
 	year		= "2013",
 	organization= "IEEE"
@@ -314,7 +342,7 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 
 @article{baliga2008automated,
 	title		= "Automated containment of rootkits attacks",
-	author		= "Baliga, Arati and Iftode, Liviu and Chen, Xiaoxin",
+	author		= "Baliga, Arati and others",
 	journal		= "Computers \& Security",
 	volume		= "27",
 	number		= "7",
@@ -324,14 +352,14 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 }
 
 @misc{rekall, 
-	title		= "WRekall Memory Forensic Framework", 
+	title		= "{Rekall Memory Forensic Framework}", 
 	url			= "http://www.rekall-forensic.com/", 
-	journal		= "Rekall Memory Forensic Framework"
+	note		= "{Rekall Forensics. Accessed: June 10, 2017. [Online].}"
 } 
 
 @inbook{chisnall2008definitive,
 	author		= "Chisnall, David",
-	title		= "The definitive guide to the xen hypervisor",
+	title		= "{The definitive guide to the Xen hypervisor}",
 	address		= "Upper Saddle River, NJ",
 	publisher	= "Pearson Education",
 	year		= 2008,
@@ -340,7 +368,7 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 
 @inbook{linuxkernel,
 	author		= "Daniel P. Bovet, Marco Cesati",
-	title		= "Understanding the Linux Kernel",
+	title		= "{Understanding the Linux kernel}",
 	address		= "",
 	publisher	= "O'Reilly Media, Inc.",
 	year		= 2005,
@@ -349,16 +377,16 @@ These examples are taken from http://libguides.nps.edu/citation/ieee
 
 @book{perla2010guide,
 	author		= "Perla, Enrico and Oldani, Massimiliano",
-	title		= "A guide to kernel exploitation: attacking the core",
+	title		= "{A guide to kernel exploitation: Attacking the core}",
 	address		= "Burlington, MA",
 	publisher	= "Elsevier",
 	year		= "2010"
 }
 
 @inproceedings{perez2006vtpm,
-	author		= "Perez, Ronald and Sailer, Reiner and van Doorn, Leendert and others",
-	title		= "vTPM: virtualizing the trusted platform module",
-	booktitle	= "Proc. 15th Conf. on USENIX Security Symposium",
+	author		= "Perez, Ronald and others",
+	title		= "{vTPM: Virtualizing the trusted platform module}",
+	booktitle	= "{Proceedings of 15th Conference on USENIX Security Symposium}",
 	pages		= "305--320",
 	year		= "2006",
 }
