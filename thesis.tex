@@ -22,6 +22,7 @@
 \usetikzlibrary{shapes.geometric}
 \usepackage{graphicx}
 \usepackage{array}
+\usepackage{notoccite}
 
 \newcommand{\codeft}[1]{\mbox{\small{\fontfamily{qcr}\selectfont #1}}}
 \newcommand{\codeftsm}[1]{\mbox{\scriptsize{\fontfamily{qcr}\selectfont #1}}}
@@ -76,8 +77,8 @@
 
 % Your abstract.  New paragraphs start after an empty line.
 \abstract{%
-When an operating system (OS) runs on a virtual machine (VM), a hypervisor, the software that facilitates virtualization of computer hardware, provides a service called introspection, used for monitoring the internal state of the VM. However, a VM is still a system with all the vulnerabilities of its running OS and software. At some point in time, it will be the victim of a successful exploitation. In this research, we develop a security solution leveraging introspection and enforcement of a separate shadow access control list (SACL) in the hypervisor to protect critical user files hosted on a VM against a range of zero-day attacks.\\
-The main security features of our solution include 1) zero-footprint in the guest VM by maintaining an out-of-guest SACL and other required security information in the hypervisor, 2) protection of critical user files from unauthorized access even if an attacker has managed to obtain root privileges on the VM, 3) application white-listing to thwart malware execution, and 4) kernel protection by denying both kernel reboot and runtime addition of  kernel modules.\\
+When an operating system (OS) runs on a virtual machine (VM), a hypervisor, the software that facilitates virtualization of computer hardware provides a service called introspection, which is used for monitoring the internal state of the VM. However, a VM still shares all the vulnerabilities of its resident OS and software. At some point in time, it will likely be the victim of a successful exploitation. In this research, we develop a security solution leveraging introspection and enforcement of a separate shadow access control list (SACL) in the hypervisor to protect critical user files hosted on a VM against a range of zero-day attacks.\\
+The main security features of our solution include 1) zero-footprint in the guest VM by maintaining an out-of-guest SACL and other required security information in the hypervisor, 2) protection of critical user files from unauthorized access even if an attacker has managed to obtain root privileges on the VM, 3) application white listing to thwart malware execution, and 4) kernel protection by denying both kernel reboot and runtime addition of kernel modules.\\
 By evaluating the solution, we conclude that it can successfully protect user files against unauthorized access. The observed performance overhead, although significant, remains within usable levels and is mainly attributed to the context switch between the hypervisor and the VM.
 }
 
@@ -167,7 +168,7 @@ By evaluating the solution, we conclude that it can successfully protect user fi
 % New paragraphs start after an empty line.
 %
 \NPSacknowledgements{%
-I would like to thank my wife, Evi, for the love, patience, support and motivation she gave me during my studies. I would not have been here and accomplished what I have without her help. \\
+I would like to thank my wife, Evi, for the love, patience, support, and motivation she gave me during my studies. I would not have been here and accomplished what I have without her help. \\
 I would also like to thank my advisors, Geoffrey Xie and Charles Prince, who conceived the premise of my thesis, for their support and guidance. Furthermore, I also extend my gratitude to Chris Eagle and Michael Thompson, who were always there to answer my questions.  
 }
 

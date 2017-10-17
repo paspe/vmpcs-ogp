@@ -10,11 +10,11 @@
 \contentsline {section}{\numberline {2.3}System Calls}{13}{section.2.3}
 \contentsline {section}{\numberline {2.4}Related Work}{14}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}In-\ac {VM} Monitoring}{15}{subsection.2.4.1}
-\contentsline {subsubsection}{Detection}{15}{subsubsection*.37}
-\contentsline {subsubsection}{Prevention}{16}{subsubsection*.38}
+\contentsline {subsubsection}{Detection}{15}{subsubsection*.36}
+\contentsline {subsubsection}{Prevention}{16}{subsubsection*.37}
 \contentsline {subsection}{\numberline {2.4.2}Out-\ac {VM} Monitoring}{18}{subsection.2.4.2}
-\contentsline {subsubsection}{Detection}{18}{subsubsection*.43}
-\contentsline {subsubsection}{Prevention}{19}{subsubsection*.48}
+\contentsline {subsubsection}{Detection}{18}{subsubsection*.42}
+\contentsline {subsubsection}{Prevention}{19}{subsubsection*.47}
 \contentsline {chapter}{\numberline {3}Design and Implementation of Ferify}{23}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overview}{23}{section.3.1}
 \contentsline {section}{\numberline {3.2}Threat Model}{25}{section.3.2}
@@ -25,7 +25,7 @@
 \contentsline {subsection}{\numberline {3.5.2}Shadow Access Control List}{28}{subsection.3.5.2}
 \contentsline {subsection}{\numberline {3.5.3}System Call Interception and Admission Control}{30}{subsection.3.5.3}
 \contentsline {subsection}{\numberline {3.5.4}System Call Hooking}{32}{subsection.3.5.4}
-\contentsline {subsection}{\numberline {3.5.5}The task\_struct}{33}{subsection.3.5.5}
+\contentsline {subsection}{\numberline {3.5.5}The task\_struct Kernel Structure}{33}{subsection.3.5.5}
 \contentsline {subsection}{\numberline {3.5.6}Trap Handling}{34}{subsection.3.5.6}
 \contentsline {section}{\numberline {3.6}Monitoring of Program Execution}{38}{section.3.6}
 \contentsline {section}{\numberline {3.7}Guest \ac {VM} Configuration}{38}{section.3.7}
@@ -52,5 +52,5 @@
 \contentsline {chapter}{\numberline {B}Performance Overhead Test Script}{59}{appendix.B}
 \contentsline {chapter}{\numberline {C}Ferify Code}{61}{appendix.C}
 \contentsline {chapter}{List of References}{117}{lstnumber.-13.2287}
-\contentsline {chapter}{Initial Distribution List}{121}{appendix*.81}
+\contentsline {chapter}{Initial Distribution List}{121}{appendix*.80}
 \contentsfinish 

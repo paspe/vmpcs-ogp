@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  11 OCT 2017 17:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6300 64-bit) (preloaded format=pdflatex 2017.5.8)  17 OCT 2017 12:06
 entering extended mode
 **./thesis.tex
 (thesis.tex
@@ -1360,6 +1360,9 @@ File: tikzlibraryshapes.geometric.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1
 File: pgflibraryshapes.geometric.code.tex 2008/06/26 v3.0.1a (rcs-revision 1.1)
 
 ))
+("C:\Program Files\MiKTeX 2.9\tex\latex\notoccite\notoccite.sty"
+Package: notoccite 2000/07/20
+)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
 Package: hyperref 2017/03/14 v6.85a Hypertext links for LaTeX
 
@@ -1469,56 +1472,56 @@ Package: hypcap 2016/05/16 v1.12 Adjusting the anchors of captions (HO)
 ) (thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 136.
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 137.
 LaTeX Font Info:    Try loading font information for OML+ntxmi on input line 13
-6.
+7.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\omlntxmi.fd"
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 136.
-LaTeX Font Info:    Try loading font information for U+ntxexa on input line 136
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 137.
+LaTeX Font Info:    Try loading font information for U+ntxexa on input line 137
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\untxexa.fd"
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 136.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 136.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 137.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 137.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 137.
 LaTeX Font Info:    Try loading font information for LMS+ntxsy on input line 13
-6.
+7.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\lmsntxsy.fd"
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 137.
 LaTeX Font Info:    Try loading font information for LMX+ntxexx on input line 1
-36.
+37.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\lmxntxexx.fd"
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 136.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 136.
-LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    ... okay on input line 137.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 137.
+LaTeX Font Info:    ... okay on input line 137.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1555,7 +1558,7 @@ LaTeX Font Info:    ... okay on input line 136.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 136.
+LaTeX Info: Redefining \selectfont on input line 137.
 \c@mv@tabular=\count296
 \c@mv@boldtabular=\count297
 
@@ -1601,7 +1604,7 @@ enefit from \pgfplotsset{compat=1.15} (current compat level: 1.9).
 
 \c@lstlisting=\count304
 \AtBeginShipoutBox=\box77
-Package hyperref Info: Link coloring OFF on input line 136.
+Package hyperref Info: Link coloring OFF on input line 137.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -1611,37 +1614,37 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 \c@section@level=\count305
 LaTeX Info: Redefining \Ref on input line 515.
 )
-LaTeX Info: Redefining \ref on input line 136.
-LaTeX Info: Redefining \pageref on input line 136.
-LaTeX Info: Redefining \nameref on input line 136.
+LaTeX Info: Redefining \ref on input line 137.
+LaTeX Info: Redefining \pageref on input line 137.
+LaTeX Info: Redefining \nameref on input line 137.
 
 (thesis.out) (thesis.out)
 \@outlinefile=\write6
 \openout6 = `thesis.out'.
 
-LaTeX Info: Redefining \Ref on input line 136.
+LaTeX Info: Redefining \Ref on input line 137.
 
 <figs/nps_logo_3clr_cymk.pdf, id=150, 222.8325pt x 153.57375pt>
 File: figs/nps_logo_3clr_cymk.pdf Graphic file (type pdf)
 
 <use figs/nps_logo_3clr_cymk.pdf>
-Package pdftex.def Info: figs/nps_logo_3clr_cymk.pdf used on input line 138.
+Package pdftex.def Info: figs/nps_logo_3clr_cymk.pdf used on input line 139.
 (pdftex.def)             Requested size: 222.83195pt x 153.57336pt.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <12> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 138.
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 139.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 12.0pt on input line 138.
+(Font)              scaled to size 12.0pt on input line 139.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 138.
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 139.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 24.88pt on input line 138.
+(Font)              scaled to size 24.88pt on input line 139.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 138.
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 139.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 138.
+(Font)              scaled to size 14.4pt on input line 139.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\newtx\ot1ntxtlf.fd")
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd")
@@ -1652,12 +1655,12 @@ LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ulasy.fd")
 \dsheight=\dimen299
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 138.
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 139.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.95pt on input line 138.
+(Font)              scaled to size 10.95pt on input line 139.
 
-Overfull \hbox (1.79993pt too wide) in paragraph at lines 138--138
+Overfull \hbox (1.79993pt too wide) in paragraph at lines 139--139
   $[]$ 
  []
 
@@ -1712,20 +1715,20 @@ Overfull \hbox (1.79993pt too wide) in paragraph at lines 138--138
 \twentySF=\box119
 \twentyboxSF=\box120
 
-Overfull \vbox (563.58018pt too high) detected at line 139
+Overfull \vbox (563.58018pt too high) detected at line 140
  []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.139 \NPSsftne
+l.140 \NPSsftne
                                  % SF298 form [1.3]pdfTeX warning (ext4): desti
 nation with the same identifier (name{page.ii}) has been already used, duplicat
 e ignored
 <to be read again> 
                    \relax 
-l.139 \NPSsftne
+l.140 \NPSsftne
                                  % SF298 form [2.4
 
 ]
@@ -1736,9 +1739,9 @@ l.139 \NPSsftne
 
 ]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 20.74pt on input line 152.
+(Font)              scaled to size 20.74pt on input line 153.
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
-(Font)              scaled to size 24.88pt on input line 152.
+(Font)              scaled to size 24.88pt on input line 153.
 
 (thesis.toc
 Package acronym Info: Label `acro:VM' newly defined as it shall be overridden
@@ -1812,16 +1815,16 @@ LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
 (Font)              scaled to size 10.0pt on input line 7.
 Package acronym Info: Label `acro:CPU' newly defined as it shall be overridden
 although it is yet undefined on input line 7.
+ [1.19
+
+
+]
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
 (Font)              scaled to size 17.28pt on input line 13.
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 13.
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
 (Font)              scaled to size 17.28pt on input line 13.
- [1.19
-
-
-]
 Package acronym Info: Label `acro:VMI' newly defined as it shall be overridden
 although it is yet undefined on input line 20.
 
@@ -1878,67 +1881,63 @@ Package acronym Info: Label `acro:IOMMU' newly defined as it shall be overridde
 n
 although it is yet undefined on input line 71.
 Package acronym Info: Label `acro:EPT' overridden on input line 71.
-Package acronym Info: Label `acro:HAP (1)' newly defined as it shall be overrid
-den
-although it is yet undefined on input line 71.
  [10.28] (figs/ept.tikz)
-(figs/libvmi.tikz) [11.29] (figs/kernelsym.tikz
+[11.29] (figs/libvmi.tikz) [12.30] (figs/kernelsym.tikz
 LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
 (Font)              scaled to size 10.95pt on input line 43.
-) [12.30] [13.31] [14.32]
+) [13.31] [14.32]
 (figs/vmevents.tikz) [15.33]
 Package acronym Info: Label `acro:MAC' newly defined as it shall be overridden
+although it is yet undefined on input line 138.
+Package acronym Info: Label `acro:HAP' newly defined as it shall be overridden
 although it is yet undefined on input line 140.
-Package acronym Info: Label `acro:HAP (2)' newly defined as it shall be overrid
-den
-although it is yet undefined on input line 142.
  [16.34]
 Package acronym Info: Label `acro:OI' newly defined as it shall be overridden
-although it is yet undefined on input line 147.
+although it is yet undefined on input line 145.
 Package acronym Info: Label `acro:SGX' newly defined as it shall be overridden
-although it is yet undefined on input line 154.
+although it is yet undefined on input line 152.
  [17.35] [18.36]
 Package acronym Info: Label `acro:IDS' newly defined as it shall be overridden
-although it is yet undefined on input line 170.
+although it is yet undefined on input line 168.
 Package acronym Info: Label `acro:HIDS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 170.
+although it is yet undefined on input line 168.
 Package acronym Info: Label `acro:NIDS' newly defined as it shall be overridden
 
-although it is yet undefined on input line 170.
+although it is yet undefined on input line 168.
 Package acronym Info: Label `acro:NIC' newly defined as it shall be overridden
-although it is yet undefined on input line 170.
+although it is yet undefined on input line 168.
  [19.37]
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 195.
+(Font)              scaled to size 10.0pt on input line 193.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 7.3pt on input line 195.
+(Font)              scaled to size 7.3pt on input line 193.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 5.5pt on input line 195.
+(Font)              scaled to size 5.5pt on input line 193.
 
 
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 195.
+(Font)              size <5> substituted on input line 193.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 195.
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 195.
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <8> not available
 (Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 197.
 
 LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 10.0pt on input line 197.
-LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <8> not available
-(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 199.
-
-LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
-(Font)              scaled to size 8.0pt on input line 199.
+(Font)              scaled to size 8.0pt on input line 197.
 [20.38] [21.39]) (chapter3.tex [22.40]
 Chapter 3.
 Package acronym Info: Label `acro:UID' newly defined as it shall be overridden
 although it is yet undefined on input line 32.
 Package acronym Info: Label `acro:GID' newly defined as it shall be overridden
 although it is yet undefined on input line 32.
-[23.41
+(figs/syscalls.tikz) [23.41
 
-] (figs/syscalls.tikz) [24.42] [25.43] [26.44] [27.45]
+] [24.42] [25.43] [26.44] [27.45]
 (figs/dir_tree.tikz) [28.46] [29.47] [30.48] (figs/overview.tikz) [31.49]
 [32.50] [33.51] ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -1950,28 +1949,28 @@ although it is yet undefined on input line 509.
  [34.52]
 [35.53] [36.54] [37.55]
 Package acronym Info: Label `acro:PAM' newly defined as it shall be overridden
-although it is yet undefined on input line 620.
+although it is yet undefined on input line 609.
  [38.56]) (chapter4.tex [39.57] [40.58
 
 ]
 Chapter 4.
 [41.59] [42.60] [43.61] (figs/attack.tikz
-<figs/traffic-light2.png, id=1278, 322.20375pt x 347.79938pt>
+<figs/traffic-light2.png, id=1280, 322.20375pt x 347.79938pt>
 File: figs/traffic-light2.png Graphic file (type png)
 
 <use figs/traffic-light2.png>
 Package pdftex.def Info: figs/traffic-light2.png used on input line 37.
 (pdftex.def)             Requested size: 11.38092pt x 12.28035pt.
 ) [44.62 <./figs/traffic-light2.png>] [45.63]
-Overfull \hbox (27.1837pt too wide) in paragraph at lines 177--178
+Overfull \hbox (27.1837pt too wide) in paragraph at lines 175--176
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 LaTeX Font Info:    Font shape `T1/qcr/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/qcr/b/n' tried instead on input line 190.
+(Font)              Font shape `T1/qcr/b/n' tried instead on input line 188.
 [46.64] [47.65]
 Package acronym Info: Label `acro:I/O' newly defined as it shall be overridden
-although it is yet undefined on input line 314.
+although it is yet undefined on input line 312.
  [48.66] [49.67] [50.68]) (chapter5.tex [51.69] [52.70
 
 ]
@@ -2022,13 +2021,13 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 ] [118.136]) [119.137] [120.138
 
 ] [121.139]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 244.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 244.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 245.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 245.
  (thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 244.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 244.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 245.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 245.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: D775469833E12FDCDE7505EC778D069B;1830.
+(rerunfilecheck)             Checksum: 41A93FECB308CC621B286036FC769909;1830.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2036,13 +2035,13 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 42383 strings out of 493328
- 881306 string characters out of 3139125
- 1642104 words of memory out of 3000000
- 41912 multiletter control sequences out of 15000+200000
+ 42384 strings out of 493328
+ 881434 string characters out of 3139125
+ 1643150 words of memory out of 3000000
+ 41910 multiletter control sequences out of 15000+200000
  116797 words of font info for 158 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,13n,97p,1793b,2129s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,13n,97p,1792b,2129s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{lstnumber.-13.2287} has been referenced but does 
 not exist, replaced by a fixed one
 
@@ -2067,9 +2066,9 @@ ram Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsya.pfb><C:/Program Files/MiK
 TeX 2.9/fonts/type1/public/newtx/txsys.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
 ype1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/ut
 mr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on thesis.pdf (139 pages, 1207034 bytes).
+Output written on thesis.pdf (139 pages, 1206740 bytes).
 PDF statistics:
- 5415 PDF objects out of 6186 (max. 8388607)
- 3145 named destinations out of 3580 (max. 500000)
+ 5416 PDF objects out of 6186 (max. 8388607)
+ 3144 named destinations out of 3580 (max. 500000)
  359 words of extra memory for PDF output out of 10000 (max. 10000000)
 

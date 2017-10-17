@@ -21,37 +21,14 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{xen}
-``{Xen Project software overview},'' {Xen Project. March 21, 2016. [Online].}
-  Available:
-  \url{https://wiki.xenproject.org/wiki/Xen_Project_Software_Overview}
-
-\bibitem{rings}
-M.~Fawzi. ({May 24, 2009}). {``Virtualization and Protection Rings (Welcome to
-  Ring -1) Part I''}. [Online]. Available:
-  \url{https://fawzi.wordpress.com/2009/05/24/virtualization-and-protection-rings-welcome-to-ring-1-part-i/}
-
-\bibitem{chisnall2008definitive}
-D.~Chisnall, \emph{{The definitive guide to the Xen hypervisor}}. Upper Saddle
-  River, NJ: Pearson Education, 2008, ch.~5.
-
-\bibitem{xen1}
-T.~K. Lengyel. (April 13, 2016). {``Stealthy monitoring with Xen altp2m''}.
-  [Online]. Available:
-  \url{https://blog.xenproject.org/2016/04/13/stealthy-monitoring-with-xen-altp2m/}
-
-\bibitem{libvmi}
-``{``Introduction to LibVMI''},'' {LibVMI. Accessed: May 09, 2017. [Online]}.
-  Available: \url{http://libvmi.com/docs/gcode-intro.html}
-
 \bibitem{mell2011nist}
 P.~Mell and T.~Grance, \emph{{The NIST definition of cloud computing}}.
-  Gaithersburg: NIST, 2011.
+  Gaithersburg, MD: NIST, 2011.
 
 \bibitem{garfinkel2003virtual}
 T.~Garfinkel and M.~Rosenblum, ``{A virtual machine introspection based
-  architecture for intrusion detection},'' in \emph{Ndss}, 2003, vol.~3, pp.
-  191--206.
+  architecture for intrusion detection},'' in \emph{Network and Distributed
+  System Security Symposium}, 2003, vol.~3, pp. 191--206.
 
 \bibitem{payne2011libvmi}
 B.~D. Payne, ``{Simplifying virtual machine introspection using LibVMI},''
@@ -66,10 +43,33 @@ T.~K. Lengyel \emph{et~al.}, ``{Scalability, fidelity and stealth in the
 M.~Rosenblum and T.~Garfinkel, ``{Virtual machine monitors: Current technology
   and future trends},'' \emph{Computer}, vol.~38, no.~5, pp. 39--47, 2005.
 
+\bibitem{xen}
+``{Xen Project software overview},'' {Xen Project. March 21, 2016. [Online].}
+  Available:
+  \url{https://wiki.xenproject.org/wiki/Xen_Project_Software_Overview}
+
+\bibitem{rings}
+M.~Fawzi. ({May 24, 2009}). {Virtualization and protection rings (welcome to
+  Ring -1) Part I}. [Online]. Available:
+  \url{https://fawzi.wordpress.com/2009/05/24/virtualization-and-protection-rings-welcome-to-ring-1-part-i/}
+
 \bibitem{payne2007secure}
 B.~D. Payne \emph{et~al.}, ``{Secure and flexible monitoring of virtual
-  machines},'' in \emph{{Computer Security Applications Conference, 2007. ACSAC
-  2007. Twenty-Third Annual}}. IEEE, 2007, pp. 385--397.
+  machines},'' in \emph{{23rd Annual Computer Security Applications
+  Conference}}. IEEE, 2007, pp. 385--397.
+
+\bibitem{chisnall2008definitive}
+D.~Chisnall, \emph{{The definitive guide to the Xen hypervisor}}. Upper Saddle
+  River, NJ: Pearson Education, 2008, ch.~5.
+
+\bibitem{xen1}
+T.~K. Lengyel. (April 13, 2016). {Stealthy monitoring with Xen altp2m}.
+  [Online]. Available:
+  \url{https://blog.xenproject.org/2016/04/13/stealthy-monitoring-with-xen-altp2m/}
+
+\bibitem{libvmi}
+``{Introduction to LibVMI},'' {LibVMI. Accessed May 9, 2017. [Online]}.
+  Available: \url{http://libvmi.com/docs/gcode-intro.html}
 
 \bibitem{bauman2015survey}
 E.~Bauman \emph{et~al.}, ``{A survey on hypervisor-based monitoring:
@@ -109,13 +109,13 @@ J.~Xiao \emph{et~al.}, ``{HyperLink: Virtual machine introspection and memory
 
 \bibitem{hofmann2013inktag}
 O.~S. Hofmann \emph{et~al.}, ``{InkTag: Secure applications on an untrusted
-  operating system},'' in \emph{{ACM SIGARCH Computer Architecture News}},
-  no.~1. ACM, 2013, vol.~41, pp. 265--278.
+  operating system},'' in \emph{{ACM SIGARCH Computer Architecture News}}. ACM,
+  2013, vol. {41, no. 1}, pp. 265--278.
 
 \bibitem{chen2008overshadow}
 X.~Chen \emph{et~al.}, ``{Overshadow: A virtualization-based approach to
   retrofitting protection in commodity operating systems},'' in \emph{{ACM
-  SIGARCH Computer Architecture News}}, no.~1. ACM, 2008, vol.~36, pp. 2--13.
+  SIGARCH Computer Architecture News}}. ACM, 2008, vol. {36, no. 1}, pp. 2--13.
 
 \bibitem{baumann2015shielding}
 A.~Baumann \emph{et~al.}, ``{Shielding applications from an untrusted cloud
@@ -134,12 +134,12 @@ G.~W. Dunlap \emph{et~al.}, ``{ReVirt: Enabling intrusion analysis through
 
 \bibitem{macko2011collecting}
 P.~Macko \emph{et~al.}, ``{Collecting provenance via the Xen hypervisor},'' in
-  \emph{{TaPP}}, 2011.
+  \emph{{3rd USENIX Workshop on the Theory and Practice of Provenance}}, 2011.
 
 \bibitem{crawford2013insider}
 M.~Crawford and G.~Peterson, ``{Insider threat detection using virtual machine
-  introspection},'' in \emph{{2013 46th Hawaii International Conference on
-  System Sciences (HICSS)}}. IEEE, 2013, pp. 1821--1830.
+  introspection},'' in \emph{{46th Hawaii International Conference on System
+  Sciences (HICSS)}}. IEEE, 2013, pp. 1821--1830.
 
 \bibitem{wang2005detecting}
 Y.-M. Wang \emph{et~al.}, ``{Detecting stealth software with Strider
@@ -148,13 +148,13 @@ Y.-M. Wang \emph{et~al.}, ``{Detecting stealth software with Strider
 
 \bibitem{riley2009multi}
 R.~Riley \emph{et~al.}, ``Multi-aspect profiling of kernel rootkit behavior,''
-  in \emph{{Proceedings of the 4th ACM European conference on Computer
-  systems}}. ACM, 2009, pp. 47--60.
+  in \emph{{Proceedings of the 4th ACM European Conference on Computer
+  Systems}}. ACM, 2009, pp. 47--60.
 
 \bibitem{jiang2007stealthy}
 X.~Jiang \emph{et~al.}, ``{Stealthy malware detection through VMM-based
   out-of-the-box semantic view reconstruction},'' in \emph{{Proceedings of the
-  14th ACM conference on Computer and communications security}}. ACM, 2007, pp.
+  14th ACM Conference on Computer and Communications Security}}. ACM, 2007, pp.
   128--138.
 
 \bibitem{mahapatra2011online}
@@ -165,8 +165,8 @@ C.~Mahapatra and S.~Selvakumar, ``An online cross view difference and behavior
 \bibitem{srinivasan2011process}
 D.~Srinivasan \emph{et~al.}, ``{Process out-grafting: An efficient out-of-VM
   approach for fine-grained process execution monitoring},'' in
-  \emph{{Proceedings of the 18th ACM conference on Computer and communications
-  security}}. ACM, 2011, pp. 363--374.
+  \emph{{Proceedings of the 18th ACM Conference on Computer and Communications
+  Security}}. ACM, 2011, pp. 363--374.
 
 \bibitem{seshadri2007secvisor}
 A.~Seshadri \emph{et~al.}, ``{SecVisor: A tiny hypervisor to provide lifetime
@@ -175,12 +175,13 @@ A.~Seshadri \emph{et~al.}, ``{SecVisor: A tiny hypervisor to provide lifetime
 
 \bibitem{xiong2011practical}
 X.~Xiong \emph{et~al.}, ``{Practical protection of kernel integrity for
-  commodity OS from untrusted extensions},'' in \emph{{NDSS}}, 2011, vol.~11.
+  commodity OS from untrusted extensions},'' in \emph{{Network and Distributed
+  System Security Symposium}}, 2011, vol.~11.
 
 \bibitem{srivastava2012efficient}
 A.~Srivastava and J.~Giffin, ``Efficient protection of kernel data structures
-  via object partitioning,'' in \emph{{Proceedings of the 28th annual computer
-  security applications conference}}. ACM, 2012, pp. 429--438.
+  via object partitioning,'' in \emph{{Proceedings of the 28th Annual Computer
+  Security Applications Conference}}. ACM, 2012, pp. 429--438.
 
 \bibitem{baliga2008automated}
 A.~Baliga \emph{et~al.}, ``Automated containment of rootkits attacks,''
@@ -191,20 +192,20 @@ M.~R. Nasab, ``Security functions for virtual machines via introspection,''
   Master's thesis, Chalmers University of Technology, 2012.
 
 \bibitem{linuxkernel}
-M.~C. Daniel P.~Bovet, \emph{{Understanding the Linux kernel}}. O'Reilly Media,
-  Inc., 2005, ch.~1.
+D.~Bovet and M.~Cesati, \emph{{Understanding the Linux kernel}}. O'Reilly
+  Media, Inc., 2005, ch.~1.
 
 \bibitem{perla2010guide}
 E.~Perla and M.~Oldani, \emph{{A guide to kernel exploitation: Attacking the
   core}}. Burlington, MA: Elsevier, 2010.
 
 \bibitem{rekall}
-``{Rekall Memory Forensic Framework},'' {Rekall Forensics. Accessed: June 10,
+``{Rekall Memory Forensic Framework},'' {Rekall Forensics. Accessed June 10,
   2017. [Online].} Available: \url{http://www.rekall-forensic.com/}
 
 \bibitem{syscalls}
-R.~A. Chapman. (Nov 29, 2012). {``Linux system call table for x86-64''}.
-  [Online]. Available:
+R.~A. Chapman. (Nov 29, 2012). {Linux system call table for x86-64}. [Online].
+  Available:
   \url{http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/}
 
 \bibitem{perez2006vtpm}

@@ -1,16 +1,16 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of solutions\relax }}{21}{table.caption.49}
+\contentsline {table}{\numberline {2.1}{\ignorespaces Overview of solutions\relax }}{21}{table.caption.48}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Trapped system calls related to file operations\relax }}{25}{table.caption.53}
-\contentsline {table}{\numberline {3.2}{\ignorespaces \unhbox \voidb@x \hbox {\relax \fontsize {10.95}{13.6}\selectfont \abovedisplayskip 11\p@ plus3\p@ minus6\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \def \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ {\leftmargin \leftmargini \topsep 9\p@ plus3\p@ minus5\p@ \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {\fontfamily {qcr}\selectfont struct protected\_files}} memory layout\relax }}{28}{table.caption.55}
-\contentsline {table}{\numberline {3.3}{\ignorespaces Arguments of file related trapped system calls\relax }}{31}{table.caption.58}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Trapped system calls related to file operations\relax }}{25}{table.caption.52}
+\contentsline {table}{\numberline {3.2}{\ignorespaces \unhbox \voidb@x \hbox {\relax \fontsize {10.95}{13.6}\selectfont \abovedisplayskip 11\p@ plus3\p@ minus6\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \def \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ {\leftmargin \leftmargini \topsep 9\p@ plus3\p@ minus5\p@ \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {\fontfamily {qcr}\selectfont struct protected\_files}} memory layout.\relax }}{28}{table.caption.54}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Arguments of file related trapped system calls\relax }}{31}{table.caption.57}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces File permissions for authorized user\relax }}{46}{table.caption.71}
-\contentsline {table}{\numberline {4.2}{\ignorespaces File permissions for root\relax }}{47}{table.caption.73}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Context-switch performance overhead measurements\relax }}{50}{table.caption.77}
-\contentsline {table}{\numberline {4.4}{\ignorespaces Hash-table search times(msec)\relax }}{50}{table.caption.78}
-\contentsline {table}{\numberline {4.5}{\ignorespaces \unhbox \voidb@x \hbox {\relax \fontsize {10.95}{13.6}\selectfont \abovedisplayskip 11\p@ plus3\p@ minus6\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \def \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ {\leftmargin \leftmargini \topsep 9\p@ plus3\p@ minus5\p@ \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {\fontfamily {qcr}\selectfont ferify}}'s performance overhead measurements\relax }}{51}{table.caption.79}
+\contentsline {table}{\numberline {4.1}{\ignorespaces File permissions for authorized user\relax }}{46}{table.caption.70}
+\contentsline {table}{\numberline {4.2}{\ignorespaces File permissions for root.\relax }}{47}{table.caption.72}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Context-switch performance overhead measurements\relax }}{50}{table.caption.76}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Hash-table search times (msec).\relax }}{50}{table.caption.77}
+\contentsline {table}{\numberline {4.5}{\ignorespaces \unhbox \voidb@x \hbox {\relax \fontsize {10.95}{13.6}\selectfont \abovedisplayskip 11\p@ plus3\p@ minus6\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \def \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ {\leftmargin \leftmargini \topsep 9\p@ plus3\p@ minus5\p@ \parsep 4.5\p@ plus2\p@ minus\p@ \itemsep \parsep }\belowdisplayskip \abovedisplayskip {\fontfamily {qcr}\selectfont ferify}}'s performance overhead measurements.\relax }}{51}{table.caption.78}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
