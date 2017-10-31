@@ -36,7 +36,10 @@ import math
 import os
 import sys
 
-def test(iterations = 100000):
+def test(iterations = 100, sleep_time = 1):
+	timing_overhead = []
+	total_timing = 0
+
 	o_results = []
 	o_total = 0
 	o_avg = 0
@@ -55,69 +58,53 @@ def test(iterations = 100000):
 	r_s = 0
 	r_var = 0
 
-	for i in range(iterations):
-		o_start = timer()
-		f = open("test.txt", "w")
-		o_stop = timer()
+    for i in range(iterations):
+		f = open("test" + str(i) + ".txt", "w")
 		f.close()
-		o_results.append(1000 * (o_stop - o_start))
 
-		r_start = timer()
-		os.rename("test.txt", "test1.txt")
-		r_stop = timer()
-		r_results.append(1000 * (r_stop - r_start))
+    o_start = timer()
+	for i in range(iterations):
+		time.sleep(sleep_time)
+	o_stop = timer()
+	baseline = o_stop - o_start
 
-		u_start = timer()
-		os.unlink("test1.txt")
-		u_stop = timer()
-		u_results.append(1000 * (u_stop - u_start))
+    f = [None] * iterations
+	o_start = timer()
+	for i in range(iterations):
+		f[i] = open("test" + str(i) + ".txt", "w")
+		time.sleep(sleep_time)
+	o_stop = timer()
+	o_overhead = ((o_stop - o_start) - baseline) / iterations
 
-	for e in o_results:
-		o_total += e
-		o_s += (e * e)
-	for e in r_results:
-		r_total += e
-		r_s += (e * e)
-	for e in u_results:
-		u_total += e
-		u_s += (e * e)
+    for i in range(iterations):
+		f[i].close()
 
-	o_avg = o_total / iterations
-	o_var = math.sqrt(o_s / iterations)
-	r_avg = r_total / iterations
-	r_var = math.sqrt(r_s / iterations)
-	u_avg = u_total / iterations
-	u_var = math.sqrt(u_s / iterations)
-	
-	print("----------------------------------------------------")
-	print("Test measurements over " + str(iterations) + " iterations.")
-	print("----------------------------------------------------")
-	print("Results for open()")
-	print("Total runtime: " + str(o_total))
-	print("Average runtime: " + str(o_avg))
-	print("Variance of runtime: " + str(o_s))
-	print("Std dev of runtime: " + str(o_var))
+    r_start = timer()
+	for i in range(iterations):
+		os.rename("test" + str(i) + ".txt", "test" + str(i) + "_.txt")
+		time.sleep(sleep_time)
+	r_stop = timer()
+	r_overhead = ((r_stop - r_start) - baseline) / iterations
 
-	print("----------------------------------------------------")
-	print("Results for rename()")
-	print("Total runtime: " + str(r_total))
-	print("Average runtime: " + str(r_avg))
-	print("Variance of runtime: " + str(r_s))
-	print("Std dev of runtime: " + str(r_var))
+   	u_start = timer()
+	for i in range(iterations):
+		os.unlink("test" + str(i) + "_.txt")
+		time.sleep(sleep_time)
+	u_stop = timer()
+	u_overhead = ((u_stop - u_start) - baseline) / iterations
 
-	print("----------------------------------------------------")
-	print("Results for unlink()")
-	print("Total runtime: " + str(u_total))
-	print("Average runtime: " + str(u_avg))
-	print("Variance of runtime: " + str(u_s))
-	print("Std dev of runtime: " + str(u_var))
-	print("----------------------------------------------------")
+    print("Timing:\t" + str(baseline))
+	print("Open:\t" + str(o_overhead))
+	print("Rename:\t" + str(r_overhead))
+	print("Unlink:\t" + str(u_overhead))
+
 
 if __name__ == '__main__':
-	if len(sys.argv) == 2:
-		test(int(sys.argv[1]))
+	if len(sys.argv) == 3:
+		test(int(sys.argv[1]), int(sys.argv[2]))
 	else:
-		test(1000000)
+		test()
+
 \end{lstlisting}
 
 \fontfamily{ptm}\selectfont

@@ -309,17 +309,17 @@ $ sudo ./file_tests file1 file2 file3
 
 \section{Performance Overhead}\label{sec:performance}
 
-In this section we present the performance overhead observed on the guest \ac{OS} when running \codeft{ferify}. To have a baseline for comparison, we created a \codeft{Python} script\footnote{The source code of the performance test script is included in Appendix~\ref{app:B}.} that performs some of the trapped system calls and measures the execution time. It performs the execution and calculates the average execution time and the standard deviation. We then performed time-execution measurements in three stages: The first was under normal \ac{CPU} scheduling preferences. For the second run, we set the \codeft{niceness} of the process to \codeft{-20}. \emph{Niceness} for Linux is how favorable the scheduling will be for the process, with \codeft{-20} being the best value. Finally, for the third run, in conjunction with changing the niceness of the process, we additionally set the \ac{I/O} niceness to the best available value. This changes the \ac{I/O} scheduling of processes, giving our test script \ac{I/O} priority over all others. Initially, we timed the execution of the script over one million iterations without running \codeft{ferify} to extract an average time that we will use as a reference. Figure~\ref{fig:script} shows the three commands we used to run the test script.
+In this section we present the performance overhead observed on the guest \ac{OS} when running \codeft{ferify}. To have a baseline for comparison, we created a \codeft{Python} script\footnote{The source code of the performance test script is included in Appendix~\ref{app:B}.} that performs some of the trapped system calls and measures the execution time. From the results we calculated the average execution time of each system call and the standard deviation. We then performed time-execution measurements in three stages: The first was under normal \ac{CPU} scheduling preferences. For the second run, we set the \codeft{niceness} of \codeft{ferify} to \codeft{-20}. \emph{Niceness} for Linux is how favorable the scheduling will be for the process, with \codeft{-20} being the best value and \codeft{10} the normal value. Finally, for the third run, in conjunction with changing the niceness of the process, we additionally set the \ac{I/O} niceness to the best available value. This changes the \ac{I/O} scheduling of processes, giving \codeft{ferify} \ac{I/O} priority over all others. Initially, we timed the execution of the script over a number of iterations without running \codeft{ferify} to extract an average time that we will use as a reference. Figure~\ref{fig:script} shows the three commands we used to run \codeft{derify} with different priorities.
 
 \begin{figure}[ht]
 	\centering
 	\footnotesize{\fontfamily{qcr}\selectfont 
 		\begin{lstlisting}
-$ sudo ./ferify_test.py 1000000
-$ sudo nice -n -30 ./ferify_test.py 1000000
-$ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
+$ sudo ./ferify
+$ sudo nice -n -30 ./ferify
+$ sudo nice -n -30 ionice -c 1 -n 0 ./ferify
 	\end{lstlisting}}
-	\caption{Test script command-line settings.}
+	\caption{\codeft{Ferify} priority command-line settings.}
 	\label{fig:script}
 \end{figure}
 
@@ -343,21 +343,21 @@ $ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
 	\toprule
 	\multicolumn{6}{c}{No scheduler priority set}\\
 	\hline
-	\codeft{open()} 	& 0.139568 & 0.149873 & 0.010482 & 0.011007 & 1331.50\%\\
-	\codeft{rename()} 	& 0.130636 & 0.152204 & 0.003966 & 0.004409 & 3293.89\%\\
-	\codeft{unlink()} 	& 0.127103 & 0.153161 & 0.003701 & 0.004258 & 3434.28\%\\
+	\codeft{open()} 	& 1.410575 & 0.042011 & 0.272977 & 0.040227 & 516.74\%\\
+	\codeft{rename()} 	& 1.177306 & 0.060151 & 0.119034 & 0.032872 & 989.05\%\\
+	\codeft{unlink()} 	& 1.265741 & 0.044768 & 0.110438 & 0.022926 & 1,146.11\%\\
 	\hline
 	\multicolumn{6}{c}{With best \codeft{nice} value}\\
 	\hline
-	\codeft{open()} 	& 0.139860 & 0.151600 & 0.010345 & 0.010674 & 1351.95\%\\
-	\codeft{rename()} 	& 0.131188 & 0.134321 & 0.004087 & 0.004329 & 3209.88\%\\
-	\codeft{unlink()} 	& 0.127132 & 0.131674 & 0.003713 & 0.003966 & 3426.96\%\\
+	\codeft{open()} 	& 1.808050 & 0.118523 & 0.272977 & 0.040227 & 662.34\%\\
+ 	\codeft{rename()} 	& 1.510058 & 0.114244 & 0.119034 & 0.032872 & 1,268.59\%\\
+	\codeft{unlink()} 	& 1.617183 & 0.116488 & 0.110438 & 0.022926 & 1,464.34\%\\	
 	\hline
 	\multicolumn{6}{c}{With best \codeft{nice} and \codeft{ionice} values}\\
 	\hline
-	\codeft{open()} 	& 0.137672 & 0.140117 & 0.010366 & 0.011140 & 1328.11\%\\
-	\codeft{rename()} 	& 0.128105 & 0.138182 & 0.004110 & 0.004440 & 3116.90\%\\
-	\codeft{unlink()} 	& 0.125161 & 0.131322 & 0.003778 & 0.004190 & 3312.89\%\\
+	\codeft{open()} 	& 1.763718 & 0.131143 & 0.272977 & 0.040227 & 646.10\%\\
+	\codeft{rename()} 	& 1.547484 & 0.111831 & 0.119034 & 0.032872 & 1,300.03\%\\
+	\codeft{unlink()} 	& 1.648374 & 0.120758 & 0.110438 & 0.022926 & 1,492.58\%\\	
 	\bottomrule
 \end{tabular}	
 \end{table}
@@ -365,7 +365,7 @@ $ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
 
 \subsection{\ac{SACL} Performance Overhead}
 
-\par The information for the files in the \acp{SACL} is stored in a hash table. The index of the table is the pathname. Since the lookups made in the hash table depend on the depth of the file's directory tree, the searching of a file in the \ac{SACL} is of \emph{O(d)} complexity, where \codeft{d} is the aforementioned depth. Since the depth of a directory tree is usually relatively short, we assess the algorithm to be efficient. To verify the claim that the search time does not depend on the entries of the \ac{SACL}, we ran the same test with the same settings and files, but with different \ac{SACL} sizes each time (as shown in Table~\ref{tbl:measure}). To avoid as much \ac{OS} interference as we could, we set both settings of \codeft{niceness} to the maximum value. The results seem to support our claim; the average execution time of the tested system calls is of the same magnitude. 
+\par The information for the files in the \acp{SACL} is stored in a hash table. The index of the table is the pathname. Since the lookups made in the hash table depend on the depth of the file's directory tree, the searching of a file in the \ac{SACL} is of \emph{O(d)} complexity, where \codeft{d} is the aforementioned depth. Since the depth of a directory tree is usually relatively short, we assess the algorithm to be efficient. To verify the claim that the search time does not depend on the entries of the \ac{SACL}, we ran the same test with the same settings and files, but with different \ac{SACL} sizes each time (as shown in Table~\ref{tbl:measure}). To avoid as much \ac{OS} interference as we could, we set both settings of \codeft{niceness} to the best value. The results seem to support our claim; the average execution time of the tested system calls is of the same magnitude. 
 
 \begin{table}[ht]
 \centering
@@ -387,8 +387,11 @@ $ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
 
 \par Although the increase in execution time seems extremely large, the average execution time of a single system call seems to remain within usable limits. While using the guest \ac{VM} to evaluate the use experience, we did not notice any delays. 
 
-\par Table \ref{tbl:measure2} shows the result of the second run of our test. We observed that the total performance overhead remained in the same magnitude. Some numbers might seem contradictory, but this is normal as the Linux kernel schedules each running process differently and continuously creates more. This is the reason we focused on the magnitude instead of the actual numbers. Compared to the dominant cost of switching between the hypervisor and the guest \ac{VM}, we assessed that the hash-table implementation and the permission checking algorithm had an insignificant impact on performance. This is the exact reason we decided to trap each system call individually, instead of trapping the system call handler, which is the kernel's entry point to all system calls. This case would cause even greater overhead, as the \ac{VM} context switch would happen for \emph{each and every} system call invoked by \emph{all} processes running on the \ac{OS}.
+\par Table \ref{tbl:measure2} shows the result of the second run of our test. We observed that the total performance overhead remained in the same magnitude. Some numbers might seem contradictory, but this is normal as the Linux kernel schedules each running process differently and continuously creates more. This is the reason we focused on the magnitude instead of the actual numbers. Compared to the dominant cost of switching between the hypervisor and the guest \ac{VM}, we assessed that the hash-table implementation and the permission checking algorithm had an insignificant impact on performance. This is the exact reason we decided to trap each system call individually, instead of trapping the system call handler, which is the kernel's entry point to all system calls. This case would cause even greater overhead, as the \ac{VM} context switch would happen for \emph{each and every} system call invoked by \emph{all} processes running on the \ac{OS}. 
 
+\makeatletter
+\setlength\@fptop{0\p@}
+\makeatother
 
 \begin{table}[ht]
 \centering
@@ -403,21 +406,21 @@ $ sudo nice -n -30 ionice -c 1 -n 0 ./ferify_test.py 1000000
 	\toprule
 	\multicolumn{6}{c}{No scheduler priority set}\\
 	\hline
-	\codeft{open()} 	& 0.251433 & 0.258587 & 0.010500 & 0.011618 & 2394.60\%\\
-	\codeft{rename()} 	& 0.297373 & 0.307451 & 0.003917 & 0.004532 & 7591.85\%\\
-	\codeft{unlink()} 	& 0.240050 & 0.257848 & 0.003713 & 0.004476 & 6465.12\%\\
+	\codeft{open()} 	& 1.742811 & 0.064730 & 0.272977 & 0.040227 & 638.45\%\\
+	\codeft{rename()} 	& 1.824321 & 0.059661 & 0.119034 & 0.032872 & 1,532.60\%\\
+	\codeft{unlink()} 	& 1.627008 & 0.098494 & 0.110438 & 0.022926 & 1,473.24\%\\
 	\hline
 	\multicolumn{6}{c}{With best \codeft{nice} value}\\
 	\hline
-	\codeft{open()} 	& 0.136804 & 0.146983 & 0.010478 & 0.010743 & 1305.63\%\\
-	\codeft{rename()} 	& 0.127728 & 0.150706 & 0.004144 & 0.004387 & 3082.23\%\\
-	\codeft{unlink()} 	& 0.125051 & 0.235790 & 0.003749 & 0.004016 & 3335.58\%\\
+	\codeft{open()} 	& 1.743948 & 0.047873 & 0.272977 & 0.040227 & 638.86\%\\
+	\codeft{rename()} 	& 1.776946 & 0.057694 & 0.119034 & 0.032872 & 1,492.80\%\\
+	\codeft{unlink()} 	& 1.593204 & 0.047137 & 0.110438 & 0.022926 & 1,442.63\%\\
 	\hline
 	\multicolumn{6}{c}{With best \codeft{nice} and \codeft{ionice} values}\\
 	\hline
-	\codeft{open()} 	& 0.141293 & 0.143097 & 0.011300 & 0.012296 & 1250.38\%\\
-	\codeft{rename()} 	& 0.131271 & 0.133869 & 0.004304 & 0.005099 & 3049.97\%\\
-	\codeft{unlink()} 	& 0.128175 & 0.132942 & 0.003919 & 0.004685 & 3270.60\%\\
+	\codeft{open()} 	& 2.105518 & 0.101172 & 0.272977 & 0.040227 & 771.32\%\\
+	\codeft{rename()} 	& 2.170908 & 0.155974 & 0.119034 & 0.032872 & 1,823.77\%\\
+	\codeft{unlink()} 	& 1.919827 & 0.149137 & 0.110438 & 0.022926 & 1,738.38\%\\
 	\bottomrule
 \end{tabular}	
 \end{table}
