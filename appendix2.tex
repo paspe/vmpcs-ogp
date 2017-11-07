@@ -58,17 +58,17 @@ def test(iterations = 100, sleep_time = 1):
 	r_s = 0
 	r_var = 0
 
-    for i in range(iterations):
+	for i in range(iterations):
 		f = open("test" + str(i) + ".txt", "w")
 		f.close()
 
-    o_start = timer()
+	o_start = timer()
 	for i in range(iterations):
 		time.sleep(sleep_time)
 	o_stop = timer()
 	baseline = o_stop - o_start
 
-    f = [None] * iterations
+	f = [None] * iterations
 	o_start = timer()
 	for i in range(iterations):
 		f[i] = open("test" + str(i) + ".txt", "w")
@@ -76,24 +76,24 @@ def test(iterations = 100, sleep_time = 1):
 	o_stop = timer()
 	o_overhead = ((o_stop - o_start) - baseline) / iterations
 
-    for i in range(iterations):
+	for i in range(iterations):
 		f[i].close()
 
-    r_start = timer()
+	r_start = timer()
 	for i in range(iterations):
 		os.rename("test" + str(i) + ".txt", "test" + str(i) + "_.txt")
 		time.sleep(sleep_time)
 	r_stop = timer()
 	r_overhead = ((r_stop - r_start) - baseline) / iterations
 
-   	u_start = timer()
+	u_start = timer()
 	for i in range(iterations):
 		os.unlink("test" + str(i) + "_.txt")
 		time.sleep(sleep_time)
 	u_stop = timer()
 	u_overhead = ((u_stop - u_start) - baseline) / iterations
 
-    print("Timing:\t" + str(baseline))
+	print("Timing:\t" + str(baseline))
 	print("Open:\t" + str(o_overhead))
 	print("Rename:\t" + str(r_overhead))
 	print("Unlink:\t" + str(u_overhead))

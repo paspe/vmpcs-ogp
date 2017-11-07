@@ -1,9 +1,16 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
 The style file: nps_thesis.bst
 Database file #1: thesis.bib
+I was expecting an "="---line 27 of file thesis.bib
+ :  
+ :  title  = "{LibVMI}",
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 -- nps_thesis.bst version 1.9 (2016/05/05) by Mark Gondree.
 -- based on IEEEtran.bst (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--missing publisher in nasab2012security
 
 Done.
+(There was 1 error message)

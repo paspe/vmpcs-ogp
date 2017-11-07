@@ -68,12 +68,12 @@ In this section, we introduce a rough timeline of the \acp{API} significant for 
 	\label{fig:hypmm}
 \end{figure}
 
-\par With the introduction of \ac{IOMMU}, this extra step is no longer needed because hardware \acp{EPT} are included in the \ac{CPU}s; the hypervisors can use these hardware \acp{EPT} instead of software ones, a method called hardware assisted paging. Hardware assisted paging implemented better isolation, and enhanced security between the \acp{VM}, with significantly reduced overhead. Following that development, as well as Intel's addition of 512 \acp{EPT} in its Haswell generation \ac{CPU}, XenAccess and mem-events were redesigned and evolved into a system called \emph{altp2m}. One of the most critical changes that came with altp2m was the concurrent assignment of multiple \ac{EPT}s per \ac{VM} (Figure~\ref{fig:ept}). Monitoring processes of multi-virtual \ac{CPU} guests is more secure and is clearly a significant improvement. Because each virtual \ac{CPU} can be assigned its own \ac{EPT} the hypervisor can now keep track of different \acp{EPT} with different permissions, which can change during the execution of the \ac{VM}. Other solutions keep only one \ac{EPT} per \ac{VM}, resulting in a less secure and isolated virtual environment between the \acp{VM} and the \acp{VM}' processes.
+\par With the introduction of \ac{IOMMU}, this extra step is no longer needed because hardware \acp{EPT} are included in the \ac{CPU}s; the hypervisors can use these hardware \acp{EPT} instead of software ones, a method called hardware-assisted paging. Hardware-assisted paging implemented better isolation, and enhanced security between the \acp{VM}, with significantly reduced overhead. Following that development, as well as Intel's addition of 512 \acp{EPT} in its Haswell generation \ac{CPU}, XenAccess and mem-events were redesigned and evolved into a system called \emph{altp2m}. One of the most critical changes that came with altp2m was the concurrent assignment of multiple \ac{EPT}s per \ac{VM} (Figure~\ref{fig:ept}). Monitoring processes of multi-virtual \ac{CPU} guests is more secure and is clearly a significant improvement. Because each virtual \ac{CPU} can be assigned its own \ac{EPT} the hypervisor can now keep track of different \acp{EPT} with different permissions, which can change during the execution of the \ac{VM}. Other solutions keep only one \ac{EPT} per \ac{VM}, resulting in a less secure and isolated virtual environment between the \acp{VM} and the \acp{VM}' processes.
 
 \begin{figure}[ht]
 	\centering
 	\scalebox{0.95}{\input{figs/ept.tikz}}
-	\caption{Normal vs altp2m multiple \ac{EPT} assignment. Source:~\cite{xen1}.}
+	\caption{Normal versus altp2m multiple \ac{EPT} assignment. Source:~\cite{xen1}.}
 	\label{fig:ept}
 \end{figure}
 
@@ -188,7 +188,7 @@ Having a monitoring tool reside completely on the hypervisor has its benefits, b
 \begin{table}[ht!]
     \footnotesize
 	\centering
-	\caption{Overview of solutions}
+	\caption{Overview of solutions.}
 	\label{tbl:overview}
 	\begin{tabular}{l|cccccc}
 		\toprule
@@ -207,7 +207,7 @@ Having a monitoring tool reside completely on the hypervisor has its benefits, b
 		\hline
 		ReVirt~\cite{dunlap2002revirt}					& - & \checkmark & \checkmark & - & - & -\\
 		Macko et al.~\cite{macko2011collecting}			& - & \checkmark & \checkmark & - & - & -\\
-		Crawford et al.~\cite{crawford2013insider}		& - & \checkmark & \checkmark & - & - & -\\
+		Crawford and Peterson~\cite{crawford2013insider}		& - & \checkmark & \checkmark & - & - & -\\
 		VMI~\cite{garfinkel2003virtual}					& - & \checkmark & \checkmark & - & - & -\\
 		Strider Ghostbuster~\cite{wang2005detecting}	& - & \checkmark & \checkmark & - & - & -\\
 		PoKeR~\cite{riley2009multi}						& - & \checkmark & \checkmark & - & - & -\\

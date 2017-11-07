@@ -5,7 +5,7 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Xen hypervisor architecture. Source:\nobreakspace {}\cite {xen}.\relax }}{8}{figure.caption.23}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces x86 protection rings. Adapted from\nobreakspace {}\cite {rings}.\relax }}{9}{figure.caption.25}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Hypervisor memory management concept. Source:\nobreakspace {}\cite {chisnall2008definitive}.\relax }}{10}{figure.caption.29}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal vs altp2m multiple \ac {EPT} assignment. Source:\nobreakspace {}\cite {xen1}.\relax }}{11}{figure.caption.32}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Normal versus altp2m multiple \ac {EPT} assignment. Source:\nobreakspace {}\cite {xen1}.\relax }}{11}{figure.caption.32}
 \contentsline {figure}{\numberline {2.7}{\ignorespaces LibVMI out-of-guest access of \ac {VM} state. Source:\nobreakspace {}\cite {libvmi}.\relax }}{12}{figure.caption.33}
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Using LibVMI to access the value of a kernel symbol. Source:\nobreakspace {}\cite {libvmi}.\relax }}{13}{figure.caption.34}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces VM-exit and VM-entry events.\relax }}{15}{figure.caption.35}

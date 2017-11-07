@@ -35,9 +35,9 @@ B.~D. Payne, ``{Simplifying virtual machine introspection using LibVMI},''
   Sandia report, Albuquerque, NM, USA, Tech. Rep. {SAND2012-7818}, 2012.
 
 \bibitem{lengyel2014drakvuf}
-T.~K. Lengyel \emph{et~al.}, ``{Scalability, fidelity and stealth in the
-  DRAKVUF dynamic malware analysis system},'' in \emph{{Proceedings of the 30th
-  Annual Computer Security Applications Conference}}, 2014.
+{T. K. Lengyel et al.}, ``{Scalability, fidelity and stealth in the DRAKVUF
+  dynamic malware analysis system},'' in \emph{{Proceedings of the 30th Annual
+  Computer Security Applications Conference}}, 2014.
 
 \bibitem{rosenblum2005virtual}
 M.~Rosenblum and T.~Garfinkel, ``{Virtual machine monitors: Current technology
@@ -54,12 +54,12 @@ M.~Fawzi. ({May 24, 2009}). {Virtualization and protection rings (welcome to
   \url{https://fawzi.wordpress.com/2009/05/24/virtualization-and-protection-rings-welcome-to-ring-1-part-i/}
 
 \bibitem{payne2007secure}
-B.~D. Payne \emph{et~al.}, ``{Secure and flexible monitoring of virtual
-  machines},'' in \emph{{23rd Annual Computer Security Applications
-  Conference}}. IEEE, 2007, pp. 385--397.
+{B. D. Payne et al.}, ``{Secure and flexible monitoring of virtual machines},''
+  in \emph{{23rd Annual Computer Security Applications Conference}}. IEEE,
+  2007, pp. 385--397.
 
 \bibitem{chisnall2008definitive}
-D.~Chisnall, \emph{{The definitive guide to the Xen hypervisor}}. Upper Saddle
+D.~Chisnall, \emph{{The Definitive Guide to the Xen Hypervisor}}. Upper Saddle
   River, NJ: Pearson Education, 2008, ch.~5.
 
 \bibitem{xen1}
@@ -72,28 +72,28 @@ T.~K. Lengyel. (April 13, 2016). {Stealthy monitoring with Xen altp2m}.
   Available: \url{http://libvmi.com/docs/gcode-intro.html}
 
 \bibitem{bauman2015survey}
-E.~Bauman \emph{et~al.}, ``{A survey on hypervisor-based monitoring:
-  Approaches, applications, and evolutions},'' \emph{{ACM Computing Surveys
-  (CSUR)}}, vol.~48, no.~1, p.~10, 2015.
+{E. Bauman et al.}, ``{A survey on hypervisor-based monitoring: Approaches,
+  applications, and evolutions},'' \emph{{ACM Computing Surveys (CSUR)}},
+  vol.~48, no.~1, p.~10, 2015.
 
 \bibitem{sharif2009secure}
-M.~I. Sharif \emph{et~al.}, ``{Secure in-VM monitoring using hardware
+{M. I. Sharif et al.}, ``{Secure in-VM monitoring using hardware
   virtualization},'' in \emph{{Proceedings of the 16th ACM Conference on
   Computer and Communications Security}}. ACM, 2009, pp. 477--487.
 
 \bibitem{dolan2011virtuoso}
-B.~Dolan-Gavitt \emph{et~al.}, ``{Virtuoso: Narrowing the semantic gap in
-  virtual machine introspection},'' in \emph{{2011 IEEE Symposium on Security
-  and Privacy (SP)}}. IEEE, 2011, pp. 297--312.
+{B. Dolan-Gavitt et al.}, ``{Virtuoso: Narrowing the semantic gap in virtual
+  machine introspection},'' in \emph{{2011 IEEE Symposium on Security and
+  Privacy (SP)}}. IEEE, 2011, pp. 297--312.
 
 \bibitem{payne2008lares}
-B.~D. Payne \emph{et~al.}, ``{Lares: An architecture for secure active
-  monitoring using virtualization},'' in \emph{{2008 IEEE Symposium on Security
-  and Privacy (SP)}}. IEEE, 2008, pp. 233--247.
+{B. D. Payne et al.}, ``{Lares: An architecture for secure active monitoring
+  using virtualization},'' in \emph{{2008 IEEE Symposium on Security and
+  Privacy (SP)}}. IEEE, 2008, pp. 233--247.
 
 \bibitem{sailer2005building}
-R.~Sailer \emph{et~al.}, ``{Building a MAC-based security architecture for the
-  Xen open-source hypervisor},'' in \emph{{21st Annual Computer Security
+{R. Sailer et al.}, ``{Building a MAC-based security architecture for the Xen
+  open-source hypervisor},'' in \emph{{21st Annual Computer Security
   Applications Conference}}. IEEE, 2005, pp. 10--pp.
 
 \bibitem{hay2008forensics}
@@ -102,38 +102,38 @@ B.~Hay and K.~Nance, ``Forensics examination of volatile system data using
   vol.~42, no.~3, pp. 74--82, 2008.
 
 \bibitem{xiao2016hyperlink}
-J.~Xiao \emph{et~al.}, ``{HyperLink: Virtual machine introspection and memory
+{J. Xiao et al.}, ``{HyperLink: Virtual machine introspection and memory
   forensic analysis without kernel source code},'' in \emph{{2016 IEEE
   International Conference on Autonomic Computing (ICAC)}}. IEEE, 2016, pp.
   127--136.
 
 \bibitem{hofmann2013inktag}
-O.~S. Hofmann \emph{et~al.}, ``{InkTag: Secure applications on an untrusted
+{O. S. Hofmann et al.}, ``{InkTag: Secure applications on an untrusted
   operating system},'' in \emph{{ACM SIGARCH Computer Architecture News}}. ACM,
   2013, vol. {41, no. 1}, pp. 265--278.
 
 \bibitem{chen2008overshadow}
-X.~Chen \emph{et~al.}, ``{Overshadow: A virtualization-based approach to
+{X. Chen et al.}, ``{Overshadow: A virtualization-based approach to
   retrofitting protection in commodity operating systems},'' in \emph{{ACM
   SIGARCH Computer Architecture News}}. ACM, 2008, vol. {36, no. 1}, pp. 2--13.
 
 \bibitem{baumann2015shielding}
-A.~Baumann \emph{et~al.}, ``{Shielding applications from an untrusted cloud
-  with Haven},'' \emph{{ACM Transactions on Computer Systems (TOCS)}}, vol.~33,
+{A. Baumann et al.}, ``{Shielding applications from an untrusted cloud with
+  Haven},'' \emph{{ACM Transactions on Computer Systems (TOCS)}}, vol.~33,
   no.~3, p.~8, 2015.
 
 \bibitem{xu2015controlled}
-Y.~Xu \emph{et~al.}, ``{Controlled-channel attacks: Deterministic side channels
-  for untrusted operating systems},'' in \emph{{2015 IEEE Symposium on Security
-  and Privacy (SP)}}. IEEE, 2015, pp. 640--656.
+{Y. Xu et al.}, ``{Controlled-channel attacks: Deterministic side channels for
+  untrusted operating systems},'' in \emph{{2015 IEEE Symposium on Security and
+  Privacy (SP)}}. IEEE, 2015, pp. 640--656.
 
 \bibitem{dunlap2002revirt}
-G.~W. Dunlap \emph{et~al.}, ``{ReVirt: Enabling intrusion analysis through
+{G. W. Dunlap et al.}, ``{ReVirt: Enabling intrusion analysis through
   virtual-machine logging and replay},'' \emph{{ACM SIGOPS Operating Systems
   Review}}, vol.~36, no.~SI, pp. 211--224, 2002.
 
 \bibitem{macko2011collecting}
-P.~Macko \emph{et~al.}, ``{Collecting provenance via the Xen hypervisor},'' in
+{P. Macko et al.}, ``{Collecting provenance via the Xen hypervisor},'' in
   \emph{{3rd USENIX Workshop on the Theory and Practice of Provenance}}, 2011.
 
 \bibitem{crawford2013insider}
@@ -142,17 +142,17 @@ M.~Crawford and G.~Peterson, ``{Insider threat detection using virtual machine
   Sciences (HICSS)}}. IEEE, 2013, pp. 1821--1830.
 
 \bibitem{wang2005detecting}
-Y.-M. Wang \emph{et~al.}, ``{Detecting stealth software with Strider
-  Ghostbuster},'' in \emph{{Proceedings of International Conference on
-  Dependable Systems and Networks, 2005}}. IEEE, 2005, pp. 368--377.
+{Y-M. Wang et al.}, ``{Detecting stealth software with Strider Ghostbuster},''
+  in \emph{{Proceedings of International Conference on Dependable Systems and
+  Networks, 2005}}. IEEE, 2005, pp. 368--377.
 
 \bibitem{riley2009multi}
-R.~Riley \emph{et~al.}, ``Multi-aspect profiling of kernel rootkit behavior,''
-  in \emph{{Proceedings of the 4th ACM European Conference on Computer
-  Systems}}. ACM, 2009, pp. 47--60.
+{R. Riley et al.}, ``Multi-aspect profiling of kernel rootkit behavior,'' in
+  \emph{{Proceedings of the 4th ACM European Conference on Computer Systems}}.
+  ACM, 2009, pp. 47--60.
 
 \bibitem{jiang2007stealthy}
-X.~Jiang \emph{et~al.}, ``{Stealthy malware detection through VMM-based
+{X. Jiang et al.}, ``{Stealthy malware detection through VMM-based
   out-of-the-box semantic view reconstruction},'' in \emph{{Proceedings of the
   14th ACM Conference on Computer and Communications Security}}. ACM, 2007, pp.
   128--138.
@@ -163,20 +163,20 @@ C.~Mahapatra and S.~Selvakumar, ``An online cross view difference and behavior
   Notes}}, vol.~36, no.~4, pp. 1--9, 2011.
 
 \bibitem{srinivasan2011process}
-D.~Srinivasan \emph{et~al.}, ``{Process out-grafting: An efficient out-of-VM
+{D. Srinivasan et al.}, ``{Process out-grafting: An efficient out-of-VM
   approach for fine-grained process execution monitoring},'' in
   \emph{{Proceedings of the 18th ACM Conference on Computer and Communications
   Security}}. ACM, 2011, pp. 363--374.
 
 \bibitem{seshadri2007secvisor}
-A.~Seshadri \emph{et~al.}, ``{SecVisor: A tiny hypervisor to provide lifetime
-  kernel code integrity for commodity OSes},'' in \emph{{ACM SIGOPS Operating
-  Systems Review}}, no.~6. ACM, 2007, vol.~41, pp. 335--350.
+{A. Seshadri et al.}, ``{SecVisor: A tiny hypervisor to provide lifetime kernel
+  code integrity for commodity OSes},'' in \emph{{ACM SIGOPS Operating Systems
+  Review}}, no.~6. ACM, 2007, vol.~41, pp. 335--350.
 
 \bibitem{xiong2011practical}
-X.~Xiong \emph{et~al.}, ``{Practical protection of kernel integrity for
-  commodity OS from untrusted extensions},'' in \emph{{Network and Distributed
-  System Security Symposium}}, 2011, vol.~11.
+{X. Xiong et al.}, ``{Practical protection of kernel integrity for commodity OS
+  from untrusted extensions},'' in \emph{{Network and Distributed System
+  Security Symposium}}, 2011, vol.~11.
 
 \bibitem{srivastava2012efficient}
 A.~Srivastava and J.~Giffin, ``Efficient protection of kernel data structures
@@ -184,20 +184,20 @@ A.~Srivastava and J.~Giffin, ``Efficient protection of kernel data structures
   Security Applications Conference}}. ACM, 2012, pp. 429--438.
 
 \bibitem{baliga2008automated}
-A.~Baliga \emph{et~al.}, ``Automated containment of rootkits attacks,''
+{A. Baliga et al.}, ``Automated containment of rootkits attacks,''
   \emph{Computers \& Security}, vol.~27, no.~7, pp. 323--334, 2008.
 
 \bibitem{nasab2012security}
-M.~R. Nasab, ``Security functions for virtual machines via introspection,''
-  Master's thesis, Chalmers University of Technology, 2012.
+M.~R. Nasab, \emph{Security functions for virtual machines via introspection},
+  {master's thesis, Chalmers University of Technology}, 2012.
 
 \bibitem{linuxkernel}
 D.~Bovet and M.~Cesati, \emph{{Understanding the Linux kernel}}. O'Reilly
   Media, Inc., 2005, ch.~1.
 
 \bibitem{perla2010guide}
-E.~Perla and M.~Oldani, \emph{{A guide to kernel exploitation: Attacking the
-  core}}. Burlington, MA: Elsevier, 2010.
+E.~Perla and M.~Oldani, \emph{{A Guide to Kernel Exploitation: Attacking the
+  Core}}. Burlington, MA: Elsevier, 2010.
 
 \bibitem{rekall}
 ``{Rekall Memory Forensic Framework},'' {Rekall Forensics. Accessed June 10,
@@ -209,8 +209,8 @@ R.~A. Chapman. (Nov 29, 2012). {Linux system call table for x86-64}. [Online].
   \url{http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/}
 
 \bibitem{perez2006vtpm}
-R.~Perez \emph{et~al.}, ``{vTPM: Virtualizing the trusted platform module},''
-  in \emph{{Proceedings of 15th Conference on USENIX Security Symposium}},
-  2006, pp. 305--320.
+{R. Perez et al.}, ``{vTPM: Virtualizing the trusted platform module},'' in
+  \emph{{Proceedings of 15th Conference on USENIX Security Symposium}}, 2006,
+  pp. 305--320.
 
 \end{thebibliography}
